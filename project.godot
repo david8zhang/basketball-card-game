@@ -11,5 +11,17 @@ config_version=5
 [application]
 
 config/name="basketball-card-game"
+run/main_scene="res://scenes/Main.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1200
+window/size/viewport_height=800
+window/dpi/allow_hidpi=false
+window/canvas_textures/default_texture_filter=0
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
