@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://qxrlmkdns66e"]
 
 [ext_resource type="Script" path="res://scripts/Game.gd" id="1_sqmis"]
-[ext_resource type="PackedScene" uid="uid://canx4b4pr7n3c" path="res://prefabs/PlayerCard.tscn" id="2_f1s3n"]
+[ext_resource type="PackedScene" uid="uid://py6a76la7wrw" path="res://prefabs/Team.tscn" id="2_731t8"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_sqmis")
@@ -20,31 +20,10 @@ theme_override_constants/margin_top = 20
 layout_mode = 2
 theme_override_constants/separation = 50
 
-[node name="OpponentCards" type="HBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(1200, 300)
+[node name="PlayerTeam" parent="CanvasLayer/MarginContainer/VBoxContainer" instance=ExtResource("2_731t8")]
 layout_mode = 2
-size_flags_horizontal = 4
 theme_override_constants/separation = -50
-alignment = 1
 
-[node name="PlayerCard" parent="CanvasLayer/MarginContainer/VBoxContainer/OpponentCards" instance=ExtResource("2_f1s3n")]
+[node name="CPUTeam" parent="CanvasLayer/MarginContainer/VBoxContainer" instance=ExtResource("2_731t8")]
 layout_mode = 2
-
-[node name="PlayerCard2" parent="CanvasLayer/MarginContainer/VBoxContainer/OpponentCards" instance=ExtResource("2_f1s3n")]
-layout_mode = 2
-
-[node name="PlayerCard3" parent="CanvasLayer/MarginContainer/VBoxContainer/OpponentCards" instance=ExtResource("2_f1s3n")]
-layout_mode = 2
-
-[node name="PlayerCard4" parent="CanvasLayer/MarginContainer/VBoxContainer/OpponentCards" instance=ExtResource("2_f1s3n")]
-layout_mode = 2
-
-[node name="PlayerCard5" parent="CanvasLayer/MarginContainer/VBoxContainer/OpponentCards" instance=ExtResource("2_f1s3n")]
-layout_mode = 2
-
-[node name="PlayerCards" type="HBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(1200, 250)
-layout_mode = 2
-size_flags_horizontal = 4
 theme_override_constants/separation = -50
-alignment = 1
