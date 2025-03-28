@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://canx4b4pr7n3c"]
+[gd_scene load_steps=3 format=3 uid="uid://canx4b4pr7n3c"]
 
 [ext_resource type="Script" path="res://scripts/BallPlayerCard.gd" id="1_my46u"]
 
@@ -6,14 +6,6 @@
 content_margin_left = 2.0
 content_margin_top = 1.0
 content_margin_right = 2.0
-content_margin_bottom = 1.0
-bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_bottom = 1
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_giq3u"]
-content_margin_left = 1.0
-content_margin_top = 1.0
-content_margin_right = 1.0
 content_margin_bottom = 1.0
 bg_color = Color(0.6, 0.6, 0.6, 0)
 border_width_bottom = 1
@@ -54,6 +46,10 @@ theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
+
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
 layout_mode = 2
@@ -102,11 +98,11 @@ theme_override_font_sizes/font_size = 12
 text = "Defense"
 horizontal_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="Control" type="Control" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="3PointBonus2" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="Position" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
@@ -180,183 +176,7 @@ theme_override_font_sizes/font_size = 10
 text = "REB"
 horizontal_alignment = 1
 
-[node name="Row1Col1" type="PanelContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_giq3u")
-
-[node name="RollRange" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer/Row1Col1"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 10
-text = "1-4"
-horizontal_alignment = 1
-
-[node name="Row1Col2" type="PanelContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_giq3u")
-
-[node name="Points" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer/Row1Col2"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 10
-text = "1"
-horizontal_alignment = 1
-
-[node name="Row1Col3" type="PanelContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_giq3u")
-
-[node name="Assists" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer/Row1Col3"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 10
-text = "1"
-horizontal_alignment = 1
-
-[node name="Row1Col4" type="PanelContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_giq3u")
-
-[node name="Rebounds" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer/Row1Col4"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 10
-text = "1"
-horizontal_alignment = 1
-
-[node name="Row2Col1" type="PanelContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_giq3u")
-
-[node name="RollRange" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer/Row2Col1"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 10
-text = "1-4"
-horizontal_alignment = 1
-
-[node name="Row2Col2" type="PanelContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_giq3u")
-
-[node name="Points" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer/Row2Col2"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 10
-text = "1"
-horizontal_alignment = 1
-
-[node name="Row2Col3" type="PanelContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_giq3u")
-
-[node name="Assists" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer/Row2Col3"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 10
-text = "1"
-horizontal_alignment = 1
-
-[node name="Row2Col4" type="PanelContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_giq3u")
-
-[node name="Rebounds" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer/Row2Col4"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 10
-text = "1"
-horizontal_alignment = 1
-
-[node name="Row3Col1" type="PanelContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_giq3u")
-
-[node name="RollRange" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer/Row3Col1"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 10
-text = "1-4"
-horizontal_alignment = 1
-
-[node name="Row3Col2" type="PanelContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_giq3u")
-
-[node name="Points" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer/Row3Col2"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 10
-text = "1"
-horizontal_alignment = 1
-
-[node name="Row3Col3" type="PanelContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_giq3u")
-
-[node name="Assists" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer/Row3Col3"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 10
-text = "1"
-horizontal_alignment = 1
-
-[node name="Row3Col4" type="PanelContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_giq3u")
-
-[node name="Rebounds" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer/Row3Col4"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 10
-text = "1"
-horizontal_alignment = 1
-
-[node name="Row3Col5" type="PanelContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_giq3u")
-
-[node name="RollRange" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer/Row3Col5"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 10
-text = "1-4"
-horizontal_alignment = 1
-
-[node name="Row3Col6" type="PanelContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_giq3u")
-
-[node name="Points" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer/Row3Col6"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 10
-text = "1"
-horizontal_alignment = 1
-
-[node name="Row3Col7" type="PanelContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_giq3u")
-
-[node name="Assists" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer/Row3Col7"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 10
-text = "1"
-horizontal_alignment = 1
-
-[node name="Row3Col8" type="PanelContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_giq3u")
-
-[node name="Rebounds" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer/Row3Col8"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 10
-text = "1"
-horizontal_alignment = 1
-
-[node name="3PointBonus" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="ThreePointBonus" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
