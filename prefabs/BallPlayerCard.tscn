@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://canx4b4pr7n3c"]
+[gd_scene load_steps=5 format=3 uid="uid://canx4b4pr7n3c"]
 
 [ext_resource type="Script" path="res://scripts/BallPlayerCard.gd" id="1_my46u"]
+[ext_resource type="PackedScene" uid="uid://cgpent6asbq6b" path="res://prefabs/TableValue.tscn" id="2_bfexb"]
+[ext_resource type="Resource" uid="uid://crm23b0v33m8u" path="res://resources/AaronGordon.tres" id="3_8h31b"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gf3ry"]
 content_margin_left = 2.0
@@ -20,6 +22,8 @@ grow_vertical = 2
 size_flags_horizontal = 6
 size_flags_stretch_ratio = 0.75
 script = ExtResource("1_my46u")
+roll_table_value_scene = ExtResource("2_bfexb")
+ball_player_stats = ExtResource("3_8h31b")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -112,13 +116,23 @@ text = "PG"
 [node name="HBoxContainer2" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="PlayerName" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="PlayerName" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+alignment = 2
+
+[node name="First" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/PlayerName"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_override_font_sizes/font_size = 20
-text = "FIRSTNAME
-LASTNAME"
+text = "FIRSTNAME"
+
+[node name="Last" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/PlayerName"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 20
+text = "LASTNAME"
 
 [node name="Control" type="Control" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
