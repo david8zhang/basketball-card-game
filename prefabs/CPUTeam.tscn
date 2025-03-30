@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://ctjg7yuu7e2ql"]
+
+[ext_resource type="PackedScene" uid="uid://py6a76la7wrw" path="res://prefabs/StartingLineup.tscn" id="1_aqnee"]
+[ext_resource type="Script" path="res://scripts/CPUTeam.gd" id="1_kdtli"]
+
+[node name="CPUTeam" type="Node"]
+script = ExtResource("1_kdtli")
+starting_lineup_scene = ExtResource("1_aqnee")

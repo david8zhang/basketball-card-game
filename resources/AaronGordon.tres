@@ -51,4 +51,5 @@ positions = Array[int]([3])
 first_name = "Aaron"
 last_name = "Gordon"
 three_point_bonus = 0
+player_cost = 780
 roll_table = Array[ExtResource("1_075yk")]([SubResource("Resource_oa5et"), SubResource("Resource_62xwd"), SubResource("Resource_htajn"), SubResource("Resource_vgewm"), SubResource("Resource_4ju4e")])

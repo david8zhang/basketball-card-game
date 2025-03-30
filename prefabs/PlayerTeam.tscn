@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2et8rtkxtdo6"]
+
+[ext_resource type="Script" path="res://scripts/PlayerTeam.gd" id="1_fkix7"]
+[ext_resource type="PackedScene" uid="uid://py6a76la7wrw" path="res://prefabs/StartingLineup.tscn" id="2_3142n"]
+[ext_resource type="PackedScene" uid="uid://cl8wuqrft8gf4" path="res://prefabs/LineupSelector.tscn" id="3_86t8e"]
+
+[node name="PlayerTeam" type="Node"]
+script = ExtResource("1_fkix7")
+starting_lineup_scene = ExtResource("2_3142n")
+lineup_selector_scene = ExtResource("3_86t8e")

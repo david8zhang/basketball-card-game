@@ -1,18 +1,8 @@
-class_name Team
+class_name StartingLineup
 extends HBoxContainer
 
 @export var card_scene: PackedScene
-
-enum Side {
-	PLAYER,
-	CPU
-}
-
 var starting_lineup_cards = []
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	init_cards()
 
 func init_cards():
 	for i in range(0, 5):

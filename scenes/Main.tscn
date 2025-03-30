@@ -1,10 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://qxrlmkdns66e"]
+[gd_scene load_steps=4 format=3 uid="uid://qxrlmkdns66e"]
 
 [ext_resource type="Script" path="res://scripts/Game.gd" id="1_sqmis"]
-[ext_resource type="PackedScene" uid="uid://py6a76la7wrw" path="res://prefabs/Team.tscn" id="2_731t8"]
+[ext_resource type="PackedScene" uid="uid://ctjg7yuu7e2ql" path="res://prefabs/CPUTeam.tscn" id="2_me2iv"]
+[ext_resource type="PackedScene" uid="uid://b2et8rtkxtdo6" path="res://prefabs/PlayerTeam.tscn" id="2_qoetb"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_sqmis")
+
+[node name="CPUTeam" parent="." node_paths=PackedStringArray("starting_lineup_wrapper") instance=ExtResource("2_me2iv")]
+starting_lineup_wrapper = NodePath("../CanvasLayer/MarginContainer/VBoxContainer")
+
+[node name="PlayerTeam" parent="." node_paths=PackedStringArray("starting_lineup_wrapper") instance=ExtResource("2_qoetb")]
+starting_lineup_wrapper = NodePath("../CanvasLayer/MarginContainer/VBoxContainer")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -18,10 +25,4 @@ theme_override_constants/margin_top = 50
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 50
-
-[node name="PlayerTeam" parent="CanvasLayer/MarginContainer/VBoxContainer" instance=ExtResource("2_731t8")]
-layout_mode = 2
-
-[node name="CPUTeam" parent="CanvasLayer/MarginContainer/VBoxContainer" instance=ExtResource("2_731t8")]
-layout_mode = 2
+theme_override_constants/separation = 20

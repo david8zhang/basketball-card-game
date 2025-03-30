@@ -6,7 +6,8 @@ extends Control
 @onready var first_name = $Panel/MarginContainer/VBoxContainer/HBoxContainer2/PlayerName/First as Label
 @onready var last_name = $Panel/MarginContainer/VBoxContainer/HBoxContainer2/PlayerName/Last as Label
 @onready var player_position = $Panel/MarginContainer/VBoxContainer/Position as Label
-@onready var three_point_bonus = $Panel/MarginContainer/VBoxContainer/ThreePointBonus as Label
+@onready var three_point_bonus = $Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer3/ThreePointBonus as Label
+@onready var shot_line = $Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer3/ShotLine as Label
 @onready var roll_table = $Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer as GridContainer
 
 @export var roll_table_value_scene: PackedScene
@@ -16,7 +17,11 @@ func _ready():
 	offense_value.text = str(ball_player_stats.offense)
 	defense_value.text = str(ball_player_stats.defense)
 	player_position.text = convert_positions_to_string(ball_player_stats.positions)
-	three_point_bonus.text = str(ball_player_stats.three_point_bonus)
+
+	if ball_player_stats.three_point_bonus > 0:
+		three_point_bonus.text = "3PT +" + str(ball_player_stats.three_point_bonus)
+	else:
+		three_point_bonus.hide()
 
 	for row in ball_player_stats.roll_table:
 		var table_row = row as RollTableRow

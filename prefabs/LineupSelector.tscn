@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://cl8wuqrft8gf4"]
+
+[ext_resource type="PackedScene" uid="uid://cgehw3go3iec0" path="res://prefabs/CardSlot.tscn" id="1_huxsp"]
+[ext_resource type="Script" path="res://scripts/LineupSelector.gd" id="1_vyal6"]
+
+[node name="LineupSelector" type="HBoxContainer"]
+custom_minimum_size = Vector2(1200, 350)
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 100
+script = ExtResource("1_vyal6")
+
+[node name="PGSlot" parent="." instance=ExtResource("1_huxsp")]
+layout_mode = 2
+
+[node name="SGSlot" parent="." instance=ExtResource("1_huxsp")]
+layout_mode = 2
+player_position = 1
+
+[node name="SFSlot" parent="." instance=ExtResource("1_huxsp")]
+layout_mode = 2
+player_position = 2
+
+[node name="PFSlot" parent="." instance=ExtResource("1_huxsp")]
+layout_mode = 2
+player_position = 3
+
+[node name="CSlot" parent="." instance=ExtResource("1_huxsp")]
+layout_mode = 2
+player_position = 4
