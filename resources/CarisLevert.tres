@@ -1,0 +1,55 @@
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://borthygdok0s4"]
+
+[ext_resource type="Script" path="res://scripts/RollTableRow.gd" id="1_o31my"]
+[ext_resource type="Script" path="res://scripts/BallPlayerStats.gd" id="2_fqegb"]
+
+[sub_resource type="Resource" id="Resource_ma4kd"]
+script = ExtResource("1_o31my")
+low = 1
+high = 4
+points = 0
+assists = 0
+rebounds = 0
+
+[sub_resource type="Resource" id="Resource_dmg4v"]
+script = ExtResource("1_o31my")
+low = 5
+high = 8
+points = 2
+assists = 1
+rebounds = 1
+
+[sub_resource type="Resource" id="Resource_d3sfm"]
+script = ExtResource("1_o31my")
+low = 9
+high = 14
+points = 3
+assists = 1
+rebounds = 1
+
+[sub_resource type="Resource" id="Resource_fgrm8"]
+script = ExtResource("1_o31my")
+low = 15
+high = 19
+points = 7
+assists = 2
+rebounds = 2
+
+[sub_resource type="Resource" id="Resource_6fmax"]
+script = ExtResource("1_o31my")
+low = 20
+high = 30
+points = 10
+assists = 2
+rebounds = 3
+
+[resource]
+script = ExtResource("2_fqegb")
+offense = 10
+defense = 12
+positions = Array[int]([1, 2])
+first_name = "Caris"
+last_name = "Levert"
+three_point_bonus = 1
+player_cost = 670
+roll_table = Array[ExtResource("1_o31my")]([SubResource("Resource_ma4kd"), SubResource("Resource_dmg4v"), SubResource("Resource_d3sfm"), SubResource("Resource_fgrm8"), SubResource("Resource_6fmax")])
