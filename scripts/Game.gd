@@ -7,6 +7,10 @@ enum Side {
 }
 
 var all_player_stats = {}
+var selected_player_bp_card: BallPlayerCard
+var selected_cpu_bp_card: BallPlayerCard
+
+@onready var matchup_container: MatchupContainer = $CanvasLayer/MatchupContainer
 
 # Called when the node enters the scene tree for the first time.
 func _init():
@@ -18,6 +22,8 @@ func _init():
 					all_player_stats[p] = []
 				all_player_stats[p].append(stat_config)
 
+func _ready():
+	matchup_container.hide()
 
 func assemble_random_lineup() -> Array[BallPlayerStats]:
 	var player_stats: Array[BallPlayerStats] = []
@@ -28,3 +34,8 @@ func assemble_random_lineup() -> Array[BallPlayerStats]:
 		var random_player_stat = players_to_pick_from.pick_random() as BallPlayerStats
 		player_stats.append(random_player_stat)
 	return player_stats
+
+func player_select_card_to_score_with(card: BallPlayerCard):
+	selected_player_bp_card = card
+	matchup_container.set_player_card(card)
+	matchup_container.show()

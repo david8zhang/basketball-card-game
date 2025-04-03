@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://qxrlmkdns66e"]
+[gd_scene load_steps=5 format=3 uid="uid://qxrlmkdns66e"]
 
 [ext_resource type="Script" path="res://scripts/Game.gd" id="1_sqmis"]
 [ext_resource type="PackedScene" uid="uid://ctjg7yuu7e2ql" path="res://prefabs/CPUTeam.tscn" id="2_me2iv"]
 [ext_resource type="PackedScene" uid="uid://b2et8rtkxtdo6" path="res://prefabs/PlayerTeam.tscn" id="2_qoetb"]
+[ext_resource type="PackedScene" uid="uid://c5jusiagrv0vw" path="res://prefabs/MatchupContainer.tscn" id="4_vns61"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_sqmis")
@@ -26,3 +27,5 @@ theme_override_constants/margin_top = 50
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
+
+[node name="MatchupContainer" parent="CanvasLayer" instance=ExtResource("4_vns61")]

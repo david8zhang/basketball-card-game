@@ -9,9 +9,12 @@ extends Control
 @onready var three_point_bonus = $Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer3/ThreePointBonus as Label
 @onready var shot_line = $Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer3/ShotLine as Label
 @onready var roll_table = $Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer as GridContainer
+@onready var button = $Panel/Button as Button
+@onready var panel_container = $Panel as Panel
 
 @export var roll_table_value_scene: PackedScene
 @export var ball_player_stats: BallPlayerStats
+@export var roll_table_font_override_size := 8
 
 func _ready():
 	offense_value.text = str(ball_player_stats.offense)
@@ -31,6 +34,12 @@ func _ready():
 		var points_value = roll_table_value_scene.instantiate() as TableValue
 		var assists_value = roll_table_value_scene.instantiate() as TableValue
 		var rebounds_value = roll_table_value_scene.instantiate() as TableValue
+		
+		roll_range.font_override_size = roll_table_font_override_size
+		points_value.font_override_size = roll_table_font_override_size
+		assists_value.font_override_size = roll_table_font_override_size
+		rebounds_value.font_override_size = roll_table_font_override_size
+
 		roll_table.add_child(roll_range)
 		roll_table.add_child(points_value)
 		roll_table.add_child(assists_value)

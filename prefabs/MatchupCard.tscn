@@ -1,17 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://canx4b4pr7n3c"]
+[gd_scene load_steps=7 format=3 uid="uid://nr3d4pggsa3m"]
 
-[ext_resource type="Script" path="res://scripts/BallPlayerCard.gd" id="1_my46u"]
-[ext_resource type="PackedScene" uid="uid://cgpent6asbq6b" path="res://prefabs/TableValue.tscn" id="2_bfexb"]
-[ext_resource type="Resource" uid="uid://cvram68b0cw7d" path="res://resources/DeAndreAyton.tres" id="3_v567d"]
+[ext_resource type="Script" path="res://scripts/BallPlayerCard.gd" id="1_2wafc"]
+[ext_resource type="PackedScene" uid="uid://cgpent6asbq6b" path="res://prefabs/TableValue.tscn" id="2_ko473"]
+[ext_resource type="Resource" uid="uid://crm23b0v33m8u" path="res://resources/AaronGordon.tres" id="3_j2ud4"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eoll5"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7wo1j"]
 bg_color = Color(0, 0, 0, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gf3ry"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yk2tx"]
 content_margin_left = 2.0
 content_margin_top = 1.0
 content_margin_right = 2.0
@@ -19,7 +19,7 @@ content_margin_bottom = 1.0
 bg_color = Color(0.6, 0.6, 0.6, 0)
 border_width_bottom = 1
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_krclw"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0vq88"]
 content_margin_top = 0.0
 content_margin_right = 5.0
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -27,19 +27,17 @@ border_width_right = 1
 border_color = Color(0.666667, 0.666667, 0.666667, 1)
 border_blend = true
 
-[node name="BallPlayerCard" type="Control"]
+[node name="MatchupCard" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 6
-size_flags_stretch_ratio = 0.75
-mouse_filter = 1
-script = ExtResource("1_my46u")
-roll_table_value_scene = ExtResource("2_bfexb")
-ball_player_stats = ExtResource("3_v567d")
+script = ExtResource("1_2wafc")
+roll_table_value_scene = ExtResource("2_ko473")
+ball_player_stats = ExtResource("3_j2ud4")
+roll_table_font_override_size = 15
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -48,14 +46,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -125.0
-offset_top = -175.0
-offset_right = 125.0
-offset_bottom = 175.0
+offset_left = -187.5
+offset_top = -300.0
+offset_right = 187.5
+offset_bottom = 300.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxFlat_eoll5")
+theme_override_styles/panel = SubResource("StyleBoxFlat_7wo1j")
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel"]
 layout_mode = 1
@@ -88,14 +86,14 @@ alignment = 1
 
 [node name="OffenseValue" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/Offense"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 50
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 2
 
 [node name="OffenseLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/Offense"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 20
 text = "Offense"
 horizontal_alignment = 1
 
@@ -110,14 +108,14 @@ alignment = 1
 
 [node name="DefenseValue" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/Defense"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 50
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 2
 
 [node name="DefenseLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/Defense"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 20
 text = "Defense"
 horizontal_alignment = 1
 
@@ -131,7 +129,7 @@ mouse_default_cursor_shape = 2
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 15
 text = "PG"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
@@ -145,14 +143,14 @@ alignment = 2
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 28
 text = "FIRSTNAME"
 
 [node name="Last" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/PlayerName"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 28
 text = "LASTNAME"
 
 [node name="Control" type="Control" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2"]
@@ -170,45 +168,45 @@ columns = 4
 
 [node name="ColumnHeader1" type="PanelContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_gf3ry")
+theme_override_styles/panel = SubResource("StyleBoxFlat_yk2tx")
 
 [node name="RollRange" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer/ColumnHeader1"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 15
 text = "ROLL"
 horizontal_alignment = 1
 
 [node name="ColumnHeader2" type="PanelContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_gf3ry")
+theme_override_styles/panel = SubResource("StyleBoxFlat_yk2tx")
 
 [node name="Points" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer/ColumnHeader2"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 15
 text = "PTS"
 horizontal_alignment = 1
 
 [node name="ColumnHeader3" type="PanelContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_gf3ry")
+theme_override_styles/panel = SubResource("StyleBoxFlat_yk2tx")
 
 [node name="Assists" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer/ColumnHeader3"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 15
 text = "AST"
 horizontal_alignment = 1
 
 [node name="ColumnHeader4" type="PanelContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_gf3ry")
+theme_override_styles/panel = SubResource("StyleBoxFlat_yk2tx")
 
 [node name="Rebounds" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer/ColumnHeader4"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 15
 text = "REB"
 horizontal_alignment = 1
 
@@ -224,20 +222,20 @@ alignment = 2
 [node name="Panel" type="PanelContainer" parent="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_krclw")
+theme_override_styles/panel = SubResource("StyleBoxFlat_0vq88")
 
 [node name="ShotLine" type="Label" parent="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer3/Panel"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 12
 text = "Shot: 1"
 
 [node name="ThreePointBonus" type="Label" parent="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 12
 text = "3pt +1"
 
 [node name="Button" type="Button" parent="Panel"]
