@@ -2,10 +2,25 @@ class_name MatchupContainer
 extends Panel
 
 @onready var hbox_container = $MarginContainer/VBoxContainer/HBoxContainer as HBoxContainer
+@onready var roll_button = $MarginContainer/VBoxContainer/VBoxContainer/RollButton as Button
+@onready var roll_value_label = $MarginContainer/VBoxContainer/VBoxContainer/RollValue as Label
+@onready var close_button = $CloseButton as Button
 @export var card_scene: PackedScene
 
 var player_card: BallPlayerCard
 var cpu_card: BallPlayerCard
+
+var off_modifier_label: Label
+
+signal calc_complete
+var calc_wflow_idx = 0
+var calc_steps = []
+var calc_delay_timer
+
+func _ready():
+	roll_button.pressed.connect(on_roll)
+	close_button.pressed.connect(on_close_matchup_window)
+	calc_complete.connect(process_calc_delay)
 
 func set_player_card(card: BallPlayerCard):
 	player_card = card_scene.instantiate() as BallPlayerCard
@@ -16,3 +31,92 @@ func set_cpu_card(card: BallPlayerCard):
 	cpu_card = card_scene.instantiate() as BallPlayerCard
 	cpu_card.ball_player_stats = card.ball_player_stats.duplicate()
 	hbox_container.add_child(cpu_card)
+
+func on_roll():
+	roll_button.hide()
+	calc_steps = [
+		{
+			"fname": "generate_roll_value",
+			"on_comp_delay_s": 1.0
+		},
+		{
+			"fname": "handle_off_modifier",
+			"on_comp_delay_s": 1.0
+		}
+	]
+	execute_calc_wflow()
+
+func execute_calc_wflow():
+	if calc_wflow_idx < calc_steps.size():
+		var curr_step = calc_steps[calc_wflow_idx]
+		var callable = Callable(self, curr_step["fname"])
+		callable.call()
+
+func process_calc_delay():
+	var curr_step = calc_steps[calc_wflow_idx]
+	if calc_delay_timer != null:
+		calc_delay_timer.queue_free()
+	calc_delay_timer = Timer.new()
+	calc_delay_timer.autostart = true
+	calc_delay_timer.wait_time = curr_step["on_comp_delay_s"]
+	calc_delay_timer.one_shot = true
+	var on_timeout = Callable(self, "go_to_next_calc")
+	calc_delay_timer.timeout.connect(on_timeout)
+	add_child(calc_delay_timer)
+
+func go_to_next_calc():
+	calc_wflow_idx += 1
+	execute_calc_wflow()
+
+func generate_roll_value():
+	var random_number = randi_range(1, 20)
+	roll_value_label.text = str(random_number)
+	roll_value_label.show()
+	calc_complete.emit()
+
+func handle_off_modifier():
+	var off_def_diff = player_card.ball_player_stats.offense - cpu_card.ball_player_stats.defense
+	if off_def_diff != 0:
+		off_modifier_label = Label.new()
+		off_modifier_label.add_theme_font_size_override("font_size", 45)
+		off_modifier_label.size.x = size.x
+		off_modifier_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		off_modifier_label.global_position = Vector2(0, roll_value_label.global_position.y + 100)
+		off_modifier_label.text = "+" + str(off_def_diff) if off_def_diff > 0 else str(off_def_diff)
+		add_child(off_modifier_label)
+
+		# Combine modifier value with roll value
+		var off_modifier_tween = create_tween()
+		off_modifier_tween.tween_property(off_modifier_label, "global_position:y", roll_value_label.global_position.y + 10, 0.5).set_delay(1.0)
+		var cb = Callable(self, "combine_off_modifier").bind(off_def_diff)
+		off_modifier_tween.finished.connect(cb)
+	else:
+		calc_complete.emit()
+
+func call_after_delay(delay_sec: float, func_name: String):
+	var timer = Timer.new()
+	timer.wait_time = delay_sec
+	timer.autostart = true
+	timer.one_shot = true
+	var callable = Callable(self, "clear_delay_timer").bind(timer, func_name)
+	timer.timeout.connect(callable)
+	add_child(timer)
+
+func clear_delay_timer(timer: Timer, func_name: String):
+	var callable = Callable(self, func_name)
+	callable.call()
+	timer.queue_free()
+
+func hide_off_modifier_label():
+	off_modifier_label.hide()
+
+func combine_off_modifier(off_def_diff: int):
+	var new_roll_value = int(roll_value_label.text) + off_def_diff
+	roll_value_label.text = str(new_roll_value)
+	off_modifier_label.queue_free()
+	calc_complete.emit()
+
+func on_close_matchup_window():
+	hide()
+	player_card.queue_free()
+	cpu_card.queue_free()

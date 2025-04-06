@@ -32,3 +32,6 @@ func hookup_bp_card_callbacks():
 
 func on_bp_card_pressed(card: BallPlayerCard):
 	game.player_select_card_to_score_with(card)
+
+func get_card_at_position(pos: BallPlayerStats.PlayerPosition):
+	return starting_lineup.get_card_at_position(pos)

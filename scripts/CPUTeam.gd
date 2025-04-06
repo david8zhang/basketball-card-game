@@ -13,3 +13,6 @@ func _ready():
 		starting_lineup_wrapper.add_child(starting_lineup)
 		var random_lineup = game.assemble_random_lineup()
 		starting_lineup.init_cards(random_lineup)
+
+func get_card_at_position(pos: BallPlayerStats.PlayerPosition):
+	return starting_lineup.get_card_at_position(pos)

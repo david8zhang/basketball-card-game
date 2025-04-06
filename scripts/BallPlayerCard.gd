@@ -15,6 +15,7 @@ extends Control
 @export var roll_table_value_scene: PackedScene
 @export var ball_player_stats: BallPlayerStats
 @export var roll_table_font_override_size := 8
+@export var assigned_position: BallPlayerStats.PlayerPosition
 
 func _ready():
 	offense_value.text = str(ball_player_stats.offense)
@@ -65,3 +66,7 @@ func convert_positions_to_string(positions: Array[BallPlayerStats.PlayerPosition
 	var player_position_name_mapping = ["PG", "SG", "SF", "PF", "C"]
 	var position_names = positions.map(func(p): return player_position_name_mapping[int(p)])
 	return "/".join(position_names)
+
+
+func get_assigned_position():
+	return assigned_position

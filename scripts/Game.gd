@@ -10,7 +10,9 @@ var all_player_stats = {}
 var selected_player_bp_card: BallPlayerCard
 var selected_cpu_bp_card: BallPlayerCard
 
-@onready var matchup_container: MatchupContainer = $CanvasLayer/MatchupContainer
+@onready var matchup_container: MatchupContainer = $CanvasLayer/MatchupContainer as MatchupContainer
+@onready var player_team: PlayerTeam = $PlayerTeam as PlayerTeam
+@onready var cpu_team: CPUTeam = $CPUTeam as CPUTeam
 
 # Called when the node enters the scene tree for the first time.
 func _init():
@@ -25,17 +27,19 @@ func _init():
 func _ready():
 	matchup_container.hide()
 
-func assemble_random_lineup() -> Array[BallPlayerStats]:
-	var player_stats: Array[BallPlayerStats] = []
+func assemble_random_lineup() -> Dictionary:
+	var pos_to_player_map = {}
 	var positions = all_player_stats.keys()
 	positions.sort()
 	for pos in positions:
-		var players_to_pick_from = all_player_stats[pos].filter(func(p): return !player_stats.has(p))
+		var players_to_pick_from = all_player_stats[pos].filter(func(p): return !pos_to_player_map.has(p))
 		var random_player_stat = players_to_pick_from.pick_random() as BallPlayerStats
-		player_stats.append(random_player_stat)
-	return player_stats
+		pos_to_player_map[pos] = random_player_stat
+	return pos_to_player_map
 
 func player_select_card_to_score_with(card: BallPlayerCard):
 	selected_player_bp_card = card
+	var opp_matchup_bp_card = cpu_team.get_card_at_position(selected_player_bp_card.get_assigned_position())
 	matchup_container.set_player_card(card)
+	matchup_container.set_cpu_card(opp_matchup_bp_card)	
 	matchup_container.show()
