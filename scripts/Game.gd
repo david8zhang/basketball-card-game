@@ -41,5 +41,6 @@ func player_select_card_to_score_with(card: BallPlayerCard):
 	selected_player_bp_card = card
 	var opp_matchup_bp_card = cpu_team.get_card_at_position(selected_player_bp_card.get_assigned_position())
 	matchup_container.set_player_card(card)
-	matchup_container.set_cpu_card(opp_matchup_bp_card)	
+	matchup_container.set_cpu_card(opp_matchup_bp_card)
+	matchup_container.set_offense_side(Side.PLAYER)
 	matchup_container.show()

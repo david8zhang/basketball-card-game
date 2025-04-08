@@ -1,21 +1,24 @@
 class_name BallPlayerCard
 extends Control
 
-@onready var offense_value = $Panel/MarginContainer/VBoxContainer/HBoxContainer/Offense/OffenseValue as Label
-@onready var defense_value = $Panel/MarginContainer/VBoxContainer/HBoxContainer/Defense/DefenseValue as Label
-@onready var first_name = $Panel/MarginContainer/VBoxContainer/HBoxContainer2/PlayerName/First as Label
-@onready var last_name = $Panel/MarginContainer/VBoxContainer/HBoxContainer2/PlayerName/Last as Label
-@onready var player_position = $Panel/MarginContainer/VBoxContainer/Position as Label
-@onready var three_point_bonus = $Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer3/ThreePointBonus as Label
-@onready var shot_line = $Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer3/ShotLine as Label
-@onready var roll_table = $Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer as GridContainer
-@onready var button = $Panel/Button as Button
-@onready var panel_container = $Panel as Panel
+@onready var offense_value := $Panel/MarginContainer/VBoxContainer/HBoxContainer/Offense/OffenseValue as Label
+@onready var defense_value := $Panel/MarginContainer/VBoxContainer/HBoxContainer/Defense/DefenseValue as Label
+@onready var first_name := $Panel/MarginContainer/VBoxContainer/HBoxContainer2/PlayerName/First as Label
+@onready var last_name := $Panel/MarginContainer/VBoxContainer/HBoxContainer2/PlayerName/Last as Label
+@onready var player_position := $Panel/MarginContainer/VBoxContainer/Position as Label
+@onready var three_point_bonus := $Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer3/ThreePointBonus as Label
+@onready var shot_line := $Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer3/Panel/ShotLine as Label
+@onready var roll_table := $Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer as GridContainer
+@onready var button := $Panel/Button as Button
+@onready var panel_container := $Panel as Panel
+@onready var animation_player := $AnimationPlayer as AnimationPlayer
 
 @export var roll_table_value_scene: PackedScene
 @export var ball_player_stats: BallPlayerStats
 @export var roll_table_font_override_size := 8
 @export var assigned_position: BallPlayerStats.PlayerPosition
+
+var roll_table_rows = []
 
 func _ready():
 	offense_value.text = str(ball_player_stats.offense)
@@ -53,6 +56,14 @@ func _ready():
 		populate_label_value(points_value.label, table_row.points)
 		populate_label_value(assists_value.label, table_row.assists)
 		populate_label_value(rebounds_value.label, table_row.rebounds)
+
+		var roll_table_row = {
+			"data": table_row,
+			"roll_range_label": roll_range,
+			"points_label": points_value,
+			"rebounds_label": rebounds_value
+		}
+		roll_table_rows.append(roll_table_row)
 
 
 func populate_label_value(label: Label, value: int):
