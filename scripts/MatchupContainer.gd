@@ -6,11 +6,13 @@ extends Panel
 @onready var roll_value_label = $MarginContainer/VBoxContainer/VBoxContainer/RollValue as Label
 @onready var close_button = $CloseButton as Button
 @export var card_scene: PackedScene
+@export var matchup_pts_assts_rebs_scene: PackedScene
 
 var player_card: BallPlayerCard
 var cpu_card: BallPlayerCard
 var offense_side: Game.Side
 var off_modifier_label: Label
+var matchup_score: MatchupPtsAsstsRebs
 
 signal calc_complete
 var calc_wflow_idx = 0
@@ -65,10 +67,22 @@ func on_roll():
 		},
 		{
 			"fname": "highlight_roll_table_row",
-			"on_comp_delay_s": 0.5
+			"on_comp_delay_s": 1.0
+		},
+		{
+			"fname": "dehighlight_roll_table_row",
+			"on_comp_delay_s": 0.1
 		},
 		{
 			"fname": "tally_points",
+			"on_comp_delay_s": 0.5
+		},
+		{
+			"fname": "tally_assists",
+			"on_comp_delay_s": 0.5
+		},
+		{
+			"fname": "tally_rebounds",
 			"on_comp_delay_s": 0.5
 		}
 	]
@@ -151,7 +165,7 @@ func on_anim_finished(anim_name: String):
 	if anim_name == "highlight_offense_stat" or anim_name == "highlight_defense_stat":
 		go_to_next_step_generic()
 
-func highlight_roll_table_row():
+func get_table_row_for_roll_value():
 	var roll_value = clamp(int(roll_value_label.text), 0, 30)
 	var roll_table_row
 	var offense_bp_card = player_card if offense_side == Game.Side.PLAYER else cpu_card
@@ -160,14 +174,25 @@ func highlight_roll_table_row():
 		if roll_value >= roll_table_row_data.low and roll_value <= roll_table_row_data.high:
 			roll_table_row = row
 	assert(roll_table_row != null, "roll_table_row must not be null!")
-	
+	return roll_table_row
+
+func highlight_roll_table_row():
+	var roll_table_row = get_table_row_for_roll_value()
 	var roll_range_label = roll_table_row["roll_range_label"] as TableValue
 	var hl_row_range = create_tween()
-	hl_row_range.tween_property(roll_range_label, "theme_override_font_sizes/font_size", 20, 0.5)
+	hl_row_range.tween_property(roll_range_label.label, "theme_override_font_sizes/font_size", 25, 0.5)
+	hl_row_range.finished.connect(go_to_next_step_generic)
+
+func dehighlight_roll_table_row():
+	var roll_table_row = get_table_row_for_roll_value()
+	var roll_range_label = roll_table_row["roll_range_label"] as TableValue
+	var hl_row_range = create_tween()
+	hl_row_range.tween_property(roll_range_label.label, "theme_override_font_sizes/font_size", 15, 0.5)
 	hl_row_range.finished.connect(go_to_next_step_generic)
 
 func push_roll_value_up():
 	var tween = create_tween()
+	var start_y = roll_value_label.global_position.y
 	tween.tween_property(roll_value_label, "theme_override_font_sizes/font_size", 30, 0.5)
 
 	var shrink_fn = func shrink_roll_value():
@@ -175,14 +200,40 @@ func push_roll_value_up():
 		var end_y = roll_value_label.global_position.y - 100
 		new_tween.tween_property(roll_value_label, "global_position:y", end_y, 0.5)
 		new_tween.finished.connect(go_to_next_step_generic)
-	
+
 	tween.finished.connect(shrink_fn)
+	matchup_score = matchup_pts_assts_rebs_scene.instantiate()
+	add_child(matchup_score)
+	matchup_score.global_position = Vector2(508, get_viewport_rect().size.y + 200)
+	var tween_slide = create_tween()
+	tween_slide.tween_property(matchup_score, "global_position:y", start_y, 1.0)
 
 func go_to_next_step_generic():
 	calc_complete.emit()
 	
-func tally_score():
-	pass
+func tally_points():
+	var roll_table_row = get_table_row_for_roll_value()
+	var points_value = matchup_score.points_value	
+	var points_scored = roll_table_row["points_label"] as TableValue
+	var hl_points_scored = create_tween()
+	hl_points_scored.tween_property(points_scored.label, "theme_override_font_sizes/font_size", 25, 0.5)
+
+	var points_bonus_label = Label.new()
+	add_child(points_bonus_label)
+	points_bonus_label.text = "+" + points_scored.label.text
+	points_bonus_label.global_position = Vector2(points_value.global_position.x, points_value.global_position.y + 75)
+	points_bonus_label.add_theme_font_size_override("font_size", 50)
+	points_bonus_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	var add_points_bonus_tween = create_tween()
+	add_points_bonus_tween.tween_property(points_bonus_label, "global_position:y", points_value.global_position.y, 0.5).set_delay(0.5)
+
+	var combine_fn = func combine_with_total_points():
+		var tween = create_tween()
+		points_bonus_label.queue_free()
+		points_value.text = str(int(points_value.text) + int(points_scored.label.text))
+		tween.tween_property(points_value, "theme_override_font_sizes/font_size", 60, 0.5)
+
+	add_points_bonus_tween.finished.connect(combine_fn)
 
 func call_after_delay(delay_sec: float, func_name: String):
 	var timer = Timer.new()

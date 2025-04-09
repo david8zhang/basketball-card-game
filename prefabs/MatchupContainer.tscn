@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://c5jusiagrv0vw"]
+[gd_scene load_steps=5 format=3 uid="uid://c5jusiagrv0vw"]
 
 [ext_resource type="Script" path="res://scripts/MatchupContainer.gd" id="1_ka8mq"]
-[ext_resource type="PackedScene" uid="uid://nr3d4pggsa3m" path="res://prefabs/MatchupCard.tscn" id="2_2b3xy"]
+[ext_resource type="PackedScene" uid="uid://nr3d4pggsa3m" path="res://prefabs/MatchupCard.tscn" id="2_qbowc"]
+[ext_resource type="PackedScene" uid="uid://cx1q0ii5q4xhh" path="res://prefabs/MatchupPtsAsstsRebs.tscn" id="3_gk8wi"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_20t5l"]
 bg_color = Color(0, 0, 0, 0.745098)
@@ -15,7 +16,8 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_20t5l")
 script = ExtResource("1_ka8mq")
-card_scene = ExtResource("2_2b3xy")
+card_scene = ExtResource("2_qbowc")
+matchup_pts_assts_rebs_scene = ExtResource("3_gk8wi")
 
 [node name="CloseButton" type="Button" parent="."]
 layout_mode = 1
