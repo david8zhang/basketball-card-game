@@ -7,6 +7,7 @@
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_sqmis")
+matchup_container_scene = ExtResource("4_vns61")
 
 [node name="CPUTeam" parent="." node_paths=PackedStringArray("starting_lineup_wrapper") instance=ExtResource("2_me2iv")]
 starting_lineup_wrapper = NodePath("../CanvasLayer/MarginContainer/VBoxContainer")
@@ -27,5 +28,3 @@ theme_override_constants/margin_top = 50
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
-
-[node name="MatchupContainer" parent="CanvasLayer" instance=ExtResource("4_vns61")]

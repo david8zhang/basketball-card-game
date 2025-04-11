@@ -61,6 +61,7 @@ func _ready():
 			"data": table_row,
 			"roll_range_label": roll_range,
 			"points_label": points_value,
+			"assists_label": assists_value,
 			"rebounds_label": rebounds_value
 		}
 		roll_table_rows.append(roll_table_row)
