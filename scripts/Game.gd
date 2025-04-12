@@ -10,6 +10,9 @@ var all_player_stats = {}
 var selected_player_bp_card: BallPlayerCard
 var selected_cpu_bp_card: BallPlayerCard
 
+var player_completed_scorers = []
+var cpu_completed_scorers = []
+
 @onready var player_team: PlayerTeam = $PlayerTeam as PlayerTeam
 @onready var cpu_team: CPUTeam = $CPUTeam as CPUTeam
 @onready var canvas_layer: CanvasLayer = $CanvasLayer as CanvasLayer
@@ -46,22 +49,27 @@ func assemble_random_lineup() -> Dictionary:
 	return pos_to_player_map
 
 func player_select_card_to_score_with(card: BallPlayerCard):
-	selected_player_bp_card = card
-	var opp_matchup_bp_card = cpu_team.get_card_at_position(selected_player_bp_card.get_assigned_position())
-	matchup_container = matchup_container_scene.instantiate() as MatchupContainer
-	canvas_layer.add_child(matchup_container)
-	matchup_container.set_player_card(card)
-	matchup_container.set_cpu_card(opp_matchup_bp_card)
-	matchup_container.set_offense_side(Side.PLAYER)
-	matchup_container.matchup_complete.connect(add_stats_from_matchup)
-	matchup_container.show()
+	if !player_completed_scorers.has(card.get_assigned_position()):
+		selected_player_bp_card = card
+		var opp_matchup_bp_card = cpu_team.get_card_at_position(selected_player_bp_card.get_assigned_position())
+		matchup_container = matchup_container_scene.instantiate() as MatchupContainer
+		canvas_layer.add_child(matchup_container)
+		matchup_container.set_player_card(card)
+		matchup_container.set_cpu_card(opp_matchup_bp_card)
+		matchup_container.set_offense_side(Side.PLAYER)
+		matchup_container.matchup_complete.connect(add_stats_from_matchup)
+		matchup_container.show()
 
 func add_stats_from_matchup(all_stats: Dictionary, side: Side):
 	if side == Side.PLAYER:
+		player_completed_scorers.append(selected_player_bp_card.get_assigned_position())
+		selected_player_bp_card.button.flat = false
 		player_score_label.text = str(int(player_score_label.text) + all_stats["points"])
 		player_assists_label.text = "A: " + str(int(player_assists_label.text) + all_stats["assists"])
 		player_rebounds_label.text = "R: " + str(int(player_rebounds_label.text) + all_stats["rebounds"])
 	elif side == Side.CPU:
+		cpu_completed_scorers.append(selected_cpu_bp_card.get_assigned_position())
+		selected_cpu_bp_card.button.flat = false
 		cpu_score_label.text = str(int(cpu_score_label.text) + all_stats["points"])
 		cpu_assists_label.text = "A: " + str(int(cpu_assists_label.text) + all_stats["asists"])
 		cpu_rebounds_label.text = "R: " + str(int(cpu_rebounds_label.text) + all_stats["rebounds"])
