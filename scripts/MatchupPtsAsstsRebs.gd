@@ -19,3 +19,10 @@ func set_assists_value(value: int):
 
 func set_rebounds_value(value: int):
 	rebounds_value.text = str(value)
+
+func get_all_stats():
+	return {
+		"points": int(points_value.text),
+		"assists": int(assists_value.text),
+		"rebounds": int(rebounds_value.text)
+	}

@@ -14,8 +14,15 @@ var selected_cpu_bp_card: BallPlayerCard
 @onready var cpu_team: CPUTeam = $CPUTeam as CPUTeam
 @onready var canvas_layer: CanvasLayer = $CanvasLayer as CanvasLayer
 
-@export var matchup_container_scene: PackedScene
+@onready var player_score_label = $CanvasLayer/Scoreboard/PlayerScore as Label
+@onready var player_assists_label = $CanvasLayer/Scoreboard/PlayerAssists as Label
+@onready var player_rebounds_label = $CanvasLayer/Scoreboard/PlayerRebounds as Label
 
+@onready var cpu_score_label = $CanvasLayer/Scoreboard/CPUScore as Label
+@onready var cpu_assists_label = $CanvasLayer/Scoreboard/CPUAssists as Label
+@onready var cpu_rebounds_label = $CanvasLayer/Scoreboard/CPURebounds as Label
+
+@export var matchup_container_scene: PackedScene
 var matchup_container: MatchupContainer
 
 # Called when the node enters the scene tree for the first time.
@@ -46,4 +53,15 @@ func player_select_card_to_score_with(card: BallPlayerCard):
 	matchup_container.set_player_card(card)
 	matchup_container.set_cpu_card(opp_matchup_bp_card)
 	matchup_container.set_offense_side(Side.PLAYER)
+	matchup_container.matchup_complete.connect(add_stats_from_matchup)
 	matchup_container.show()
+
+func add_stats_from_matchup(all_stats: Dictionary, side: Side):
+	if side == Side.PLAYER:
+		player_score_label.text = str(int(player_score_label.text) + all_stats["points"])
+		player_assists_label.text = "A: " + str(int(player_assists_label.text) + all_stats["assists"])
+		player_rebounds_label.text = "R: " + str(int(player_rebounds_label.text) + all_stats["rebounds"])
+	elif side == Side.CPU:
+		cpu_score_label.text = str(int(cpu_score_label.text) + all_stats["points"])
+		cpu_assists_label.text = "A: " + str(int(cpu_assists_label.text) + all_stats["asists"])
+		cpu_rebounds_label.text = "R: " + str(int(cpu_rebounds_label.text) + all_stats["rebounds"])

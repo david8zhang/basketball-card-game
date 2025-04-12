@@ -15,6 +15,8 @@ var off_modifier_label: Label
 var matchup_score: MatchupPtsAsstsRebs
 
 signal calc_complete
+signal matchup_complete(all_stats: Dictionary)
+
 var calc_wflow_idx = 0
 var calc_steps = []
 var calc_delay_timer
@@ -229,14 +231,14 @@ func tally_points():
 
 	var on_combine_finished = func on_combine_finished():
 		var tween = create_tween()
-		tween.tween_property(points_value, "theme_override_font_sizes/font_size", 50, 0.5)
+		tween.tween_property(points_value, "theme_override_font_sizes/font_size", 50, 0.25)
 		calc_complete.emit()
 
 	var combine_fn = func combine_with_total_points():
 		var tween = create_tween()
 		points_bonus_label.queue_free()
 		points_value.text = str(int(points_value.text) + int(points_scored.label.text))
-		tween.tween_property(points_value, "theme_override_font_sizes/font_size", 60, 0.5)
+		tween.tween_property(points_value, "theme_override_font_sizes/font_size", 60, 0.25)
 		tween.finished.connect(on_combine_finished)
 	
 	add_points_bonus_tween.finished.connect(combine_fn)
@@ -259,14 +261,14 @@ func tally_assists():
 
 	var on_combine_finished = func on_combine_finished():
 		var tween = create_tween()
-		tween.tween_property(assists_value, "theme_override_font_sizes/font_size", 50, 0.5)
+		tween.tween_property(assists_value, "theme_override_font_sizes/font_size", 50, 0.25)
 		calc_complete.emit()
 
 	var combine_fn = func combine_with_total_points():
 		var tween = create_tween()
 		assists_bonus_label.queue_free()
 		assists_value.text = str(int(assists_value.text) + int(assists_made.label.text))
-		tween.tween_property(assists_value, "theme_override_font_sizes/font_size", 60, 0.5)
+		tween.tween_property(assists_value, "theme_override_font_sizes/font_size", 60, 0.25)
 		tween.finished.connect(on_combine_finished)
 
 	add_assists_bonus_tween.finished.connect(combine_fn)
@@ -289,14 +291,14 @@ func tally_rebounds():
 
 	var on_combine_finished = func on_combine_finished():
 		var tween = create_tween()
-		tween.tween_property(rebounds_value, "theme_override_font_sizes/font_size", 50, 0.5)
+		tween.tween_property(rebounds_value, "theme_override_font_sizes/font_size", 50, 0.25)
 		calc_complete.emit()
 
 	var combine_fn = func combine_with_total_points():
 		var tween = create_tween()
 		rebounds_bonus_label.queue_free()
 		rebounds_value.text = str(int(rebounds_value.text) + int(rebounds_grabbed.label.text))
-		tween.tween_property(rebounds_value, "theme_override_font_sizes/font_size", 60, 0.5)
+		tween.tween_property(rebounds_value, "theme_override_font_sizes/font_size", 60, 0.25)
 		tween.finished.connect(on_combine_finished)
 	add_rebounds_bonus_tween.finished.connect(combine_fn)	
 
@@ -312,7 +314,19 @@ func reset_roll_table_rows():
 	tween.parallel().tween_property(rebounds_value_row.label, "theme_override_font_sizes/font_size", 15, 0.5)
 	tween.parallel().tween_property(assists_value_row.label, "theme_override_font_sizes/font_size", 15, 0.5)
 	tween.parallel().tween_property(points_value_row.label, "theme_override_font_sizes/font_size", 15, 0.5)
-	
+
+	var on_continue_button = Button.new()
+	on_continue_button.text = "Continue"
+	add_child(on_continue_button)
+	on_continue_button.add_theme_font_size_override("font_size", 20)
+	on_continue_button.global_position.y = matchup_score.points_value.global_position.y + 90
+	on_continue_button.global_position.x = matchup_score.assists_value.global_position.x
+	on_continue_button.pressed.connect(on_matchup_completed)
+
+func on_matchup_completed():
+	var all_stats = matchup_score.get_all_stats()
+	matchup_complete.emit(all_stats, offense_side)
+	on_close_matchup_window()
 
 func call_after_delay(delay_sec: float, func_name: String):
 	var timer = Timer.new()
