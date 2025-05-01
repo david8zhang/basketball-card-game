@@ -40,12 +40,19 @@ func _init():
 
 func assemble_random_lineup() -> Dictionary:
 	var pos_to_player_map = {}
+	var picked_players = []
 	var positions = all_player_stats.keys()
 	positions.sort()
+
+	var remove_invalid_players = func (p):
+		var player_name = p.first_name + " " + p.last_name
+		return !pos_to_player_map.values().has(p) and !picked_players.has(player_name)
+	
 	for pos in positions:
-		var players_to_pick_from = all_player_stats[pos].filter(func(p): return !pos_to_player_map.has(p))
+		var players_to_pick_from = all_player_stats[pos].filter(remove_invalid_players)
 		var random_player_stat = players_to_pick_from.pick_random() as BallPlayerStats
 		pos_to_player_map[pos] = random_player_stat
+		picked_players.append(random_player_stat.first_name + " " + random_player_stat.last_name)
 	return pos_to_player_map
 
 func player_select_card_to_score_with(card: BallPlayerCard):
@@ -57,8 +64,27 @@ func player_select_card_to_score_with(card: BallPlayerCard):
 		matchup_container.set_player_card(card)
 		matchup_container.set_cpu_card(opp_matchup_bp_card)
 		matchup_container.set_offense_side(Side.PLAYER)
-		matchup_container.matchup_complete.connect(add_stats_from_matchup)
+		matchup_container.matchup_complete.connect(on_matchup_complete)
 		matchup_container.show()
+
+func cpu_select_card_to_score_with():
+	var cpu_cards = cpu_team.starting_lineup.starting_lineup_cards
+	var cards_to_score_with = cpu_cards.filter(func(c): return !cpu_completed_scorers.has(c.get_assigned_position()))
+	selected_cpu_bp_card = cards_to_score_with.pick_random()
+	var opp_matchup_bp_card = player_team.get_card_at_position(selected_cpu_bp_card.get_assigned_position())
+	matchup_container = matchup_container_scene.instantiate() as MatchupContainer
+	canvas_layer.add_child(matchup_container)
+	matchup_container.set_player_card(opp_matchup_bp_card)
+	matchup_container.set_cpu_card(selected_cpu_bp_card)
+	matchup_container.set_offense_side(Side.CPU)
+	matchup_container.matchup_complete.connect(on_matchup_complete)
+	matchup_container.show()
+
+
+func on_matchup_complete(all_stats: Dictionary, side: Side):
+	add_stats_from_matchup(all_stats, side)
+	if side == Side.PLAYER:
+		cpu_select_card_to_score_with()
 
 func add_stats_from_matchup(all_stats: Dictionary, side: Side):
 	if side == Side.PLAYER:
@@ -71,5 +97,5 @@ func add_stats_from_matchup(all_stats: Dictionary, side: Side):
 		cpu_completed_scorers.append(selected_cpu_bp_card.get_assigned_position())
 		selected_cpu_bp_card.button.flat = false
 		cpu_score_label.text = str(int(cpu_score_label.text) + all_stats["points"])
-		cpu_assists_label.text = "A: " + str(int(cpu_assists_label.text) + all_stats["asists"])
+		cpu_assists_label.text = "A: " + str(int(cpu_assists_label.text) + all_stats["assists"])
 		cpu_rebounds_label.text = "R: " + str(int(cpu_rebounds_label.text) + all_stats["rebounds"])
