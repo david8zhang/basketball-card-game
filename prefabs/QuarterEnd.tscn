@@ -1,0 +1,199 @@
+[gd_scene load_steps=4 format=3 uid="uid://shsmwna0cia5"]
+
+[ext_resource type="Script" path="res://scripts/QuarterEnd.gd" id="1_baxhf"]
+[ext_resource type="PackedScene" uid="uid://cmh2p7sqkladm" path="res://prefabs/BoxScoreRow.tscn" id="2_57elv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_owxqd"]
+content_margin_left = 2.0
+content_margin_top = 1.0
+content_margin_right = 2.0
+content_margin_bottom = 1.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_bottom = 1
+
+[node name="QuarterEnd" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_baxhf")
+box_score_row = ExtResource("2_57elv")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "End of Q1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PlayerScore" type="RichTextLabel" parent="VBoxContainer/HBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(300, 2.08165e-12)
+layout_mode = 2
+bbcode_enabled = true
+text = "[center][font_size=30]Player[center][center][font_size=60]39[center]"
+fit_content = true
+scroll_active = false
+
+[node name="CPUScore" type="RichTextLabel" parent="VBoxContainer/HBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(300, 2.08165e-12)
+layout_mode = 2
+bbcode_enabled = true
+text = "[center][font_size=30]CPU[center][center][font_size=60]34[center]"
+fit_content = true
+scroll_active = false
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PlayerBoxScore" type="Control" parent="VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(300, 2.08165e-12)
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/HBoxContainer2/PlayerBoxScore"]
+custom_minimum_size = Vector2(2.08165e-12, 2.08165e-12)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -55.0
+offset_top = -13.5
+offset_right = 55.0
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+columns = 4
+
+[node name="ColumnHeader1" type="PanelContainer" parent="VBoxContainer/HBoxContainer2/PlayerBoxScore/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_owxqd")
+
+[node name="RollRange" type="Label" parent="VBoxContainer/HBoxContainer2/PlayerBoxScore/GridContainer/ColumnHeader1"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 25
+horizontal_alignment = 1
+
+[node name="ColumnHeader2" type="PanelContainer" parent="VBoxContainer/HBoxContainer2/PlayerBoxScore/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_owxqd")
+
+[node name="Points" type="Label" parent="VBoxContainer/HBoxContainer2/PlayerBoxScore/GridContainer/ColumnHeader2"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 25
+text = "PTS"
+horizontal_alignment = 1
+
+[node name="ColumnHeader3" type="PanelContainer" parent="VBoxContainer/HBoxContainer2/PlayerBoxScore/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_owxqd")
+
+[node name="Assists" type="Label" parent="VBoxContainer/HBoxContainer2/PlayerBoxScore/GridContainer/ColumnHeader3"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 25
+text = "AST"
+horizontal_alignment = 1
+
+[node name="ColumnHeader4" type="PanelContainer" parent="VBoxContainer/HBoxContainer2/PlayerBoxScore/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_owxqd")
+
+[node name="Rebounds" type="Label" parent="VBoxContainer/HBoxContainer2/PlayerBoxScore/GridContainer/ColumnHeader4"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 25
+text = "REB"
+horizontal_alignment = 1
+
+[node name="CPUBoxScore" type="Control" parent="VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(300, 2.08165e-12)
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/HBoxContainer2/CPUBoxScore"]
+custom_minimum_size = Vector2(2.08165e-12, 2.08165e-12)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -55.0
+offset_top = -13.5
+offset_right = 55.0
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+columns = 4
+
+[node name="ColumnHeader1" type="PanelContainer" parent="VBoxContainer/HBoxContainer2/CPUBoxScore/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_owxqd")
+
+[node name="RollRange" type="Label" parent="VBoxContainer/HBoxContainer2/CPUBoxScore/GridContainer/ColumnHeader1"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 25
+horizontal_alignment = 1
+
+[node name="ColumnHeader2" type="PanelContainer" parent="VBoxContainer/HBoxContainer2/CPUBoxScore/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_owxqd")
+
+[node name="Points" type="Label" parent="VBoxContainer/HBoxContainer2/CPUBoxScore/GridContainer/ColumnHeader2"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 25
+text = "PTS"
+horizontal_alignment = 1
+
+[node name="ColumnHeader3" type="PanelContainer" parent="VBoxContainer/HBoxContainer2/CPUBoxScore/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_owxqd")
+
+[node name="Assists" type="Label" parent="VBoxContainer/HBoxContainer2/CPUBoxScore/GridContainer/ColumnHeader3"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 25
+text = "AST"
+horizontal_alignment = 1
+
+[node name="ColumnHeader4" type="PanelContainer" parent="VBoxContainer/HBoxContainer2/CPUBoxScore/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_owxqd")
+
+[node name="Rebounds" type="Label" parent="VBoxContainer/HBoxContainer2/CPUBoxScore/GridContainer/ColumnHeader4"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 25
+text = "REB"
+horizontal_alignment = 1
