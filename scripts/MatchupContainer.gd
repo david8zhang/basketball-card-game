@@ -26,7 +26,6 @@ func _ready():
 	close_button.pressed.connect(on_close_matchup_window)
 	calc_complete.connect(process_calc_delay)
 
-
 func set_player_card(card: BallPlayerCard):
 	player_card = card_scene.instantiate() as BallPlayerCard
 	player_card.ball_player_stats = card.ball_player_stats.duplicate()
@@ -119,7 +118,11 @@ func generate_roll_value():
 	calc_complete.emit()
 
 func handle_off_modifier():
-	var off_def_diff = player_card.ball_player_stats.offense - cpu_card.ball_player_stats.defense
+	var player_bp_stats = player_card.ball_player_stats
+	var cpu_bp_stats = cpu_card.ball_player_stats
+	var off_stat = player_bp_stats.offense if offense_side == Game.Side.PLAYER else cpu_bp_stats.offense
+	var def_stat = cpu_bp_stats.defense if offense_side == Game.Side.PLAYER else player_bp_stats.defense
+	var off_def_diff = off_stat - def_stat
 	if off_def_diff != 0:
 		off_modifier_label = Label.new()
 		off_modifier_label.add_theme_font_size_override("font_size", 45)
@@ -346,3 +349,6 @@ func on_close_matchup_window():
 	player_card.queue_free()
 	cpu_card.queue_free()
 	queue_free()
+
+func hide_close_button():
+	close_button.hide()

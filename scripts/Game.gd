@@ -38,6 +38,9 @@ func _init():
 					all_player_stats[p] = []
 				all_player_stats[p].append(stat_config)
 
+func _ready():
+	cpu_select_card_to_score_with()
+
 func assemble_random_lineup() -> Dictionary:
 	var pos_to_player_map = {}
 	var picked_players = []
@@ -71,15 +74,36 @@ func cpu_select_card_to_score_with():
 	var cpu_cards = cpu_team.starting_lineup.starting_lineup_cards
 	var cards_to_score_with = cpu_cards.filter(func(c): return !cpu_completed_scorers.has(c.get_assigned_position()))
 	selected_cpu_bp_card = cards_to_score_with.pick_random()
-	var opp_matchup_bp_card = player_team.get_card_at_position(selected_cpu_bp_card.get_assigned_position())
-	matchup_container = matchup_container_scene.instantiate() as MatchupContainer
-	canvas_layer.add_child(matchup_container)
-	matchup_container.set_player_card(opp_matchup_bp_card)
-	matchup_container.set_cpu_card(selected_cpu_bp_card)
-	matchup_container.set_offense_side(Side.CPU)
-	matchup_container.matchup_complete.connect(on_matchup_complete)
-	matchup_container.show()
+	
+	# Play a little animation indicating a card was chosen
+	var on_zoom_out_finished = func():
+		var opp_matchup_bp_card = player_team.get_card_at_position(selected_cpu_bp_card.get_assigned_position())
+		matchup_container = matchup_container_scene.instantiate() as MatchupContainer
+		canvas_layer.add_child(matchup_container)
+		matchup_container.set_player_card(opp_matchup_bp_card)
+		matchup_container.set_cpu_card(selected_cpu_bp_card)
+		matchup_container.set_offense_side(Side.CPU)
+		matchup_container.matchup_complete.connect(on_matchup_complete)
+		matchup_container.show()
+		matchup_container.on_roll()
+		matchup_container.hide_close_button()
 
+	var on_hold_finished = func():
+		var zoom_out_card = create_tween()
+		zoom_out_card.tween_property(selected_cpu_bp_card, "scale", Vector2(1, 1), 0.5)
+		zoom_out_card.finished.connect(on_zoom_out_finished)
+
+	var on_zoomed = func():
+		var zoom_hold_timer = Timer.new()
+		zoom_hold_timer.wait_time = 1.0
+		zoom_hold_timer.autostart = true
+		zoom_hold_timer.one_shot = true
+		zoom_hold_timer.timeout.connect(on_hold_finished)
+		add_child(zoom_hold_timer)
+
+	var zoom_in_card = create_tween()
+	zoom_in_card.tween_property(selected_cpu_bp_card, "scale", Vector2(1.05, 1.05), 0.5)
+	zoom_in_card.finished.connect(on_zoomed)
 
 func on_matchup_complete(all_stats: Dictionary, side: Side):
 	add_stats_from_matchup(all_stats, side)
