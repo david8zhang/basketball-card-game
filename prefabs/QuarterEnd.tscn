@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://shsmwna0cia5"]
+[gd_scene load_steps=5 format=3 uid="uid://shsmwna0cia5"]
 
 [ext_resource type="Script" path="res://scripts/QuarterEnd.gd" id="1_baxhf"]
 [ext_resource type="PackedScene" uid="uid://cmh2p7sqkladm" path="res://prefabs/BoxScoreRow.tscn" id="2_57elv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uidyv"]
+bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_owxqd"]
 content_margin_left = 2.0
@@ -28,6 +31,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uidyv")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -52,7 +56,7 @@ alignment = 1
 
 [node name="PlayerScore" type="RichTextLabel" parent="VBoxContainer/HBoxContainer"]
 clip_contents = false
-custom_minimum_size = Vector2(300, 2.08165e-12)
+custom_minimum_size = Vector2(500, 2.08165e-12)
 layout_mode = 2
 bbcode_enabled = true
 text = "[center][font_size=30]Player[center][center][font_size=60]39[center]"
@@ -61,19 +65,23 @@ scroll_active = false
 
 [node name="CPUScore" type="RichTextLabel" parent="VBoxContainer/HBoxContainer"]
 clip_contents = false
-custom_minimum_size = Vector2(300, 2.08165e-12)
+custom_minimum_size = Vector2(500, 2.08165e-12)
 layout_mode = 2
 bbcode_enabled = true
 text = "[center][font_size=30]CPU[center][center][font_size=60]34[center]"
 fit_content = true
 scroll_active = false
 
+[node name="Spacer2" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 50)
+layout_mode = 2
+
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 alignment = 1
 
 [node name="PlayerBoxScore" type="Control" parent="VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(300, 2.08165e-12)
+custom_minimum_size = Vector2(500, 2.08165e-12)
 layout_mode = 2
 
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer/HBoxContainer2/PlayerBoxScore"]
@@ -99,7 +107,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_owxqd")
 [node name="RollRange" type="Label" parent="VBoxContainer/HBoxContainer2/PlayerBoxScore/GridContainer/ColumnHeader1"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 16
 horizontal_alignment = 1
 
 [node name="ColumnHeader2" type="PanelContainer" parent="VBoxContainer/HBoxContainer2/PlayerBoxScore/GridContainer"]
@@ -109,7 +117,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_owxqd")
 [node name="Points" type="Label" parent="VBoxContainer/HBoxContainer2/PlayerBoxScore/GridContainer/ColumnHeader2"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 16
 text = "PTS"
 horizontal_alignment = 1
 
@@ -120,7 +128,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_owxqd")
 [node name="Assists" type="Label" parent="VBoxContainer/HBoxContainer2/PlayerBoxScore/GridContainer/ColumnHeader3"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 16
 text = "AST"
 horizontal_alignment = 1
 
@@ -131,12 +139,12 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_owxqd")
 [node name="Rebounds" type="Label" parent="VBoxContainer/HBoxContainer2/PlayerBoxScore/GridContainer/ColumnHeader4"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 16
 text = "REB"
 horizontal_alignment = 1
 
 [node name="CPUBoxScore" type="Control" parent="VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(300, 2.08165e-12)
+custom_minimum_size = Vector2(500, 2.08165e-12)
 layout_mode = 2
 
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer/HBoxContainer2/CPUBoxScore"]
@@ -162,7 +170,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_owxqd")
 [node name="RollRange" type="Label" parent="VBoxContainer/HBoxContainer2/CPUBoxScore/GridContainer/ColumnHeader1"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 16
 horizontal_alignment = 1
 
 [node name="ColumnHeader2" type="PanelContainer" parent="VBoxContainer/HBoxContainer2/CPUBoxScore/GridContainer"]
@@ -172,7 +180,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_owxqd")
 [node name="Points" type="Label" parent="VBoxContainer/HBoxContainer2/CPUBoxScore/GridContainer/ColumnHeader2"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 16
 text = "PTS"
 horizontal_alignment = 1
 
@@ -183,7 +191,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_owxqd")
 [node name="Assists" type="Label" parent="VBoxContainer/HBoxContainer2/CPUBoxScore/GridContainer/ColumnHeader3"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 16
 text = "AST"
 horizontal_alignment = 1
 
@@ -194,6 +202,16 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_owxqd")
 [node name="Rebounds" type="Label" parent="VBoxContainer/HBoxContainer2/CPUBoxScore/GridContainer/ColumnHeader4"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 16
 text = "REB"
 horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 100)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Continue"

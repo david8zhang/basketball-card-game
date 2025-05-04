@@ -44,47 +44,47 @@ func on_roll():
 	calc_steps = [
 		{
 			"fname": "generate_roll_value",
-			"on_comp_delay_s": 1.0
+			"on_comp_delay_s": 0.25
 		},
 		{
 			"fname": "highlight_off_stat",
-			"on_comp_delay_s": 0.25
+			"on_comp_delay_s": 0.1
 		},
 		{
 			"fname": "highlight_def_stat",
-			"on_comp_delay_s": 0.25
+			"on_comp_delay_s": 0.1
 		},
 		{
 			"fname": "handle_off_modifier",
-			"on_comp_delay_s": 0.5
+			"on_comp_delay_s": 0.1
 		},
 		{
 			"fname": "reset_stat_highlight",
-			"on_comp_delay_s": 0.5
+			"on_comp_delay_s": 0.1
 		},
 		{
 			"fname": "push_roll_value_up",
-			"on_comp_delay_s": 0.25
+			"on_comp_delay_s": 0.1
 		},
 		{
 			"fname": "highlight_roll_table_row",
-			"on_comp_delay_s": 0.5
+			"on_comp_delay_s": 0.1
 		},
 		{
 			"fname": "tally_points",
-			"on_comp_delay_s": 0.5
+			"on_comp_delay_s": 0.1
 		},
 		{
 			"fname": "tally_assists",
-			"on_comp_delay_s": 0.5
+			"on_comp_delay_s": 0.1
 		},
 		{
 			"fname": "tally_rebounds",
-			"on_comp_delay_s": 0.5
+			"on_comp_delay_s": 0.1
 		},
 		{
 			"fname": "reset_roll_table_rows",
-			"on_comp_delay_s": 0.5
+			"on_comp_delay_s": 0.1
 		}
 	]
 	execute_calc_wflow()

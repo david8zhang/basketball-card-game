@@ -16,3 +16,6 @@ func _ready():
 
 func get_card_at_position(pos: BallPlayerStats.PlayerPosition):
 	return starting_lineup.get_card_at_position(pos)
+
+func get_starting_cards():
+	return starting_lineup.starting_lineup_cards

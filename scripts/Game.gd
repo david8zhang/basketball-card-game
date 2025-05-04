@@ -10,23 +10,38 @@ var all_player_stats = {}
 var selected_player_bp_card: BallPlayerCard
 var selected_cpu_bp_card: BallPlayerCard
 
-var player_completed_scorers = []
-var cpu_completed_scorers = []
+var player_completed_scorer_positions = []
+var full_player_scorer_statlines = {}
+var cpu_completed_scorer_positions = []
+var full_cpu_scorer_statlines = {}
 
 @onready var player_team: PlayerTeam = $PlayerTeam as PlayerTeam
 @onready var cpu_team: CPUTeam = $CPUTeam as CPUTeam
 @onready var canvas_layer: CanvasLayer = $CanvasLayer as CanvasLayer
-
 @onready var player_score_label = $CanvasLayer/Scoreboard/PlayerScore as Label
 @onready var player_assists_label = $CanvasLayer/Scoreboard/PlayerAssists as Label
 @onready var player_rebounds_label = $CanvasLayer/Scoreboard/PlayerRebounds as Label
-
 @onready var cpu_score_label = $CanvasLayer/Scoreboard/CPUScore as Label
 @onready var cpu_assists_label = $CanvasLayer/Scoreboard/CPUAssists as Label
 @onready var cpu_rebounds_label = $CanvasLayer/Scoreboard/CPURebounds as Label
 
 @export var matchup_container_scene: PackedScene
+@export var quarter_end_modal_scene: PackedScene
+
 var matchup_container: MatchupContainer
+var quarter_end_modal: QuarterEnd
+
+class BoxScoreStatLine:
+	var bp_card: BallPlayerCard
+	var points: int
+	var assists: int
+	var rebounds: int
+
+	func _init(_bp_card: BallPlayerCard, _points: int, _assists: int, _rebounds: int):
+		bp_card = _bp_card
+		points = _points
+		assists = _assists
+		rebounds = _rebounds
 
 # Called when the node enters the scene tree for the first time.
 func _init():
@@ -39,7 +54,7 @@ func _init():
 				all_player_stats[p].append(stat_config)
 
 func _ready():
-	cpu_select_card_to_score_with()
+	get_rebounds(player_rebounds_label)
 
 func assemble_random_lineup() -> Dictionary:
 	var pos_to_player_map = {}
@@ -59,7 +74,7 @@ func assemble_random_lineup() -> Dictionary:
 	return pos_to_player_map
 
 func player_select_card_to_score_with(card: BallPlayerCard):
-	if !player_completed_scorers.has(card.get_assigned_position()):
+	if !player_completed_scorer_positions.has(card.get_assigned_position()):
 		selected_player_bp_card = card
 		var opp_matchup_bp_card = cpu_team.get_card_at_position(selected_player_bp_card.get_assigned_position())
 		matchup_container = matchup_container_scene.instantiate() as MatchupContainer
@@ -72,7 +87,7 @@ func player_select_card_to_score_with(card: BallPlayerCard):
 
 func cpu_select_card_to_score_with():
 	var cpu_cards = cpu_team.starting_lineup.starting_lineup_cards
-	var cards_to_score_with = cpu_cards.filter(func(c): return !cpu_completed_scorers.has(c.get_assigned_position()))
+	var cards_to_score_with = cpu_cards.filter(func(c): return !cpu_completed_scorer_positions.has(c.get_assigned_position()))
 	selected_cpu_bp_card = cards_to_score_with.pick_random()
 	
 	# Play a little animation indicating a card was chosen
@@ -90,7 +105,7 @@ func cpu_select_card_to_score_with():
 
 	var on_hold_finished = func():
 		var zoom_out_card = create_tween()
-		zoom_out_card.tween_property(selected_cpu_bp_card, "scale", Vector2(1, 1), 0.5)
+		zoom_out_card.tween_property(selected_cpu_bp_card, "scale", Vector2(1, 1), 0.25)
 		zoom_out_card.finished.connect(on_zoom_out_finished)
 
 	var on_zoomed = func():
@@ -102,24 +117,71 @@ func cpu_select_card_to_score_with():
 		add_child(zoom_hold_timer)
 
 	var zoom_in_card = create_tween()
-	zoom_in_card.tween_property(selected_cpu_bp_card, "scale", Vector2(1.05, 1.05), 0.5)
+	zoom_in_card.tween_property(selected_cpu_bp_card, "scale", Vector2(1.05, 1.05), 0.25)
 	zoom_in_card.finished.connect(on_zoomed)
 
 func on_matchup_complete(all_stats: Dictionary, side: Side):
 	add_stats_from_matchup(all_stats, side)
-	if side == Side.PLAYER:
+	if is_quarter_completed():
+		quarter_end_modal = quarter_end_modal_scene.instantiate() as QuarterEnd
+		canvas_layer.add_child(quarter_end_modal)
+		quarter_end_modal.update_scores(get_player_score(), get_cpu_score())
+		quarter_end_modal.update_player_box_score(full_player_scorer_statlines)
+		quarter_end_modal.update_cpu_box_score(full_cpu_scorer_statlines)
+		var callable = Callable(self, "on_new_quarter_start")
+		quarter_end_modal.continue_button.pressed.connect(callable)
+	elif side == Side.PLAYER:
 		cpu_select_card_to_score_with()
+
+func is_quarter_completed():
+	var player_lineup_cards = player_team.get_starting_cards()
+	var cpu_lineup_cards = cpu_team.get_starting_cards()
+	return player_lineup_cards.size() == player_completed_scorer_positions.size() and \
+		cpu_lineup_cards.size() == cpu_completed_scorer_positions.size()
+
+func get_player_score():
+	return int(player_score_label.text)
+
+func get_cpu_score():
+	return int(cpu_score_label.text)
+
+func get_rebounds(rebounds_label: Label) -> int:
+	var rebounds_value = rebounds_label.text.split(": ")
+	if rebounds_value.size() > 1:
+		return int(rebounds_value[1])
+	return 0
+
+func get_assists(assists_label: Label) -> int:
+	var assists_value = assists_label.text.split(": ")
+	if assists_value.size() > 1:
+		return int(assists_value[1])
+	return 0
 
 func add_stats_from_matchup(all_stats: Dictionary, side: Side):
 	if side == Side.PLAYER:
-		player_completed_scorers.append(selected_player_bp_card.get_assigned_position())
+		var stat_line = BoxScoreStatLine.new(selected_player_bp_card, all_stats["points"], all_stats["assists"], all_stats["rebounds"])
+		full_player_scorer_statlines[selected_player_bp_card.full_name()] = stat_line
+		player_completed_scorer_positions.append(selected_player_bp_card.get_assigned_position())
 		selected_player_bp_card.button.flat = false
 		player_score_label.text = str(int(player_score_label.text) + all_stats["points"])
-		player_assists_label.text = "A: " + str(int(player_assists_label.text) + all_stats["assists"])
-		player_rebounds_label.text = "R: " + str(int(player_rebounds_label.text) + all_stats["rebounds"])
+		player_assists_label.text = "A: " + str(get_assists(player_assists_label) + all_stats["assists"])
+		player_rebounds_label.text = "R: " + str(get_rebounds(player_rebounds_label) + all_stats["rebounds"])
 	elif side == Side.CPU:
-		cpu_completed_scorers.append(selected_cpu_bp_card.get_assigned_position())
+		var stat_line = BoxScoreStatLine.new(selected_cpu_bp_card, all_stats["points"], all_stats["assists"], all_stats["rebounds"])
+		full_cpu_scorer_statlines[selected_cpu_bp_card.full_name()] = stat_line
+		cpu_completed_scorer_positions.append(selected_cpu_bp_card.get_assigned_position())
 		selected_cpu_bp_card.button.flat = false
 		cpu_score_label.text = str(int(cpu_score_label.text) + all_stats["points"])
-		cpu_assists_label.text = "A: " + str(int(cpu_assists_label.text) + all_stats["assists"])
-		cpu_rebounds_label.text = "R: " + str(int(cpu_rebounds_label.text) + all_stats["rebounds"])
+		cpu_assists_label.text = "A: " + str(get_assists(cpu_assists_label) + all_stats["assists"])
+		cpu_rebounds_label.text = "R: " + str(get_rebounds(cpu_rebounds_label) + all_stats["rebounds"])
+
+func on_new_quarter_start():
+	player_completed_scorer_positions = []
+	cpu_completed_scorer_positions = []
+	quarter_end_modal.queue_free()
+	
+	for card in player_team.get_starting_cards():
+		card.button.flat = true
+
+	for card in cpu_team.get_starting_cards():
+		card.button.flat = true
