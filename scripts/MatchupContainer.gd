@@ -44,7 +44,7 @@ func on_roll():
 	calc_steps = [
 		{
 			"fname": "generate_roll_value",
-			"on_comp_delay_s": 0.25
+			"on_comp_delay_s": 0.1
 		},
 		{
 			"fname": "highlight_off_stat",
@@ -134,7 +134,7 @@ func handle_off_modifier():
 
 		# Combine modifier value with roll value
 		var off_modifier_tween = create_tween()
-		off_modifier_tween.tween_property(off_modifier_label, "global_position:y", roll_value_label.global_position.y + 10, 0.5).set_delay(1.0)
+		off_modifier_tween.tween_property(off_modifier_label, "global_position:y", roll_value_label.global_position.y + 10, 0.25).set_delay(0.5)
 		var cb = Callable(self, "combine_off_modifier").bind(off_def_diff)
 		off_modifier_tween.finished.connect(cb)
 	else:
@@ -185,25 +185,25 @@ func highlight_roll_table_row():
 	var roll_table_row = get_table_row_for_roll_value()
 	var roll_range_label = roll_table_row["roll_range_label"] as TableValue
 	var hl_row_range = create_tween()
-	hl_row_range.tween_property(roll_range_label.label, "theme_override_font_sizes/font_size", 25, 0.5)
+	hl_row_range.tween_property(roll_range_label.label, "theme_override_font_sizes/font_size", 25, 0.4)
 	hl_row_range.finished.connect(go_to_next_step_generic)
 
 func dehighlight_roll_table_row():
 	var roll_table_row = get_table_row_for_roll_value()
 	var roll_range_label = roll_table_row["roll_range_label"] as TableValue
 	var hl_row_range = create_tween()
-	hl_row_range.tween_property(roll_range_label.label, "theme_override_font_sizes/font_size", 15, 0.5)
+	hl_row_range.tween_property(roll_range_label.label, "theme_override_font_sizes/font_size", 15, 0.4)
 	hl_row_range.finished.connect(go_to_next_step_generic)
 
 func push_roll_value_up():
 	var tween = create_tween()
 	var start_y = roll_value_label.global_position.y
-	tween.tween_property(roll_value_label, "theme_override_font_sizes/font_size", 30, 0.5)
+	tween.tween_property(roll_value_label, "theme_override_font_sizes/font_size", 30, 0.25)
 
 	var shrink_fn = func shrink_roll_value():
 		var new_tween = create_tween()
 		var end_y = roll_value_label.global_position.y - 100
-		new_tween.tween_property(roll_value_label, "global_position:y", end_y, 0.5)
+		new_tween.tween_property(roll_value_label, "global_position:y", end_y, 0.25)
 		new_tween.finished.connect(go_to_next_step_generic)
 
 	tween.finished.connect(shrink_fn)
@@ -221,7 +221,7 @@ func tally_points():
 	var points_value = matchup_score.points_value	
 	var points_scored = roll_table_row["points_label"] as TableValue
 	var hl_points_scored = create_tween()
-	hl_points_scored.tween_property(points_scored.label, "theme_override_font_sizes/font_size", 25, 0.5)
+	hl_points_scored.tween_property(points_scored.label, "theme_override_font_sizes/font_size", 25, 0.25)
 
 	var points_bonus_label = Label.new()
 	add_child(points_bonus_label)
@@ -230,7 +230,7 @@ func tally_points():
 	points_bonus_label.add_theme_font_size_override("font_size", 50)
 	points_bonus_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	var add_points_bonus_tween = create_tween()
-	add_points_bonus_tween.tween_property(points_bonus_label, "global_position:y", points_value.global_position.y, 0.5).set_delay(0.5)
+	add_points_bonus_tween.tween_property(points_bonus_label, "global_position:y", points_value.global_position.y, 0.25).set_delay(0.5)
 
 	var on_combine_finished = func on_combine_finished():
 		var tween = create_tween()
@@ -251,7 +251,7 @@ func tally_assists():
 	var assists_value = matchup_score.assists_value
 	var assists_made = roll_table_row["assists_label"] as TableValue
 	var hl_assists_scored = create_tween()
-	hl_assists_scored.tween_property(assists_made.label, "theme_override_font_sizes/font_size", 25, 0.5)
+	hl_assists_scored.tween_property(assists_made.label, "theme_override_font_sizes/font_size", 25, 0.25)
 
 	var assists_bonus_label = Label.new()
 	add_child(assists_bonus_label)
@@ -260,7 +260,7 @@ func tally_assists():
 	assists_bonus_label.add_theme_font_size_override("font_size", 50)
 	assists_bonus_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	var add_assists_bonus_tween = create_tween()
-	add_assists_bonus_tween.tween_property(assists_bonus_label, "global_position:y", assists_value.global_position.y, 0.5).set_delay(0.5)
+	add_assists_bonus_tween.tween_property(assists_bonus_label, "global_position:y", assists_value.global_position.y, 0.25).set_delay(0.5)
 
 	var on_combine_finished = func on_combine_finished():
 		var tween = create_tween()
@@ -281,7 +281,7 @@ func tally_rebounds():
 	var rebounds_value = matchup_score.rebounds_value
 	var rebounds_grabbed = roll_table_row["rebounds_label"] as TableValue
 	var hl_rebounds_grabbed = create_tween()
-	hl_rebounds_grabbed.tween_property(rebounds_grabbed.label, "theme_override_font_sizes/font_size", 25, 0.5)
+	hl_rebounds_grabbed.tween_property(rebounds_grabbed.label, "theme_override_font_sizes/font_size", 25, 0.25)
 
 	var rebounds_bonus_label = Label.new()
 	add_child(rebounds_bonus_label)
@@ -290,7 +290,7 @@ func tally_rebounds():
 	rebounds_bonus_label.add_theme_font_size_override("font_size", 50)
 	rebounds_bonus_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	var add_rebounds_bonus_tween = create_tween()
-	add_rebounds_bonus_tween.tween_property(rebounds_bonus_label, "global_position:y", rebounds_value.global_position.y, 0.5).set_delay(0.5)
+	add_rebounds_bonus_tween.tween_property(rebounds_bonus_label, "global_position:y", rebounds_value.global_position.y, 0.25).set_delay(0.5)
 
 	var on_combine_finished = func on_combine_finished():
 		var tween = create_tween()
@@ -313,10 +313,10 @@ func reset_roll_table_rows():
 	var points_value_row = roll_table_row["points_label"] as TableValue
 
 	var tween = create_tween()
-	tween.tween_property(roll_range_label.label, "theme_override_font_sizes/font_size", 15, 0.5)
-	tween.parallel().tween_property(rebounds_value_row.label, "theme_override_font_sizes/font_size", 15, 0.5)
-	tween.parallel().tween_property(assists_value_row.label, "theme_override_font_sizes/font_size", 15, 0.5)
-	tween.parallel().tween_property(points_value_row.label, "theme_override_font_sizes/font_size", 15, 0.5)
+	tween.tween_property(roll_range_label.label, "theme_override_font_sizes/font_size", 15, 0.25)
+	tween.parallel().tween_property(rebounds_value_row.label, "theme_override_font_sizes/font_size", 15, 0.25)
+	tween.parallel().tween_property(assists_value_row.label, "theme_override_font_sizes/font_size", 15, 0.25)
+	tween.parallel().tween_property(points_value_row.label, "theme_override_font_sizes/font_size", 15, 0.25)
 
 	var on_continue_button = Button.new()
 	on_continue_button.text = "Continue"
