@@ -7,6 +7,10 @@ extends Control
 @onready var player_box_score = $VBoxContainer/HBoxContainer2/PlayerBoxScore/GridContainer as GridContainer
 @onready var cpu_box_score = $VBoxContainer/HBoxContainer2/CPUBoxScore/GridContainer as GridContainer
 @onready var continue_button = $VBoxContainer/Button as Button
+@onready var title = $VBoxContainer/Title as Label
+
+func update_quarter_number(quarter_num: int):
+	title.text = "End of Q" + str(quarter_num)
 
 func update_scores(player_score: int, cpu_score: int):
 	player_score_label.text = "[center][font_size=30]Player[center][center][font_size=60]" + str(player_score) + "[center]"

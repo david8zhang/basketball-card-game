@@ -30,6 +30,8 @@ var full_cpu_scorer_statlines = {}
 
 var matchup_container: MatchupContainer
 var quarter_end_modal: QuarterEnd
+var quarter_number: int = 1
+var quarter_scores = {}
 
 class BoxScoreStatLine:
 	var bp_card: BallPlayerCard
@@ -123,13 +125,19 @@ func cpu_select_card_to_score_with():
 func on_matchup_complete(all_stats: Dictionary, side: Side):
 	add_stats_from_matchup(all_stats, side)
 	if is_quarter_completed():
-		quarter_end_modal = quarter_end_modal_scene.instantiate() as QuarterEnd
-		canvas_layer.add_child(quarter_end_modal)
-		quarter_end_modal.update_scores(get_player_score(), get_cpu_score())
-		quarter_end_modal.update_player_box_score(full_player_scorer_statlines)
-		quarter_end_modal.update_cpu_box_score(full_cpu_scorer_statlines)
-		var callable = Callable(self, "on_new_quarter_start")
-		quarter_end_modal.continue_button.pressed.connect(callable)
+		if quarter_number == 4:
+			SceneVariables.quarter_scores = quarter_scores
+			SceneVariables.full_cpu_scorer_statlines = full_cpu_scorer_statlines
+			get_tree().change_scene_to_file("res://scenes/GameOver.tscn")
+		else:
+			quarter_end_modal = quarter_end_modal_scene.instantiate() as QuarterEnd
+			canvas_layer.add_child(quarter_end_modal)
+			quarter_end_modal.update_scores(get_player_score(), get_cpu_score())
+			quarter_end_modal.update_player_box_score(full_player_scorer_statlines)
+			quarter_end_modal.update_cpu_box_score(full_cpu_scorer_statlines)
+			quarter_end_modal.update_quarter_number(quarter_number)
+			var callable = Callable(self, "on_new_quarter_start")
+			quarter_end_modal.continue_button.pressed.connect(callable)
 	elif side == Side.PLAYER:
 		cpu_select_card_to_score_with()
 
@@ -160,7 +168,7 @@ func get_assists(assists_label: Label) -> int:
 func add_stats_from_matchup(all_stats: Dictionary, side: Side):
 	if side == Side.PLAYER:
 		var stat_line = BoxScoreStatLine.new(selected_player_bp_card, all_stats["points"], all_stats["assists"], all_stats["rebounds"])
-		full_player_scorer_statlines[selected_player_bp_card.full_name()] = stat_line
+		update_statlines(selected_player_bp_card.full_name(), stat_line, full_player_scorer_statlines)
 		player_completed_scorer_positions.append(selected_player_bp_card.get_assigned_position())
 		selected_player_bp_card.button.flat = false
 		player_score_label.text = str(int(player_score_label.text) + all_stats["points"])
@@ -168,20 +176,28 @@ func add_stats_from_matchup(all_stats: Dictionary, side: Side):
 		player_rebounds_label.text = "R: " + str(get_rebounds(player_rebounds_label) + all_stats["rebounds"])
 	elif side == Side.CPU:
 		var stat_line = BoxScoreStatLine.new(selected_cpu_bp_card, all_stats["points"], all_stats["assists"], all_stats["rebounds"])
-		full_cpu_scorer_statlines[selected_cpu_bp_card.full_name()] = stat_line
+		update_statlines(selected_cpu_bp_card.full_name(), stat_line, full_cpu_scorer_statlines)
 		cpu_completed_scorer_positions.append(selected_cpu_bp_card.get_assigned_position())
 		selected_cpu_bp_card.button.flat = false
 		cpu_score_label.text = str(int(cpu_score_label.text) + all_stats["points"])
 		cpu_assists_label.text = "A: " + str(get_assists(cpu_assists_label) + all_stats["assists"])
 		cpu_rebounds_label.text = "R: " + str(get_rebounds(cpu_rebounds_label) + all_stats["rebounds"])
 
+func update_statlines(full_name: String, stat_line: BoxScoreStatLine, scorer_statline: Dictionary):
+	if scorer_statline.has(full_name):
+		var stat_line_to_update = scorer_statline[full_name] as BoxScoreStatLine
+		stat_line_to_update.points += stat_line.points
+		stat_line_to_update.assists += stat_line.assists
+		stat_line_to_update.rebounds += stat_line.rebounds
+	else:
+		scorer_statline[full_name] = stat_line
+
 func on_new_quarter_start():
+	quarter_number += 1
 	player_completed_scorer_positions = []
 	cpu_completed_scorer_positions = []
 	quarter_end_modal.queue_free()
-	
 	for card in player_team.get_starting_cards():
 		card.button.flat = true
-
 	for card in cpu_team.get_starting_cards():
 		card.button.flat = true
