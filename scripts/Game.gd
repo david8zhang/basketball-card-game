@@ -31,7 +31,12 @@ var full_cpu_scorer_statlines = {}
 var matchup_container: MatchupContainer
 var quarter_end_modal: QuarterEnd
 var quarter_number: int = 1
-var quarter_scores = {}
+var quarter_scores = {
+	"player": [],
+	"cpu": []
+}
+var curr_player_quarter_score := 0
+var curr_cpu_quarter_score := 0
 
 class BoxScoreStatLine:
 	var bp_card: BallPlayerCard
@@ -125,9 +130,16 @@ func cpu_select_card_to_score_with():
 func on_matchup_complete(all_stats: Dictionary, side: Side):
 	add_stats_from_matchup(all_stats, side)
 	if is_quarter_completed():
+		quarter_scores["player"].append(curr_player_quarter_score)
+		quarter_scores["cpu"].append(curr_cpu_quarter_score)
+		curr_player_quarter_score = 0
+		curr_cpu_quarter_score = 0
 		if quarter_number == 4:
 			SceneVariables.quarter_scores = quarter_scores
 			SceneVariables.full_cpu_scorer_statlines = full_cpu_scorer_statlines
+			SceneVariables.full_player_scorer_statlines = full_player_scorer_statlines
+			SceneVariables.player_score = get_player_score()
+			SceneVariables.cpu_score = get_cpu_score()
 			get_tree().change_scene_to_file("res://scenes/GameOver.tscn")
 		else:
 			quarter_end_modal = quarter_end_modal_scene.instantiate() as QuarterEnd
@@ -174,6 +186,7 @@ func add_stats_from_matchup(all_stats: Dictionary, side: Side):
 		player_score_label.text = str(int(player_score_label.text) + all_stats["points"])
 		player_assists_label.text = "A: " + str(get_assists(player_assists_label) + all_stats["assists"])
 		player_rebounds_label.text = "R: " + str(get_rebounds(player_rebounds_label) + all_stats["rebounds"])
+		curr_player_quarter_score += all_stats["points"]
 	elif side == Side.CPU:
 		var stat_line = BoxScoreStatLine.new(selected_cpu_bp_card, all_stats["points"], all_stats["assists"], all_stats["rebounds"])
 		update_statlines(selected_cpu_bp_card.full_name(), stat_line, full_cpu_scorer_statlines)
@@ -182,6 +195,7 @@ func add_stats_from_matchup(all_stats: Dictionary, side: Side):
 		cpu_score_label.text = str(int(cpu_score_label.text) + all_stats["points"])
 		cpu_assists_label.text = "A: " + str(get_assists(cpu_assists_label) + all_stats["assists"])
 		cpu_rebounds_label.text = "R: " + str(get_rebounds(cpu_rebounds_label) + all_stats["rebounds"])
+		curr_cpu_quarter_score += all_stats["points"]
 
 func update_statlines(full_name: String, stat_line: BoxScoreStatLine, scorer_statline: Dictionary):
 	if scorer_statline.has(full_name):

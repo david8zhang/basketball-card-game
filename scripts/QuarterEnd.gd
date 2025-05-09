@@ -33,6 +33,7 @@ func add_statline_row(statline: Game.BoxScoreStatLine, parent: GridContainer):
 	parent.add_child(points_row)
 	parent.add_child(assists_row)
 	parent.add_child(rebounds_row)
+	name_row.box_score_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 	name_row.set_value(statline.bp_card.full_name())
 	points_row.set_value(str(statline.points))
 	assists_row.set_value(str(statline.assists))

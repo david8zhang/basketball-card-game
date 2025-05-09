@@ -1,4 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dvid1m0m2lsrf"]
+[gd_scene load_steps=5 format=3 uid="uid://dvid1m0m2lsrf"]
+
+[ext_resource type="Script" path="res://scripts/GameOver.gd" id="1_xl4kn"]
+[ext_resource type="PackedScene" uid="uid://cmh2p7sqkladm" path="res://prefabs/BoxScoreRow.tscn" id="2_sjhit"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hsuhp"]
 bg_color = Color(0, 0, 0, 1)
@@ -12,6 +15,8 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 border_width_bottom = 1
 
 [node name="GameOver" type="Node2D"]
+script = ExtResource("1_xl4kn")
+box_score_row = ExtResource("2_sjhit")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -42,10 +47,6 @@ grow_vertical = 2
 theme_override_constants/separation = 40
 alignment = 1
 
-[node name="Spacer3" type="Control" parent="CanvasLayer/Control/VBoxContainer"]
-custom_minimum_size = Vector2(2.08165e-12, 50)
-layout_mode = 2
-
 [node name="Title" type="Label" parent="CanvasLayer/Control/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
@@ -74,6 +75,10 @@ bbcode_enabled = true
 text = "[center][font_size=30]CPU[center][center][font_size=60]34[center]"
 fit_content = true
 scroll_active = false
+
+[node name="Spacer3" type="Control" parent="CanvasLayer/Control/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 25)
+layout_mode = 2
 
 [node name="QuarterScores" type="Control" parent="CanvasLayer/Control/VBoxContainer"]
 custom_minimum_size = Vector2(500, 2.08165e-12)
