@@ -59,7 +59,7 @@ clip_contents = false
 custom_minimum_size = Vector2(500, 2.08165e-12)
 layout_mode = 2
 bbcode_enabled = true
-text = "[center][font_size=30]Player[center][center][font_size=60]39[center]"
+text = "[center][font_size=30]Player[center][center][font_size=60]0[center]"
 fit_content = true
 scroll_active = false
 
@@ -68,7 +68,7 @@ clip_contents = false
 custom_minimum_size = Vector2(500, 2.08165e-12)
 layout_mode = 2
 bbcode_enabled = true
-text = "[center][font_size=30]CPU[center][center][font_size=60]34[center]"
+text = "[center][font_size=30]CPU[center][center][font_size=60]0[center]"
 fit_content = true
 scroll_active = false
 

@@ -1,0 +1,86 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5k1x8ihmtb33"]
+
+[ext_resource type="Script" path="res://scripts/ReboundTally.gd" id="1_0n3j2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e53ns"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_nnlo5"]
+color = Color(1, 1, 1, 1)
+thickness = 5
+vertical = true
+
+[node name="ReboundTally" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0n3j2")
+
+[node name="Panel" type="Panel" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_e53ns")
+
+[node name="Scoreboard" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -392.0
+offset_right = 392.0
+offset_bottom = 86.0
+grow_horizontal = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="PlayerRebounds" type="Label" parent="Scoreboard"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 40
+text = "R: 0"
+
+[node name="PlayerAssists" type="Label" parent="Scoreboard"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 40
+text = "A: 0"
+
+[node name="PlayerScore" type="Label" parent="Scoreboard"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 60
+text = "0"
+horizontal_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="Scoreboard"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_nnlo5")
+
+[node name="CPUScore" type="Label" parent="Scoreboard"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 60
+text = "0"
+horizontal_alignment = 1
+
+[node name="CPUAssists" type="Label" parent="Scoreboard"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 40
+text = "A: 0"
+
+[node name="CPURebounds" type="Label" parent="Scoreboard"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 40
+text = "R: 0"
