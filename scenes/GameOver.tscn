@@ -171,7 +171,7 @@ text = "Total"
 horizontal_alignment = 1
 
 [node name="Spacer2" type="Control" parent="CanvasLayer/Control/VBoxContainer"]
-custom_minimum_size = Vector2(2.08165e-12, 50)
+custom_minimum_size = Vector2(2.08165e-12, 125)
 layout_mode = 2
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer"]

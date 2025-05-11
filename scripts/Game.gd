@@ -24,7 +24,7 @@ var full_cpu_scorer_statlines = {}
 @onready var cpu_score_label = $CanvasLayer/Scoreboard/CPUScore as Label
 @onready var cpu_assists_label = $CanvasLayer/Scoreboard/CPUAssists as Label
 @onready var cpu_rebounds_label = $CanvasLayer/Scoreboard/CPURebounds as Label
-
+@onready var quarter_label = $CanvasLayer/QuarterLabel as Label
 
 @export var matchup_container_scene: PackedScene
 @export var quarter_end_modal_scene: PackedScene
@@ -48,7 +48,7 @@ class BoxScoreStatLine:
 	var rebounds: int
 
 	func _init(_full_name: String, _points: int, _assists: int, _rebounds: int):
-		full_name = full_name
+		full_name = _full_name
 		points = _points
 		assists = _assists
 		rebounds = _rebounds
@@ -104,7 +104,7 @@ func assemble_random_lineup() -> Dictionary:
 	return pos_to_player_map
 
 func player_select_card_to_score_with(card: BallPlayerCard):
-	if !player_completed_scorer_positions.has(card.get_assigned_position()):
+	if !player_completed_scorer_positions.has(card.get_assigned_position()) and !is_cpu_scoring:
 		selected_player_bp_card = card
 		var opp_matchup_bp_card = cpu_team.get_card_at_position(selected_player_bp_card.get_assigned_position())
 		matchup_container = matchup_container_scene.instantiate() as MatchupContainer
@@ -154,6 +154,7 @@ func cpu_select_card_to_score_with():
 func on_matchup_complete(all_stats: Dictionary, side: Side):
 	add_stats_from_matchup(all_stats, side)
 	if is_quarter_completed():
+		is_cpu_scoring = false
 		var rebound_tally = rebound_tally_scene.instantiate() as ReboundTally
 		canvas_layer.add_child(rebound_tally)
 		rebound_tally.hide()
@@ -169,6 +170,8 @@ func on_matchup_complete(all_stats: Dictionary, side: Side):
 		handle_rebound_tally(rebound_tally, on_rebound_tally_complete)
 	elif side == Side.PLAYER:
 		cpu_select_card_to_score_with()
+	else:
+		is_cpu_scoring = false
 
 func handle_rebound_tally(rebound_tally: ReboundTally, cb: Callable):
 	var player_score_data = {
@@ -266,6 +269,7 @@ func on_new_quarter_start():
 	reset_rebounds()
 	reset_assists()
 	quarter_number += 1
+	quarter_label.text = "Q" + str(quarter_number)
 	player_completed_scorer_positions = []
 	cpu_completed_scorer_positions = []
 	quarter_end_modal.queue_free()
