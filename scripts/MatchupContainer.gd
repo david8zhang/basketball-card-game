@@ -396,3 +396,6 @@ func hide_close_button():
 
 func hide_use_assists_checkbox():
 	use_assists_checkbox.hide()
+
+func enable_use_assists():
+	use_assists_checkbox.button_pressed = true

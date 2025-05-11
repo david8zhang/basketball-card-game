@@ -132,6 +132,7 @@ func cpu_select_card_to_score_with():
 		matchup_container.set_offense_side(Side.CPU)
 		matchup_container.set_curr_assists(get_assists(cpu_assists_label))
 		matchup_container.matchup_complete.connect(on_matchup_complete)
+		matchup_container.enable_use_assists()
 		matchup_container.show()
 		matchup_container.on_roll()
 		matchup_container.hide_close_button()
