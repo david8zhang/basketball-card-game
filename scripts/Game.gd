@@ -112,6 +112,7 @@ func player_select_card_to_score_with(card: BallPlayerCard):
 		matchup_container.set_player_card(card)
 		matchup_container.set_cpu_card(opp_matchup_bp_card)
 		matchup_container.set_offense_side(Side.PLAYER)
+		matchup_container.set_curr_assists(get_assists(player_assists_label))
 		matchup_container.matchup_complete.connect(on_matchup_complete)
 		matchup_container.show()
 
@@ -129,10 +130,12 @@ func cpu_select_card_to_score_with():
 		matchup_container.set_player_card(opp_matchup_bp_card)
 		matchup_container.set_cpu_card(selected_cpu_bp_card)
 		matchup_container.set_offense_side(Side.CPU)
+		matchup_container.set_curr_assists(get_assists(cpu_assists_label))
 		matchup_container.matchup_complete.connect(on_matchup_complete)
 		matchup_container.show()
 		matchup_container.on_roll()
 		matchup_container.hide_close_button()
+		matchup_container.hide_use_assists_checkbox()
 
 	var on_hold_finished = func():
 		var zoom_out_card = create_tween()
@@ -151,8 +154,8 @@ func cpu_select_card_to_score_with():
 	zoom_in_card.tween_property(selected_cpu_bp_card, "scale", Vector2(1.05, 1.05), 0.25)
 	zoom_in_card.finished.connect(on_zoomed)
 
-func on_matchup_complete(all_stats: Dictionary, side: Side):
-	add_stats_from_matchup(all_stats, side)
+func on_matchup_complete(all_stats: Dictionary, side: Side, assists_used: int):
+	process_matchup_stats(all_stats, side, assists_used)
 	if is_quarter_completed():
 		is_cpu_scoring = false
 		var rebound_tally = rebound_tally_scene.instantiate() as ReboundTally
@@ -234,7 +237,7 @@ func get_assists(assists_label: Label) -> int:
 		return int(assists_value[1])
 	return 0
 
-func add_stats_from_matchup(all_stats: Dictionary, side: Side):
+func process_matchup_stats(all_stats: Dictionary, side: Side, assists_used: int):
 	if side == Side.PLAYER:
 		var full_name = selected_player_bp_card.full_name()
 		var stat_line = BoxScoreStatLine.new(full_name, all_stats["points"], all_stats["assists"], all_stats["rebounds"])
@@ -242,7 +245,7 @@ func add_stats_from_matchup(all_stats: Dictionary, side: Side):
 		player_completed_scorer_positions.append(selected_player_bp_card.get_assigned_position())
 		selected_player_bp_card.button.flat = false
 		player_score_label.text = str(int(player_score_label.text) + all_stats["points"])
-		player_assists_label.text = "A: " + str(get_assists(player_assists_label) + all_stats["assists"])
+		player_assists_label.text = "A: " + str(get_assists(player_assists_label) - assists_used + all_stats["assists"])
 		player_rebounds_label.text = "R: " + str(get_rebounds(player_rebounds_label) + all_stats["rebounds"])
 		curr_player_quarter_score += all_stats["points"]
 	elif side == Side.CPU:
@@ -252,7 +255,7 @@ func add_stats_from_matchup(all_stats: Dictionary, side: Side):
 		cpu_completed_scorer_positions.append(selected_cpu_bp_card.get_assigned_position())
 		selected_cpu_bp_card.button.flat = false
 		cpu_score_label.text = str(int(cpu_score_label.text) + all_stats["points"])
-		cpu_assists_label.text = "A: " + str(get_assists(cpu_assists_label) + all_stats["assists"])
+		cpu_assists_label.text = "A: " + str(get_assists(cpu_assists_label) - assists_used + all_stats["assists"])
 		cpu_rebounds_label.text = "R: " + str(get_rebounds(cpu_rebounds_label) + all_stats["rebounds"])
 		curr_cpu_quarter_score += all_stats["points"]
 

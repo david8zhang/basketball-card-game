@@ -5,6 +5,8 @@ extends Panel
 @onready var roll_button = $MarginContainer/VBoxContainer/VBoxContainer/RollButton as Button
 @onready var roll_value_label = $MarginContainer/VBoxContainer/VBoxContainer/RollValue as Label
 @onready var close_button = $CloseButton as Button
+@onready var use_assists_checkbox = $MarginContainer/VBoxContainer/VBoxContainer/UseAssistsCheckbox as CheckBox
+
 @export var card_scene: PackedScene
 @export var matchup_pts_assts_rebs_scene: PackedScene
 
@@ -12,10 +14,12 @@ var player_card: BallPlayerCard
 var cpu_card: BallPlayerCard
 var offense_side: Game.Side
 var off_modifier_label: Label
+var assists_modifier_label: Label
 var matchup_score: MatchupPtsAsstsRebs
+var curr_assists := 0
 
 signal calc_complete
-signal matchup_complete(all_stats: Dictionary)
+signal matchup_complete(all_stats: Dictionary, side: Game.Side, assists_used: int)
 
 var calc_wflow_idx = 0
 var calc_steps = []
@@ -36,6 +40,13 @@ func set_cpu_card(card: BallPlayerCard):
 	cpu_card.ball_player_stats = card.ball_player_stats.duplicate()
 	hbox_container.add_child(cpu_card)
 
+func set_curr_assists(assists: int):
+	curr_assists = assists
+	if curr_assists == 0:
+		use_assists_checkbox.hide()
+	else:
+		use_assists_checkbox.text = "Use " + str(curr_assists) + " assists"
+
 func set_offense_side(side: Game.Side):
 	offense_side = side
 
@@ -44,6 +55,10 @@ func on_roll():
 	calc_steps = [
 		{
 			"fname": "generate_roll_value",
+			"on_comp_delay_s": 0.1
+		},
+		{
+			"fname": "add_assists_to_roll",
 			"on_comp_delay_s": 0.1
 		},
 		{
@@ -112,10 +127,35 @@ func go_to_next_calc():
 	execute_calc_wflow()
 
 func generate_roll_value():
+	use_assists_checkbox.hide()
 	var random_number = randi_range(1, 20)
 	roll_value_label.text = str(random_number)
 	roll_value_label.show()
 	calc_complete.emit()
+
+func combine_assists_modifier(assists_modifier: int):
+	var new_roll_value = int(roll_value_label.text) + assists_modifier
+	roll_value_label.text = str(new_roll_value)
+	assists_modifier_label.queue_free()
+	calc_complete.emit()
+
+func add_assists_to_roll():
+	if use_assists_checkbox.button_pressed and curr_assists > 0:
+		assists_modifier_label = Label.new()
+		assists_modifier_label.add_theme_font_size_override("font_size", 35)
+		assists_modifier_label.size.x = size.x
+		assists_modifier_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		assists_modifier_label.global_position = Vector2(0, roll_value_label.global_position.y + 100)
+		assists_modifier_label.text = "+" + str(curr_assists) + " assist" + ("s" if curr_assists > 1 else "")
+		add_child(assists_modifier_label)
+
+		# Combine assists with roll value
+		var assists_modifier_tween = create_tween()
+		assists_modifier_tween.tween_property(assists_modifier_label, "global_position:y", roll_value_label.global_position.y + 10, 0.25).set_delay(0.5)
+		var cb = Callable(self, "combine_assists_modifier").bind(curr_assists)
+		assists_modifier_tween.finished.connect(cb)
+	else:
+		calc_complete.emit()
 
 func handle_off_modifier():
 	var player_bp_stats = player_card.ball_player_stats
@@ -328,7 +368,8 @@ func reset_roll_table_rows():
 
 func on_matchup_completed():
 	var all_stats = matchup_score.get_all_stats()
-	matchup_complete.emit(all_stats, offense_side)
+	var assists_used = curr_assists if use_assists_checkbox.button_pressed else 0
+	matchup_complete.emit(all_stats, offense_side, assists_used)
 	on_close_matchup_window()
 
 func call_after_delay(delay_sec: float, func_name: String):
@@ -352,3 +393,6 @@ func on_close_matchup_window():
 
 func hide_close_button():
 	close_button.hide()
+
+func hide_use_assists_checkbox():
+	use_assists_checkbox.hide()
