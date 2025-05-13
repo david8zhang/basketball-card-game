@@ -12,6 +12,7 @@ extends Control
 @onready var button := $Panel/Button as Button
 @onready var panel_container := $Panel as Panel
 @onready var animation_player := $AnimationPlayer as AnimationPlayer
+@onready var marker = $Panel/MarginContainer/VBoxContainer/HBoxContainer2/PlayerName/Marker as Marker
 
 @export var roll_table_value_scene: PackedScene
 @export var ball_player_stats: BallPlayerStats
@@ -66,6 +67,9 @@ func _ready():
 		}
 		roll_table_rows.append(roll_table_row)
 
+		if marker != null:
+			print(marker.curr_marker_count)
+
 
 func populate_label_value(label: Label, value: int):
 	if value == 0:
@@ -73,15 +77,19 @@ func populate_label_value(label: Label, value: int):
 	else:
 		label.text = str(value)
 
-
 func convert_positions_to_string(positions: Array[BallPlayerStats.PlayerPosition]):
 	var player_position_name_mapping = ["PG", "SG", "SF", "PF", "C"]
 	var position_names = positions.map(func(p): return player_position_name_mapping[int(p)])
 	return "/".join(position_names)
-
 
 func get_assigned_position():
 	return assigned_position
 
 func full_name():
 	return ball_player_stats.first_name + " " + ball_player_stats.last_name
+
+func add_hot_marker():
+	marker.add_hot_marker()
+
+func add_cold_marker():
+	marker.add_cold_marker()

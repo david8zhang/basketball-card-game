@@ -15,6 +15,7 @@ var cpu_card: BallPlayerCard
 var offense_side: Game.Side
 var off_modifier_label: Label
 var assists_modifier_label: Label
+var hot_cold_modifier_label: Label
 var matchup_score: MatchupPtsAsstsRebs
 var curr_assists := 0
 
@@ -34,11 +35,13 @@ func set_player_card(card: BallPlayerCard):
 	player_card = card_scene.instantiate() as BallPlayerCard
 	player_card.ball_player_stats = card.ball_player_stats.duplicate()
 	hbox_container.add_child(player_card)
+	player_card.marker.copy_from_marker(card.marker)
 
 func set_cpu_card(card: BallPlayerCard):
 	cpu_card = card_scene.instantiate() as BallPlayerCard
 	cpu_card.ball_player_stats = card.ball_player_stats.duplicate()
 	hbox_container.add_child(cpu_card)
+	cpu_card.marker.copy_from_marker(card.marker)
 
 func set_curr_assists(assists: int):
 	curr_assists = assists
@@ -59,6 +62,10 @@ func on_roll():
 		},
 		{
 			"fname": "add_assists_to_roll",
+			"on_comp_delay_s": 0.1
+		},
+		{
+			"fname": "add_hot_or_cold_modifiers",
 			"on_comp_delay_s": 0.1
 		},
 		{
@@ -128,7 +135,14 @@ func go_to_next_calc():
 
 func generate_roll_value():
 	use_assists_checkbox.hide()
-	var random_number = randi_range(1, 20)
+	# var random_number = randi_range(1, 20)
+	var random_number = 20 if randi_range(0, 1) == 1 else 1
+	var off_bp_card = player_card if offense_side == Game.Side.PLAYER else cpu_card
+	if random_number == 1:
+		off_bp_card.add_cold_marker()
+	elif random_number == 20:
+		off_bp_card.add_hot_marker()
+
 	roll_value_label.text = str(random_number)
 	roll_value_label.show()
 	calc_complete.emit()
@@ -156,6 +170,38 @@ func add_assists_to_roll():
 		assists_modifier_tween.finished.connect(cb)
 	else:
 		calc_complete.emit()
+
+
+func combine_hot_or_cold_bonus(bonus: int):
+	var new_roll_value = int(roll_value_label.text) + bonus
+	roll_value_label.text = str(new_roll_value)
+	hot_cold_modifier_label.queue_free()
+	calc_complete.emit()
+
+func add_hot_or_cold_modifiers():
+	var offensive_player = player_card if offense_side == Game.Side.PLAYER else cpu_card
+	var marker = offensive_player.marker
+	if marker.curr_marker_count > 0:
+		var bonus_amt = 4 * marker.curr_marker_count
+		bonus_amt = -bonus_amt if marker.curr_marker_type == Marker.MarkerType.COLD else bonus_amt
+
+		var modifier_label_text = "(hot)" if marker.curr_marker_type == Marker.MarkerType.HOT else "(cold)"
+		hot_cold_modifier_label = Label.new()
+		hot_cold_modifier_label.add_theme_font_size_override("font_size", 30)
+		hot_cold_modifier_label.size.x = size.x
+		hot_cold_modifier_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		hot_cold_modifier_label.global_position = Vector2(0, roll_value_label.global_position.y + 100)
+		hot_cold_modifier_label.text = ("+" if bonus_amt > 0 else "") + str(bonus_amt) + " " + modifier_label_text
+		add_child(hot_cold_modifier_label)
+
+		# Combine hot/cold bonus with roll value
+		var hot_cold_modifier_label_tween = create_tween()
+		hot_cold_modifier_label_tween.tween_property(hot_cold_modifier_label, "global_position:y", roll_value_label.global_position.y + 10, 0.25).set_delay(0.75)
+		var cb = Callable(self, "combine_hot_or_cold_bonus").bind(bonus_amt)
+		hot_cold_modifier_label_tween.finished.connect(cb)
+	else:
+		calc_complete.emit()
+
 
 func handle_off_modifier():
 	var player_bp_stats = player_card.ball_player_stats

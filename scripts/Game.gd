@@ -244,6 +244,7 @@ func process_matchup_stats(all_stats: Dictionary, side: Side, assists_used: int)
 		var stat_line = BoxScoreStatLine.new(full_name, all_stats["points"], all_stats["assists"], all_stats["rebounds"])
 		update_statlines(full_name, stat_line, full_player_scorer_statlines)
 		player_completed_scorer_positions.append(selected_player_bp_card.get_assigned_position())
+		selected_player_bp_card.marker.copy_from_marker(matchup_container.player_card.marker)
 		selected_player_bp_card.button.flat = false
 		player_score_label.text = str(int(player_score_label.text) + all_stats["points"])
 		player_assists_label.text = "A: " + str(get_assists(player_assists_label) - assists_used + all_stats["assists"])
@@ -254,11 +255,13 @@ func process_matchup_stats(all_stats: Dictionary, side: Side, assists_used: int)
 		var stat_line = BoxScoreStatLine.new(full_name, all_stats["points"], all_stats["assists"], all_stats["rebounds"])
 		update_statlines(full_name, stat_line, full_cpu_scorer_statlines)
 		cpu_completed_scorer_positions.append(selected_cpu_bp_card.get_assigned_position())
+		selected_cpu_bp_card.marker.copy_from_marker(matchup_container.cpu_card.marker)
 		selected_cpu_bp_card.button.flat = false
 		cpu_score_label.text = str(int(cpu_score_label.text) + all_stats["points"])
 		cpu_assists_label.text = "A: " + str(get_assists(cpu_assists_label) - assists_used + all_stats["assists"])
 		cpu_rebounds_label.text = "R: " + str(get_rebounds(cpu_rebounds_label) + all_stats["rebounds"])
 		curr_cpu_quarter_score += all_stats["points"]
+	matchup_container.queue_free()
 
 func update_statlines(full_name: String, stat_line: BoxScoreStatLine, scorer_statline: Dictionary):
 	if scorer_statline.has(full_name):

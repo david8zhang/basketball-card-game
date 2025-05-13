@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://ciyhd5db3ubjt"]
+
+[ext_resource type="Texture2D" uid="uid://nq2cix5houd8" path="res://assets/cold-marker.png" id="1_72tpc"]
+[ext_resource type="Script" path="res://scripts/Marker.gd" id="1_yrqh7"]
+
+[node name="Marker" type="HBoxContainer"]
+script = ExtResource("1_yrqh7")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_72tpc")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1

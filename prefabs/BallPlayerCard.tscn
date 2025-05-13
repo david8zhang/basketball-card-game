@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://canx4b4pr7n3c"]
+[gd_scene load_steps=8 format=3 uid="uid://canx4b4pr7n3c"]
 
 [ext_resource type="Script" path="res://scripts/BallPlayerCard.gd" id="1_my46u"]
 [ext_resource type="PackedScene" uid="uid://cgpent6asbq6b" path="res://prefabs/TableValue.tscn" id="2_bfexb"]
 [ext_resource type="Resource" uid="uid://cvram68b0cw7d" path="res://resources/DeAndreAyton.tres" id="3_v567d"]
+[ext_resource type="PackedScene" uid="uid://ciyhd5db3ubjt" path="res://prefabs/Marker.tscn" id="4_wqmgd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eoll5"]
 bg_color = Color(0, 0, 0, 1)
@@ -140,6 +141,10 @@ layout_mode = 2
 [node name="PlayerName" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 alignment = 2
+
+[node name="Marker" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/PlayerName" instance=ExtResource("4_wqmgd")]
+visible = false
+layout_mode = 2
 
 [node name="First" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/PlayerName"]
 layout_mode = 2
