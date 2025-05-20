@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bi2ksw8anhd4v"]
+[gd_scene load_steps=4 format=3 uid="uid://bi2ksw8anhd4v"]
 
 [ext_resource type="Script" path="res://scripts/StrategyCard.gd" id="1_omdm6"]
+[ext_resource type="Resource" uid="uid://dc61qc1kcn8w2" path="res://resources/strategy/Test.tres" id="2_c7te8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7wo1j"]
 bg_color = Color(0, 0, 0, 1)
@@ -10,6 +11,7 @@ border_width_right = 2
 border_width_bottom = 2
 
 [node name="StrategyCard" type="Control"]
+custom_minimum_size = Vector2(300, 420)
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -19,9 +21,10 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_omdm6")
+strategy_card_config = ExtResource("2_c7te8")
 
 [node name="Panel" type="Panel" parent="."]
-custom_minimum_size = Vector2(300, 420)
+custom_minimum_size = Vector2(280, 420)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -77,7 +80,16 @@ custom_minimum_size = Vector2(2.08165e-12, 15)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="RichTextLabel" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="CardDescription" type="RichTextLabel" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "This player scores 2 points. Roll a D20. If it's a 20, give each player on your team a hot marker"
 fit_content = true
+
+[node name="Button" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
