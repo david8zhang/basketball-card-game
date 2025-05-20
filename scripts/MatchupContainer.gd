@@ -6,6 +6,7 @@ extends Panel
 @onready var roll_value_label = $MarginContainer/VBoxContainer/VBoxContainer/RollValue as Label
 @onready var close_button = $CloseButton as Button
 @onready var use_assists_checkbox = $MarginContainer/VBoxContainer/VBoxContainer/UseAssistsCheckbox as CheckBox
+@onready var use_strategy_card_button = $MarginContainer/VBoxContainer/VBoxContainer/StratButton as Button
 
 @export var card_scene: PackedScene
 @export var matchup_pts_assts_rebs_scene: PackedScene
@@ -135,8 +136,8 @@ func go_to_next_calc():
 
 func generate_roll_value():
 	use_assists_checkbox.hide()
-	# var random_number = randi_range(1, 20)
-	var random_number = 20 if randi_range(0, 1) == 1 else 1
+	use_strategy_card_button.hide()
+	var random_number = randi_range(1, 20)
 	var off_bp_card = player_card if offense_side == Game.Side.PLAYER else cpu_card
 	if random_number == 1:
 		off_bp_card.add_cold_marker()

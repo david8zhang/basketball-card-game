@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/BallPlayerCard.gd" id="1_2wafc"]
 [ext_resource type="PackedScene" uid="uid://cgpent6asbq6b" path="res://prefabs/TableValue.tscn" id="2_ko473"]
-[ext_resource type="Resource" path="res://resources/AaronGordon.tres" id="3_j2ud4"]
+[ext_resource type="Resource" uid="uid://crm23b0v33m8u" path="res://resources/players/AaronGordon.tres" id="3_j2ud4"]
 [ext_resource type="PackedScene" uid="uid://ciyhd5db3ubjt" path="res://prefabs/Marker.tscn" id="4_huvud"]
 [ext_resource type="Animation" uid="uid://v6bgww4fmfmj" path="res://animations/highlight_offense_stat.res" id="4_vlyfh"]
 [ext_resource type="Animation" uid="uid://b00udrbvrd25l" path="res://animations/highlight_defense_stat.res" id="5_tli0d"]
