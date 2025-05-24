@@ -1,76 +1,100 @@
-[gd_scene load_steps=4 format=3 uid="uid://ujdwrbx0pr12"]
+[gd_scene load_steps=6 format=3 uid="uid://ujdwrbx0pr12"]
 
 [ext_resource type="PackedScene" uid="uid://bi2ksw8anhd4v" path="res://prefabs/StrategyCard.tscn" id="1_03tvw"]
 [ext_resource type="Script" path="res://scripts/StrategyCardSelector.gd" id="1_xpjc8"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kvpy1"]
-bg_color = Color(0, 0, 0, 0.670588)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8slut"]
+bg_color = Color(0.552941, 0.552941, 0.552941, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[node name="StrategyCardSelector" type="Control"]
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wc44o"]
+bg_color = Color(0, 0, 0, 0.862745)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tiik3"]
+bg_color = Color(0, 0, 0, 0.862745)
+
+[node name="StrategyCardSelector" type="Panel"]
+custom_minimum_size = Vector2(900, 550)
+anchors_preset = -1
+anchor_left = 0.167
+anchor_top = 0.194
+anchor_right = 0.833
+anchor_bottom = 0.806
+offset_left = -0.450012
+offset_top = 0.399994
+offset_right = 0.449951
+offset_bottom = -0.400024
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8slut")
 script = ExtResource("1_xpjc8")
 strategy_card_scene = ExtResource("1_03tvw")
 
-[node name="Panel" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -450.0
-offset_top = -275.0
-offset_right = 450.0
-offset_bottom = 275.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_kvpy1")
-
-[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+[node name="CloseButton" type="Button" parent="."]
+custom_minimum_size = Vector2(1350, 900)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_wc44o")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tiik3")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tiik3")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 37.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
+theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 30
 text = "Strategy Cards"
 horizontal_alignment = 1
 
-[node name="Control" type="Control" parent="Panel/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(2.08165e-12, 40)
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(2.08165e-12, 428)
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 350)
 layout_mode = 2
 vertical_scroll_mode = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer"]
 custom_minimum_size = Vector2(2.08165e-12, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 theme_override_constants/separation = 15
+
+[node name="StrategyCard" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer" instance=ExtResource("1_03tvw")]
+layout_mode = 2
+
+[node name="StrategyCard2" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer" instance=ExtResource("1_03tvw")]
+layout_mode = 2
+
+[node name="StrategyCard3" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer" instance=ExtResource("1_03tvw")]
+layout_mode = 2

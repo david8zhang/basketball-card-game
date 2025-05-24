@@ -17,5 +17,4 @@ func _ready():
 	button.pressed.connect(on_card_click)
 
 func on_card_click():
-	print(self)
 	on_card_selected.emit(self)

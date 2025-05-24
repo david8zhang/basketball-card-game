@@ -10,6 +10,7 @@ extends Panel
 
 @export var card_scene: PackedScene
 @export var matchup_pts_assts_rebs_scene: PackedScene
+@export var strategy_card_selector_scene: PackedScene
 
 var player_card: BallPlayerCard
 var cpu_card: BallPlayerCard
@@ -18,6 +19,7 @@ var off_modifier_label: Label
 var assists_modifier_label: Label
 var hot_cold_modifier_label: Label
 var matchup_score: MatchupPtsAsstsRebs
+var strategy_card_selector: StrategyCardSelector
 var curr_assists := 0
 
 signal calc_complete
@@ -31,6 +33,7 @@ func _ready():
 	roll_button.pressed.connect(on_roll)
 	close_button.pressed.connect(on_close_matchup_window)
 	calc_complete.connect(process_calc_delay)
+	use_strategy_card_button.pressed.connect(show_strategy_card_selector)
 
 func set_player_card(card: BallPlayerCard):
 	player_card = card_scene.instantiate() as BallPlayerCard
@@ -446,3 +449,10 @@ func hide_use_assists_checkbox():
 
 func enable_use_assists():
 	use_assists_checkbox.button_pressed = true
+
+func show_strategy_card_selector():
+	var on_clear_fn = func clear_strategy_card_selector():
+		strategy_card_selector.queue_free()
+	strategy_card_selector = strategy_card_selector_scene.instantiate() as StrategyCardSelector
+	add_child(strategy_card_selector)
+	strategy_card_selector.on_close.connect(on_clear_fn)

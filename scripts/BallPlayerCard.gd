@@ -67,9 +67,6 @@ func _ready():
 		}
 		roll_table_rows.append(roll_table_row)
 
-		if marker != null:
-			print(marker.curr_marker_count)
-
 
 func populate_label_value(label: Label, value: int):
 	if value == 0:
