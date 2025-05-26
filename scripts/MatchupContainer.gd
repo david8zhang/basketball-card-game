@@ -141,7 +141,7 @@ func generate_roll_value():
 	use_assists_checkbox.hide()
 	use_strategy_card_button.hide()
 	var random_number = randi_range(1, 20)
-	var off_bp_card = player_card if offense_side == Game.Side.PLAYER else cpu_card
+	var off_bp_card = get_off_player_card()
 	if random_number == 1:
 		off_bp_card.add_cold_marker()
 	elif random_number == 20:
@@ -183,7 +183,7 @@ func combine_hot_or_cold_bonus(bonus: int):
 	calc_complete.emit()
 
 func add_hot_or_cold_modifiers():
-	var offensive_player = player_card if offense_side == Game.Side.PLAYER else cpu_card
+	var offensive_player = get_off_player_card()
 	var marker = offensive_player.marker
 	if marker.curr_marker_count > 0:
 		var bonus_amt = 4 * marker.curr_marker_count
@@ -240,18 +240,18 @@ func combine_off_modifier(off_def_diff: int):
 	calc_complete.emit()
 
 func highlight_off_stat():
-	var offense_bp_card = player_card if offense_side == Game.Side.PLAYER else cpu_card
+	var offense_bp_card = get_off_player_card()
 	offense_bp_card.animation_player.animation_finished.connect(on_anim_finished)
 	offense_bp_card.animation_player.play("highlight_offense_stat")
 
 func highlight_def_stat():
-	var defense_bp_card = cpu_card if offense_side == Game.Side.PLAYER else player_card
+	var defense_bp_card = get_def_player_card()
 	defense_bp_card.animation_player.animation_finished.connect(on_anim_finished)
 	defense_bp_card.animation_player.play("highlight_defense_stat")
 
 func reset_stat_highlight():
-	var defense_bp_card = cpu_card if offense_side == Game.Side.PLAYER else player_card
-	var offense_bp_card = player_card if offense_side == Game.Side.PLAYER else cpu_card
+	var defense_bp_card = get_def_player_card()
+	var offense_bp_card = get_off_player_card()
 	defense_bp_card.animation_player.animation_finished.disconnect(on_anim_finished) 	# prevent double firing of calc complete event
 	offense_bp_card.animation_player.play_backwards("highlight_offense_stat")
 	defense_bp_card.animation_player.play_backwards("highlight_defense_stat")
@@ -263,7 +263,7 @@ func on_anim_finished(anim_name: String):
 func get_table_row_for_roll_value():
 	var roll_value = clamp(int(roll_value_label.text), 1, 30)
 	var roll_table_row
-	var offense_bp_card = player_card if offense_side == Game.Side.PLAYER else cpu_card
+	var offense_bp_card = get_off_player_card()
 	for row in offense_bp_card.roll_table_rows:
 		var roll_table_row_data = row["data"] as RollTableRow
 		if roll_value >= roll_table_row_data.low and roll_value <= roll_table_row_data.high:
@@ -450,9 +450,17 @@ func hide_use_assists_checkbox():
 func enable_use_assists():
 	use_assists_checkbox.button_pressed = true
 
+func get_off_player_card() -> BallPlayerCard:
+	return player_card if offense_side == Game.Side.PLAYER else cpu_card
+
+func get_def_player_card() -> BallPlayerCard:
+	return cpu_card if offense_side == Game.Side.PLAYER else player_card
+
 func show_strategy_card_selector():
 	var on_clear_fn = func clear_strategy_card_selector():
 		strategy_card_selector.queue_free()
 	strategy_card_selector = strategy_card_selector_scene.instantiate() as StrategyCardSelector
+	strategy_card_selector.off_player = get_off_player_card()
+	strategy_card_selector.def_player = get_def_player_card()
 	add_child(strategy_card_selector)
 	strategy_card_selector.on_close.connect(on_clear_fn)

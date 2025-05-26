@@ -20,16 +20,18 @@ class DiceRollConditionResult extends StrategyCardCondition.ConditionResult:
 
 func check_condition(_off_player: BallPlayerCard, _def_player: BallPlayerCard):
   var dice_roll_result = randi_range(1, dice_type)
+  var result_type
   match (comparator_type):
     ComparatorType.LESS:
-      return StrategyCardCondition.ConditionResultType.SUCCESS if \
+      result_type = StrategyCardCondition.ConditionResultType.SUCCESS if \
         dice_roll_result <= dice_roll_thres else \
         StrategyCardCondition.ConditionResultType.FAILURE
     ComparatorType.EQUAL:
-      return StrategyCardCondition.ConditionResultType.SUCCESS if \
+      result_type = StrategyCardCondition.ConditionResultType.SUCCESS if \
         dice_roll_result == dice_roll_thres else \
         StrategyCardCondition.ConditionResultType.FAILURE
     ComparatorType.GREATER:
-      return StrategyCardCondition.ConditionResultType.SUCCESS if \
+      result_type = StrategyCardCondition.ConditionResultType.SUCCESS if \
         dice_roll_result >= dice_roll_thres else \
-        StrategyCardCondition.ConditionResultType.FAILURE      
+        StrategyCardCondition.ConditionResultType.FAILURE
+  return DiceRollConditionResult.new(result_type, dice_roll_result)      

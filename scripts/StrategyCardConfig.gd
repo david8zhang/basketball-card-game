@@ -23,8 +23,8 @@ enum StrategyCardType {
 @export var bonus_3: Array[StrategyCardBonus]
 
 class ConditionBonusResult:
-	var condition_results: Array[StrategyCardCondition.ConditionResult] = []
-	var bonus_results: Array[StrategyCardBonus.BonusResult] = []
+	var condition_results = []
+	var bonus_results = []
 	func _init(_condition_results, _bonus_results):
 		condition_results = _condition_results
 		bonus_results = _bonus_results
@@ -42,13 +42,13 @@ func process(off_player: BallPlayerCard, def_player: BallPlayerCard):
 func process_condition_bonus(conditions: Array[StrategyCardCondition], bonuses: Array[StrategyCardBonus], op: BallPlayerCard, dp: BallPlayerCard):
 	var condition_results = []
 	var bonus_results = []
-	var should_apply_bonus_1 = true
+	var should_apply_bonus = true
 	for c in conditions:
 		var result = c.check_condition(op, dp)
 		if result.result_type == StrategyCardCondition.ConditionResultType.FAILURE:
-			should_apply_bonus_1 = false
+			should_apply_bonus = false
 		condition_results.append(result)
-	if should_apply_bonus_1:
+	if should_apply_bonus:
 		for b in bonuses:
 			bonus_results.append(b.apply_bonus(op, dp))
 	return ConditionBonusResult.new(condition_results, bonus_results)

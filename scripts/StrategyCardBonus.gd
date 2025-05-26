@@ -15,5 +15,5 @@ class BonusResult:
     bonus_type = _bonus_type
 
 
-func apply_bonus(off_player: BallPlayerCard, def_player: BallPlayerCard):
+func apply_bonus(_off_player: BallPlayerCard, _def_player: BallPlayerCard):
   pass

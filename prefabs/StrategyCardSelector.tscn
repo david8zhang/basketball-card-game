@@ -89,12 +89,3 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 theme_override_constants/separation = 15
-
-[node name="StrategyCard" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer" instance=ExtResource("1_03tvw")]
-layout_mode = 2
-
-[node name="StrategyCard2" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer" instance=ExtResource("1_03tvw")]
-layout_mode = 2
-
-[node name="StrategyCard3" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer" instance=ExtResource("1_03tvw")]
-layout_mode = 2

@@ -16,5 +16,8 @@ func _ready():
 	type_label.text = "Offense" if strategy_card_config.strategy_type == StrategyCardConfig.StrategyCardType.OFFENSE else "Defense"
 	button.pressed.connect(on_card_click)
 
+func get_strategy_name():
+	return name_label.text
+
 func on_card_click():
 	on_card_selected.emit(self)
