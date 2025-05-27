@@ -21,6 +21,10 @@ var hot_cold_modifier_label: Label
 var matchup_score: MatchupPtsAsstsRebs
 var strategy_card_selector: StrategyCardSelector
 var curr_assists := 0
+var strategy_roll_bonuses := 0
+var strategy_off_bonuses := 0
+var strategy_def_bonuses := 0
+var strategy_score_bonuses := 0
 
 signal calc_complete
 signal matchup_complete(all_stats: Dictionary, side: Game.Side, assists_used: int)
@@ -462,5 +466,6 @@ func show_strategy_card_selector():
 	strategy_card_selector = strategy_card_selector_scene.instantiate() as StrategyCardSelector
 	strategy_card_selector.off_player = get_off_player_card()
 	strategy_card_selector.def_player = get_def_player_card()
+	strategy_card_selector.matchup_container = self
 	add_child(strategy_card_selector)
 	strategy_card_selector.on_close.connect(on_clear_fn)
