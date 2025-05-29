@@ -2,6 +2,8 @@ class_name StrategyCardSelector
 extends Control
 
 @export var strategy_card_scene: PackedScene
+@export var dice_roll_scene: PackedScene
+
 @onready var card_container: HBoxContainer = $MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer
 @onready var close_button: Button = $CloseButton
 
@@ -70,22 +72,20 @@ func process_curr_condition():
 	match condition_result.condition_type:
 		StrategyCardCondition.StrategyCardConditionType.DICE_ROLL:
 			var dice_roll_cr = condition_result as DiceRollCondition.DiceRollConditionResult
-			show_dice_roll(dice_roll_cr.dice_roll_result)
+			show_dice_roll(dice_roll_cr)
 
-func show_dice_roll_result(roll_result: int, timer: Timer):
-	timer.queue_free()
-	print("Rolled: " + str(roll_result))
+func show_dice_roll_result(dice_roll_window: DiceRoll):
+	dice_roll_window.queue_free()
 	on_cr_finished.emit()
 
-func show_dice_roll(roll_result):
-	print("Rolling dice...")
-	var timer = Timer.new()
-	timer.one_shot = true
-	timer.autostart = true
-	timer.wait_time = 2
-	var on_timeout = Callable(self, "show_dice_roll_result").bind(roll_result, timer)
-	timer.timeout.connect(on_timeout)
-	add_child(timer)
+func show_dice_roll(roll_result: DiceRollCondition.DiceRollConditionResult):
+	var dice_roll_window = dice_roll_scene.instantiate() as DiceRoll
+	add_child(dice_roll_window)
+	var dice_roll_condition = roll_result.condition_ref as DiceRollCondition
+	dice_roll_window.configure_dice_roll(dice_roll_condition, roll_result.result_type)
+	dice_roll_window.roll_value(roll_result.dice_roll_result)
+	var callable = Callable(self, "show_dice_roll_result").bind(dice_roll_window)
+	dice_roll_window.on_roll_complete.connect(callable)
 
 func handle_br_finished():
 	if curr_b_result_to_process_idx == b_results.size() - 1 or b_results.is_empty():

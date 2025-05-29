@@ -16,19 +16,19 @@ dice_type = 20
 comparator_type = 2
 condition_type = 1
 
-[sub_resource type="Resource" id="Resource_465fk"]
+[sub_resource type="Resource" id="Resource_rhov8"]
 script = ExtResource("2_fhwci")
-dice_roll_thres = 5
+dice_roll_thres = 10
 dice_type = 20
 comparator_type = 2
-condition_type = 1
+condition_type = 0
 
 [resource]
 script = ExtResource("3_wax5g")
 strategy_type = 0
 card_name = "Test Strategy"
 card_description = "Roll a D20. Add 2 to the scoring roll if the result is greater than 5"
-condition_1 = Array[Resource("res://scripts/StrategyCardCondition.gd")]([SubResource("Resource_umxpl"), SubResource("Resource_465fk")])
+condition_1 = Array[Resource("res://scripts/StrategyCardCondition.gd")]([SubResource("Resource_umxpl"), SubResource("Resource_rhov8")])
 bonus_1 = Array[Resource("res://scripts/StrategyCardBonus.gd")]([SubResource("Resource_8wcse")])
 condition_2 = Array[Resource("res://scripts/StrategyCardCondition.gd")]([])
 bonus_2 = Array[Resource("res://scripts/StrategyCardBonus.gd")]([])
