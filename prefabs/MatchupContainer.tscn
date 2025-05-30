@@ -116,3 +116,10 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 70
 text = "20"
 horizontal_alignment = 1
+
+[node name="StratRollBonus" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 25
+text = "+2"
+horizontal_alignment = 1

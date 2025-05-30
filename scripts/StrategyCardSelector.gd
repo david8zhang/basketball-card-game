@@ -12,6 +12,7 @@ var def_player: BallPlayerCard
 var matchup_container: MatchupContainer
 var all_strategy_card_configs = []
 var strategy_cards = []
+var selected_strategy_card: StrategyCard
 const NUM_STRATEGY_CARDS = 3
 
 var cb_results = []
@@ -43,6 +44,7 @@ func _ready():
 		card_container.add_child(strategy_card)
 
 func select_strategy_card(sc: StrategyCard):
+	selected_strategy_card = sc
 	cb_results = sc.strategy_card_config.process(off_player, def_player) as Array[StrategyCardConfig.ConditionBonusResult]
 	process_curr_cb_result()
 
@@ -106,8 +108,7 @@ func process_curr_bonus():
 
 func add_roll_bonus(roll_br: RollBonus.RollBonusResult):
 	var bonus_amount = roll_br.roll_bonus_amount
-	matchup_container.strategy_roll_bonuses = bonus_amount
-	print("Add " + str(bonus_amount) + " to roll")
+	matchup_container.set_roll_bonus_from_strat(bonus_amount, selected_strategy_card.strategy_card_config)
 	on_br_finished.emit()
 
 func on_close_selector():

@@ -7,6 +7,7 @@ extends Panel
 @onready var close_button = $CloseButton as Button
 @onready var use_assists_checkbox = $MarginContainer/VBoxContainer/VBoxContainer/UseAssistsCheckbox as CheckBox
 @onready var use_strategy_card_button = $MarginContainer/VBoxContainer/VBoxContainer/StratButton as Button
+@onready var strat_roll_bonus_label = $MarginContainer/VBoxContainer/VBoxContainer/StratRollBonus as Label
 
 @export var card_scene: PackedScene
 @export var matchup_pts_assts_rebs_scene: PackedScene
@@ -25,6 +26,7 @@ var strategy_roll_bonuses := 0
 var strategy_off_bonuses := 0
 var strategy_def_bonuses := 0
 var strategy_score_bonuses := 0
+var did_use_strategy_card := false
 
 signal calc_complete
 signal matchup_complete(all_stats: Dictionary, side: Game.Side, assists_used: int)
@@ -38,6 +40,7 @@ func _ready():
 	close_button.pressed.connect(on_close_matchup_window)
 	calc_complete.connect(process_calc_delay)
 	use_strategy_card_button.pressed.connect(show_strategy_card_selector)
+	strat_roll_bonus_label.hide()
 
 func set_player_card(card: BallPlayerCard):
 	player_card = card_scene.instantiate() as BallPlayerCard
@@ -144,6 +147,7 @@ func go_to_next_calc():
 func generate_roll_value():
 	use_assists_checkbox.hide()
 	use_strategy_card_button.hide()
+	strat_roll_bonus_label.hide()
 	var random_number = randi_range(1, 20)
 	var off_bp_card = get_off_player_card()
 	if random_number == 1:
@@ -462,10 +466,17 @@ func get_def_player_card() -> BallPlayerCard:
 
 func show_strategy_card_selector():
 	var on_clear_fn = func clear_strategy_card_selector():
+		did_use_strategy_card = true
 		strategy_card_selector.queue_free()
+		use_strategy_card_button.hide()
 	strategy_card_selector = strategy_card_selector_scene.instantiate() as StrategyCardSelector
 	strategy_card_selector.off_player = get_off_player_card()
 	strategy_card_selector.def_player = get_def_player_card()
 	strategy_card_selector.matchup_container = self
 	add_child(strategy_card_selector)
 	strategy_card_selector.on_close.connect(on_clear_fn)
+
+func set_roll_bonus_from_strat(bonus: int, strategy_config: StrategyCardConfig):
+	strategy_roll_bonuses += bonus
+	strat_roll_bonus_label.text = "+" + str(strategy_roll_bonuses) + " (" + strategy_config.card_name + ")"
+	strat_roll_bonus_label.show()
