@@ -44,6 +44,7 @@ func add_cold_marker():
 
 func copy_from_marker(other_marker: Marker):
 	set_marker_type(other_marker.curr_marker_type)
-	update_marker_count(other_marker.curr_marker_count)
+	curr_marker_count = other_marker.curr_marker_count
+	label.text = str(curr_marker_count)
 	if curr_marker_count > 0:
 		show()

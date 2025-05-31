@@ -16,16 +16,24 @@ extends Panel
 var player_card: BallPlayerCard
 var cpu_card: BallPlayerCard
 var offense_side: Game.Side
+
+# Labels for bonuses
 var off_modifier_label: Label
 var assists_modifier_label: Label
 var hot_cold_modifier_label: Label
+var strat_roll_bonus_modifier_label: Label
+
+# Stats
 var matchup_score: MatchupPtsAsstsRebs
-var strategy_card_selector: StrategyCardSelector
 var curr_assists := 0
+
+# Strategy cards
+var strategy_card_selector: StrategyCardSelector
 var strategy_roll_bonuses := 0
 var strategy_off_bonuses := 0
 var strategy_def_bonuses := 0
 var strategy_score_bonuses := 0
+var off_strategy_card_name := ""
 var did_use_strategy_card := false
 
 signal calc_complete
@@ -69,6 +77,10 @@ func on_roll():
 	calc_steps = [
 		{
 			"fname": "generate_roll_value",
+			"on_comp_delay_s": 0.1
+		},
+		{
+			"fname": "add_strat_bonus_to_roll",
 			"on_comp_delay_s": 0.1
 		},
 		{
@@ -148,7 +160,8 @@ func generate_roll_value():
 	use_assists_checkbox.hide()
 	use_strategy_card_button.hide()
 	strat_roll_bonus_label.hide()
-	var random_number = randi_range(1, 20)
+	# var random_number = randi_range(1, 20)
+	var random_number = 1
 	var off_bp_card = get_off_player_card()
 	if random_number == 1:
 		off_bp_card.add_cold_marker()
@@ -158,6 +171,30 @@ func generate_roll_value():
 	roll_value_label.text = str(random_number)
 	roll_value_label.show()
 	calc_complete.emit()
+
+func combine_strat_bonus_modifier():
+	var new_roll_value = int(roll_value_label.text) + strategy_roll_bonuses
+	roll_value_label.text = str(new_roll_value)
+	strat_roll_bonus_modifier_label.queue_free()
+	calc_complete.emit()
+
+func add_strat_bonus_to_roll():
+	if strategy_roll_bonuses > 0:
+		strat_roll_bonus_modifier_label = Label.new()
+		strat_roll_bonus_modifier_label.add_theme_font_size_override("font_size", 35)
+		strat_roll_bonus_modifier_label.size.x = size.x
+		strat_roll_bonus_modifier_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		strat_roll_bonus_modifier_label.global_position = Vector2(0, roll_value_label.global_position.y + 100)
+		strat_roll_bonus_modifier_label.text = "+" + str(strategy_roll_bonuses) + " (" + off_strategy_card_name + ")"
+		add_child(strat_roll_bonus_modifier_label)
+
+		# Combine assists with roll value
+		var strat_roll_modifier_tween = create_tween()
+		strat_roll_modifier_tween.tween_property(strat_roll_bonus_modifier_label, "global_position:y", roll_value_label.global_position.y + 10, 0.25).set_delay(0.5)
+		var cb = Callable(self, "combine_strat_bonus_modifier")
+		strat_roll_modifier_tween.finished.connect(cb)
+	else:
+		calc_complete.emit()
 
 func combine_assists_modifier(assists_modifier: int):
 	var new_roll_value = int(roll_value_label.text) + assists_modifier
@@ -478,5 +515,6 @@ func show_strategy_card_selector():
 
 func set_roll_bonus_from_strat(bonus: int, strategy_config: StrategyCardConfig):
 	strategy_roll_bonuses += bonus
+	off_strategy_card_name = strategy_config.card_name
 	strat_roll_bonus_label.text = "+" + str(strategy_roll_bonuses) + " (" + strategy_config.card_name + ")"
 	strat_roll_bonus_label.show()
