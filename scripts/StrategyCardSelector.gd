@@ -15,12 +15,8 @@ var strategy_cards = []
 var selected_strategy_card: StrategyCard
 const NUM_STRATEGY_CARDS = 3
 
-var cb_results = []
-var curr_cb_result_to_process_idx = 0
-var c_results = []
-var curr_c_result_to_process_idx = 0
-var b_results = []
-var curr_b_result_to_process_idx = 0
+var node_results = []
+var curr_node_result_to_process_idx = 0
 
 signal on_close
 signal on_cr_finished
@@ -31,8 +27,8 @@ func _init():
 		if (file_name.get_extension() == "tres"):
 			var strategy_card_config = load("res://resources/strategy/" + file_name) as StrategyCardConfig
 			all_strategy_card_configs.append(strategy_card_config)
-	on_cr_finished.connect(handle_cr_finished)
-	on_br_finished.connect(handle_br_finished)
+	# on_cr_finished.connect(handle_cr_finished)
+	# on_br_finished.connect(handle_br_finished)
 
 func _ready():
 	close_button.pressed.connect(on_close_selector)
@@ -45,71 +41,77 @@ func _ready():
 
 func select_strategy_card(sc: StrategyCard):
 	selected_strategy_card = sc
-	cb_results = sc.strategy_card_config.process(off_player, def_player) as Array[StrategyCardConfig.ConditionBonusResult]
-	process_curr_cb_result()
+	sc.strategy_card_config.process(off_player, def_player)
+	node_results = sc.strategy_card_config.blackboard.node_results as Array[StrategyCardNode.NodeResult]
+	process_curr_node_result()
 
-func handle_cbr_finished():
-	if curr_cb_result_to_process_idx == cb_results.size() - 1:
-		print("Finished processing all condition bonus results!")
-		on_close.emit()
+# func handle_cbr_finished():
+# 	if curr_cb_result_to_process_idx == cb_results.size() - 1:
+# 		print("Finished processing all condition bonus results!")
+# 		on_close.emit()
+# 	else:
+# 		curr_cb_result_to_process_idx += 1
+# 		process_curr_cb_result()
+
+func process_curr_node_result():
+	if curr_node_result_to_process_idx > node_results.size() - 1:
+		return
+	var curr_node_result = node_results[curr_node_result_to_process_idx] as StrategyCardNode.NodeResult
+	if curr_node_result.node_ref.node_type == StrategyCardNode.NodeType.BONUS:
+		pass
+	elif curr_node_result.node_ref.node_type == StrategyCardNode.NodeType.CONDITION:
+		process_condition_node_result(curr_node_result)
 	else:
-		curr_cb_result_to_process_idx += 1
-		process_curr_cb_result()
+		curr_node_result_to_process_idx += 1
+		process_curr_node_result()
 
-func process_curr_cb_result():
-	var curr_cb_result = cb_results[curr_cb_result_to_process_idx] as StrategyCardConfig.ConditionBonusResult
-	c_results = curr_cb_result.condition_results as Array[StrategyCardCondition.ConditionResult]
-	b_results = curr_cb_result.bonus_results as Array[StrategyCardBonus.BonusResult]
-	process_curr_condition()
+# func handle_cr_finished():
+# 	if curr_c_result_to_process_idx == c_results.size() - 1:
+# 		process_curr_bonus()
+# 	else:
+# 		curr_c_result_to_process_idx += 1
+# 		process_curr_condition()
 
-func handle_cr_finished():
-	if curr_c_result_to_process_idx == c_results.size() - 1:
-		process_curr_bonus()
-	else:
-		curr_c_result_to_process_idx += 1
-		process_curr_condition()
+func process_condition_node_result(curr_node_result: StrategyCardNode.NodeResult):
+	var node = curr_node_result.node_ref as StrategyCardConditionNode
+	match (node.condition_type):
+		StrategyCardConditionNode.ConditionType.DICE_ROLL_CHECK:
+			var dice_roll_condition = node as DiceRollCondition
+			show_dice_roll(dice_roll_condition, curr_node_result.result_type)
 
-func process_curr_condition():
-	var condition_result = c_results[curr_c_result_to_process_idx] as StrategyCardCondition.ConditionResult
-	match condition_result.condition_type:
-		StrategyCardCondition.StrategyCardConditionType.DICE_ROLL:
-			var dice_roll_cr = condition_result as DiceRollCondition.DiceRollConditionResult
-			show_dice_roll(dice_roll_cr)
+# func show_dice_roll_result(dice_roll_window: DiceRoll):
+# 	dice_roll_window.queue_free()
+# 	on_cr_finished.emit()
 
-func show_dice_roll_result(dice_roll_window: DiceRoll):
-	dice_roll_window.queue_free()
-	on_cr_finished.emit()
-
-func show_dice_roll(roll_result: DiceRollCondition.DiceRollConditionResult):
+func show_dice_roll(dice_roll_condition: DiceRollCondition, result_type: StrategyCardNode.NodeResultType):
 	var dice_roll_window = dice_roll_scene.instantiate() as DiceRoll
 	add_child(dice_roll_window)
-	var dice_roll_condition = roll_result.condition_ref as DiceRollCondition
-	dice_roll_window.configure_dice_roll(dice_roll_condition, roll_result.result_type)
-	dice_roll_window.roll_value(roll_result.dice_roll_result)
+	dice_roll_window.configure_dice_roll(dice_roll_condition, result_type)
+	dice_roll_window.roll_value(dice_roll_condition.dice_roll_result)
 	var callable = Callable(self, "show_dice_roll_result").bind(dice_roll_window)
 	dice_roll_window.on_roll_complete.connect(callable)
 
-func handle_br_finished():
-	if curr_b_result_to_process_idx == b_results.size() - 1 or b_results.is_empty():
-		handle_cbr_finished()
-	else:
-		curr_b_result_to_process_idx += 1
-		process_curr_bonus()
+# func handle_br_finished():
+# 	if curr_b_result_to_process_idx == b_results.size() - 1 or b_results.is_empty():
+# 		handle_cbr_finished()
+# 	else:
+# 		curr_b_result_to_process_idx += 1
+# 		process_curr_bonus()
 
-func process_curr_bonus():
-	if b_results.size() > 0:
-		var bonus_result = b_results[curr_b_result_to_process_idx] as StrategyCardBonus.BonusResult
-		match bonus_result.bonus_type:
-			StrategyCardBonus.StrategyCardBonusType.ROLL:
-				var roll_br = bonus_result as RollBonus.RollBonusResult
-				add_roll_bonus(roll_br)
-	else:
-		on_br_finished.emit()
+# func process_curr_bonus():
+# 	if b_results.size() > 0:
+# 		var bonus_result = b_results[curr_b_result_to_process_idx] as StrategyCardBonus.BonusResult
+# 		match bonus_result.bonus_type:
+# 			StrategyCardBonus.StrategyCardBonusType.ROLL:
+# 				var roll_br = bonus_result as RollBonus.RollBonusResult
+# 				add_roll_bonus(roll_br)
+# 	else:
+# 		on_br_finished.emit()
 
-func add_roll_bonus(roll_br: RollBonus.RollBonusResult):
-	var bonus_amount = roll_br.roll_bonus_amount
-	matchup_container.set_roll_bonus_from_strat(bonus_amount, selected_strategy_card.strategy_card_config)
-	on_br_finished.emit()
+# func add_roll_bonus(roll_br: RollBonus.RollBonusResult):
+# 	var bonus_amount = roll_br.roll_bonus_amount
+# 	matchup_container.set_roll_bonus_from_strat(bonus_amount, selected_strategy_card.strategy_card_config)
+# 	on_br_finished.emit()
 
 func on_close_selector():
 	on_close.emit()

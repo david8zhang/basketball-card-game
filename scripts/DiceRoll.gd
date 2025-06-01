@@ -7,7 +7,7 @@ extends Panel
 @onready var button: Button = $VBoxContainer/Button
 
 var curr_threshold: int
-var curr_result_type: StrategyCardCondition.ConditionResultType
+var curr_result_type: StrategyCardNode.NodeResultType
 var dice_type: int
 
 signal on_roll_complete
@@ -18,7 +18,7 @@ func _ready():
 	button.hide()
 	button.pressed.connect(complete_roll)
 
-func configure_dice_roll(condition_ref: DiceRollCondition, result_type: StrategyCardCondition.ConditionResultType):
+func configure_dice_roll(condition_ref: DiceRollCondition, result_type:  StrategyCardNode.NodeResultType):
 	curr_threshold = condition_ref.dice_roll_thres
 	curr_result_type = result_type
 	dice_type = condition_ref.dice_type
@@ -41,7 +41,7 @@ func scramble_numbers(num_scrambles: int, timer: Timer, final_value: int):
 		if timer != null:
 			timer.queue_free()
 		roll_value_label.text = str(final_value)
-		result_label.text = "Success!" if curr_result_type == StrategyCardCondition.ConditionResultType.SUCCESS else "Failure..."
+		result_label.text = "Success!" if curr_result_type ==  StrategyCardNode.NodeResultType.SUCCESS else "Failure..."
 		button.show()
 		return
 	var num = generate_random_number()

@@ -1,4 +1,4 @@
-class_name StrategyCardTree
+class_name StrategyCardConfig
 extends Resource
 
 enum StrategyCardType {
@@ -11,7 +11,10 @@ enum StrategyCardType {
 @export var card_description: String
 @export var root_node: StrategyCardNode
 
-var blackboard = []
+var blackboard: Blackboard
 
-func process():
+func process(off_player: BallPlayerCard, def_player: BallPlayerCard):
+  blackboard = Blackboard.new()
+  blackboard.off_player = off_player
+  blackboard.def_player = def_player
   root_node.process(blackboard)

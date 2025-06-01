@@ -1,0 +1,61 @@
+[gd_resource type="Resource" script_class="StrategyCardConfig" load_steps=15 format=3 uid="uid://k5k64b703bbm"]
+
+[ext_resource type="Script" path="res://scripts/strategy/condition/DiceRollCondition.gd" id="1_3dac2"]
+[ext_resource type="Script" path="res://scripts/strategy/action/RollDiceAction.gd" id="1_g28v7"]
+[ext_resource type="Script" path="res://scripts/strategy/StrategyCardConfig.gd" id="1_tx0re"]
+[ext_resource type="Script" path="res://scripts/strategy/bonus/StatBonus.gd" id="1_yp0c8"]
+[ext_resource type="Script" path="res://scripts/strategy/bonus/MarkerBonus.gd" id="2_wdto3"]
+[ext_resource type="Script" path="res://scripts/strategy/StrategyCardSequenceNode.gd" id="3_6k1yo"]
+
+[sub_resource type="Resource" id="Resource_gjn3g"]
+script = ExtResource("1_g28v7")
+dice_type = 20
+action_type = 2
+
+[sub_resource type="Resource" id="Resource_x63lf"]
+script = ExtResource("1_yp0c8")
+off_bonus_amount = 1
+def_bonus_amount = 1
+bonus_type = 0
+
+[sub_resource type="Resource" id="Resource_cx7ga"]
+script = ExtResource("2_wdto3")
+marker_type = 0
+num_markers = 1
+bonus_type = 3
+
+[sub_resource type="Resource" id="Resource_mj1kx"]
+script = ExtResource("1_yp0c8")
+off_bonus_amount = 1
+def_bonus_amount = 1
+bonus_type = 0
+
+[sub_resource type="Resource" id="Resource_ykig0"]
+script = ExtResource("3_6k1yo")
+children = Array[Resource("res://scripts/strategy/StrategyCardNode.gd")]([SubResource("Resource_cx7ga"), SubResource("Resource_mj1kx")])
+
+[sub_resource type="Resource" id="Resource_r6r0p"]
+script = ExtResource("1_3dac2")
+dice_roll_thres = 19
+comparator_type = 2
+condition_type = 0
+pass_child = SubResource("Resource_ykig0")
+fail_child = SubResource("Resource_x63lf")
+
+[sub_resource type="Resource" id="Resource_ivwus"]
+script = ExtResource("1_3dac2")
+dice_roll_thres = 10
+comparator_type = 2
+condition_type = 0
+pass_child = SubResource("Resource_r6r0p")
+
+[sub_resource type="Resource" id="Resource_4w8nq"]
+script = ExtResource("3_6k1yo")
+children = Array[Resource("res://scripts/strategy/StrategyCardNode.gd")]([SubResource("Resource_gjn3g"), SubResource("Resource_ivwus")])
+
+[resource]
+script = ExtResource("1_tx0re")
+strategy_type = 0
+card_name = "Glue Guy"
+card_description = "Player rolls a die. 1-10 No Effect. 11-20 each player still remaining in the quarter gets +1 Offense and +1 Defense. If player rolls a 20, player also gets a hot marker"
+root_node = SubResource("Resource_4w8nq")

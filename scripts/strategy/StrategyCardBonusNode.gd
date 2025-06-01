@@ -1,11 +1,18 @@
 class_name StrategyCardBonusNode
 extends StrategyCardNode
 
-class BonusResult extends StrategyCardNode.NodeResult:
-	func _init():
-		result_type = StrategyCardNode.NodeResultType.SUCCESS
+enum BonusType {
+  STAT,
+  ROLL,
+  SCORE,
+  MARKER,
+  TEAM_STAT,
+  REM_TEAM_STAT
+}
+
+@export var bonus_type: BonusType
 
 func process(blackboard):
-	var bonus_result = BonusResult.new()
-	blackboard.append(bonus_result)
+	var bonus_result = StrategyCardNode.NodeResult.new(StrategyCardNode.NodeResultType.SUCCESS, self)
+	blackboard.node_results.append(bonus_result)
 	return StrategyCardNode.NodeResultType.SUCCESS
