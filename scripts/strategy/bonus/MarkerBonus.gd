@@ -9,6 +9,7 @@ enum MarkerType {
 }
 
 func _init():
+  super._init()
   bonus_type = StrategyCardBonusNode.BonusType.MARKER
 
 @export var marker_type: MarkerType

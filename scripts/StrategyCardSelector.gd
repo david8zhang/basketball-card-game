@@ -58,36 +58,31 @@ func process_curr_node_result():
 		return
 	var curr_node_result = node_results[curr_node_result_to_process_idx] as StrategyCardNode.NodeResult
 	if curr_node_result.node_ref.node_type == StrategyCardNode.NodeType.BONUS:
+		print("Processing bonus")
 		pass
-	elif curr_node_result.node_ref.node_type == StrategyCardNode.NodeType.CONDITION:
-		process_condition_node_result(curr_node_result)
+	elif curr_node_result.node_ref.node_type == StrategyCardNode.NodeType.ACTION:
+		process_action_node_result(curr_node_result)
 	else:
 		curr_node_result_to_process_idx += 1
 		process_curr_node_result()
 
-# func handle_cr_finished():
-# 	if curr_c_result_to_process_idx == c_results.size() - 1:
-# 		process_curr_bonus()
-# 	else:
-# 		curr_c_result_to_process_idx += 1
-# 		process_curr_condition()
+func process_action_node_result(curr_node_result: StrategyCardNode.NodeResult):
+	var node = curr_node_result.node_ref as StrategyCardActionNode
+	match (node.action_type):
+		StrategyCardActionNode.ActionType.ROLL_DICE:
+			var roll_dice_action = node as RollDiceAction
+			show_dice_roll(roll_dice_action)
 
-func process_condition_node_result(curr_node_result: StrategyCardNode.NodeResult):
-	var node = curr_node_result.node_ref as StrategyCardConditionNode
-	match (node.condition_type):
-		StrategyCardConditionNode.ConditionType.DICE_ROLL_CHECK:
-			var dice_roll_condition = node as DiceRollCondition
-			show_dice_roll(dice_roll_condition, curr_node_result.result_type)
+func show_dice_roll_result(dice_roll_window: DiceRoll):
+	dice_roll_window.queue_free()
+	curr_node_result_to_process_idx += 1
+	process_curr_node_result()
 
-# func show_dice_roll_result(dice_roll_window: DiceRoll):
-# 	dice_roll_window.queue_free()
-# 	on_cr_finished.emit()
-
-func show_dice_roll(dice_roll_condition: DiceRollCondition, result_type: StrategyCardNode.NodeResultType):
+func show_dice_roll(roll_dice_action: RollDiceAction):
 	var dice_roll_window = dice_roll_scene.instantiate() as DiceRoll
 	add_child(dice_roll_window)
-	dice_roll_window.configure_dice_roll(dice_roll_condition, result_type)
-	dice_roll_window.roll_value(dice_roll_condition.dice_roll_result)
+	dice_roll_window.configure_dice_roll(roll_dice_action)
+	dice_roll_window.roll_value(roll_dice_action.dice_roll_result)
 	var callable = Callable(self, "show_dice_roll_result").bind(dice_roll_window)
 	dice_roll_window.on_roll_complete.connect(callable)
 
