@@ -8,9 +8,9 @@ enum MarkerType {
   COLD_ON_DEF
 }
 
+@export var marker_type: MarkerType
+@export var num_markers := 0
+
 func _init():
   super._init()
   bonus_type = StrategyCardBonusNode.BonusType.MARKER
-
-@export var marker_type: MarkerType
-@export var num_markers := 0
