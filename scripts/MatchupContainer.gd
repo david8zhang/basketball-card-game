@@ -8,6 +8,7 @@ extends Panel
 @onready var use_assists_checkbox = $MarginContainer/VBoxContainer/VBoxContainer/UseAssistsCheckbox as CheckBox
 @onready var use_strategy_card_button = $MarginContainer/VBoxContainer/VBoxContainer/StratButton as Button
 @onready var strat_roll_bonus_label = $MarginContainer/VBoxContainer/VBoxContainer/StratRollBonus as Label
+@onready var stat_bonus_animator: StatBonusAnimator = $StatBonusAnimator
 
 @export var card_scene: PackedScene
 @export var matchup_pts_assts_rebs_scene: PackedScene
@@ -513,8 +514,11 @@ func show_strategy_card_selector():
 	add_child(strategy_card_selector)
 	strategy_card_selector.on_close.connect(on_clear_fn)
 
-func set_roll_bonus_from_strat(bonus: int, strategy_config: StrategyCardConfig):
-	strategy_roll_bonuses += bonus
-	off_strategy_card_name = strategy_config.card_name
-	strat_roll_bonus_label.text = "+" + str(strategy_roll_bonuses) + " (" + strategy_config.card_name + ")"
-	strat_roll_bonus_label.show()
+func apply_bonuses(bonuses):
+	var off_player = get_off_player_card()
+	for node in bonuses:
+		match (node.bonus_type):
+			StrategyCardBonusNode.BonusType.STAT:
+				var stat_bonus = node as StatBonus
+				print("Applying bonus to player")
+				stat_bonus_animator.apply_bonus_to_player(stat_bonus.off_bonus_amount, stat_bonus.def_bonus_amount, off_player)

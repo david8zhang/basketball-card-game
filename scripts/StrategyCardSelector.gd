@@ -86,7 +86,12 @@ func process_bonus_node_result(curr_node_result):
   process_curr_node_result()
 
 func apply_bonuses():
-  pass
+  var bonuses = []
+  for result in node_results:
+    if result.node_ref.node_type == StrategyCardNode.NodeType.BONUS:
+      bonuses.append(result.node_ref)
+  matchup_container.apply_bonuses(bonuses)
+  on_close.emit()
 
 func process_action_node_result(curr_node_result: StrategyCardNode.NodeResult):
   var node = curr_node_result.node_ref as StrategyCardActionNode
