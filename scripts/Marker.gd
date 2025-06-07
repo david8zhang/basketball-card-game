@@ -24,6 +24,18 @@ func update_marker_count(count: int):
 		hide()
 	label.text = str(curr_marker_count)
 
+func update_marker_with_type(count: int, marker_type: MarkerType):
+	if curr_marker_type != marker_type and curr_marker_type != MarkerType.NONE:
+		curr_marker_count -= count
+		if curr_marker_count < 0:
+			curr_marker_count = abs(curr_marker_count)
+			set_marker_type(marker_type)
+	else:
+		set_marker_type(marker_type)
+		curr_marker_count += count
+		label.text = str(curr_marker_count)
+	
+
 func add_hot_marker():
 	if curr_marker_type == MarkerType.COLD:
 		update_marker_count(-1)

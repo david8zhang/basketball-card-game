@@ -9,6 +9,7 @@ extends Panel
 @onready var use_strategy_card_button = $MarginContainer/VBoxContainer/VBoxContainer/StratButton as Button
 @onready var strat_roll_bonus_label = $MarginContainer/VBoxContainer/VBoxContainer/StratRollBonus as Label
 @onready var stat_bonus_animator: StatBonusAnimator = $StatBonusAnimator
+@onready var marker_bonus_animator: MarkerBonusAnimator = $MarkerBonusAnimator
 
 @export var card_scene: PackedScene
 @export var matchup_pts_assts_rebs_scene: PackedScene
@@ -161,8 +162,7 @@ func generate_roll_value():
 	use_assists_checkbox.hide()
 	use_strategy_card_button.hide()
 	strat_roll_bonus_label.hide()
-	# var random_number = randi_range(1, 20)
-	var random_number = 1
+	var random_number = randi_range(1, 20)
 	var off_bp_card = get_off_player_card()
 	if random_number == 1:
 		off_bp_card.add_cold_marker()
@@ -252,12 +252,15 @@ func add_hot_or_cold_modifiers():
 	else:
 		calc_complete.emit()
 
+func get_off_stat(bp_card: BallPlayerCard):
+	return int(bp_card.offense_value.text)
+
+func get_def_stat(bp_card: BallPlayerCard):
+	return int(bp_card.defense_value.text)
 
 func handle_off_modifier():
-	var player_bp_stats = player_card.ball_player_stats
-	var cpu_bp_stats = cpu_card.ball_player_stats
-	var off_stat = player_bp_stats.offense if offense_side == Game.Side.PLAYER else cpu_bp_stats.offense
-	var def_stat = cpu_bp_stats.defense if offense_side == Game.Side.PLAYER else player_bp_stats.defense
+	var off_stat = get_off_stat(player_card) if offense_side == Game.Side.PLAYER else get_off_stat(cpu_card)
+	var def_stat = get_def_stat(cpu_card) if offense_side == Game.Side.PLAYER else get_def_stat(player_card)
 	var off_def_diff = off_stat - def_stat
 	if off_def_diff != 0:
 		off_modifier_label = Label.new()
@@ -516,9 +519,12 @@ func show_strategy_card_selector():
 
 func apply_bonuses(bonuses):
 	var off_player = get_off_player_card()
+	var def_player = get_def_player_card()
 	for node in bonuses:
 		match (node.bonus_type):
 			StrategyCardBonusNode.BonusType.STAT:
 				var stat_bonus = node as StatBonus
-				print("Applying bonus to player")
 				stat_bonus_animator.apply_bonus_to_player(stat_bonus.off_bonus_amount, stat_bonus.def_bonus_amount, off_player)
+			StrategyCardBonusNode.BonusType.MARKER:
+				var marker_bonus = node as MarkerBonus
+				marker_bonus_animator.apply_bonus_to_player(off_player, def_player, marker_bonus)

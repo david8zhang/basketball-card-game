@@ -26,7 +26,7 @@ func check_condition(blackboard: Blackboard):
   match (comparator_type):
     ComparatorType.LESS:
       result_type = StrategyCardNode.NodeResultType.SUCCESS if \
-      dice_roll_result <= dice_roll_thres else \
+      dice_roll_result < dice_roll_thres else \
       StrategyCardNode.NodeResultType.FAILURE
     ComparatorType.EQUAL:
       result_type = StrategyCardNode.NodeResultType.SUCCESS if \
@@ -34,7 +34,7 @@ func check_condition(blackboard: Blackboard):
       StrategyCardNode.NodeResultType.FAILURE
     ComparatorType.GREATER:
       result_type = StrategyCardNode.NodeResultType.SUCCESS if \
-      dice_roll_result >= dice_roll_thres else \
+      dice_roll_result > dice_roll_thres else \
       StrategyCardNode.NodeResultType.FAILURE
   return result_type
 
