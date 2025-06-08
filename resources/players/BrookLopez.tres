@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://y322303bkojr"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=9 format=3 uid="uid://y322303bkojr"]
 
 [ext_resource type="Script" path="res://scripts/RollTableRow.gd" id="1_4bnwl"]
 [ext_resource type="Script" path="res://scripts/BallPlayerStats.gd" id="2_1l20y"]
+[ext_resource type="Texture2D" uid="uid://c2kygxyqc8xcg" path="res://assets/players/brook-lopez.jpg" id="3_jtrbi"]
 
 [sub_resource type="Resource" id="Resource_wqmvr"]
 script = ExtResource("1_4bnwl")
@@ -52,4 +53,5 @@ first_name = "Brook"
 last_name = "Lopez"
 three_point_bonus = 0
 player_cost = 830
+texture = ExtResource("3_jtrbi")
 roll_table = Array[ExtResource("1_4bnwl")]([SubResource("Resource_wqmvr"), SubResource("Resource_c05ca"), SubResource("Resource_1jpon"), SubResource("Resource_k8lch"), SubResource("Resource_qtd4x")])

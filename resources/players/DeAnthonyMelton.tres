@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://dr8ln3d6uvhnb"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://dr8ln3d6uvhnb"]
 
 [ext_resource type="Script" path="res://scripts/RollTableRow.gd" id="1_jlmfl"]
 [ext_resource type="Script" path="res://scripts/BallPlayerStats.gd" id="2_4fs5r"]
+[ext_resource type="Texture2D" uid="uid://ccuyu1iyfmpah" path="res://assets/players/deanthony-melton.jpg" id="3_hj4kh"]
 
 [sub_resource type="Resource" id="Resource_00lky"]
 script = ExtResource("1_jlmfl")
@@ -44,4 +45,5 @@ first_name = "De'Anthony"
 last_name = "Melton"
 three_point_bonus = 2
 player_cost = 510
+texture = ExtResource("3_hj4kh")
 roll_table = Array[ExtResource("1_jlmfl")]([SubResource("Resource_00lky"), SubResource("Resource_lerkq"), SubResource("Resource_jegl8"), SubResource("Resource_c4ne2")])

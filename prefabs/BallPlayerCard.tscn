@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/BallPlayerCard.gd" id="1_my46u"]
 [ext_resource type="PackedScene" uid="uid://cgpent6asbq6b" path="res://prefabs/TableValue.tscn" id="2_bfexb"]
-[ext_resource type="Resource" uid="uid://cvram68b0cw7d" path="res://resources/DeAndreAyton.tres" id="3_v567d"]
+[ext_resource type="Resource" uid="uid://cvram68b0cw7d" path="res://resources/players/DeAndreAyton.tres" id="3_v567d"]
 [ext_resource type="PackedScene" uid="uid://ciyhd5db3ubjt" path="res://prefabs/Marker.tscn" id="4_wqmgd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eoll5"]
@@ -41,6 +41,7 @@ mouse_filter = 1
 script = ExtResource("1_my46u")
 roll_table_value_scene = ExtResource("2_bfexb")
 ball_player_stats = ExtResource("3_v567d")
+show_roll_table = false
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -73,6 +74,8 @@ theme_override_constants/margin_bottom = 10
 [node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+expand_mode = 5
+stretch_mode = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
 layout_mode = 2
@@ -89,6 +92,8 @@ alignment = 1
 
 [node name="OffenseValue" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/Offense"]
 layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 30
 text = "0"
 horizontal_alignment = 1
@@ -96,6 +101,8 @@ vertical_alignment = 2
 
 [node name="OffenseLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/Offense"]
 layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 12
 text = "Offense"
 horizontal_alignment = 1
@@ -111,6 +118,8 @@ alignment = 1
 
 [node name="DefenseValue" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/Defense"]
 layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 30
 text = "0"
 horizontal_alignment = 1
@@ -118,6 +127,8 @@ vertical_alignment = 2
 
 [node name="DefenseLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/Defense"]
 layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 12
 text = "Defense"
 horizontal_alignment = 1
@@ -132,6 +143,8 @@ mouse_default_cursor_shape = 2
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 10
 text = "PG"
 
@@ -150,6 +163,8 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 22
 text = "FIRSTNAME"
 
@@ -157,6 +172,8 @@ text = "FIRSTNAME"
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 22
 text = "LASTNAME"
 
@@ -235,6 +252,8 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_krclw")
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 8
 text = "Shot: 1"
 
@@ -242,6 +261,8 @@ text = "Shot: 1"
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 8
 text = "3pt +1"
 

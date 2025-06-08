@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://bywmbfk12p8b6"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://bywmbfk12p8b6"]
 
 [ext_resource type="Script" path="res://scripts/RollTableRow.gd" id="1_j1twh"]
 [ext_resource type="Script" path="res://scripts/BallPlayerStats.gd" id="2_c4flq"]
+[ext_resource type="Texture2D" uid="uid://d2tb6gasmgwfi" path="res://assets/players/andrew-wiggins.jpg" id="3_3nq65"]
 
 [sub_resource type="Resource" id="Resource_fwcin"]
 script = ExtResource("1_j1twh")
@@ -44,4 +45,5 @@ first_name = "Andrew"
 last_name = "Wiggins"
 three_point_bonus = 4
 player_cost = 480
+texture = ExtResource("3_3nq65")
 roll_table = Array[ExtResource("1_j1twh")]([SubResource("Resource_fwcin"), SubResource("Resource_0ol8o"), SubResource("Resource_l44jt"), SubResource("Resource_14avi")])

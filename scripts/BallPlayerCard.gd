@@ -13,11 +13,13 @@ extends Control
 @onready var panel_container := $Panel as Panel
 @onready var animation_player := $AnimationPlayer as AnimationPlayer
 @onready var marker = $Panel/MarginContainer/VBoxContainer/HBoxContainer2/PlayerName/Marker as Marker
+@onready var texture_rect = $Panel/MarginContainer/TextureRect as TextureRect
 
 @export var roll_table_value_scene: PackedScene
 @export var ball_player_stats: BallPlayerStats
 @export var roll_table_font_override_size := 8
 @export var assigned_position: BallPlayerStats.PlayerPosition
+@export var show_roll_table = true
 
 var roll_table_rows = []
 
@@ -25,16 +27,24 @@ func _ready():
 	offense_value.text = str(ball_player_stats.offense)
 	defense_value.text = str(ball_player_stats.defense)
 	player_position.text = convert_positions_to_string(ball_player_stats.positions)
+	texture_rect.texture = ball_player_stats.texture
 
 	if ball_player_stats.three_point_bonus > 0:
 		three_point_bonus.text = "3PT +" + str(ball_player_stats.three_point_bonus)
 	else:
 		three_point_bonus.hide()
 
+	first_name.text = ball_player_stats.first_name.to_upper()
+	last_name.text = ball_player_stats.last_name.to_upper()
+
+	if show_roll_table:
+		setup_roll_table()
+	else:
+		roll_table.hide()
+
+func setup_roll_table():
 	for row in ball_player_stats.roll_table:
 		var table_row = row as RollTableRow
-		first_name.text = ball_player_stats.first_name.to_upper()
-		last_name.text = ball_player_stats.last_name.to_upper()
 		var roll_range = roll_table_value_scene.instantiate() as TableValue
 		var points_value = roll_table_value_scene.instantiate() as TableValue
 		var assists_value = roll_table_value_scene.instantiate() as TableValue

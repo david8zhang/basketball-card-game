@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://b7xr17eaosteu"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://b7xr17eaosteu"]
 
 [ext_resource type="Script" path="res://scripts/RollTableRow.gd" id="1_ycugx"]
 [ext_resource type="Script" path="res://scripts/BallPlayerStats.gd" id="2_1tk73"]
+[ext_resource type="Texture2D" uid="uid://usejii1u8pge" path="res://assets/players/bobby-portis.jpeg" id="3_ifmp4"]
 
 [sub_resource type="Resource" id="Resource_owj8y"]
 script = ExtResource("1_ycugx")
@@ -44,4 +45,5 @@ first_name = "Bobby"
 last_name = "Portis"
 three_point_bonus = 1
 player_cost = 410
+texture = ExtResource("3_ifmp4")
 roll_table = Array[ExtResource("1_ycugx")]([SubResource("Resource_owj8y"), SubResource("Resource_rflna"), SubResource("Resource_oqup8"), SubResource("Resource_k83sf")])

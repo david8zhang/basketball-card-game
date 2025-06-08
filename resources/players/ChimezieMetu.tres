@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://cistcrb2yqg53"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://cistcrb2yqg53"]
 
 [ext_resource type="Script" path="res://scripts/RollTableRow.gd" id="1_c1n0s"]
 [ext_resource type="Script" path="res://scripts/BallPlayerStats.gd" id="2_ewi26"]
+[ext_resource type="Texture2D" uid="uid://d28f68qnw4oa0" path="res://assets/players/chimezie-metu.jpg" id="3_17teo"]
 
 [sub_resource type="Resource" id="Resource_ltwkk"]
 script = ExtResource("1_c1n0s")
@@ -44,4 +45,5 @@ first_name = "Chimezie"
 last_name = "Metu"
 three_point_bonus = 0
 player_cost = 90
+texture = ExtResource("3_17teo")
 roll_table = Array[ExtResource("1_c1n0s")]([SubResource("Resource_ltwkk"), SubResource("Resource_gb0cm"), SubResource("Resource_upwwj"), SubResource("Resource_anwve")])

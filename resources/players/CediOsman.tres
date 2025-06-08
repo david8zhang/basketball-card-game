@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://cpg4chlf7vbvj"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://cpg4chlf7vbvj"]
 
 [ext_resource type="Script" path="res://scripts/RollTableRow.gd" id="1_g8j7i"]
 [ext_resource type="Script" path="res://scripts/BallPlayerStats.gd" id="2_4lvrg"]
+[ext_resource type="Texture2D" uid="uid://dg7mr84mu6jpq" path="res://assets/players/cedi-osman.jpg" id="3_m7bgu"]
 
 [sub_resource type="Resource" id="Resource_tlayx"]
 script = ExtResource("1_g8j7i")
@@ -44,4 +45,5 @@ first_name = "Cedi"
 last_name = "Osman"
 three_point_bonus = 2
 player_cost = 420
+texture = ExtResource("3_m7bgu")
 roll_table = Array[ExtResource("1_g8j7i")]([SubResource("Resource_tlayx"), SubResource("Resource_76mbv"), SubResource("Resource_pavbv"), SubResource("Resource_oc7q8")])

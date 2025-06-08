@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://bsfj7n7eoa23o"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://bsfj7n7eoa23o"]
 
 [ext_resource type="Script" path="res://scripts/RollTableRow.gd" id="1_i53rc"]
 [ext_resource type="Script" path="res://scripts/BallPlayerStats.gd" id="2_pebty"]
+[ext_resource type="Texture2D" uid="uid://8bf34cip0hda" path="res://assets/players/davion-mitchell.jpeg" id="3_qpdax"]
 
 [sub_resource type="Resource" id="Resource_rnrmq"]
 script = ExtResource("1_i53rc")
@@ -44,4 +45,5 @@ first_name = "Davion"
 last_name = "Mitchell"
 three_point_bonus = 0
 player_cost = 230
+texture = ExtResource("3_qpdax")
 roll_table = Array[ExtResource("1_i53rc")]([SubResource("Resource_rnrmq"), SubResource("Resource_8raaw"), SubResource("Resource_wq5g5"), SubResource("Resource_on3aj")])

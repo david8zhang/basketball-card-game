@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://dww48x60eeced"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://dww48x60eeced"]
 
 [ext_resource type="Script" path="res://scripts/RollTableRow.gd" id="1_qem3y"]
 [ext_resource type="Script" path="res://scripts/BallPlayerStats.gd" id="2_q60aj"]
+[ext_resource type="Texture2D" uid="uid://2h30f0gjl7br" path="res://assets/players/bones-hyland.jpg" id="3_ruvwu"]
 
 [sub_resource type="Resource" id="Resource_gtwhs"]
 script = ExtResource("1_qem3y")
@@ -44,4 +45,5 @@ first_name = "Bones"
 last_name = "Hyland"
 three_point_bonus = 0
 player_cost = 330
+texture = ExtResource("3_ruvwu")
 roll_table = Array[ExtResource("1_qem3y")]([SubResource("Resource_gtwhs"), SubResource("Resource_smo50"), SubResource("Resource_6vnvl"), SubResource("Resource_heifh")])

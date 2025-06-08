@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://dx4bo428g7rop"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=9 format=3 uid="uid://dx4bo428g7rop"]
 
 [ext_resource type="Script" path="res://scripts/RollTableRow.gd" id="1_bfw85"]
 [ext_resource type="Script" path="res://scripts/BallPlayerStats.gd" id="2_lrnvg"]
+[ext_resource type="Texture2D" uid="uid://c0fifj0ealuh2" path="res://assets/players/darius-garland.jpg" id="3_x3u71"]
 
 [sub_resource type="Resource" id="Resource_2hk6b"]
 script = ExtResource("1_bfw85")
@@ -52,4 +53,5 @@ first_name = "Darius"
 last_name = "Garland"
 three_point_bonus = 0
 player_cost = 1030
+texture = ExtResource("3_x3u71")
 roll_table = Array[ExtResource("1_bfw85")]([SubResource("Resource_2hk6b"), SubResource("Resource_31n21"), SubResource("Resource_db3q2"), SubResource("Resource_mgoar"), SubResource("Resource_r0r6q")])
