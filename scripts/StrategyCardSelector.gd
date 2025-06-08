@@ -7,12 +7,12 @@ extends Control
 
 @onready var card_container: HBoxContainer = $MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer
 @onready var close_button: Button = $CloseButton
+@onready var game = get_node("/root/Main") as Game
 
 var strategy_bonuses: StrategyBonuses
 var off_player: BallPlayerCard
 var def_player: BallPlayerCard
 var matchup_container: MatchupContainer
-var all_strategy_card_configs = []
 var strategy_cards = []
 var selected_strategy_card: StrategyCard
 const NUM_STRATEGY_CARDS = 3
@@ -21,29 +21,26 @@ var node_results = []
 var curr_node_result_to_process_idx = 0
 
 signal on_close
-signal on_cr_finished
-signal on_br_finished
-
-func _init():
-  for file_name in DirAccess.get_files_at("res://resources/strategy"):
-    if file_name.get_extension() == "tres":
-      var strategy_card_config = load("res://resources/strategy/" + file_name) as StrategyCardConfig
-      all_strategy_card_configs.append(strategy_card_config)
+signal on_strategy_card_selected(selected_card_idx)
 
 func _ready():
+  var player_deck = game.player_team.get_strategy_card_deck()
   close_button.pressed.connect(on_close_selector)
-  for i in range(0, NUM_STRATEGY_CARDS):
+  var idx = 0
+  for config in player_deck:
     var strategy_card = strategy_card_scene.instantiate() as StrategyCard
-    var random_config = all_strategy_card_configs.pick_random()
-    strategy_card.strategy_card_config = random_config
-    strategy_card.on_card_selected.connect(select_strategy_card)
+    strategy_card.strategy_card_config = config
+    var on_select_callable = Callable(self, "select_strategy_card").bind(strategy_card, idx)
     card_container.add_child(strategy_card)
+    strategy_card.button.pressed.connect(on_select_callable)
+    idx += 1
 
-func select_strategy_card(sc: StrategyCard):
+func select_strategy_card(sc: StrategyCard, index: int):
   selected_strategy_card = sc
   sc.strategy_card_config.process(off_player, def_player)
   node_results = sc.strategy_card_config.blackboard.node_results as Array[StrategyCardNode.NodeResult]
   process_curr_node_result()
+  on_strategy_card_selected.emit(index)
 
 func process_curr_node_result():
   if curr_node_result_to_process_idx > node_results.size() - 1:

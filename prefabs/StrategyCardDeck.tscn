@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://w6enbxoyw6au"]
+
+[ext_resource type="Script" path="res://scripts/StrategyCardDeck.gd" id="1_etint"]
+
+[node name="StrategyCardDeck" type="Node"]
+script = ExtResource("1_etint")

@@ -10,6 +10,7 @@ extends Panel
 @onready var strat_roll_bonus_label = $MarginContainer/VBoxContainer/VBoxContainer/StratRollBonus as Label
 @onready var stat_bonus_animator: StatBonusAnimator = $StatBonusAnimator
 @onready var marker_bonus_animator: MarkerBonusAnimator = $MarkerBonusAnimator
+@onready var game = get_node("/root/Main") as Game
 
 @export var card_scene: PackedScene
 @export var matchup_pts_assts_rebs_scene: PackedScene
@@ -516,6 +517,10 @@ func show_strategy_card_selector():
 	strategy_card_selector.matchup_container = self
 	add_child(strategy_card_selector)
 	strategy_card_selector.on_close.connect(on_clear_fn)
+	var team = game.player_team if offense_side == Game.Side.PLAYER else game.cpu_team
+	if team.strategy_card_deck != null:
+		strategy_card_selector.on_strategy_card_selected.connect(team.strategy_card_deck.on_strategy_card_selected)
+
 
 func apply_bonuses(bonuses):
 	var off_player = get_off_player_card()
