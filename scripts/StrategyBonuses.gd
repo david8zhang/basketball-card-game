@@ -17,3 +17,4 @@ func add_bonus_line(attr_name: String, bonus_amt: int):
 
 func handle_close():
 	on_close.emit()
+	queue_free()

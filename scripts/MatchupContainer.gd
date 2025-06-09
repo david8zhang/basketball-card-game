@@ -75,6 +75,10 @@ func set_curr_assists(assists: int):
 func set_offense_side(side: Game.Side):
 	offense_side = side
 
+func cpu_use_strategy_card():
+	var cpu_team = game.cpu_team
+	cpu_team.use_strategy_card(self)
+
 func on_roll():
 	roll_button.hide()
 	calc_steps = [
@@ -169,7 +173,6 @@ func generate_roll_value():
 		off_bp_card.add_cold_marker()
 	elif random_number == 20:
 		off_bp_card.add_hot_marker()
-
 	roll_value_label.text = str(random_number)
 	roll_value_label.show()
 	calc_complete.emit()
@@ -491,12 +494,6 @@ func on_close_matchup_window():
 	cpu_card.queue_free()
 	queue_free()
 
-func hide_close_button():
-	close_button.hide()
-
-func hide_use_assists_checkbox():
-	use_assists_checkbox.hide()
-
 func enable_use_assists():
 	use_assists_checkbox.button_pressed = true
 
@@ -521,7 +518,6 @@ func show_strategy_card_selector():
 	if team.strategy_card_deck != null:
 		strategy_card_selector.on_strategy_card_selected.connect(team.strategy_card_deck.on_strategy_card_selected)
 
-
 func apply_bonuses(bonuses):
 	var off_player = get_off_player_card()
 	var def_player = get_def_player_card()
@@ -533,3 +529,9 @@ func apply_bonuses(bonuses):
 			StrategyCardBonusNode.BonusType.MARKER:
 				var marker_bonus = node as MarkerBonus
 				marker_bonus_animator.apply_bonus_to_player(off_player, def_player, marker_bonus)
+
+func init_cpu_roll():
+	roll_button.hide()
+	close_button.hide()
+	use_assists_checkbox.hide()
+	use_strategy_card_button.hide()
