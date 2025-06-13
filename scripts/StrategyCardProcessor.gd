@@ -24,6 +24,7 @@ func select_strategy_card(sc: StrategyCard, index: int):
 
 func process_curr_node_result():
   if curr_node_result_to_process_idx > node_results.size() - 1:
+    apply_bonuses()
     return
   var curr_node_result = node_results[curr_node_result_to_process_idx] as StrategyCardNode.NodeResult
   if curr_node_result.node_ref.node_type == StrategyCardNode.NodeType.BONUS:

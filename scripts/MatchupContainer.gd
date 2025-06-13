@@ -38,6 +38,7 @@ var strategy_def_bonuses := 0
 var strategy_score_bonuses := 0
 var off_strategy_card_name := ""
 var did_use_strategy_card := false
+var is_cpu_using_strategy_card := false
 
 signal calc_complete
 signal matchup_complete(all_stats: Dictionary, side: Game.Side, assists_used: int)
@@ -77,7 +78,13 @@ func set_offense_side(side: Game.Side):
 
 func cpu_use_strategy_card():
 	var cpu_team = game.cpu_team
+	is_cpu_using_strategy_card = true
 	cpu_team.use_strategy_card(self)
+
+func on_apply_bonus_complete():
+	if is_cpu_using_strategy_card:
+		is_cpu_using_strategy_card = false
+		on_roll()
 
 func on_roll():
 	roll_button.hide()
@@ -521,14 +528,20 @@ func show_strategy_card_selector():
 func apply_bonuses(bonuses):
 	var off_player = get_off_player_card()
 	var def_player = get_def_player_card()
-	for node in bonuses:
-		match (node.bonus_type):
-			StrategyCardBonusNode.BonusType.STAT:
-				var stat_bonus = node as StatBonus
-				stat_bonus_animator.apply_bonus_to_player(stat_bonus.off_bonus_amount, stat_bonus.def_bonus_amount, off_player)
-			StrategyCardBonusNode.BonusType.MARKER:
-				var marker_bonus = node as MarkerBonus
-				marker_bonus_animator.apply_bonus_to_player(off_player, def_player, marker_bonus)
+	var callable = Callable(self, "on_apply_bonus_complete")
+	if bonuses.is_empty():
+		on_apply_bonus_complete()
+	else:
+		for node in bonuses:
+			match (node.bonus_type):
+				StrategyCardBonusNode.BonusType.STAT:
+					var stat_bonus = node as StatBonus
+					stat_bonus_animator.on_complete.connect(callable)
+					stat_bonus_animator.apply_bonus_to_player(stat_bonus.off_bonus_amount, stat_bonus.def_bonus_amount, off_player)
+				StrategyCardBonusNode.BonusType.MARKER:
+					var marker_bonus = node as MarkerBonus
+					stat_bonus_animator.on_complete.connect(callable)
+					marker_bonus_animator.apply_bonus_to_player(off_player, def_player, marker_bonus)
 
 func init_cpu_roll():
 	roll_button.hide()

@@ -6,12 +6,19 @@ enum BonusType {
 	SUBTRACT
 }
 
+signal on_complete
+
 func update_stat_value(label: Label, new_value: int, bonus_type: BonusType):
 	label.text = str(new_value)
 	var font_color_override = Color(0, 1, 0) if bonus_type == BonusType.ADD else Color(1, 0, 0)
 	label.add_theme_color_override("font_color", font_color_override)
 	var reset_tween = create_tween()
 	reset_tween.tween_property(label, "theme_override_font_sizes/font_size", 50, 0.5).set_delay(1.0)
+	var callable = Callable(self, "on_stat_update_complete")
+	reset_tween.finished.connect(callable)
+
+func on_stat_update_complete():
+	on_complete.emit()
 
 func apply_bonus_to_player(off_amt: int, def_amt: int, player: BallPlayerCard):
 	if off_amt > 0:
