@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="StrategyCardConfig" load_steps=15 format=3 uid="uid://k5k64b703bbm"]
+[gd_resource type="Resource" script_class="StrategyCardConfig" load_steps=17 format=3 uid="uid://k5k64b703bbm"]
 
 [ext_resource type="Script" path="res://scripts/strategy/condition/DiceRollCondition.gd" id="1_3dac2"]
 [ext_resource type="Script" path="res://scripts/strategy/action/RollDiceAction.gd" id="1_g28v7"]
 [ext_resource type="Script" path="res://scripts/strategy/StrategyCardConfig.gd" id="1_tx0re"]
 [ext_resource type="Script" path="res://scripts/strategy/bonus/StatBonus.gd" id="1_yp0c8"]
+[ext_resource type="Script" path="res://scripts/strategy/bonus/NoopBonus.gd" id="2_0jaf0"]
 [ext_resource type="Script" path="res://scripts/strategy/bonus/MarkerBonus.gd" id="2_wdto3"]
 [ext_resource type="Script" path="res://scripts/strategy/StrategyCardSequenceNode.gd" id="3_6k1yo"]
 
@@ -11,6 +12,10 @@
 script = ExtResource("1_g28v7")
 dice_type = 20
 action_type = 2
+
+[sub_resource type="Resource" id="Resource_2agmm"]
+script = ExtResource("2_0jaf0")
+bonus_type = 6
 
 [sub_resource type="Resource" id="Resource_sglnj"]
 script = ExtResource("1_yp0c8")
@@ -48,6 +53,7 @@ dice_roll_thres = 10
 comparator_type = 2
 condition_type = 0
 pass_child = SubResource("Resource_triuw")
+fail_child = SubResource("Resource_2agmm")
 
 [sub_resource type="Resource" id="Resource_4w8nq"]
 script = ExtResource("3_6k1yo")

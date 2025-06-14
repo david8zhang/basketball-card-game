@@ -39,4 +39,3 @@ func use_strategy_card(matchup_container: MatchupContainer):
   strategy_card_processor.def_player = matchup_container.get_def_player_card()
   strategy_card_processor.on_strategy_card_selected.connect(strategy_card_deck.on_strategy_card_selected)
   strategy_card_processor.select_strategy_card(strategy_card, rand_index)
-  strategy_card_processor.on_apply_bonus.connect(matchup_container.apply_bonuses)

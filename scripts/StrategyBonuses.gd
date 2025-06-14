@@ -2,6 +2,8 @@ class_name StrategyBonuses
 extends Panel
 
 @export var strategy_bonus_line_scene: PackedScene
+@onready var failure_label: Label = $FailureLabel
+@onready var title_label: Label = $Label
 @onready var container = $MarginContainer/ScrollContainer/VBoxContainer
 @onready var continue_button = $Button
 
@@ -18,3 +20,7 @@ func add_bonus_line(attr_name: String, bonus_amt: int):
 func handle_close():
 	on_close.emit()
 	queue_free()
+
+func show_failure_message():
+	title_label.hide()
+	failure_label.show()

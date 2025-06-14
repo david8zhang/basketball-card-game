@@ -7,7 +7,8 @@ enum BonusType {
   SCORE,
   MARKER,
   TEAM_STAT,
-  REM_TEAM_STAT
+  REM_TEAM_STAT,
+  NOOP
 }
 
 @export var bonus_type: BonusType

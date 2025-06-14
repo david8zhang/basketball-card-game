@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://ujdwrbx0pr12"]
+[gd_scene load_steps=9 format=3 uid="uid://ujdwrbx0pr12"]
 
 [ext_resource type="PackedScene" uid="uid://bi2ksw8anhd4v" path="res://prefabs/StrategyCard.tscn" id="1_03tvw"]
 [ext_resource type="Script" path="res://scripts/StrategyCardSelector.gd" id="1_xpjc8"]
+[ext_resource type="PackedScene" uid="uid://pt6ixmed30nf" path="res://prefabs/StrategyCardProcessor.tscn" id="3_kixw2"]
 [ext_resource type="PackedScene" uid="uid://dwpw7m7anqr3m" path="res://prefabs/DiceRoll.tscn" id="3_lx3xh"]
 [ext_resource type="PackedScene" uid="uid://bd3rgepkydr13" path="res://prefabs/StrategyBonuses.tscn" id="4_eeguo"]
 
@@ -38,6 +39,7 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_8slut")
 script = ExtResource("1_xpjc8")
 strategy_card_scene = ExtResource("1_03tvw")
+strategy_card_processor_scene = ExtResource("3_kixw2")
 dice_roll_scene = ExtResource("3_lx3xh")
 strategy_bonuses_scene = ExtResource("4_eeguo")
 

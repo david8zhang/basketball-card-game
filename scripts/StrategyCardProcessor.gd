@@ -12,7 +12,7 @@ var selected_strategy_card: StrategyCard
 var off_player: BallPlayerCard
 var def_player: BallPlayerCard
 
-signal on_apply_bonus
+signal before_apply_bonus
 signal on_strategy_card_selected(index: int)
 
 func select_strategy_card(sc: StrategyCard, index: int):
@@ -24,7 +24,6 @@ func select_strategy_card(sc: StrategyCard, index: int):
 
 func process_curr_node_result():
   if curr_node_result_to_process_idx > node_results.size() - 1:
-    apply_bonuses()
     return
   var curr_node_result = node_results[curr_node_result_to_process_idx] as StrategyCardNode.NodeResult
   if curr_node_result.node_ref.node_type == StrategyCardNode.NodeType.BONUS:
@@ -60,6 +59,8 @@ func process_bonus_node_result(curr_node_result):
           strategy_bonuses.add_bonus_line("Hot markers (def)", marker_bonus.num_markers)
         MarkerBonus.MarkerType.COLD_ON_DEF:
           strategy_bonuses.add_bonus_line("Cold markers (def)", marker_bonus.num_markers)
+    StrategyCardBonusNode.BonusType.NOOP:
+      strategy_bonuses.show_failure_message()
   curr_node_result_to_process_idx += 1
   process_curr_node_result()
 
@@ -88,5 +89,7 @@ func apply_bonuses():
   for result in node_results:
     if result.node_ref.node_type == StrategyCardNode.NodeType.BONUS:
       bonuses.append(result.node_ref)
-  matchup_container.apply_bonuses(bonuses)
+  # Signal that allows StrategyCardSelector to hook in and close itself
+  before_apply_bonus.emit()
+  matchup_container.apply_bonuses_if_applicable(bonuses)
   queue_free()

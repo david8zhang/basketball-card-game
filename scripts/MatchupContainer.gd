@@ -81,7 +81,7 @@ func cpu_use_strategy_card():
 	is_cpu_using_strategy_card = true
 	cpu_team.use_strategy_card(self)
 
-func on_apply_bonus_complete():
+func on_process_strategy_complete():
 	if is_cpu_using_strategy_card:
 		is_cpu_using_strategy_card = false
 		on_roll()
@@ -525,12 +525,12 @@ func show_strategy_card_selector():
 	if team.strategy_card_deck != null:
 		strategy_card_selector.on_strategy_card_selected.connect(team.strategy_card_deck.on_strategy_card_selected)
 
-func apply_bonuses(bonuses):
+func apply_bonuses_if_applicable(bonuses):
 	var off_player = get_off_player_card()
 	var def_player = get_def_player_card()
-	var callable = Callable(self, "on_apply_bonus_complete")
+	var callable = Callable(self, "on_process_strategy_complete")
 	if bonuses.is_empty():
-		on_apply_bonus_complete()
+		on_process_strategy_complete()
 	else:
 		for node in bonuses:
 			match (node.bonus_type):
@@ -542,6 +542,8 @@ func apply_bonuses(bonuses):
 					var marker_bonus = node as MarkerBonus
 					stat_bonus_animator.on_complete.connect(callable)
 					marker_bonus_animator.apply_bonus_to_player(off_player, def_player, marker_bonus)
+				StrategyCardBonusNode.BonusType.NOOP:
+					on_process_strategy_complete()
 
 func init_cpu_roll():
 	roll_button.hide()
