@@ -7,6 +7,7 @@ extends Control
 @export var strategy_bonuses_scene: PackedScene
 
 @onready var card_container: HBoxContainer = $MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer
+@onready var margin_container: MarginContainer = $MarginContainer
 @onready var close_button: Button = $CloseButton
 @onready var game = get_node("/root/Main") as Game
 
@@ -37,7 +38,7 @@ func _ready():
     strategy_card.button.pressed.connect(on_select_callable)
     idx += 1
   strategy_card_processor = strategy_card_processor_scene.instantiate() as StrategyCardProcessor
-  add_child(strategy_card_processor)  
+  matchup_container.add_child(strategy_card_processor)
   strategy_card_processor.off_player = off_player
   strategy_card_processor.def_player = def_player
   strategy_card_processor.matchup_container = matchup_container
@@ -45,7 +46,13 @@ func _ready():
 
 func select_strategy_card(sc: StrategyCard, index: int):
   strategy_card_processor.select_strategy_card(sc, index)
+  var callable = Callable(self, "process_strategy_card")
+  strategy_card_processor.display_complete.connect(callable)
+  hide()
   on_strategy_card_selected.emit(index)
+
+func process_strategy_card():
+  strategy_card_processor.process_selected_card()
 
 func on_close_selector():
   on_close.emit()

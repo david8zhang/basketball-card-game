@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://lkpp0562vspw"]
+
+[ext_resource type="Script" path="res://scripts/StratCardPreview.gd" id="1_l6akk"]
+[ext_resource type="PackedScene" uid="uid://bi2ksw8anhd4v" path="res://prefabs/StrategyCard.tscn" id="2_28bfr"]
+
+[node name="StratCardPreview" type="Node"]
+script = ExtResource("1_l6akk")
+strategy_card_scene = ExtResource("2_28bfr")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

@@ -1,6 +1,7 @@
 class_name MatchupContainer
 extends Panel
 
+@onready var strategy_card_preview = $StratCardPreview
 @onready var hbox_container = $MarginContainer/VBoxContainer/HBoxContainer as HBoxContainer
 @onready var roll_button = $MarginContainer/VBoxContainer/VBoxContainer/RollButton as Button
 @onready var roll_value_label = $MarginContainer/VBoxContainer/VBoxContainer/RollValue as Label
@@ -78,8 +79,11 @@ func set_offense_side(side: Game.Side):
 
 func cpu_use_strategy_card():
 	var cpu_team = game.cpu_team
-	is_cpu_using_strategy_card = true
-	cpu_team.use_strategy_card(self)
+	if cpu_team.get_strategy_card_deck().size() > 0:
+		is_cpu_using_strategy_card = true
+		cpu_team.use_strategy_card(self)
+	else:
+		on_roll()
 
 func on_process_strategy_complete():
 	if is_cpu_using_strategy_card:

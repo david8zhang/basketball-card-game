@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c5jusiagrv0vw"]
+[gd_scene load_steps=11 format=3 uid="uid://c5jusiagrv0vw"]
 
 [ext_resource type="Script" path="res://scripts/MatchupContainer.gd" id="1_ka8mq"]
 [ext_resource type="PackedScene" uid="uid://nr3d4pggsa3m" path="res://prefabs/MatchupCard.tscn" id="2_qbowc"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ujdwrbx0pr12" path="res://prefabs/StrategyCardSelector.tscn" id="4_lf8mp"]
 [ext_resource type="PackedScene" uid="uid://q8du0pabkwos" path="res://prefabs/MarkerBonusAnimator.tscn" id="5_bsl14"]
 [ext_resource type="PackedScene" uid="uid://bocyd5espcfft" path="res://prefabs/StatBonusAnimator.tscn" id="5_iqwyu"]
+[ext_resource type="PackedScene" uid="uid://lkpp0562vspw" path="res://prefabs/StratCardPreview.tscn" id="5_khnnx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_20t5l"]
 bg_color = Color(0, 0, 0, 0.745098)
@@ -40,6 +41,8 @@ script = ExtResource("1_ka8mq")
 card_scene = ExtResource("2_qbowc")
 matchup_pts_assts_rebs_scene = ExtResource("3_gk8wi")
 strategy_card_selector_scene = ExtResource("4_lf8mp")
+
+[node name="StratCardPreview" parent="." instance=ExtResource("5_khnnx")]
 
 [node name="MarkerBonusAnimator" parent="." instance=ExtResource("5_bsl14")]
 layout_mode = 1

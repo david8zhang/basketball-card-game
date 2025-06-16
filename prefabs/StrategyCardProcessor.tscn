@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://pt6ixmed30nf"]
+[gd_scene load_steps=5 format=3 uid="uid://pt6ixmed30nf"]
 
 [ext_resource type="Script" path="res://scripts/StrategyCardProcessor.gd" id="1_8tbfo"]
 [ext_resource type="PackedScene" uid="uid://bd3rgepkydr13" path="res://prefabs/StrategyBonuses.tscn" id="2_uq2p6"]
 [ext_resource type="PackedScene" uid="uid://dwpw7m7anqr3m" path="res://prefabs/DiceRoll.tscn" id="3_oqwln"]
+[ext_resource type="PackedScene" uid="uid://lkpp0562vspw" path="res://prefabs/StratCardPreview.tscn" id="4_yoq48"]
 
 [node name="StrategyCardProcessor" type="Node"]
 script = ExtResource("1_8tbfo")
 strategy_bonuses_scene = ExtResource("2_uq2p6")
 dice_roll_scene = ExtResource("3_oqwln")
+
+[node name="StratCardPreview" parent="." instance=ExtResource("4_yoq48")]

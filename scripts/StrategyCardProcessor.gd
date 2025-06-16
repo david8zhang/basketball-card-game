@@ -1,6 +1,7 @@
 class_name StrategyCardProcessor
 extends Node
 
+@onready var strat_card_preview: StratCardPreview = $StratCardPreview
 @export var strategy_bonuses_scene: PackedScene
 @export var dice_roll_scene: PackedScene
 
@@ -13,14 +14,24 @@ var off_player: BallPlayerCard
 var def_player: BallPlayerCard
 
 signal before_apply_bonus
+signal display_complete
 signal on_strategy_card_selected(index: int)
 
 func select_strategy_card(sc: StrategyCard, index: int):
   selected_strategy_card = sc
-  sc.strategy_card_config.process(off_player, def_player)
-  node_results = sc.strategy_card_config.blackboard.node_results as Array[StrategyCardNode.NodeResult]
-  process_curr_node_result()
   on_strategy_card_selected.emit(index)
+  var callable = Callable(self, "on_display_complete")
+  matchup_container.strategy_card_preview.show_strategy_card(sc, callable)
+
+func on_display_complete():
+  matchup_container.strategy_card_preview.hide_strategy_card()
+  display_complete.emit()
+
+func process_selected_card():
+  var config = selected_strategy_card.strategy_card_config
+  config.process(off_player, def_player)
+  node_results = config.blackboard.node_results as Array[StrategyCardNode.NodeResult]
+  process_curr_node_result()
 
 func process_curr_node_result():
   if curr_node_result_to_process_idx > node_results.size() - 1:
