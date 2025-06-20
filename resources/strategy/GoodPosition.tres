@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="StrategyCardConfig" load_steps=4 format=3 uid="uid://3xymk6d5gppj"]
+
+[ext_resource type="Script" path="res://scripts/strategy/bonus/StatBonus.gd" id="1_7tatm"]
+[ext_resource type="Script" path="res://scripts/strategy/StrategyCardConfig.gd" id="1_b8cmk"]
+
+[sub_resource type="Resource" id="Resource_wg4b7"]
+script = ExtResource("1_7tatm")
+off_bonus_amount = 0
+def_bonus_amount = 4
+bonus_type = 0
+
+[resource]
+script = ExtResource("1_b8cmk")
+strategy_type = 1
+card_name = "Good Position"
+card_description = "This player gets +4 Defense"
+root_node = SubResource("Resource_wg4b7")

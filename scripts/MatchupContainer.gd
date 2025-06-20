@@ -91,6 +91,8 @@ func on_process_strategy_complete():
 		on_roll()
 
 func on_roll():
+	var cpu_team = game.cpu_team
+
 	roll_button.hide()
 	calc_steps = [
 		{

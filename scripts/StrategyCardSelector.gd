@@ -28,6 +28,10 @@ signal on_strategy_card_selected(selected_card_idx)
 
 func _ready():
   var player_deck = game.player_team.get_strategy_card_deck()
+  if matchup_container.offense_side == Game.Side.PLAYER:
+    player_deck = player_deck.filter(func (card): return card.strategy_type == StrategyCardConfig.StrategyCardType.OFFENSE)
+  else:
+    player_deck = player_deck.filter(func (card): return card.strategy_type == StrategyCardConfig.StrategyCardType.DEFENSE)
   close_button.pressed.connect(on_close_selector)
   var idx = 0
   for config in player_deck:
