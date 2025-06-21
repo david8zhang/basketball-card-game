@@ -92,7 +92,6 @@ func cpu_use_strategy_card():
 func on_process_strategy_complete():
   if is_cpu_using_strategy_card:
     is_cpu_using_strategy_card = false
-    
     # If CPU is on offense, process CPU's scoring roll
     if offense_side == Game.Side.CPU:
       process_scoring_roll()
@@ -168,6 +167,8 @@ func on_start_turn():
   var def_strat_cards = cpu_team.strategy_card_deck.get_defense_strategy_cards()
   if def_strat_cards.size() > 0 and !did_opp_use_def_strategy_card:
     cpu_use_strategy_card()
+  else:
+    process_scoring_roll()
 
 func execute_calc_wflow():
   if calc_wflow_idx < calc_steps.size():
