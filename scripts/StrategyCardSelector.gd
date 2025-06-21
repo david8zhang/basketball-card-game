@@ -27,14 +27,15 @@ signal on_close
 signal on_strategy_card_selected(selected_card_idx)
 
 func _ready():
-  var player_deck = game.player_team.get_strategy_card_deck()
+  var strat_deck = game.player_team.strategy_card_deck
+  var cards_in_deck = []
   if matchup_container.offense_side == Game.Side.PLAYER:
-    player_deck = player_deck.filter(func (card): return card.strategy_type == StrategyCardConfig.StrategyCardType.OFFENSE)
+    cards_in_deck = strat_deck.get_offense_strategy_cards()
   else:
-    player_deck = player_deck.filter(func (card): return card.strategy_type == StrategyCardConfig.StrategyCardType.DEFENSE)
+    cards_in_deck = strat_deck.get_defense_strategy_cards()
   close_button.pressed.connect(on_close_selector)
   var idx = 0
-  for config in player_deck:
+  for config in cards_in_deck:
     var strategy_card = strategy_card_scene.instantiate() as StrategyCard
     strategy_card.strategy_card_config = config
     var on_select_callable = Callable(self, "select_strategy_card").bind(strategy_card, idx)

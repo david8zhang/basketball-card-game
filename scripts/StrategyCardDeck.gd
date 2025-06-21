@@ -26,3 +26,11 @@ func on_strategy_card_selected(selected_card_idx: int):
       new_deck.append(c)
     idx += 1
   cards = new_deck
+
+func get_offense_strategy_cards():
+  var offense_cards = cards.filter(func(c): return c.strategy_type == StrategyCardConfig.StrategyCardType.OFFENSE)
+  return offense_cards
+
+func get_defense_strategy_cards():
+  var defense_cards = cards.filter(func(c): return c.strategy_type == StrategyCardConfig.StrategyCardType.DEFENSE)
+  return defense_cards

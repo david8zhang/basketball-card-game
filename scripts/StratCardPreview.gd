@@ -6,6 +6,7 @@ extends Node
 @export var strategy_card_scene: PackedScene
 
 func show_strategy_card(sc: StrategyCard, callable: Callable):
+	control.show()
 	var strategy_card = strategy_card_scene.instantiate() as StrategyCard
 	strategy_card.strategy_card_config = sc.strategy_card_config
 	control.add_child(strategy_card)

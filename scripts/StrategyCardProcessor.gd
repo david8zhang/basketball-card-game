@@ -102,5 +102,6 @@ func apply_bonuses():
       bonuses.append(result.node_ref)
   # Signal that allows StrategyCardSelector to hook in and close itself
   before_apply_bonus.emit()
-  matchup_container.apply_bonuses_if_applicable(bonuses)
+  var strategy_type = selected_strategy_card.strategy_card_config.strategy_type
+  matchup_container.apply_bonuses_if_applicable(bonuses, strategy_type)
   queue_free()
