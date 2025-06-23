@@ -135,7 +135,7 @@ func cpu_select_card_to_score_with():
 		matchup_container.enable_use_assists()
 		matchup_container.show()
 		matchup_container.init_cpu_roll()
-		matchup_container.cpu_use_strategy_card()
+		matchup_container.cpu_use_off_strategy_card()
 
 	var on_hold_finished = func():
 		var zoom_out_card = create_tween()

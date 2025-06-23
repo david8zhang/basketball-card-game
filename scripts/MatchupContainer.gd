@@ -55,6 +55,15 @@ func _ready():
   calc_complete.connect(process_calc_delay)
   use_strategy_card_button.pressed.connect(show_strategy_card_selector)
   strat_roll_bonus_label.hide()
+  
+  # Hide use strategy card button if player has no strategy cards available
+  if offense_side == Game.Side.PLAYER:
+    var player_team = game.player_team
+    var strat_deck = player_team.strategy_card_deck as StrategyCardDeck
+    if strat_deck.get_offense_strategy_cards().size() == 0:
+      use_strategy_card_button.hide()
+    else:
+      use_strategy_card_button.show()
 
 func set_player_card(card: BallPlayerCard):
   player_card = card_scene.instantiate() as BallPlayerCard
@@ -78,29 +87,80 @@ func set_curr_assists(assists: int):
 func set_offense_side(side: Game.Side):
   offense_side = side
 
-func cpu_use_strategy_card():
+func cpu_use_off_strategy_card():
   var cpu_team = game.cpu_team
   var cpu_strat_deck = cpu_team.strategy_card_deck as StrategyCardDeck
-  var cards_to_pick_from = cpu_strat_deck.get_offense_strategy_cards() if offense_side == Game.Side.CPU else cpu_strat_deck.get_defense_strategy_cards()
+  var cards_to_pick_from = cpu_strat_deck.get_offense_strategy_cards()
+  if cards_to_pick_from.size() > 0:
+    is_cpu_using_strategy_card = true
+    var rand_index = randi_range(0, cards_to_pick_from.size() - 1)
+    cpu_team.use_strategy_card(self, rand_index, cards_to_pick_from)
+  else:
+    var player_team = game.player_team
+    var player_strat_deck = player_team.strategy_card_deck as StrategyCardDeck
+    var player_def_cards = player_strat_deck.get_defense_strategy_cards()
+    if player_def_cards.size() > 0:
+      use_strategy_card_button.show()
+      roll_button.show() # provide option to NOT use strategy card also
+      roll_button.text = "CPU Roll"
+    else:
+      process_scoring_roll()
+
+func cpu_use_def_strategy_card():
+  var cpu_team = game.cpu_team
+  var cpu_strat_deck = cpu_team.strategy_card_deck as StrategyCardDeck
+  var cards_to_pick_from = cpu_strat_deck.get_defense_strategy_cards()
   var rand_index = randi_range(0, cards_to_pick_from.size() - 1)
   if cards_to_pick_from.size() > 0:
     is_cpu_using_strategy_card = true
     cpu_team.use_strategy_card(self, rand_index, cards_to_pick_from)
   else:
+    # If no CPU defensive strategy cards, just move on to process player roll
     process_scoring_roll()
+
+func on_process_player_def_strategy_complete():
+  roll_button.text = "CPU Roll"
+  roll_button.show()
+
+func on_process_player_off_strategy_complete():
+  roll_button.text = "Roll"
+  roll_button.show()
+
+func on_process_cpu_def_strategy_complete():
+  roll_button.text = "Roll"
+  roll_button.show()
+
+func on_process_cpu_off_strategy_complete():
+  var player_team = game.player_team
+  var player_strat_deck = player_team.strategy_card_deck as StrategyCardDeck
+  var player_def_cards = player_strat_deck.get_defense_strategy_cards()
+  if player_def_cards.size() > 0 and !did_opp_use_def_strategy_card:
+    use_strategy_card_button.show()
+  roll_button.text = "CPU Roll"
+  roll_button.show()
 
 func on_process_strategy_complete():
   if is_cpu_using_strategy_card:
     is_cpu_using_strategy_card = false
-    # If CPU is on offense, process CPU's scoring roll
+    # If CPU is on offense
     if offense_side == Game.Side.CPU:
-      process_scoring_roll()
+      var player_team = game.player_team
+      var player_strat_deck = player_team.strategy_card_deck as StrategyCardDeck
+      var player_def_cards = player_strat_deck.get_defense_strategy_cards()
+      if player_def_cards.size() > 0 and !did_opp_use_def_strategy_card:
+        use_strategy_card_button.show()
+        roll_button.show()
+        roll_button.text = "CPU Roll"
+      else:
+        process_scoring_roll()
     # Otherwise, flag that the CPU has used a defensive strategy card
     else:
-      did_opp_use_def_strategy_card = true
       roll_button.show()
+  else:
+    roll_button.show()
 
 func process_scoring_roll():
+  roll_button.hide()
   calc_steps = [
     {
       "fname": "generate_roll_value",
@@ -163,10 +223,8 @@ func process_scoring_roll():
 
 func on_start_turn():
   roll_button.hide()
-  var cpu_team = game.cpu_team
-  var def_strat_cards = cpu_team.strategy_card_deck.get_defense_strategy_cards()
-  if def_strat_cards.size() > 0 and !did_opp_use_def_strategy_card:
-    cpu_use_strategy_card()
+  if !did_opp_use_def_strategy_card:
+    cpu_use_def_strategy_card()
   else:
     process_scoring_roll()
 
@@ -533,10 +591,13 @@ func get_def_player_card() -> BallPlayerCard:
   return cpu_card if offense_side == Game.Side.PLAYER else player_card
 
 func show_strategy_card_selector():
+  use_strategy_card_button.hide()
+  roll_button.hide()
   var on_clear_fn = func clear_strategy_card_selector():
     did_use_strategy_card = true
     strategy_card_selector.queue_free()
     use_strategy_card_button.hide()
+    roll_button.show()
   strategy_card_selector = strategy_card_selector_scene.instantiate() as StrategyCardSelector
   strategy_card_selector.off_player = get_off_player_card()
   strategy_card_selector.def_player = get_def_player_card()
@@ -547,26 +608,40 @@ func show_strategy_card_selector():
   if team.strategy_card_deck != null:
     strategy_card_selector.on_strategy_card_selected.connect(team.strategy_card_deck.on_strategy_card_selected)
 
+func get_on_process_strategy_complete_callable(strategy_type: StrategyCardConfig.StrategyCardType):
+  if strategy_type == StrategyCardConfig.StrategyCardType.DEFENSE:
+    if offense_side == Game.Side.PLAYER:
+      return "on_process_cpu_def_strategy_complete"
+    else:
+      return "on_process_player_def_strategy_complete"
+  elif strategy_type == StrategyCardConfig.StrategyCardType.OFFENSE:
+    if offense_side == Game.Side.PLAYER:
+      return "on_process_player_off_strategy_complete"
+    else:
+      return "on_process_cpu_off_strategy_complete"
+
 func apply_bonuses_if_applicable(bonuses, strategy_type: StrategyCardConfig.StrategyCardType):
   var off_player = get_off_player_card()
   var def_player = get_def_player_card()
-  var callable = Callable(self, "on_process_strategy_complete")
+  var on_complete_callable = Callable(self, get_on_process_strategy_complete_callable(strategy_type))
+  if strategy_type == StrategyCardConfig.StrategyCardType.DEFENSE:
+    did_opp_use_def_strategy_card = true
   if bonuses.is_empty():
-    on_process_strategy_complete()
+    on_complete_callable.call()
   else:
     for node in bonuses:
       match (node.bonus_type):
         StrategyCardBonusNode.BonusType.STAT:
           var stat_bonus = node as StatBonus
           var player_to_apply_bonus_to = def_player if strategy_type == StrategyCardConfig.StrategyCardType.DEFENSE else off_player
-          stat_bonus_animator.on_complete.connect(callable)
+          stat_bonus_animator.on_complete.connect(on_complete_callable)
           stat_bonus_animator.apply_bonus_to_player(stat_bonus.off_bonus_amount, stat_bonus.def_bonus_amount, player_to_apply_bonus_to)
         StrategyCardBonusNode.BonusType.MARKER:
           var marker_bonus = node as MarkerBonus
-          stat_bonus_animator.on_complete.connect(callable)
+          stat_bonus_animator.on_complete.connect(on_complete_callable)
           marker_bonus_animator.apply_bonus_to_player(off_player, def_player, marker_bonus)
         StrategyCardBonusNode.BonusType.NOOP:
-          on_process_strategy_complete()
+          on_complete_callable.call()
 
 func init_cpu_roll():
   roll_button.hide()

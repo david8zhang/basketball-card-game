@@ -16,7 +16,7 @@ func show_strategy_card(sc: StrategyCard, callable: Callable):
 
 	var on_slide_in_complete = func slide_in_complete():
 		var fade_tween = create_tween()
-		fade_tween.tween_property(strategy_card, "modulate:a", 0, 0.5).set_delay(1.5)
+		fade_tween.tween_property(strategy_card, "modulate:a", 0, 0.5).set_delay(1.0)
 		fade_tween.finished.connect(callable)
 
 	var slide_in = create_tween()
