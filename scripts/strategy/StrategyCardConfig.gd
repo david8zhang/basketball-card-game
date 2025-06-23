@@ -12,6 +12,7 @@ enum StrategyCardType {
 @export var root_node: StrategyCardNode
 
 var blackboard: Blackboard
+var id = 0
 
 func process(off_player: BallPlayerCard, def_player: BallPlayerCard):
   blackboard = Blackboard.new()

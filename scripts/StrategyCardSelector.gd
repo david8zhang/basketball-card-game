@@ -34,14 +34,12 @@ func _ready():
   else:
     cards_in_deck = strat_deck.get_defense_strategy_cards()
   close_button.pressed.connect(on_close_selector)
-  var idx = 0
   for config in cards_in_deck:
     var strategy_card = strategy_card_scene.instantiate() as StrategyCard
     strategy_card.strategy_card_config = config
-    var on_select_callable = Callable(self, "select_strategy_card").bind(strategy_card, idx)
+    var on_select_callable = Callable(self, "select_strategy_card").bind(strategy_card)
     card_container.add_child(strategy_card)
     strategy_card.button.pressed.connect(on_select_callable)
-    idx += 1
   strategy_card_processor = strategy_card_processor_scene.instantiate() as StrategyCardProcessor
   matchup_container.add_child(strategy_card_processor)
   strategy_card_processor.off_player = off_player
@@ -49,12 +47,11 @@ func _ready():
   strategy_card_processor.matchup_container = matchup_container
   strategy_card_processor.before_apply_bonus.connect(on_close_selector)
 
-func select_strategy_card(sc: StrategyCard, index: int):
-  strategy_card_processor.select_strategy_card(sc, index)
+func select_strategy_card(sc: StrategyCard):
+  strategy_card_processor.select_strategy_card(sc)
   var callable = Callable(self, "process_strategy_card")
   strategy_card_processor.display_complete.connect(callable)
   hide()
-  on_strategy_card_selected.emit(index)
 
 func process_strategy_card():
   strategy_card_processor.process_selected_card()

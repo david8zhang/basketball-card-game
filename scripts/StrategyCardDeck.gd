@@ -16,15 +16,14 @@ func init_strategy_card_deck():
       all_strategy_card_configs.append(strategy_card_config)
   for i in range(0, num_strategy_cards):
     var random_config = all_strategy_card_configs.pick_random()
+    random_config.id = "strategy " + str(i)
     cards.append(random_config)
 
-func on_strategy_card_selected(selected_card_idx: int):
+func on_strategy_card_selected(selected_card_id: int):
   var new_deck: Array[StrategyCardConfig] = []
-  var idx = 0
   for c in cards:
-    if idx != selected_card_idx:
+    if c.id != selected_card_id:
       new_deck.append(c)
-    idx += 1
   cards = new_deck
 
 func get_offense_strategy_cards():

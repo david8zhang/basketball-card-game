@@ -17,9 +17,9 @@ signal before_apply_bonus
 signal display_complete
 signal on_strategy_card_selected(index: int)
 
-func select_strategy_card(sc: StrategyCard, index: int):
+func select_strategy_card(sc: StrategyCard):
   selected_strategy_card = sc
-  on_strategy_card_selected.emit(index)
+  on_strategy_card_selected.emit(sc.strategy_card_config.id)
   var callable = Callable(self, "on_display_complete")
   matchup_container.strategy_card_preview.show_strategy_card(sc, callable)
 
