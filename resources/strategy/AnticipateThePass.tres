@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="StrategyCardConfig" load_steps=2 format=3 uid="uid://dprl0ducmb7x4"]
+
+[ext_resource type="Script" path="res://scripts/strategy/StrategyCardConfig.gd" id="1_6pwnh"]
+
+[resource]
+script = ExtResource("1_6pwnh")
+strategy_type = 1
+card_name = "Anticipate the Pass"
+card_description = "If the opposing team has 6 or more assists, they lose 2 of them."

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="StrategyCardConfig" load_steps=2 format=3 uid="uid://cuv3b1hl4bc1y"]
+
+[ext_resource type="Script" path="res://scripts/strategy/StrategyCardConfig.gd" id="1_2dfyd"]
+
+[resource]
+script = ExtResource("1_2dfyd")
+strategy_type = 1
+card_name = "Boxing Out"
+card_description = "This player gets one rebound"

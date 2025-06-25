@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="StrategyCardConfig" load_steps=2 format=3 uid="uid://0gd3uglomtbf"]
+
+[ext_resource type="Script" path="res://scripts/strategy/StrategyCardConfig.gd" id="1_jjy1w"]
+
+[resource]
+script = ExtResource("1_jjy1w")
+strategy_type = 0
+card_name = "And-One!"
+card_description = "This player scores 1 point before his scoring roll"

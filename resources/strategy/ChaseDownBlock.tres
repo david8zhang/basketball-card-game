@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="StrategyCardConfig" load_steps=2 format=3 uid="uid://csyb28f8fjday"]
+
+[ext_resource type="Script" path="res://scripts/strategy/StrategyCardConfig.gd" id="1_fuf0v"]
+
+[resource]
+script = ExtResource("1_fuf0v")
+strategy_type = 1
+card_name = "Chase Down Block"
+card_description = "If your player has more defense than his opponent has offense, remove 2 points from his scoring roll, no less than 0."

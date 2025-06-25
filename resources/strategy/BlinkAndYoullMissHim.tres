@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="StrategyCardConfig" load_steps=2 format=3 uid="uid://cfr4vc7nen4bw"]
+
+[ext_resource type="Script" path="res://scripts/strategy/StrategyCardConfig.gd" id="1_fpvyn"]
+
+[resource]
+script = ExtResource("1_fpvyn")
+strategy_type = 0
+card_name = "Blink and You'll Miss Him"
+card_description = "This player gets +2 offense"
