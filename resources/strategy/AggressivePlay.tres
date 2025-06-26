@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="StrategyCardConfig" load_steps=2 format=3 uid="uid://bi3ia6iqlb5rl"]
-
-[ext_resource type="Script" path="res://scripts/strategy/StrategyCardConfig.gd" id="1_1bhj6"]
-
-[resource]
-script = ExtResource("1_1bhj6")
-strategy_type = 0
-card_name = "Aggressive Play"
-card_description = "Roll a die. 1-4: The opposing player takes two free throws. 5-20: This player gets +3 to his scoring roll."

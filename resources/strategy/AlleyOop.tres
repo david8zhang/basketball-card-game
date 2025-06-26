@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="StrategyCardConfig" load_steps=2 format=3 uid="uid://wx4jyxdlveoj"]
-
-[ext_resource type="Script" path="res://scripts/strategy/StrategyCardConfig.gd" id="1_q0gqt"]
-
-[resource]
-script = ExtResource("1_q0gqt")
-strategy_type = 0
-card_name = "Alley-Oop"
-card_description = "Discard a card to play Alley-Oop. If this player has Offense 15 or more, he scores 2 points and gets +1 assist on his scoring roll."

@@ -4,10 +4,11 @@ extends StrategyCardNode
 enum BonusType {
   STAT,
   ROLL,
-  SCORE,
+  BOX_SCORE,
   MARKER,
   TEAM_STAT,
   REM_TEAM_STAT,
+  FREE_THROWS,
   NOOP
 }
 

@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="StrategyCardConfig" load_steps=2 format=3 uid="uid://d3o2738jfqhqo"]
-
-[ext_resource type="Script" path="res://scripts/strategy/StrategyCardConfig.gd" id="1_vhqt1"]
-
-[resource]
-script = ExtResource("1_vhqt1")
-strategy_type = 0
-card_name = "Brute Force"
-card_description = "If this player has 12 or more offense, discard up to 3 cards from your hand to have them score twice that many points before his scoring roll."
