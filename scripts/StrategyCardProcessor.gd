@@ -15,11 +15,11 @@ var def_player: BallPlayerCard
 
 signal before_apply_bonus
 signal display_complete
-signal on_strategy_card_selected(index: int)
+signal on_strategy_card_selected(strategy_card_id: int)
 
 func select_strategy_card(sc: StrategyCard):
   selected_strategy_card = sc
-  on_strategy_card_selected.emit(sc.strategy_card_config.id)
+  on_strategy_card_selected.emit(sc.config_id)
   var callable = Callable(self, "on_display_complete")
   matchup_container.strategy_card_preview.show_strategy_card(sc, callable)
 

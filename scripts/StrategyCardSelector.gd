@@ -24,7 +24,7 @@ var node_results = []
 var curr_node_result_to_process_idx = 0
 
 signal on_close
-signal on_strategy_card_selected(selected_card_idx)
+signal on_strategy_card_selected(selected_card_id)
 
 func _ready():
   var strat_deck = game.player_team.strategy_card_deck
@@ -34,9 +34,10 @@ func _ready():
   else:
     cards_in_deck = strat_deck.get_defense_strategy_cards()
   close_button.pressed.connect(on_close_selector)
-  for config in cards_in_deck:
+  for config_wrapper in cards_in_deck:
     var strategy_card = strategy_card_scene.instantiate() as StrategyCard
-    strategy_card.strategy_card_config = config
+    strategy_card.strategy_card_config = config_wrapper.config
+    strategy_card.config_id = config_wrapper.config_id
     var on_select_callable = Callable(self, "select_strategy_card").bind(strategy_card)
     card_container.add_child(strategy_card)
     strategy_card.button.pressed.connect(on_select_callable)

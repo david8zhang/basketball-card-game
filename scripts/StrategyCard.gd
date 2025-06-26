@@ -3,9 +3,12 @@ extends Control
 
 @export var strategy_card_config: StrategyCardConfig
 @onready var description_label: RichTextLabel = $Panel/MarginContainer/VBoxContainer/CardDescription
-@onready var name_label: Label = $Panel/MarginContainer/VBoxContainer/HBoxContainer/CardName
+@onready var name_label: RichTextLabel = $Panel/MarginContainer/VBoxContainer/HBoxContainer/CardName
 @onready var type_label: Label = $Panel/MarginContainer/VBoxContainer/HBoxContainer/CardType
 @onready var button: Button = $Panel/Button
+
+# Config ID in order to associate this card with a config in deck
+var config_id := 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

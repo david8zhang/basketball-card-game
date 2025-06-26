@@ -33,12 +33,13 @@ func use_strategy_card(matchup_container: MatchupContainer, rand_index: int, car
     strategy_card.queue_free()
   strategy_card_processor = strategy_card_processor_scene.instantiate() as StrategyCardProcessor
   add_child(strategy_card_processor)
-  var card_to_use_config = cards_to_pick_from[rand_index]
+  var card_to_use_config_wrapper = cards_to_pick_from[rand_index]
   strategy_card = strategy_card_scene.instantiate() as StrategyCard
   add_child(strategy_card)
   strategy_card.global_position = Vector2(1200, 240)
   strategy_card.hide()
-  strategy_card.strategy_card_config = card_to_use_config
+  strategy_card.strategy_card_config = card_to_use_config_wrapper.config
+  strategy_card.config_id = card_to_use_config_wrapper.config_id
   strategy_card_processor.matchup_container = matchup_container
   strategy_card_processor.off_player = matchup_container.get_off_player_card()
   strategy_card_processor.def_player = matchup_container.get_def_player_card()

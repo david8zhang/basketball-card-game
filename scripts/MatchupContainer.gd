@@ -642,7 +642,10 @@ func apply_bonuses_if_applicable(bonuses, strategy_type: StrategyCardConfig.Stra
           marker_bonus_animator.apply_bonus_to_player(off_player, def_player, marker_bonus)
         StrategyCardBonusNode.BonusType.ROLL:
           print("Implement roll bonus here!")
-          pass
+          on_complete_callable.call()
+        StrategyCardBonusNode.BonusType.BOX_SCORE:
+          print("Implement box score bonus here!")
+          on_complete_callable.call()
         StrategyCardBonusNode.BonusType.NOOP:
           on_complete_callable.call()
 

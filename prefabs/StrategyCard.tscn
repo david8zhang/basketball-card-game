@@ -62,10 +62,12 @@ layout_mode = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="CardName" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="CardName" type="RichTextLabel" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 2.08165e-12)
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
 text = "Tomahawk Dunk"
+scroll_active = false
+autowrap_mode = 2
 
 [node name="Control" type="Control" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
