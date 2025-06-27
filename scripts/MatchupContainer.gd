@@ -36,7 +36,9 @@ var strategy_card_selector: StrategyCardSelector
 var strategy_roll_bonuses := 0
 var strategy_off_bonuses := 0
 var strategy_def_bonuses := 0
-var strategy_score_bonuses := 0
+var strategy_point_bonuses := 0
+var strategy_rebound_bonuses := 0
+var strategy_assist_bonuses := 0
 var off_strategy_card_name := ""
 var did_use_strategy_card := false
 var is_cpu_using_strategy_card := false
@@ -204,6 +206,10 @@ func process_scoring_roll():
     },
     {
       "fname": "tally_points",
+      "on_comp_delay_s": 0.1
+    },
+    {
+      "fname": "tally_strat_bonus_points",
       "on_comp_delay_s": 0.1
     },
     {
@@ -445,17 +451,12 @@ func push_roll_value_up():
 
 func go_to_next_step_generic():
   calc_complete.emit()
-  
-func tally_points():
-  var roll_table_row = get_table_row_for_roll_value()
-  var points_value = matchup_score.points_value	
-  var points_scored = roll_table_row["points_label"] as TableValue
-  var hl_points_scored = create_tween()
-  hl_points_scored.tween_property(points_scored.label, "theme_override_font_sizes/font_size", 25, 0.25)
 
+func handle_point_tally_anim(points_scored_value: int, bonus_modifier: String = ""):
+  var points_value = matchup_score.points_value
   var points_bonus_label = Label.new()
   add_child(points_bonus_label)
-  points_bonus_label.text = "+" + ("0" if points_scored.label.text == "" else points_scored.label.text)
+  points_bonus_label.text = bonus_modifier + "+" + str(points_scored_value)
   points_bonus_label.global_position = Vector2(points_value.global_position.x, points_value.global_position.y + 75)
   points_bonus_label.add_theme_font_size_override("font_size", 50)
   points_bonus_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -470,22 +471,31 @@ func tally_points():
   var combine_fn = func combine_with_total_points():
     var tween = create_tween()
     points_bonus_label.queue_free()
-    points_value.text = str(int(points_value.text) + int(points_scored.label.text))
+    points_value.text = str(int(points_value.text) + points_scored_value)
     tween.tween_property(points_value, "theme_override_font_sizes/font_size", 60, 0.25)
     tween.finished.connect(on_combine_finished)
   
   add_points_bonus_tween.finished.connect(combine_fn)
-
-func tally_assists():
+  
+func tally_points():
   var roll_table_row = get_table_row_for_roll_value()
+  var points_scored = roll_table_row["points_label"] as TableValue
+  var hl_points_scored = create_tween()
+  hl_points_scored.tween_property(points_scored.label, "theme_override_font_sizes/font_size", 25, 0.25)
+  handle_point_tally_anim(0 if points_scored.label.text == "" else int(points_scored.label.text))
+
+func tally_strat_bonus_points():
+  if strategy_point_bonuses == 0:
+    calc_complete.emit()
+  else:
+    handle_point_tally_anim(strategy_point_bonuses)
+
+func handle_assist_tally_anim(assist_value: int, bonus_modifier: String = ""):
   var assists_value = matchup_score.assists_value
-  var assists_made = roll_table_row["assists_label"] as TableValue
-  var hl_assists_scored = create_tween()
-  hl_assists_scored.tween_property(assists_made.label, "theme_override_font_sizes/font_size", 25, 0.25)
 
   var assists_bonus_label = Label.new()
   add_child(assists_bonus_label)
-  assists_bonus_label.text = "+" + ("0" if assists_made.label.text == "" else assists_made.label.text)
+  assists_bonus_label.text = bonus_modifier + "+" + str(assist_value)
   assists_bonus_label.global_position = Vector2(assists_value.global_position.x, assists_value.global_position.y + 75)
   assists_bonus_label.add_theme_font_size_override("font_size", 50)
   assists_bonus_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -500,11 +510,24 @@ func tally_assists():
   var combine_fn = func combine_with_total_points():
     var tween = create_tween()
     assists_bonus_label.queue_free()
-    assists_value.text = str(int(assists_value.text) + int(assists_made.label.text))
+    assists_value.text = str(int(assists_value.text) + assist_value)
     tween.tween_property(assists_value, "theme_override_font_sizes/font_size", 60, 0.25)
     tween.finished.connect(on_combine_finished)
 
   add_assists_bonus_tween.finished.connect(combine_fn)
+
+func tally_assists():
+  var roll_table_row = get_table_row_for_roll_value()
+  var assists_made = roll_table_row["assists_label"] as TableValue
+  var hl_assists_scored = create_tween()
+  hl_assists_scored.tween_property(assists_made.label, "theme_override_font_sizes/font_size", 25, 0.25)
+  handle_assist_tally_anim(0 if assists_made.label.text == "" else int(assists_made.label.text))
+
+func tally_strat_bonus_assists():
+  if strategy_assist_bonuses == 0:
+    calc_complete.emit()
+  else:
+    handle_assist_tally_anim(strategy_assist_bonuses)
 
 func tally_rebounds():
   var roll_table_row = get_table_row_for_roll_value()
@@ -641,10 +664,17 @@ func apply_bonuses_if_applicable(bonuses, strategy_type: StrategyCardConfig.Stra
           stat_bonus_animator.on_complete.connect(on_complete_callable)
           marker_bonus_animator.apply_bonus_to_player(off_player, def_player, marker_bonus)
         StrategyCardBonusNode.BonusType.ROLL:
-          print("Implement roll bonus here!")
+          var roll_bonus = node as RollBonus
+          strategy_roll_bonuses = roll_bonus.roll_bonus_amount
           on_complete_callable.call()
         StrategyCardBonusNode.BonusType.BOX_SCORE:
-          print("Implement box score bonus here!")
+          var box_score_bonus = node as BoxScoreBonus
+          if box_score_bonus.bonus_stat_type == BoxScoreBonus.StatType.POINTS:
+            strategy_point_bonuses = box_score_bonus.bonus_amt
+          elif box_score_bonus.bonus_stat_type == BoxScoreBonus.StatType.REBOUNDS:
+            strategy_rebound_bonuses = box_score_bonus.bonus_amt
+          elif box_score_bonus.bonus_stat_type == BoxScoreBonus.StatType.ASSISTS:
+            strategy_assist_bonuses = box_score_bonus.bonus_amt
           on_complete_callable.call()
         StrategyCardBonusNode.BonusType.NOOP:
           on_complete_callable.call()
