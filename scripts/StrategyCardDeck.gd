@@ -17,13 +17,14 @@ func _ready():
   init_strategy_card_deck()
 
 func init_strategy_card_deck():
-  var all_strategy_card_configs = []
-  for file_name in DirAccess.get_files_at("res://resources/strategy"):
-    if file_name.get_extension() == "tres":
-      var strategy_card_config = load("res://resources/strategy/" + file_name) as StrategyCardConfig
-      all_strategy_card_configs.append(strategy_card_config)
+  var all_strategy_card_configs = [load("res://resources/strategy/AndOne.tres"), load("res://resources/strategy/BoxingOut.tres")]
+  # for file_name in DirAccess.get_files_at("res://resources/strategy"):
+  #   if file_name.get_extension() == "tres":
+  #     var strategy_card_config = load("res://resources/strategy/" + file_name) as StrategyCardConfig
+  #     all_strategy_card_configs.append(strategy_card_config)
   for i in range(0, num_strategy_cards):
-    var random_config = all_strategy_card_configs.pick_random()
+    # var random_config = all_strategy_card_configs.pick_random()
+    var random_config = all_strategy_card_configs[i % all_strategy_card_configs.size()]
     var config_wrapper = StrategyCardConfigWrapper.new(random_config, i)
     cards.append(config_wrapper)
 

@@ -66,6 +66,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(150, 2.08165e-12)
 layout_mode = 2
 text = "Tomahawk Dunk"
+fit_content = true
 scroll_active = false
 autowrap_mode = 2
 

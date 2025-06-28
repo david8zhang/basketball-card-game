@@ -9,9 +9,12 @@ extends Panel
 @onready var use_assists_checkbox = $MarginContainer/VBoxContainer/VBoxContainer/UseAssistsCheckbox as CheckBox
 @onready var use_strategy_card_button = $MarginContainer/VBoxContainer/VBoxContainer/StratButton as Button
 @onready var strat_roll_bonus_label = $MarginContainer/VBoxContainer/VBoxContainer/StratRollBonus as Label
+@onready var game = get_node("/root/Main") as Game
+
+# For animating bonuses from strategy cards
 @onready var stat_bonus_animator: StatBonusAnimator = $StatBonusAnimator
 @onready var marker_bonus_animator: MarkerBonusAnimator = $MarkerBonusAnimator
-@onready var game = get_node("/root/Main") as Game
+@onready var def_box_score_bonus_animator: DefBoxScoreBonusAnimator = $DefBoxScoreBonusAnimator
 
 @export var card_scene: PackedScene
 @export var matchup_pts_assts_rebs_scene: PackedScene
@@ -57,6 +60,7 @@ func _ready():
   calc_complete.connect(process_calc_delay)
   use_strategy_card_button.pressed.connect(show_strategy_card_selector)
   strat_roll_bonus_label.hide()
+  def_box_score_bonus_animator.hide()
   
   # Hide use strategy card button if player has no strategy cards available
   if offense_side == Game.Side.PLAYER:
@@ -492,7 +496,6 @@ func tally_strat_bonus_points():
 
 func handle_assist_tally_anim(assist_value: int, bonus_modifier: String = ""):
   var assists_value = matchup_score.assists_value
-
   var assists_bonus_label = Label.new()
   add_child(assists_bonus_label)
   assists_bonus_label.text = bonus_modifier + "+" + str(assist_value)
@@ -531,14 +534,22 @@ func tally_strat_bonus_assists():
 
 func tally_rebounds():
   var roll_table_row = get_table_row_for_roll_value()
-  var rebounds_value = matchup_score.rebounds_value
   var rebounds_grabbed = roll_table_row["rebounds_label"] as TableValue
   var hl_rebounds_grabbed = create_tween()
   hl_rebounds_grabbed.tween_property(rebounds_grabbed.label, "theme_override_font_sizes/font_size", 25, 0.25)
+  handle_rebound_tally_anim(0 if rebounds_grabbed.label.text == "" else int(rebounds_grabbed.label.text))
 
+func tally_strat_bonus_rebounds():
+  if strategy_rebound_bonuses == 0:
+    calc_complete.emit()
+  else:
+    handle_rebound_tally_anim(strategy_rebound_bonuses)
+
+func handle_rebound_tally_anim(num_rebounds: int):
+  var rebounds_value = matchup_score.rebounds_value
   var rebounds_bonus_label = Label.new()
   add_child(rebounds_bonus_label)
-  rebounds_bonus_label.text = "+" + ("0" if rebounds_grabbed.label.text == "" else rebounds_grabbed.label.text)
+  rebounds_bonus_label.text = "+" + str(num_rebounds)
   rebounds_bonus_label.global_position = Vector2(rebounds_value.global_position.x, rebounds_value.global_position.y + 75)
   rebounds_bonus_label.add_theme_font_size_override("font_size", 50)
   rebounds_bonus_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -553,10 +564,11 @@ func tally_rebounds():
   var combine_fn = func combine_with_total_points():
     var tween = create_tween()
     rebounds_bonus_label.queue_free()
-    rebounds_value.text = str(int(rebounds_value.text) + int(rebounds_grabbed.label.text))
+    rebounds_value.text = str(int(rebounds_value.text) + num_rebounds)
     tween.tween_property(rebounds_value, "theme_override_font_sizes/font_size", 60, 0.25)
     tween.finished.connect(on_combine_finished)
-  add_rebounds_bonus_tween.finished.connect(combine_fn)	
+  add_rebounds_bonus_tween.finished.connect(combine_fn)
+
 
 func reset_roll_table_rows():
   var roll_table_row = get_table_row_for_roll_value()
@@ -669,13 +681,27 @@ func apply_bonuses_if_applicable(bonuses, strategy_type: StrategyCardConfig.Stra
           on_complete_callable.call()
         StrategyCardBonusNode.BonusType.BOX_SCORE:
           var box_score_bonus = node as BoxScoreBonus
-          if box_score_bonus.bonus_stat_type == BoxScoreBonus.StatType.POINTS:
-            strategy_point_bonuses = box_score_bonus.bonus_amt
-          elif box_score_bonus.bonus_stat_type == BoxScoreBonus.StatType.REBOUNDS:
-            strategy_rebound_bonuses = box_score_bonus.bonus_amt
-          elif box_score_bonus.bonus_stat_type == BoxScoreBonus.StatType.ASSISTS:
-            strategy_assist_bonuses = box_score_bonus.bonus_amt
-          on_complete_callable.call()
+          if box_score_bonus.target_side == BoxScoreBonus.TargetSide.OFFENSE:
+            if box_score_bonus.bonus_stat_type == BoxScoreBonus.StatType.POINTS:
+              strategy_point_bonuses = box_score_bonus.bonus_amt
+            elif box_score_bonus.bonus_stat_type == BoxScoreBonus.StatType.REBOUNDS:
+              strategy_rebound_bonuses = box_score_bonus.bonus_amt
+            elif box_score_bonus.bonus_stat_type == BoxScoreBonus.StatType.ASSISTS:
+              strategy_assist_bonuses = box_score_bonus.bonus_amt
+            on_complete_callable.call()
+          else:
+            # If the target of this bonus is the defender and the current offensive player card is the player, then it was
+            # the CPU that used the defensive strategy card resulting in this bonus
+            var is_cpu = offense_side == Game.Side.PLAYER
+            def_box_score_bonus_animator.animate_box_score_bonus(box_score_bonus, is_cpu)
+            var on_def_box_score_anim_finished = func _on_anim_finished():
+              var side_to_receive_bonus = Game.Side.CPU if is_cpu else Game.Side.PLAYER
+              game.add_def_box_score_bonuses(side_to_receive_bonus, box_score_bonus.bonus_stat_type, box_score_bonus.bonus_amt)
+              on_complete_callable.call()
+              def_box_score_bonus_animator.hide()
+            def_box_score_bonus_animator.show()
+            def_box_score_bonus_animator.on_def_box_score_bonus_complete.connect(on_def_box_score_anim_finished)
+
         StrategyCardBonusNode.BonusType.NOOP:
           on_complete_callable.call()
 

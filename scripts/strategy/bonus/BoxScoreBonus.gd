@@ -7,8 +7,14 @@ enum StatType {
 	ASSISTS
 }
 
+enum TargetSide {
+	OFFENSE,
+	DEFENSE
+}
+
 @export var bonus_amt: int
 @export var bonus_stat_type: StatType
+@export var target_side: TargetSide
 
 func _init():
 	super._init()

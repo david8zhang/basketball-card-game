@@ -262,6 +262,19 @@ func process_matchup_stats(all_stats: Dictionary, side: Side, assists_used: int)
 		curr_cpu_quarter_score += all_stats["points"]
 	matchup_container.queue_free()
 
+# If defensive player uses a card that increases stats
+func add_def_box_score_bonuses(side: Side, stat_type: BoxScoreBonus.StatType, value: int):
+	var score_label = player_score_label if side == Side.PLAYER else cpu_score_label
+	var assists_label = player_assists_label if side == Side.PLAYER else cpu_assists_label
+	var rebounds_label = player_rebounds_label if side == Side.PLAYER else cpu_rebounds_label
+	match stat_type:
+		BoxScoreBonus.StatType.POINTS:
+			score_label.text = str(int(player_score_label.text) + value)
+		BoxScoreBonus.StatType.REBOUNDS:
+			rebounds_label.text = "R:" + str(get_rebounds(rebounds_label) + value)
+		BoxScoreBonus.StatType.ASSISTS:
+			assists_label.text = "A:" + str(get_assists(assists_label)+ value)
+
 func update_statlines(full_name: String, stat_line: BoxScoreStatLine, scorer_statline: Dictionary):
 	if scorer_statline.has(full_name):
 		var stat_line_to_update = scorer_statline[full_name] as BoxScoreStatLine
