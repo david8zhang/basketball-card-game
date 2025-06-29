@@ -10,7 +10,7 @@
 [sub_resource type="Resource" id="Resource_7myi7"]
 script = ExtResource("1_irpgn")
 dice_type = 20
-rigged_dice_value = 20
+rigged_dice_value = -1
 action_type = 2
 
 [sub_resource type="Resource" id="Resource_toksa"]

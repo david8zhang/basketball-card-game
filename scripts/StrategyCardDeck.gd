@@ -30,7 +30,6 @@ func init_strategy_card_deck():
     cards.append(config_wrapper)
 
 func on_strategy_card_selected(selected_card_id: int):
-  print("Selected card: " + str(selected_card_id))
   cards = cards.filter(func (c): return c.config_id != selected_card_id)
 
 func get_offense_strategy_cards():

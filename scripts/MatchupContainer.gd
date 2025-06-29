@@ -130,6 +130,8 @@ func on_process_player_def_strategy_complete():
 
 func on_process_player_off_strategy_complete():
   roll_button.text = "Roll"
+  if curr_assists > 0:
+    use_assists_checkbox.show()
   roll_button.show()
 
 func on_process_cpu_def_strategy_complete():
@@ -144,26 +146,6 @@ func on_process_cpu_off_strategy_complete():
     use_strategy_card_button.show()
   roll_button.text = "CPU Roll"
   roll_button.show()
-
-func on_process_strategy_complete():
-  if is_cpu_using_strategy_card:
-    is_cpu_using_strategy_card = false
-    # If CPU is on offense
-    if offense_side == Game.Side.CPU:
-      var player_team = game.player_team
-      var player_strat_deck = player_team.strategy_card_deck as StrategyCardDeck
-      var player_def_cards = player_strat_deck.get_defense_strategy_cards()
-      if player_def_cards.size() > 0 and !did_opp_use_def_strategy_card:
-        use_strategy_card_button.show()
-        roll_button.show()
-        roll_button.text = "CPU Roll"
-      else:
-        process_scoring_roll()
-    # Otherwise, flag that the CPU has used a defensive strategy card
-    else:
-      roll_button.show()
-  else:
-    roll_button.show()
 
 func process_scoring_roll():
   roll_button.hide()
@@ -629,11 +611,11 @@ func get_def_player_card() -> BallPlayerCard:
 func show_strategy_card_selector():
   use_strategy_card_button.hide()
   roll_button.hide()
+  use_assists_checkbox.hide()
   var on_clear_fn = func clear_strategy_card_selector():
     did_use_strategy_card = true
     strategy_card_selector.queue_free()
     use_strategy_card_button.hide()
-    roll_button.show()
   strategy_card_selector = strategy_card_selector_scene.instantiate() as StrategyCardSelector
   strategy_card_selector.off_player = get_off_player_card()
   strategy_card_selector.def_player = get_def_player_card()

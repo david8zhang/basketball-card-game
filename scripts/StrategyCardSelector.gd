@@ -42,6 +42,7 @@ func _ready():
     card_container.add_child(strategy_card)
     strategy_card.button.pressed.connect(on_select_callable)
   strategy_card_processor = strategy_card_processor_scene.instantiate() as StrategyCardProcessor
+  strategy_card_processor.on_strategy_card_selected.connect(strat_deck.on_strategy_card_selected)
   matchup_container.add_child(strategy_card_processor)
   strategy_card_processor.off_player = off_player
   strategy_card_processor.def_player = def_player
