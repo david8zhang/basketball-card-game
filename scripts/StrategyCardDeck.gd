@@ -17,7 +17,7 @@ func _ready():
   init_strategy_card_deck()
 
 func init_strategy_card_deck():
-  var all_strategy_card_configs = [load("res://resources/strategy/AndOne.tres"), load("res://resources/strategy/BoxingOut.tres")]
+  var all_strategy_card_configs = [load("res://resources/strategy/ChaseDownBlock.tres")]
   # for file_name in DirAccess.get_files_at("res://resources/strategy"):
   #   if file_name.get_extension() == "tres":
   #     var strategy_card_config = load("res://resources/strategy/" + file_name) as StrategyCardConfig

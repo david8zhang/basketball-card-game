@@ -5,5 +5,6 @@ extends HBoxContainer
 @onready var bonus_amount_label = $BonusAmount as Label
 
 func setup(attr_name: String, bonus_amt: int):
-	attribute_label.text = attr_name
-	bonus_amount_label.text = "+" + str(bonus_amt)
+  attribute_label.text = attr_name
+  var operator = "+" if bonus_amt > 0 else "-"
+  bonus_amount_label.text = operator + str(abs(bonus_amt))

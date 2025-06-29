@@ -281,13 +281,14 @@ func combine_strat_bonus_modifier():
   calc_complete.emit()
 
 func add_strat_bonus_to_roll():
-  if strategy_roll_bonuses > 0:
+  if strategy_roll_bonuses != 0:
     strat_roll_bonus_modifier_label = Label.new()
     strat_roll_bonus_modifier_label.add_theme_font_size_override("font_size", 35)
     strat_roll_bonus_modifier_label.size.x = size.x
     strat_roll_bonus_modifier_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
     strat_roll_bonus_modifier_label.global_position = Vector2(0, roll_value_label.global_position.y + 100)
-    strat_roll_bonus_modifier_label.text = "+" + str(strategy_roll_bonuses) + " (" + off_strategy_card_name + ")"
+    var operator = "+" if strategy_roll_bonuses > 0 else "-"
+    strat_roll_bonus_modifier_label.text = operator + str(abs(strategy_roll_bonuses))
     add_child(strat_roll_bonus_modifier_label)
 
     # Combine assists with roll value

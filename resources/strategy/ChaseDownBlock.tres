@@ -1,23 +1,26 @@
-[gd_resource type="Resource" script_class="StrategyCardConfig" load_steps=7 format=3 uid="uid://csyb28f8fjday"]
+[gd_resource type="Resource" script_class="StrategyCardConfig" load_steps=8 format=3 uid="uid://csyb28f8fjday"]
 
 [ext_resource type="Script" path="res://scripts/strategy/bonus/NoopBonus.gd" id="1_1jdnm"]
 [ext_resource type="Script" path="res://scripts/strategy/condition/StatCompCondition.gd" id="1_2h88y"]
 [ext_resource type="Script" path="res://scripts/strategy/StrategyCardConfig.gd" id="1_fuf0v"]
+[ext_resource type="Script" path="res://scripts/strategy/bonus/RollBonus.gd" id="2_o55mq"]
 
 [sub_resource type="Resource" id="Resource_5q7d7"]
 script = ExtResource("1_1jdnm")
 bonus_type = 7
 
-[sub_resource type="Resource" id="Resource_c45fa"]
-script = ExtResource("1_1jdnm")
-bonus_type = 7
+[sub_resource type="Resource" id="Resource_j4jfe"]
+script = ExtResource("2_o55mq")
+roll_bonus_amount = -2
+bonus_type = 1
 
 [sub_resource type="Resource" id="Resource_e3u5j"]
 script = ExtResource("1_2h88y")
-stat_to_comp = 1
-comp_type = 0
+off_stat_to_comp = 0
+def_stat_to_comp = 1
+comp_type = 1
 condition_type = 2
-pass_child = SubResource("Resource_c45fa")
+pass_child = SubResource("Resource_j4jfe")
 fail_child = SubResource("Resource_5q7d7")
 
 [resource]

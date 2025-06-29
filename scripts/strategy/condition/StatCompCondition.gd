@@ -12,7 +12,8 @@ enum StatCompType {
 	EQUAL
 }
 
-@export var stat_to_comp: StatToComp
+@export var off_stat_to_comp: StatToComp
+@export var def_stat_to_comp: StatToComp
 @export var comp_type: StatCompType
 
 func _init():
@@ -23,8 +24,8 @@ func check_condition(blackboard: Blackboard):
 	var def_player = blackboard.def_player as BallPlayerCard
 	var off_bp_stats = off_player.ball_player_stats
 	var def_bp_stats = def_player.ball_player_stats
-	var off_player_stat = off_bp_stats.offense if stat_to_comp == StatToComp.OFFENSE else off_bp_stats.defense
-	var def_player_stat = def_bp_stats.offense if stat_to_comp == StatToComp.OFFENSE else def_bp_stats.defense
+	var off_player_stat = off_bp_stats.offense if off_stat_to_comp == StatToComp.OFFENSE else off_bp_stats.defense
+	var def_player_stat = def_bp_stats.offense if def_stat_to_comp == StatToComp.OFFENSE else def_bp_stats.defense
 	var result_type := StrategyCardNode.NodeResultType.SUCCESS
 	match comp_type:
 		StatCompType.GREATER:
