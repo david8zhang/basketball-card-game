@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://q8du0pabkwos" path="res://prefabs/MarkerBonusAnimator.tscn" id="5_bsl14"]
 [ext_resource type="PackedScene" uid="uid://bocyd5espcfft" path="res://prefabs/StatBonusAnimator.tscn" id="5_iqwyu"]
 [ext_resource type="PackedScene" uid="uid://lkpp0562vspw" path="res://prefabs/StratCardPreview.tscn" id="5_khnnx"]
-[ext_resource type="PackedScene" uid="uid://dqr18xaoirdkp" path="res://prefabs/DefBoxScoreBonusAnimator.tscn" id="8_1kemv"]
+[ext_resource type="PackedScene" uid="uid://dqr18xaoirdkp" path="res://prefabs/BoxScoreBonusAnimator.tscn" id="8_y58ie"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_20t5l"]
 bg_color = Color(0, 0, 0, 0.745098)
@@ -136,5 +136,5 @@ theme_override_font_sizes/font_size = 25
 text = "+2"
 horizontal_alignment = 1
 
-[node name="DefBoxScoreBonusAnimator" parent="." instance=ExtResource("8_1kemv")]
+[node name="BoxScoreBonusAnimator" parent="." instance=ExtResource("8_y58ie")]
 layout_mode = 1

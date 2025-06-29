@@ -1,10 +1,10 @@
-class_name DefBoxScoreBonusAnimator
+class_name BoxScoreBonusAnimator
 extends Control
 
 @export var box_score_bonus_label_scene: PackedScene
 @export var test_box_score_bonus: BoxScoreBonus
 
-signal on_def_box_score_bonus_complete
+signal on_box_score_bonus_complete
 
 func _ready():
   animate_box_score_bonus(test_box_score_bonus, true)
@@ -34,7 +34,7 @@ func animate_box_score_bonus(box_score_bonus: BoxScoreBonus, is_cpu: bool):
 
   var on_pan_complete = func _on_pan_complete():
     label.queue_free()
-    on_def_box_score_bonus_complete.emit()
+    on_box_score_bonus_complete.emit()
 
   var pan_to_corner = func _pan_to_corner():
     var tween = create_tween()

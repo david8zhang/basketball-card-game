@@ -14,7 +14,7 @@ extends Panel
 # For animating bonuses from strategy cards
 @onready var stat_bonus_animator: StatBonusAnimator = $StatBonusAnimator
 @onready var marker_bonus_animator: MarkerBonusAnimator = $MarkerBonusAnimator
-@onready var def_box_score_bonus_animator: DefBoxScoreBonusAnimator = $DefBoxScoreBonusAnimator
+@onready var box_score_bonus_animator: BoxScoreBonusAnimator = $BoxScoreBonusAnimator
 
 @export var card_scene: PackedScene
 @export var matchup_pts_assts_rebs_scene: PackedScene
@@ -60,7 +60,7 @@ func _ready():
   calc_complete.connect(process_calc_delay)
   use_strategy_card_button.pressed.connect(show_strategy_card_selector)
   strat_roll_bonus_label.hide()
-  def_box_score_bonus_animator.hide()
+  box_score_bonus_animator.hide()
   
   # Hide use strategy card button if player has no strategy cards available
   if offense_side == Game.Side.PLAYER:
@@ -674,7 +674,7 @@ func apply_bonuses_if_applicable(bonuses, strategy_type: StrategyCardConfig.Stra
           stat_bonus_animator.apply_bonus_to_player(stat_bonus.off_bonus_amount, stat_bonus.def_bonus_amount, player_to_apply_bonus_to)
         StrategyCardBonusNode.BonusType.MARKER:
           var marker_bonus = node as MarkerBonus
-          stat_bonus_animator.on_complete.connect(on_complete_callable)
+          marker_bonus_animator.on_complete.connect(on_complete_callable)
           marker_bonus_animator.apply_bonus_to_player(off_player, def_player, marker_bonus)
         StrategyCardBonusNode.BonusType.ROLL:
           var roll_bonus = node as RollBonus
@@ -694,14 +694,14 @@ func apply_bonuses_if_applicable(bonuses, strategy_type: StrategyCardConfig.Stra
             # If the target of this bonus is the defender and the current offensive player card is the player, then it was
             # the CPU that used the defensive strategy card resulting in this bonus
             var is_cpu = offense_side == Game.Side.PLAYER
-            def_box_score_bonus_animator.animate_box_score_bonus(box_score_bonus, is_cpu)
-            var on_def_box_score_anim_finished = func _on_anim_finished():
+            box_score_bonus_animator.animate_box_score_bonus(box_score_bonus, is_cpu)
+            var on_box_score_anim_finished = func _on_anim_finished():
               var side_to_receive_bonus = Game.Side.CPU if is_cpu else Game.Side.PLAYER
-              game.add_def_box_score_bonuses(side_to_receive_bonus, box_score_bonus.bonus_stat_type, box_score_bonus.bonus_amt)
+              game.add_box_score_bonuses(side_to_receive_bonus, box_score_bonus.bonus_stat_type, box_score_bonus.bonus_amt)
               on_complete_callable.call()
-              def_box_score_bonus_animator.hide()
-            def_box_score_bonus_animator.show()
-            def_box_score_bonus_animator.on_def_box_score_bonus_complete.connect(on_def_box_score_anim_finished)
+              box_score_bonus_animator.hide()
+            box_score_bonus_animator.show()
+            box_score_bonus_animator.on_box_score_bonus_complete.connect(on_box_score_anim_finished)
 
         StrategyCardBonusNode.BonusType.NOOP:
           on_complete_callable.call()

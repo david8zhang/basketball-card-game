@@ -4,4 +4,3 @@
 
 [node name="StrategyCardDeck" type="Node"]
 script = ExtResource("1_etint")
-num_strategy_cards = null

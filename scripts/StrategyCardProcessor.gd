@@ -72,13 +72,14 @@ func process_bonus_node_result(curr_node_result):
           strategy_bonuses.add_bonus_line("Cold markers (def)", marker_bonus.num_markers)
     StrategyCardBonusNode.BonusType.BOX_SCORE:
       var box_score_bonus = node as BoxScoreBonus
+      var suffix = "(Offense)" if box_score_bonus.target_side == BoxScoreBonus.TargetSide.OFFENSE else "(Defense)"
       match (box_score_bonus.bonus_stat_type):
         BoxScoreBonus.StatType.POINTS:
-          strategy_bonuses.add_bonus_line("Points", box_score_bonus.bonus_amt)
+          strategy_bonuses.add_bonus_line("Points " + suffix, box_score_bonus.bonus_amt)
         BoxScoreBonus.StatType.ASSISTS:
-          strategy_bonuses.add_bonus_line("Assists", box_score_bonus.bonus_amt)
+          strategy_bonuses.add_bonus_line("Assists " + suffix, box_score_bonus.bonus_amt)
         BoxScoreBonus.StatType.REBOUNDS:
-          strategy_bonuses.add_bonus_line("Rebounds", box_score_bonus.bonus_amt)
+          strategy_bonuses.add_bonus_line("Rebounds " + suffix, box_score_bonus.bonus_amt)
     StrategyCardBonusNode.BonusType.ROLL:
       var roll_bonus = node as RollBonus
       strategy_bonuses.add_bonus_line("Roll", roll_bonus.roll_bonus_amount)

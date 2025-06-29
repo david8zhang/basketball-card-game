@@ -14,5 +14,5 @@ bonus_type = 2
 script = ExtResource("1_jjy1w")
 strategy_type = 0
 card_name = "And-One!"
-card_description = "This player scores 1 additional point"
+card_description = "This player gets +1 point after their scoring roll"
 root_node = SubResource("Resource_tc45u")

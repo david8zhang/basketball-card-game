@@ -27,5 +27,5 @@ fail_child = SubResource("Resource_5q7d7")
 script = ExtResource("1_fuf0v")
 strategy_type = 1
 card_name = "Chase Down Block"
-card_description = "If your player has more defense than his opponent has offense, remove 2 points from his scoring roll, no less than 0."
+card_description = "If your player has more defense than his opponent has offense, -2 from his scoring roll, no less than 0."
 root_node = SubResource("Resource_e3u5j")

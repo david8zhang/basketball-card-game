@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cloqfuoeb140w"]
 
-[node name="DefBoxScoreBonusLabel" type="Label"]
+[node name="BoxScoreBonusLabel" type="Label"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

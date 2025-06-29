@@ -14,5 +14,5 @@ bonus_type = 2
 script = ExtResource("1_2dfyd")
 strategy_type = 1
 card_name = "Boxing Out"
-card_description = "This player gets one rebound"
+card_description = "This player gets +1 rebound"
 root_node = SubResource("Resource_xpkhg")

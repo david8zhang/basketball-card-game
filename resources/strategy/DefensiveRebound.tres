@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="StrategyCardConfig" load_steps=11 format=3 uid="uid://gt5jmt5mx1fd"]
+
+[ext_resource type="Script" path="res://scripts/strategy/StrategyCardConfig.gd" id="1_34cuo"]
+[ext_resource type="Script" path="res://scripts/strategy/bonus/NoopBonus.gd" id="1_f7nea"]
+[ext_resource type="Script" path="res://scripts/strategy/bonus/BoxScoreBonus.gd" id="2_anemx"]
+[ext_resource type="Script" path="res://scripts/strategy/StrategyCardSequenceNode.gd" id="3_rwpbx"]
+[ext_resource type="Script" path="res://scripts/strategy/condition/StatCompCondition.gd" id="4_e3k6s"]
+
+[sub_resource type="Resource" id="Resource_3xal7"]
+script = ExtResource("1_f7nea")
+bonus_type = 7
+
+[sub_resource type="Resource" id="Resource_nnthm"]
+script = ExtResource("2_anemx")
+bonus_amt = -1
+bonus_stat_type = 1
+target_side = 0
+bonus_type = 2
+
+[sub_resource type="Resource" id="Resource_0u2rf"]
+script = ExtResource("2_anemx")
+bonus_amt = 1
+bonus_stat_type = 1
+target_side = 1
+bonus_type = 2
+
+[sub_resource type="Resource" id="Resource_ogyev"]
+script = ExtResource("3_rwpbx")
+children = Array[Resource("res://scripts/strategy/StrategyCardNode.gd")]([SubResource("Resource_nnthm"), SubResource("Resource_0u2rf")])
+
+[sub_resource type="Resource" id="Resource_2ipnx"]
+script = ExtResource("4_e3k6s")
+off_stat_to_comp = 1
+def_stat_to_comp = 1
+comp_type = 1
+condition_type = 2
+pass_child = SubResource("Resource_ogyev")
+fail_child = SubResource("Resource_3xal7")
+
+[resource]
+script = ExtResource("1_34cuo")
+strategy_type = 1
+card_name = "Defensive Rebound"
+card_description = "If your player has more defense than the opponent, -1 rebound from your opponent's scoring roll and +1 rebound to your team"
+root_node = SubResource("Resource_2ipnx")
