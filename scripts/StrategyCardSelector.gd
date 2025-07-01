@@ -24,6 +24,7 @@ var node_results = []
 var curr_node_result_to_process_idx = 0
 
 signal on_close
+signal on_finished
 signal on_strategy_card_selected(selected_card_id)
 
 func _ready():
@@ -47,7 +48,7 @@ func _ready():
   strategy_card_processor.off_player = off_player
   strategy_card_processor.def_player = def_player
   strategy_card_processor.matchup_container = matchup_container
-  strategy_card_processor.before_apply_bonus.connect(on_close_selector)
+  strategy_card_processor.before_apply_bonus.connect(on_finished_processing_strat)
 
 func select_strategy_card(sc: StrategyCard):
   strategy_card_processor.select_strategy_card(sc)
@@ -60,3 +61,6 @@ func process_strategy_card():
 
 func on_close_selector():
   on_close.emit()
+
+func on_finished_processing_strat():
+  on_finished.emit()

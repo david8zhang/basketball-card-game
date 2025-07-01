@@ -203,7 +203,15 @@ func process_scoring_roll():
       "on_comp_delay_s": 0.1
     },
     {
+      "fname": "tally_strat_bonus_assists",
+      "on_comp_delay_s": 0.1
+    },
+    {
       "fname": "tally_rebounds",
+      "on_comp_delay_s": 0.1
+    },
+    {
+      "fname": "tally_strat_bonus_rebounds",
       "on_comp_delay_s": 0.1
     },
     {
@@ -215,7 +223,7 @@ func process_scoring_roll():
 
 func on_start_turn():
   roll_button.hide()
-  if !did_opp_use_def_strategy_card:
+  if offense_side == Game.Side.PLAYER and !did_opp_use_def_strategy_card:
     cpu_use_def_strategy_card()
   else:
     process_scoring_roll()
@@ -529,10 +537,12 @@ func tally_strat_bonus_rebounds():
     handle_rebound_tally_anim(strategy_rebound_bonuses)
 
 func handle_rebound_tally_anim(num_rebounds: int):
+  print(num_rebounds)
   var rebounds_value = matchup_score.rebounds_value
   var rebounds_bonus_label = Label.new()
   add_child(rebounds_bonus_label)
-  rebounds_bonus_label.text = "+" + str(num_rebounds)
+  var prefix = "+" if num_rebounds >= 0 else ""
+  rebounds_bonus_label.text = prefix + str(num_rebounds)
   rebounds_bonus_label.global_position = Vector2(rebounds_value.global_position.x, rebounds_value.global_position.y + 75)
   rebounds_bonus_label.add_theme_font_size_override("font_size", 50)
   rebounds_bonus_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -547,7 +557,7 @@ func handle_rebound_tally_anim(num_rebounds: int):
   var combine_fn = func combine_with_total_points():
     var tween = create_tween()
     rebounds_bonus_label.queue_free()
-    rebounds_value.text = str(int(rebounds_value.text) + num_rebounds)
+    rebounds_value.text = str(max(0, int(rebounds_value.text) + num_rebounds))
     tween.tween_property(rebounds_value, "theme_override_font_sizes/font_size", 60, 0.25)
     tween.finished.connect(on_combine_finished)
   add_rebounds_bonus_tween.finished.connect(combine_fn)
@@ -612,16 +622,27 @@ func show_strategy_card_selector():
   use_strategy_card_button.hide()
   roll_button.hide()
   use_assists_checkbox.hide()
-  var on_clear_fn = func clear_strategy_card_selector():
+  var on_finished = func _on_finished():
     did_use_strategy_card = true
     strategy_card_selector.queue_free()
     use_strategy_card_button.hide()
+  var on_close = func _on_close():
+    strategy_card_selector.queue_free()
+    roll_button.show()
+    use_strategy_card_button.show()
+    if offense_side == Game.Side.PLAYER:
+      did_use_strategy_card = false
+      if curr_assists == 0:
+        use_assists_checkbox.show()
+    else:
+      did_opp_use_def_strategy_card = false
   strategy_card_selector = strategy_card_selector_scene.instantiate() as StrategyCardSelector
   strategy_card_selector.off_player = get_off_player_card()
   strategy_card_selector.def_player = get_def_player_card()
   strategy_card_selector.matchup_container = self
   add_child(strategy_card_selector)
-  strategy_card_selector.on_close.connect(on_clear_fn)
+  strategy_card_selector.on_finished.connect(on_finished)
+  strategy_card_selector.on_close.connect(on_close)
   var team = game.player_team if offense_side == Game.Side.PLAYER else game.cpu_team
   if team.strategy_card_deck != null:
     strategy_card_selector.on_strategy_card_selected.connect(team.strategy_card_deck.on_strategy_card_selected)

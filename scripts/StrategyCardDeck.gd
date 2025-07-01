@@ -3,7 +3,7 @@ extends Node
 
 @export var num_strategy_cards := 3
 var cards: Array[StrategyCardConfigWrapper] = []
-var override_configs = [load("res://resources/strategy/KillerCrossover.tres")]
+@export var override_configs = [load("res://resources/strategy/DefensiveRebound.tres")]
 
 class StrategyCardConfigWrapper:
   var config_id := 0
