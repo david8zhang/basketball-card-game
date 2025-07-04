@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/BallPlayerCard.gd" id="1_my46u"]
 [ext_resource type="PackedScene" uid="uid://cgpent6asbq6b" path="res://prefabs/TableValue.tscn" id="2_bfexb"]
-[ext_resource type="Resource" uid="uid://cvram68b0cw7d" path="res://resources/players/DeAndreAyton.tres" id="3_v567d"]
+[ext_resource type="Resource" uid="uid://dghnk54btjod" path="res://resources/players/DeanWade.tres" id="3_ajuuy"]
 [ext_resource type="PackedScene" uid="uid://ciyhd5db3ubjt" path="res://prefabs/Marker.tscn" id="4_wqmgd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eoll5"]
@@ -40,7 +40,7 @@ size_flags_stretch_ratio = 0.75
 mouse_filter = 1
 script = ExtResource("1_my46u")
 roll_table_value_scene = ExtResource("2_bfexb")
-ball_player_stats = ExtResource("3_v567d")
+ball_player_stats = ExtResource("3_ajuuy")
 show_roll_table = false
 
 [node name="Panel" type="Panel" parent="."]

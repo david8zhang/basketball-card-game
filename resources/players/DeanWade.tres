@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://dghnk54btjod"]
+
+[ext_resource type="Script" path="res://scripts/BallPlayerStats.gd" id="1_i31sx"]
+[ext_resource type="Script" path="res://scripts/RollTableRow.gd" id="1_t6phj"]
+[ext_resource type="Texture2D" uid="uid://du8m6h7cjp5t4" path="res://assets/players/dean-wade.png" id="3_3m1q5"]
+
+[sub_resource type="Resource" id="Resource_j5llo"]
+script = ExtResource("1_t6phj")
+low = 1
+high = 6
+points = 0
+assists = 0
+rebounds = 0
+
+[sub_resource type="Resource" id="Resource_x6hql"]
+script = ExtResource("1_t6phj")
+low = 7
+high = 11
+points = 1
+assists = 0
+rebounds = 1
+
+[sub_resource type="Resource" id="Resource_an0b6"]
+script = ExtResource("1_t6phj")
+low = 12
+high = 17
+points = 4
+assists = 1
+rebounds = 2
+
+[sub_resource type="Resource" id="Resource_fs63f"]
+script = ExtResource("1_t6phj")
+low = 18
+high = 30
+points = 6
+assists = 1
+rebounds = 3
+
+[resource]
+script = ExtResource("1_i31sx")
+offense = 7
+defense = 12
+positions = Array[int]([3])
+first_name = "Dean"
+last_name = "Wade"
+three_point_bonus = 4
+player_cost = 0
+texture = ExtResource("3_3m1q5")
+roll_table = Array[ExtResource("1_t6phj")]([SubResource("Resource_j5llo"), SubResource("Resource_x6hql"), SubResource("Resource_an0b6"), SubResource("Resource_fs63f")])
