@@ -1,0 +1,55 @@
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://b7fcpvtjm7fd5"]
+
+[ext_resource type="Script" path="res://scripts/RollTableRow.gd" id="1_hubla"]
+[ext_resource type="Script" path="res://scripts/BallPlayerStats.gd" id="1_w4wq3"]
+
+[sub_resource type="Resource" id="Resource_hgleq"]
+script = ExtResource("1_hubla")
+low = 1
+high = 5
+points = 1
+assists = 0
+rebounds = 0
+
+[sub_resource type="Resource" id="Resource_wkcal"]
+script = ExtResource("1_hubla")
+low = 6
+high = 10
+points = 3
+assists = 1
+rebounds = 1
+
+[sub_resource type="Resource" id="Resource_0rvix"]
+script = ExtResource("1_hubla")
+low = 11
+high = 17
+points = 5
+assists = 2
+rebounds = 1
+
+[sub_resource type="Resource" id="Resource_ut70l"]
+script = ExtResource("1_hubla")
+low = 18
+high = 22
+points = 9
+assists = 3
+rebounds = 2
+
+[sub_resource type="Resource" id="Resource_wkseu"]
+script = ExtResource("1_hubla")
+low = 23
+high = 30
+points = 13
+assists = 4
+rebounds = 3
+
+[resource]
+script = ExtResource("1_w4wq3")
+offense = 12
+defense = 14
+positions = Array[int]([0, 1])
+first_name = "Jrue"
+last_name = "Holiday"
+three_point_bonus = 3
+player_cost = 0
+roll_table = Array[ExtResource("1_hubla")]([SubResource("Resource_hgleq"), SubResource("Resource_wkcal"), SubResource("Resource_0rvix"), SubResource("Resource_ut70l"), SubResource("Resource_wkseu")])

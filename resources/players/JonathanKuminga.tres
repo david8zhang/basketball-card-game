@@ -1,0 +1,47 @@
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://b3nlhqwcm6hu6"]
+
+[ext_resource type="Script" path="res://scripts/RollTableRow.gd" id="1_1no7f"]
+[ext_resource type="Script" path="res://scripts/BallPlayerStats.gd" id="1_k1nsi"]
+
+[sub_resource type="Resource" id="Resource_ykxd6"]
+script = ExtResource("1_1no7f")
+low = 1
+high = 6
+points = 0
+assists = 0
+rebounds = 0
+
+[sub_resource type="Resource" id="Resource_7owuq"]
+script = ExtResource("1_1no7f")
+low = 7
+high = 12
+points = 2
+assists = 0
+rebounds = 1
+
+[sub_resource type="Resource" id="Resource_oospj"]
+script = ExtResource("1_1no7f")
+low = 13
+high = 16
+points = 4
+assists = 1
+rebounds = 2
+
+[sub_resource type="Resource" id="Resource_4g1l3"]
+script = ExtResource("1_1no7f")
+low = 17
+high = 30
+points = 6
+assists = 2
+rebounds = 3
+
+[resource]
+script = ExtResource("1_k1nsi")
+offense = 7
+defense = 10
+positions = Array[int]([3])
+first_name = "Jonathan"
+last_name = "Kuminga"
+three_point_bonus = 3
+player_cost = 0
+roll_table = Array[ExtResource("1_1no7f")]([SubResource("Resource_ykxd6"), SubResource("Resource_7owuq"), SubResource("Resource_oospj"), SubResource("Resource_4g1l3")])
