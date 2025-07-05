@@ -1,0 +1,55 @@
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://cqyd04134g1f1"]
+
+[ext_resource type="Script" path="res://scripts/RollTableRow.gd" id="1_ehqkg"]
+[ext_resource type="Script" path="res://scripts/BallPlayerStats.gd" id="1_uw4hw"]
+
+[sub_resource type="Resource" id="Resource_8us7g"]
+script = ExtResource("1_ehqkg")
+low = 1
+high = 5
+points = 0
+assists = 0
+rebounds = 1
+
+[sub_resource type="Resource" id="Resource_g06sp"]
+script = ExtResource("1_ehqkg")
+low = 6
+high = 10
+points = 4
+assists = 1
+rebounds = 2
+
+[sub_resource type="Resource" id="Resource_7bvv6"]
+script = ExtResource("1_ehqkg")
+low = 11
+high = 17
+points = 8
+assists = 1
+rebounds = 3
+
+[sub_resource type="Resource" id="Resource_gwvnw"]
+script = ExtResource("1_ehqkg")
+low = 18
+high = 24
+points = 11
+assists = 2
+rebounds = 5
+
+[sub_resource type="Resource" id="Resource_efnsg"]
+script = ExtResource("1_ehqkg")
+low = 25
+high = 30
+points = 14
+assists = 3
+rebounds = 6
+
+[resource]
+script = ExtResource("1_uw4hw")
+offense = 14
+defense = 14
+positions = Array[int]([2, 3, 4])
+first_name = "Giannis"
+last_name = "Antetokounmpo"
+three_point_bonus = 2
+player_cost = 0
+roll_table = Array[ExtResource("1_ehqkg")]([SubResource("Resource_8us7g"), SubResource("Resource_g06sp"), SubResource("Resource_7bvv6"), SubResource("Resource_gwvnw"), SubResource("Resource_efnsg")])

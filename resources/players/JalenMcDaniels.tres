@@ -1,0 +1,47 @@
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://c43so26p5qisu"]
+
+[ext_resource type="Script" path="res://scripts/BallPlayerStats.gd" id="1_fdqr2"]
+[ext_resource type="Script" path="res://scripts/RollTableRow.gd" id="1_ty1sj"]
+
+[sub_resource type="Resource" id="Resource_51bvj"]
+script = ExtResource("1_ty1sj")
+low = 1
+high = 6
+points = 0
+assists = 0
+rebounds = 0
+
+[sub_resource type="Resource" id="Resource_tjra3"]
+script = ExtResource("1_ty1sj")
+low = 7
+high = 13
+points = 2
+assists = 0
+rebounds = 1
+
+[sub_resource type="Resource" id="Resource_5plvu"]
+script = ExtResource("1_ty1sj")
+low = 14
+high = 18
+points = 5
+assists = 1
+rebounds = 2
+
+[sub_resource type="Resource" id="Resource_w3ds7"]
+script = ExtResource("1_ty1sj")
+low = 19
+high = 30
+points = 7
+assists = 2
+rebounds = 3
+
+[resource]
+script = ExtResource("1_fdqr2")
+offense = 9
+defense = 10
+positions = Array[int]([2, 3])
+first_name = "Jalen"
+last_name = "McDaniels"
+three_point_bonus = 0
+player_cost = 0
+roll_table = Array[ExtResource("1_ty1sj")]([SubResource("Resource_51bvj"), SubResource("Resource_tjra3"), SubResource("Resource_5plvu"), SubResource("Resource_w3ds7")])

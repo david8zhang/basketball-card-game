@@ -1,0 +1,47 @@
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://b5r1vvd75s7lt"]
+
+[ext_resource type="Script" path="res://scripts/RollTableRow.gd" id="1_15lil"]
+[ext_resource type="Script" path="res://scripts/BallPlayerStats.gd" id="1_64w73"]
+
+[sub_resource type="Resource" id="Resource_bqkai"]
+script = ExtResource("1_15lil")
+low = 1
+high = 6
+points = 1
+assists = 0
+rebounds = 0
+
+[sub_resource type="Resource" id="Resource_0huo0"]
+script = ExtResource("1_15lil")
+low = 7
+high = 13
+points = 3
+assists = 0
+rebounds = 2
+
+[sub_resource type="Resource" id="Resource_vjbya"]
+script = ExtResource("1_15lil")
+low = 14
+high = 17
+points = 6
+assists = 1
+rebounds = 5
+
+[sub_resource type="Resource" id="Resource_ythun"]
+script = ExtResource("1_15lil")
+low = 18
+high = 30
+points = 8
+assists = 1
+rebounds = 7
+
+[resource]
+script = ExtResource("1_64w73")
+offense = 8
+defense = 11
+positions = Array[int]([4])
+first_name = "Ivica"
+last_name = "Zubac"
+three_point_bonus = 0
+player_cost = 0
+roll_table = Array[ExtResource("1_15lil")]([SubResource("Resource_bqkai"), SubResource("Resource_0huo0"), SubResource("Resource_vjbya"), SubResource("Resource_ythun")])
