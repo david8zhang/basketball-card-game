@@ -46,7 +46,7 @@ rebounds = 6
 [resource]
 script = ExtResource("1_uw4hw")
 offense = 14
-defense = 14
+defense = 15
 positions = Array[int]([2, 3, 4])
 first_name = "Giannis"
 last_name = "Antetokounmpo"
