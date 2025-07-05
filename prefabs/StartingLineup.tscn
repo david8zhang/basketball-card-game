@@ -9,6 +9,6 @@ anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
 size_flags_horizontal = 4
-theme_override_constants/separation = 100
+theme_override_constants/separation = 20
 script = ExtResource("1_smxg4")
 card_scene = ExtResource("2_ix3b1")

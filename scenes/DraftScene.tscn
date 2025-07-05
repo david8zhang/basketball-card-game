@@ -1,0 +1,93 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3cr5jpw52n0r"]
+
+[ext_resource type="Script" path="res://scripts/DraftScene.gd" id="1_hkacg"]
+[ext_resource type="PackedScene" uid="uid://canx4b4pr7n3c" path="res://prefabs/BallPlayerCard.tscn" id="2_twtru"]
+
+[node name="DraftScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hkacg")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 2
+
+[node name="BallPlayerCard" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_twtru")]
+layout_mode = 2
+show_roll_table = true
+
+[node name="BallPlayerCard2" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_twtru")]
+layout_mode = 2
+show_roll_table = true
+
+[node name="BallPlayerCard3" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_twtru")]
+layout_mode = 2
+show_roll_table = true
+
+[node name="BallPlayerCard4" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_twtru")]
+layout_mode = 2
+show_roll_table = true
+
+[node name="BallPlayerCard5" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_twtru")]
+layout_mode = 2
+show_roll_table = true
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 450)
+layout_mode = 2
+vertical_scroll_mode = 0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/MarginContainer/ScrollContainer"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+
+[node name="BallPlayerCard" parent="VBoxContainer/MarginContainer/ScrollContainer/HBoxContainer2" instance=ExtResource("2_twtru")]
+layout_mode = 2
+size_flags_horizontal = 3
+show_roll_table = true
+
+[node name="BallPlayerCard2" parent="VBoxContainer/MarginContainer/ScrollContainer/HBoxContainer2" instance=ExtResource("2_twtru")]
+layout_mode = 2
+size_flags_horizontal = 3
+show_roll_table = true
+
+[node name="BallPlayerCard3" parent="VBoxContainer/MarginContainer/ScrollContainer/HBoxContainer2" instance=ExtResource("2_twtru")]
+layout_mode = 2
+size_flags_horizontal = 3
+show_roll_table = true
+
+[node name="BallPlayerCard4" parent="VBoxContainer/MarginContainer/ScrollContainer/HBoxContainer2" instance=ExtResource("2_twtru")]
+layout_mode = 2
+size_flags_horizontal = 3
+show_roll_table = true
+
+[node name="BallPlayerCard5" parent="VBoxContainer/MarginContainer/ScrollContainer/HBoxContainer2" instance=ExtResource("2_twtru")]
+layout_mode = 2
+size_flags_horizontal = 3
+show_roll_table = true
+
+[node name="BallPlayerCard6" parent="VBoxContainer/MarginContainer/ScrollContainer/HBoxContainer2" instance=ExtResource("2_twtru")]
+layout_mode = 2
+size_flags_horizontal = 3
+show_roll_table = true

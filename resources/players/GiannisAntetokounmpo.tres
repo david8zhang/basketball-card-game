@@ -52,4 +52,6 @@ first_name = "Giannis"
 last_name = "Antetokounmpo"
 three_point_bonus = 2
 player_cost = 0
+first_name_size = 28
+last_name_size = 22
 roll_table = Array[ExtResource("1_ehqkg")]([SubResource("Resource_8us7g"), SubResource("Resource_g06sp"), SubResource("Resource_7bvv6"), SubResource("Resource_gwvnw"), SubResource("Resource_efnsg")])

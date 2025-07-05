@@ -1,8 +1,8 @@
 [gd_scene load_steps=12 format=3 uid="uid://nr3d4pggsa3m"]
 
-[ext_resource type="Script" path="res://scripts/BallPlayerCard.gd" id="1_2wafc"]
+[ext_resource type="Script" path="res://scripts/MatchupPlayerCard.gd" id="1_b2tmg"]
 [ext_resource type="PackedScene" uid="uid://cgpent6asbq6b" path="res://prefabs/TableValue.tscn" id="2_ko473"]
-[ext_resource type="Resource" uid="uid://dhtty2eoupow0" path="res://resources/players/DorianFinneySmith.tres" id="3_kd1tf"]
+[ext_resource type="Resource" uid="uid://cqyd04134g1f1" path="res://resources/players/GiannisAntetokounmpo.tres" id="3_xd1ub"]
 [ext_resource type="Texture2D" uid="uid://ckq3e43adggw3" path="res://assets/players/aaron-gordon.jpg" id="4_1k4qq"]
 [ext_resource type="PackedScene" uid="uid://ciyhd5db3ubjt" path="res://prefabs/Marker.tscn" id="4_huvud"]
 [ext_resource type="Animation" uid="uid://v6bgww4fmfmj" path="res://animations/highlight_offense_stat.res" id="4_vlyfh"]
@@ -50,9 +50,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 6
-script = ExtResource("1_2wafc")
+script = ExtResource("1_b2tmg")
 roll_table_value_scene = ExtResource("2_ko473")
-ball_player_stats = ExtResource("3_kd1tf")
+ball_player_stats = ExtResource("3_xd1ub")
 roll_table_font_override_size = 15
 
 [node name="Panel" type="Panel" parent="."]
@@ -165,6 +165,7 @@ text = "PG"
 layout_mode = 2
 
 [node name="PlayerName" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2"]
+clip_contents = true
 layout_mode = 2
 alignment = 2
 
@@ -178,7 +179,6 @@ size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 15
-theme_override_font_sizes/font_size = 28
 text = "FIRSTNAME"
 
 [node name="Last" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/PlayerName"]
@@ -187,7 +187,6 @@ size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 15
-theme_override_font_sizes/font_size = 28
 text = "LASTNAME"
 
 [node name="Control" type="Control" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2"]

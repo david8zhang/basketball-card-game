@@ -9,7 +9,7 @@ anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
 size_flags_horizontal = 4
-theme_override_constants/separation = 100
+theme_override_constants/separation = 25
 script = ExtResource("1_vyal6")
 
 [node name="PGSlot" parent="." instance=ExtResource("1_huxsp")]
