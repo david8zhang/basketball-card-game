@@ -46,4 +46,6 @@ last_name = "Wade"
 three_point_bonus = 4
 player_cost = 0
 texture = ExtResource("3_3m1q5")
+first_name_size = 28
+last_name_size = 28
 roll_table = Array[ExtResource("1_t6phj")]([SubResource("Resource_j5llo"), SubResource("Resource_x6hql"), SubResource("Resource_an0b6"), SubResource("Resource_fs63f")])

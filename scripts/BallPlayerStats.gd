@@ -17,3 +17,6 @@ enum PlayerPosition { PG, SG, SF, PF, C }
 
 @export_group("RollTable")
 @export var roll_table: Array[RollTableRow] = []
+
+func get_full_name():
+  return first_name + " " + last_name

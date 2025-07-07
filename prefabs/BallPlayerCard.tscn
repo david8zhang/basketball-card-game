@@ -42,6 +42,8 @@ mouse_filter = 1
 script = ExtResource("1_my46u")
 roll_table_value_scene = ExtResource("2_bfexb")
 ball_player_stats = ExtResource("3_ajuuy")
+roll_table_font_override_size = null
+assigned_position = null
 show_roll_table = false
 
 [node name="Panel" type="Panel" parent="."]
@@ -166,7 +168,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 20
 text = "FIRSTNAME"
 
 [node name="Last" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/PlayerName"]
@@ -175,7 +177,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 20
 text = "LASTNAME"
 
 [node name="Control" type="Control" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2"]

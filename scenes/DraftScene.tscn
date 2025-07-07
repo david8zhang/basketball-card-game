@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://b3cr5jpw52n0r"]
+[gd_scene load_steps=5 format=3 uid="uid://b3cr5jpw52n0r"]
 
 [ext_resource type="Script" path="res://scripts/DraftScene.gd" id="1_hkacg"]
-[ext_resource type="PackedScene" uid="uid://canx4b4pr7n3c" path="res://prefabs/BallPlayerCard.tscn" id="2_twtru"]
+[ext_resource type="PackedScene" uid="uid://canx4b4pr7n3c" path="res://prefabs/BallPlayerCard.tscn" id="2_e0ktr"]
+[ext_resource type="PackedScene" uid="uid://cgehw3go3iec0" path="res://prefabs/CardSlot.tscn" id="2_idsv2"]
+[ext_resource type="PackedScene" uid="uid://bm8fw1micckc0" path="res://prefabs/BPCardPreview.tscn" id="3_pwmdt"]
 
 [node name="DraftScene" type="Control"]
 layout_mode = 3
@@ -11,6 +13,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_hkacg")
+bp_card_scene = ExtResource("2_e0ktr")
+bp_card_preview_scene = ExtResource("3_pwmdt")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -25,25 +29,24 @@ layout_mode = 2
 size_flags_vertical = 3
 alignment = 2
 
-[node name="BallPlayerCard" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_twtru")]
+[node name="CardSlot" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_idsv2")]
 layout_mode = 2
-show_roll_table = true
 
-[node name="BallPlayerCard2" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_twtru")]
+[node name="CardSlot2" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_idsv2")]
 layout_mode = 2
-show_roll_table = true
+player_position = 1
 
-[node name="BallPlayerCard3" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_twtru")]
+[node name="CardSlot3" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_idsv2")]
 layout_mode = 2
-show_roll_table = true
+player_position = 2
 
-[node name="BallPlayerCard4" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_twtru")]
+[node name="CardSlot4" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_idsv2")]
 layout_mode = 2
-show_roll_table = true
+player_position = 3
 
-[node name="BallPlayerCard5" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_twtru")]
+[node name="CardSlot5" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_idsv2")]
 layout_mode = 2
-show_roll_table = true
+player_position = 4
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -61,33 +64,3 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 20
-
-[node name="BallPlayerCard" parent="VBoxContainer/MarginContainer/ScrollContainer/HBoxContainer2" instance=ExtResource("2_twtru")]
-layout_mode = 2
-size_flags_horizontal = 3
-show_roll_table = true
-
-[node name="BallPlayerCard2" parent="VBoxContainer/MarginContainer/ScrollContainer/HBoxContainer2" instance=ExtResource("2_twtru")]
-layout_mode = 2
-size_flags_horizontal = 3
-show_roll_table = true
-
-[node name="BallPlayerCard3" parent="VBoxContainer/MarginContainer/ScrollContainer/HBoxContainer2" instance=ExtResource("2_twtru")]
-layout_mode = 2
-size_flags_horizontal = 3
-show_roll_table = true
-
-[node name="BallPlayerCard4" parent="VBoxContainer/MarginContainer/ScrollContainer/HBoxContainer2" instance=ExtResource("2_twtru")]
-layout_mode = 2
-size_flags_horizontal = 3
-show_roll_table = true
-
-[node name="BallPlayerCard5" parent="VBoxContainer/MarginContainer/ScrollContainer/HBoxContainer2" instance=ExtResource("2_twtru")]
-layout_mode = 2
-size_flags_horizontal = 3
-show_roll_table = true
-
-[node name="BallPlayerCard6" parent="VBoxContainer/MarginContainer/ScrollContainer/HBoxContainer2" instance=ExtResource("2_twtru")]
-layout_mode = 2
-size_flags_horizontal = 3
-show_roll_table = true

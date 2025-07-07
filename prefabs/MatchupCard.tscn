@@ -50,10 +50,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 6
+mouse_filter = 2
 script = ExtResource("1_b2tmg")
 roll_table_value_scene = ExtResource("2_ko473")
 ball_player_stats = ExtResource("3_ci24t")
 roll_table_font_override_size = 15
+assigned_position = null
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1

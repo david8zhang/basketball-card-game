@@ -1,0 +1,53 @@
+[gd_scene load_steps=4 format=3 uid="uid://bm8fw1micckc0"]
+
+[ext_resource type="Script" path="res://scripts/BPCardPreview.gd" id="1_oybm7"]
+[ext_resource type="PackedScene" uid="uid://nr3d4pggsa3m" path="res://prefabs/MatchupCard.tscn" id="2_tgnhj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1gspt"]
+bg_color = Color(0, 0, 0, 0.588235)
+
+[node name="BPCardPreview" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_oybm7")
+matchup_bp_card_scene = ExtResource("2_tgnhj")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1gspt")
+
+[node name="SelectButton" type="Button" parent="."]
+custom_minimum_size = Vector2(150, 2.08165e-12)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -47.0
+offset_top = -115.0
+offset_right = 47.0
+offset_bottom = -65.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "Select"
+
+[node name="CloseButton" type="Button" parent="."]
+layout_mode = 1
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 104.0
+offset_bottom = 60.0
+theme_override_font_sizes/font_size = 25
+text = "Close"
