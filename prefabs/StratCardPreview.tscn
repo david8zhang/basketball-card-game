@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://lkpp0562vspw"]
 
-[ext_resource type="Script" path="res://scripts/StratCardPreview.gd" id="1_l6akk"]
+[ext_resource type="Script" uid="uid://wve62v035ybf" path="res://scripts/StratCardPreview.gd" id="1_l6akk"]
 [ext_resource type="PackedScene" uid="uid://bi2ksw8anhd4v" path="res://prefabs/StrategyCard.tscn" id="2_28bfr"]
 
 [node name="StratCardPreview" type="Node"]

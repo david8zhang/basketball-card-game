@@ -1,11 +1,12 @@
-[gd_resource type="Resource" script_class="StrategyCardConfig" load_steps=14 format=3 uid="uid://bdylgvbivsarv"]
+[gd_resource type="Resource" script_class="StrategyCardConfig" load_steps=15 format=3 uid="uid://bdylgvbivsarv"]
 
-[ext_resource type="Script" path="res://scripts/strategy/action/RollDiceAction.gd" id="1_irpgn"]
-[ext_resource type="Script" path="res://scripts/strategy/StrategyCardConfig.gd" id="1_pev5k"]
-[ext_resource type="Script" path="res://scripts/strategy/bonus/NoopBonus.gd" id="2_er6ay"]
-[ext_resource type="Script" path="res://scripts/strategy/bonus/MarkerBonus.gd" id="3_2p4rk"]
-[ext_resource type="Script" path="res://scripts/strategy/StrategyCardSequenceNode.gd" id="4_8712p"]
-[ext_resource type="Script" path="res://scripts/strategy/condition/DiceRollCondition.gd" id="5_eys5n"]
+[ext_resource type="Script" uid="uid://ckyo36itiyt30" path="res://scripts/strategy/action/RollDiceAction.gd" id="1_irpgn"]
+[ext_resource type="Script" uid="uid://cdj30lies16yq" path="res://scripts/strategy/StrategyCardConfig.gd" id="1_pev5k"]
+[ext_resource type="Script" uid="uid://bq22hlebjq8xg" path="res://scripts/strategy/StrategyCardNode.gd" id="1_sjhb7"]
+[ext_resource type="Script" uid="uid://8h7wbli6l8ea" path="res://scripts/strategy/bonus/NoopBonus.gd" id="2_er6ay"]
+[ext_resource type="Script" uid="uid://valpsh4ib3un" path="res://scripts/strategy/bonus/MarkerBonus.gd" id="3_2p4rk"]
+[ext_resource type="Script" uid="uid://dfdnia3mppqsu" path="res://scripts/strategy/StrategyCardSequenceNode.gd" id="4_8712p"]
+[ext_resource type="Script" uid="uid://2s3vmqbdc7qr" path="res://scripts/strategy/condition/DiceRollCondition.gd" id="5_eys5n"]
 
 [sub_resource type="Resource" id="Resource_7myi7"]
 script = ExtResource("1_irpgn")
@@ -31,7 +32,7 @@ bonus_type = 3
 
 [sub_resource type="Resource" id="Resource_gtdt3"]
 script = ExtResource("4_8712p")
-children = Array[Resource("res://scripts/strategy/StrategyCardNode.gd")]([SubResource("Resource_big1v"), SubResource("Resource_3su7y")])
+children = Array[ExtResource("1_sjhb7")]([SubResource("Resource_big1v"), SubResource("Resource_3su7y")])
 
 [sub_resource type="Resource" id="Resource_8uej1"]
 script = ExtResource("5_eys5n")
@@ -43,7 +44,7 @@ fail_child = SubResource("Resource_toksa")
 
 [sub_resource type="Resource" id="Resource_n4owb"]
 script = ExtResource("4_8712p")
-children = Array[Resource("res://scripts/strategy/StrategyCardNode.gd")]([SubResource("Resource_7myi7"), SubResource("Resource_8uej1")])
+children = Array[ExtResource("1_sjhb7")]([SubResource("Resource_7myi7"), SubResource("Resource_8uej1")])
 
 [resource]
 script = ExtResource("1_pev5k")

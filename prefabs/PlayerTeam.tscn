@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://b2et8rtkxtdo6"]
 
-[ext_resource type="Script" path="res://scripts/PlayerTeam.gd" id="1_fkix7"]
+[ext_resource type="Script" uid="uid://cfj7bio73dc7n" path="res://scripts/PlayerTeam.gd" id="1_fkix7"]
 [ext_resource type="PackedScene" uid="uid://py6a76la7wrw" path="res://prefabs/StartingLineup.tscn" id="2_3142n"]
 [ext_resource type="PackedScene" uid="uid://cl8wuqrft8gf4" path="res://prefabs/LineupSelector.tscn" id="3_86t8e"]
 [ext_resource type="PackedScene" uid="uid://w6enbxoyw6au" path="res://prefabs/StrategyCardDeck.tscn" id="4_cgkio"]

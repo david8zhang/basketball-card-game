@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://dqr18xaoirdkp"]
 
-[ext_resource type="Script" path="res://scripts/BoxScoreBonusAnimator.gd" id="1_dk3j4"]
+[ext_resource type="Script" uid="uid://bnvw6uxb1cqcl" path="res://scripts/BoxScoreBonusAnimator.gd" id="1_dk3j4"]
 [ext_resource type="PackedScene" uid="uid://cloqfuoeb140w" path="res://prefabs/BoxScoreBonusLabel.tscn" id="2_1gn3j"]
-[ext_resource type="Script" path="res://scripts/strategy/bonus/BoxScoreBonus.gd" id="2_gh7ac"]
+[ext_resource type="Script" uid="uid://dvl8hl7mfdxi2" path="res://scripts/strategy/bonus/BoxScoreBonus.gd" id="2_gh7ac"]
 
 [sub_resource type="Resource" id="Resource_m8faq"]
 script = ExtResource("2_gh7ac")

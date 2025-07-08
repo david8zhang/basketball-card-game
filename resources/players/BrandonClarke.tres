@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://dcch4p3kvlan4"]
 
-[ext_resource type="Script" path="res://scripts/RollTableRow.gd" id="1_ta0u3"]
-[ext_resource type="Script" path="res://scripts/BallPlayerStats.gd" id="2_groid"]
+[ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_ta0u3"]
+[ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_groid"]
 [ext_resource type="Texture2D" uid="uid://sl0hpgnbaoy3" path="res://assets/players/brandon-clarke.jpeg" id="3_u8do8"]
 
 [sub_resource type="Resource" id="Resource_tjd14"]
@@ -46,4 +46,6 @@ last_name = "Clarke"
 three_point_bonus = 0
 player_cost = 290
 texture = ExtResource("3_u8do8")
+first_name_size = 28
+last_name_size = 28
 roll_table = Array[ExtResource("1_ta0u3")]([SubResource("Resource_tjd14"), SubResource("Resource_k68ba"), SubResource("Resource_6f4wt"), SubResource("Resource_qlccc")])

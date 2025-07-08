@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cx1q0ii5q4xhh"]
 
-[ext_resource type="Script" path="res://scripts/MatchupPtsAsstsRebs.gd" id="1_alqtu"]
+[ext_resource type="Script" uid="uid://b3eihsxxnjxx5" path="res://scripts/MatchupPtsAsstsRebs.gd" id="1_alqtu"]
 
 [node name="MatchupPtsAsstsRebs" type="HBoxContainer"]
 anchors_preset = 8

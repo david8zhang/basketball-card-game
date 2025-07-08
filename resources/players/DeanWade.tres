@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://dghnk54btjod"]
 
-[ext_resource type="Script" path="res://scripts/BallPlayerStats.gd" id="1_i31sx"]
-[ext_resource type="Script" path="res://scripts/RollTableRow.gd" id="1_t6phj"]
+[ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="1_i31sx"]
+[ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_t6phj"]
 [ext_resource type="Texture2D" uid="uid://du8m6h7cjp5t4" path="res://assets/players/dean-wade.png" id="3_3m1q5"]
 
 [sub_resource type="Resource" id="Resource_j5llo"]

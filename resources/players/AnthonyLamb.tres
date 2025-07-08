@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://0i7ih065y7ke"]
 
-[ext_resource type="Script" path="res://scripts/RollTableRow.gd" id="1_la6rn"]
-[ext_resource type="Script" path="res://scripts/BallPlayerStats.gd" id="2_21xt4"]
+[ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_la6rn"]
+[ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_21xt4"]
 [ext_resource type="Texture2D" uid="uid://1ob8638fv2qj" path="res://assets/players/anthony-lamb.jpg" id="3_wcyts"]
 
 [sub_resource type="Resource" id="Resource_qau4q"]
@@ -46,4 +46,6 @@ last_name = "Lamb"
 three_point_bonus = 0
 player_cost = 320
 texture = ExtResource("3_wcyts")
+first_name_size = 28
+last_name_size = 28
 roll_table = Array[ExtResource("1_la6rn")]([SubResource("Resource_qau4q"), SubResource("Resource_10bfn"), SubResource("Resource_psqih"), SubResource("Resource_yfirf")])

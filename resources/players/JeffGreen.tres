@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://d1n83vbx7dpcc"]
 
-[ext_resource type="Script" path="res://scripts/BallPlayerStats.gd" id="1_4fy5x"]
-[ext_resource type="Script" path="res://scripts/RollTableRow.gd" id="1_v4bmm"]
+[ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="1_4fy5x"]
+[ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_v4bmm"]
 
 [sub_resource type="Resource" id="Resource_xnwc3"]
 script = ExtResource("1_v4bmm")
@@ -44,4 +44,6 @@ first_name = "Jeff"
 last_name = "Green"
 three_point_bonus = 0
 player_cost = 0
+first_name_size = 28
+last_name_size = 28
 roll_table = Array[ExtResource("1_v4bmm")]([SubResource("Resource_xnwc3"), SubResource("Resource_j4yqe"), SubResource("Resource_aju4c"), SubResource("Resource_jo8fo")])

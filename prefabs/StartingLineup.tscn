@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://py6a76la7wrw"]
 
-[ext_resource type="Script" path="res://scripts/StartingLineup.gd" id="1_smxg4"]
+[ext_resource type="Script" uid="uid://5mgbjrp6ukqa" path="res://scripts/StartingLineup.gd" id="1_smxg4"]
 [ext_resource type="PackedScene" uid="uid://canx4b4pr7n3c" path="res://prefabs/BallPlayerCard.tscn" id="2_ix3b1"]
 
 [node name="StartingLineup" type="HBoxContainer"]

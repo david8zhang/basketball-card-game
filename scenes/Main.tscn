@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://qxrlmkdns66e"]
 
-[ext_resource type="Script" path="res://scripts/Game.gd" id="1_sqmis"]
+[ext_resource type="Script" uid="uid://nv7kewy7u83r" path="res://scripts/Game.gd" id="1_sqmis"]
 [ext_resource type="PackedScene" uid="uid://ctjg7yuu7e2ql" path="res://prefabs/CPUTeam.tscn" id="2_me2iv"]
 [ext_resource type="PackedScene" uid="uid://b2et8rtkxtdo6" path="res://prefabs/PlayerTeam.tscn" id="2_qoetb"]
 [ext_resource type="PackedScene" uid="uid://shsmwna0cia5" path="res://prefabs/QuarterEnd.tscn" id="3_g1bwu"]

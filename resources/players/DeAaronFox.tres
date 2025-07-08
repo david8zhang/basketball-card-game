@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="BallPlayerStats" load_steps=9 format=3 uid="uid://l0oimokk6gut"]
 
-[ext_resource type="Script" path="res://scripts/RollTableRow.gd" id="1_4b7nh"]
-[ext_resource type="Script" path="res://scripts/BallPlayerStats.gd" id="2_cq3gq"]
+[ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_4b7nh"]
+[ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_cq3gq"]
 [ext_resource type="Texture2D" uid="uid://ngr037hw0aqr" path="res://assets/players/deaaron-fox.png" id="3_1y5jn"]
 
 [sub_resource type="Resource" id="Resource_bud03"]
@@ -54,4 +54,6 @@ last_name = "Fox"
 three_point_bonus = 2
 player_cost = 950
 texture = ExtResource("3_1y5jn")
+first_name_size = 28
+last_name_size = 28
 roll_table = Array[ExtResource("1_4b7nh")]([SubResource("Resource_bud03"), SubResource("Resource_opjtp"), SubResource("Resource_qv3wd"), SubResource("Resource_eync0"), SubResource("Resource_5f1ja")])

@@ -1,11 +1,12 @@
-[gd_resource type="Resource" script_class="StrategyCardConfig" load_steps=12 format=3 uid="uid://bi5emlrauehda"]
+[gd_resource type="Resource" script_class="StrategyCardConfig" load_steps=13 format=3 uid="uid://bi5emlrauehda"]
 
-[ext_resource type="Script" path="res://scripts/strategy/action/RollDiceAction.gd" id="1_f2u4c"]
-[ext_resource type="Script" path="res://scripts/strategy/StrategyCardConfig.gd" id="1_gosdo"]
-[ext_resource type="Script" path="res://scripts/strategy/bonus/NoopBonus.gd" id="2_3qc6f"]
-[ext_resource type="Script" path="res://scripts/strategy/bonus/MarkerBonus.gd" id="3_02p1d"]
-[ext_resource type="Script" path="res://scripts/strategy/condition/DiceRollCondition.gd" id="4_et3s3"]
-[ext_resource type="Script" path="res://scripts/strategy/StrategyCardSequenceNode.gd" id="5_dscdy"]
+[ext_resource type="Script" uid="uid://bq22hlebjq8xg" path="res://scripts/strategy/StrategyCardNode.gd" id="1_d50gg"]
+[ext_resource type="Script" uid="uid://ckyo36itiyt30" path="res://scripts/strategy/action/RollDiceAction.gd" id="1_f2u4c"]
+[ext_resource type="Script" uid="uid://cdj30lies16yq" path="res://scripts/strategy/StrategyCardConfig.gd" id="1_gosdo"]
+[ext_resource type="Script" uid="uid://8h7wbli6l8ea" path="res://scripts/strategy/bonus/NoopBonus.gd" id="2_3qc6f"]
+[ext_resource type="Script" uid="uid://valpsh4ib3un" path="res://scripts/strategy/bonus/MarkerBonus.gd" id="3_02p1d"]
+[ext_resource type="Script" uid="uid://2s3vmqbdc7qr" path="res://scripts/strategy/condition/DiceRollCondition.gd" id="4_et3s3"]
+[ext_resource type="Script" uid="uid://dfdnia3mppqsu" path="res://scripts/strategy/StrategyCardSequenceNode.gd" id="5_dscdy"]
 
 [sub_resource type="Resource" id="Resource_ta7lx"]
 script = ExtResource("1_f2u4c")
@@ -33,7 +34,7 @@ fail_child = SubResource("Resource_ei2h2")
 
 [sub_resource type="Resource" id="Resource_3qtvu"]
 script = ExtResource("5_dscdy")
-children = Array[Resource("res://scripts/strategy/StrategyCardNode.gd")]([SubResource("Resource_ta7lx"), SubResource("Resource_ymg8q")])
+children = Array[ExtResource("1_d50gg")]([SubResource("Resource_ta7lx"), SubResource("Resource_ymg8q")])
 
 [resource]
 script = ExtResource("1_gosdo")

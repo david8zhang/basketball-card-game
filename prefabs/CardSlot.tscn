@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cgehw3go3iec0"]
 
-[ext_resource type="Script" path="res://scripts/CardSlot.gd" id="1_bc6y8"]
+[ext_resource type="Script" uid="uid://dygna0mve0iao" path="res://scripts/CardSlot.gd" id="1_bc6y8"]
 
 [node name="CardSlot" type="Control"]
 custom_minimum_size = Vector2(250, 350)

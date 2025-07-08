@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://dd6y2yvpwywfp"]
 
-[ext_resource type="Script" path="res://scripts/RollTableRow.gd" id="1_ohucc"]
-[ext_resource type="Script" path="res://scripts/BallPlayerStats.gd" id="2_118u3"]
+[ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_ohucc"]
+[ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_118u3"]
 [ext_resource type="Texture2D" uid="uid://dv6qf6m451e0d" path="res://assets/players/damion-lee.jpg" id="3_xem27"]
 
 [sub_resource type="Resource" id="Resource_syoao"]
@@ -46,4 +46,6 @@ last_name = "Lee"
 three_point_bonus = 3
 player_cost = 300
 texture = ExtResource("3_xem27")
+first_name_size = 28
+last_name_size = 28
 roll_table = Array[ExtResource("1_ohucc")]([SubResource("Resource_syoao"), SubResource("Resource_ow4fd"), SubResource("Resource_tex2t"), SubResource("Resource_lnunj")])

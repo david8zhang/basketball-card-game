@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://b3cr5jpw52n0r"]
 
-[ext_resource type="Script" path="res://scripts/DraftScene.gd" id="1_hkacg"]
+[ext_resource type="Script" uid="uid://bipt6py4qa6vk" path="res://scripts/DraftScene.gd" id="1_hkacg"]
 [ext_resource type="PackedScene" uid="uid://canx4b4pr7n3c" path="res://prefabs/BallPlayerCard.tscn" id="2_e0ktr"]
 [ext_resource type="PackedScene" uid="uid://cgehw3go3iec0" path="res://prefabs/CardSlot.tscn" id="2_idsv2"]
 [ext_resource type="PackedScene" uid="uid://bm8fw1micckc0" path="res://prefabs/BPCardPreview.tscn" id="3_pwmdt"]

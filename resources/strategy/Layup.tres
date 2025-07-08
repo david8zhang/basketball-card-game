@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="StrategyCardConfig" load_steps=8 format=3 uid="uid://b634w12qade1"]
 
-[ext_resource type="Script" path="res://scripts/strategy/condition/StatCompCondition.gd" id="1_4hmae"]
-[ext_resource type="Script" path="res://scripts/strategy/StrategyCardConfig.gd" id="1_58apj"]
-[ext_resource type="Script" path="res://scripts/strategy/bonus/NoopBonus.gd" id="1_86n60"]
-[ext_resource type="Script" path="res://scripts/strategy/bonus/BoxScoreBonus.gd" id="2_fducl"]
+[ext_resource type="Script" uid="uid://ddnjcjhym57bv" path="res://scripts/strategy/condition/StatCompCondition.gd" id="1_4hmae"]
+[ext_resource type="Script" uid="uid://cdj30lies16yq" path="res://scripts/strategy/StrategyCardConfig.gd" id="1_58apj"]
+[ext_resource type="Script" uid="uid://8h7wbli6l8ea" path="res://scripts/strategy/bonus/NoopBonus.gd" id="1_86n60"]
+[ext_resource type="Script" uid="uid://dvl8hl7mfdxi2" path="res://scripts/strategy/bonus/BoxScoreBonus.gd" id="2_fducl"]
 
 [sub_resource type="Resource" id="Resource_c6a02"]
 script = ExtResource("1_86n60")

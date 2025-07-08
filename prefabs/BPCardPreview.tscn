@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bm8fw1micckc0"]
 
-[ext_resource type="Script" path="res://scripts/BPCardPreview.gd" id="1_oybm7"]
+[ext_resource type="Script" uid="uid://cyy0shif0uemi" path="res://scripts/BPCardPreview.gd" id="1_oybm7"]
 [ext_resource type="PackedScene" uid="uid://nr3d4pggsa3m" path="res://prefabs/MatchupCard.tscn" id="2_tgnhj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1gspt"]

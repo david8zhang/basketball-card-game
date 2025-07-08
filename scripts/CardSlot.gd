@@ -5,7 +5,9 @@ extends Control
 @onready var button = $Button as Button
 @export var player_position := BallPlayerStats.PlayerPosition.PG
 
-signal on_select_card(player_position)
+var card_in_slot: BallPlayerCard
+
+signal on_select_card(card_slot)
 
 func _ready():
 	match player_position:
@@ -19,8 +21,14 @@ func _ready():
 			position_label.text = "PF"
 		BallPlayerStats.PlayerPosition.C:
 			position_label.text = "C"
-	
 	button.pressed.connect(on_pressed)
 
 func on_pressed():
-	on_select_card.emit(player_position)
+	on_select_card.emit(self)
+
+func set_bp_card_in_slot(bp_card: BallPlayerCard):
+	if card_in_slot != null:
+		card_in_slot.queue_free()
+	card_in_slot = bp_card
+	add_child(bp_card)
+	bp_card.button.pressed.connect(on_pressed)

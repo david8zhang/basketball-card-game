@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bocyd5espcfft"]
 
-[ext_resource type="Script" path="res://scripts/StatBonusAnimator.gd" id="1_ol54w"]
+[ext_resource type="Script" uid="uid://ccsil6slai3xk" path="res://scripts/StatBonusAnimator.gd" id="1_ol54w"]
 
 [node name="StatBonusAnimator" type="Control"]
 layout_mode = 3

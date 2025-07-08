@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://q8du0pabkwos"]
 
-[ext_resource type="Script" path="res://scripts/MarkerBonusAnimator.gd" id="1_b6ui6"]
+[ext_resource type="Script" uid="uid://c6j8i57jc2ul6" path="res://scripts/MarkerBonusAnimator.gd" id="1_b6ui6"]
 
 [node name="MarkerBonusAnimator" type="Control"]
 layout_mode = 3

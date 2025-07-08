@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://cvram68b0cw7d"]
 
-[ext_resource type="Script" path="res://scripts/RollTableRow.gd" id="1_1fisp"]
-[ext_resource type="Script" path="res://scripts/BallPlayerStats.gd" id="2_dlqsx"]
+[ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_1fisp"]
+[ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_dlqsx"]
 [ext_resource type="Texture2D" uid="uid://dloj45pfhx40g" path="res://assets/players/deandre-ayton.jpg" id="3_1j60y"]
 
 [sub_resource type="Resource" id="Resource_a1ytt"]
@@ -46,4 +46,6 @@ last_name = "Ayton"
 three_point_bonus = 0
 player_cost = 450
 texture = ExtResource("3_1j60y")
+first_name_size = 28
+last_name_size = 28
 roll_table = Array[ExtResource("1_1fisp")]([SubResource("Resource_a1ytt"), SubResource("Resource_repgo"), SubResource("Resource_k4t11"), SubResource("Resource_swus7")])

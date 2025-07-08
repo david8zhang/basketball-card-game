@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cmh2p7sqkladm"]
 
-[ext_resource type="Script" path="res://scripts/BoxScoreRow.gd" id="1_qptbu"]
+[ext_resource type="Script" uid="uid://buen4duvtwm5f" path="res://scripts/BoxScoreRow.gd" id="1_qptbu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_suspj"]
 bg_color = Color(0.6, 0.6, 0.6, 0)

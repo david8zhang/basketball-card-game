@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="StrategyCardConfig" load_steps=8 format=3 uid="uid://csyb28f8fjday"]
 
-[ext_resource type="Script" path="res://scripts/strategy/bonus/NoopBonus.gd" id="1_1jdnm"]
-[ext_resource type="Script" path="res://scripts/strategy/condition/StatCompCondition.gd" id="1_2h88y"]
-[ext_resource type="Script" path="res://scripts/strategy/StrategyCardConfig.gd" id="1_fuf0v"]
-[ext_resource type="Script" path="res://scripts/strategy/bonus/RollBonus.gd" id="2_o55mq"]
+[ext_resource type="Script" uid="uid://8h7wbli6l8ea" path="res://scripts/strategy/bonus/NoopBonus.gd" id="1_1jdnm"]
+[ext_resource type="Script" uid="uid://ddnjcjhym57bv" path="res://scripts/strategy/condition/StatCompCondition.gd" id="1_2h88y"]
+[ext_resource type="Script" uid="uid://cdj30lies16yq" path="res://scripts/strategy/StrategyCardConfig.gd" id="1_fuf0v"]
+[ext_resource type="Script" uid="uid://co8frnjq86y02" path="res://scripts/strategy/bonus/RollBonus.gd" id="2_o55mq"]
 
 [sub_resource type="Resource" id="Resource_5q7d7"]
 script = ExtResource("1_1jdnm")
@@ -19,6 +19,7 @@ script = ExtResource("1_2h88y")
 off_stat_to_comp = 0
 def_stat_to_comp = 1
 comp_type = 1
+threshold = 1
 condition_type = 2
 pass_child = SubResource("Resource_j4jfe")
 fail_child = SubResource("Resource_5q7d7")

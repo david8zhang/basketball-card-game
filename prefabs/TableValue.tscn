@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cgpent6asbq6b"]
 
 [ext_resource type="StyleBox" uid="uid://c1arcj6lbqfdf" path="res://styles/RowTableValueStyle.tres" id="1_fquiw"]
-[ext_resource type="Script" path="res://scripts/TableValue.gd" id="2_f8nlp"]
+[ext_resource type="Script" uid="uid://vyg70pmpg6jh" path="res://scripts/TableValue.gd" id="2_f8nlp"]
 
 [node name="TableValue" type="PanelContainer"]
 anchors_preset = 8

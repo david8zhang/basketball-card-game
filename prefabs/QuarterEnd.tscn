@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://shsmwna0cia5"]
 
-[ext_resource type="Script" path="res://scripts/QuarterEnd.gd" id="1_baxhf"]
+[ext_resource type="Script" uid="uid://bit5565nyca2n" path="res://scripts/QuarterEnd.gd" id="1_baxhf"]
 [ext_resource type="PackedScene" uid="uid://cmh2p7sqkladm" path="res://prefabs/BoxScoreRow.tscn" id="2_57elv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uidyv"]

@@ -1,12 +1,19 @@
-[gd_scene load_steps=12 format=3 uid="uid://nr3d4pggsa3m"]
+[gd_scene load_steps=13 format=3 uid="uid://nr3d4pggsa3m"]
 
-[ext_resource type="Script" path="res://scripts/MatchupPlayerCard.gd" id="1_b2tmg"]
+[ext_resource type="Script" uid="uid://cwe2cjerdaiuv" path="res://scripts/MatchupPlayerCard.gd" id="1_b2tmg"]
 [ext_resource type="PackedScene" uid="uid://cgpent6asbq6b" path="res://prefabs/TableValue.tscn" id="2_ko473"]
 [ext_resource type="Resource" uid="uid://bp7wmkoxqyrw0" path="res://resources/players/ShaiGilgeousAlexander.tres" id="3_ci24t"]
 [ext_resource type="Texture2D" uid="uid://ckq3e43adggw3" path="res://assets/players/aaron-gordon.jpg" id="4_1k4qq"]
 [ext_resource type="PackedScene" uid="uid://ciyhd5db3ubjt" path="res://prefabs/Marker.tscn" id="4_huvud"]
 [ext_resource type="Animation" uid="uid://v6bgww4fmfmj" path="res://animations/highlight_offense_stat.res" id="4_vlyfh"]
 [ext_resource type="Animation" uid="uid://b00udrbvrd25l" path="res://animations/highlight_defense_stat.res" id="5_tli0d"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6kmcj"]
+bg_color = Color(9.38572e-06, 0.759174, 3.93277e-07, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7wo1j"]
 bg_color = Color(0, 0, 0, 1)
@@ -38,8 +45,8 @@ border_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3556h"]
 _data = {
-"highlight_defense_stat": ExtResource("5_tli0d"),
-"highlight_offense_stat": ExtResource("4_vlyfh")
+&"highlight_defense_stat": ExtResource("5_tli0d"),
+&"highlight_offense_stat": ExtResource("4_vlyfh")
 }
 
 [node name="MatchupCard" type="Control"]
@@ -55,7 +62,22 @@ script = ExtResource("1_b2tmg")
 roll_table_value_scene = ExtResource("2_ko473")
 ball_player_stats = ExtResource("3_ci24t")
 roll_table_font_override_size = 15
-assigned_position = null
+
+[node name="Highlight" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.5
+offset_top = -267.5
+offset_right = 192.5
+offset_bottom = 267.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6kmcj")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -299,5 +321,5 @@ flat = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_3556h")
+&"": SubResource("AnimationLibrary_3556h")
 }

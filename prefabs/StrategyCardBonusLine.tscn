@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ekv035bqgb2t"]
 
-[ext_resource type="Script" path="res://scripts/StrategyCardBonusLine.gd" id="1_8kgx8"]
+[ext_resource type="Script" uid="uid://dw2wj4iiy51e5" path="res://scripts/StrategyCardBonusLine.gd" id="1_8kgx8"]
 
 [node name="StrategyCardBonusLine" type="HBoxContainer"]
 anchors_preset = 14

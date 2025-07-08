@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://dvtoyoa80uqyw"]
 
-[ext_resource type="Script" path="res://scripts/RollTableRow.gd" id="1_8xhxw"]
-[ext_resource type="Script" path="res://scripts/BallPlayerStats.gd" id="1_qtn8t"]
+[ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_8xhxw"]
+[ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="1_qtn8t"]
 
 [sub_resource type="Resource" id="Resource_yqed7"]
 script = ExtResource("1_8xhxw")
@@ -52,4 +52,6 @@ first_name = "Joel"
 last_name = "Embiid"
 three_point_bonus = 0
 player_cost = 0
+first_name_size = 28
+last_name_size = 28
 roll_table = Array[ExtResource("1_8xhxw")]([SubResource("Resource_yqed7"), SubResource("Resource_7f1a3"), SubResource("Resource_4ywnc"), SubResource("Resource_23jn4"), SubResource("Resource_sbtbw")])

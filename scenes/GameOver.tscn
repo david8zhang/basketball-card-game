@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dvid1m0m2lsrf"]
 
-[ext_resource type="Script" path="res://scripts/GameOver.gd" id="1_xl4kn"]
+[ext_resource type="Script" uid="uid://b8j8u7sqqnund" path="res://scripts/GameOver.gd" id="1_xl4kn"]
 [ext_resource type="PackedScene" uid="uid://cmh2p7sqkladm" path="res://prefabs/BoxScoreRow.tscn" id="2_sjhit"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hsuhp"]

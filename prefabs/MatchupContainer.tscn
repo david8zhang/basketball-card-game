@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://c5jusiagrv0vw"]
 
-[ext_resource type="Script" path="res://scripts/MatchupContainer.gd" id="1_ka8mq"]
+[ext_resource type="Script" uid="uid://deik3jcpgg0r3" path="res://scripts/MatchupContainer.gd" id="1_ka8mq"]
 [ext_resource type="PackedScene" uid="uid://nr3d4pggsa3m" path="res://prefabs/MatchupCard.tscn" id="2_qbowc"]
 [ext_resource type="PackedScene" uid="uid://cx1q0ii5q4xhh" path="res://prefabs/MatchupPtsAsstsRebs.tscn" id="3_gk8wi"]
 [ext_resource type="PackedScene" uid="uid://ujdwrbx0pr12" path="res://prefabs/StrategyCardSelector.tscn" id="4_lf8mp"]
@@ -107,8 +107,8 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 25
-theme_override_styles/normal = SubResource("StyleBoxFlat_w58ns")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_w58ns")
+theme_override_styles/normal = SubResource("StyleBoxFlat_w58ns")
 text = "Use Strategy Card"
 
 [node name="RollButton" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer"]
@@ -117,8 +117,8 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxFlat_w58ns")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_w58ns")
+theme_override_styles/normal = SubResource("StyleBoxFlat_w58ns")
 text = "Roll"
 
 [node name="RollValue" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://ujdwrbx0pr12"]
 
 [ext_resource type="PackedScene" uid="uid://bi2ksw8anhd4v" path="res://prefabs/StrategyCard.tscn" id="1_03tvw"]
-[ext_resource type="Script" path="res://scripts/StrategyCardSelector.gd" id="1_xpjc8"]
+[ext_resource type="Script" uid="uid://c0310shfanmh7" path="res://scripts/StrategyCardSelector.gd" id="1_xpjc8"]
 [ext_resource type="PackedScene" uid="uid://pt6ixmed30nf" path="res://prefabs/StrategyCardProcessor.tscn" id="3_kixw2"]
 [ext_resource type="PackedScene" uid="uid://dwpw7m7anqr3m" path="res://prefabs/DiceRoll.tscn" id="3_lx3xh"]
 [ext_resource type="PackedScene" uid="uid://bd3rgepkydr13" path="res://prefabs/StrategyBonuses.tscn" id="4_eeguo"]
@@ -17,10 +17,10 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wc44o"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tiik3"]
 bg_color = Color(0, 0, 0, 0.862745)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tiik3"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wc44o"]
 bg_color = Color(0, 0, 0, 0.862745)
 
 [node name="StrategyCardSelector" type="Panel"]
@@ -51,9 +51,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_wc44o")
 theme_override_styles/hover = SubResource("StyleBoxFlat_tiik3")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_tiik3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_wc44o")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
