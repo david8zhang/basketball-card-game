@@ -4,10 +4,12 @@ extends Control
 @onready var bp_card_container = $VBoxContainer/MarginContainer/ScrollContainer/HBoxContainer2 as HBoxContainer
 @onready var card_slot_container = $VBoxContainer/HBoxContainer as HBoxContainer
 @onready var continue_button = $Continue as Button
+@onready var player_cost_total = $PlayerCostTotal as Label
 
 @export var bp_card_scene: PackedScene
 @export var bp_card_preview_scene: PackedScene
 @export var num_random_players = 8
+@export var player_cost_limit = 1500
 
 var all_player_stats = {}
 var selected_bp_card: BallPlayerCard
@@ -35,6 +37,20 @@ func on_set_bp_card(card_slot: CardSlot):
 		selected_bp_card.disable_highlight()
 		selected_bp_card = null
 		check_can_continue()
+		update_curr_player_cost_total()
+
+func get_curr_cost_total():
+	var curr_cost = 0
+	for node in card_slot_container.get_children():
+		var card_slot = node as CardSlot
+		if card_slot.card_in_slot != null:
+			var card_in_slot = card_slot.card_in_slot as BallPlayerCard
+			curr_cost += card_in_slot.ball_player_stats.player_cost
+	return curr_cost
+
+func update_curr_player_cost_total():
+	var curr_cost = get_curr_cost_total()
+	player_cost_total.text = "Total: " + str(curr_cost) + "/" + str(player_cost_limit)
 
 func check_can_continue():
 	for node in card_slot_container.get_children():

@@ -53,6 +53,7 @@ first_name = "Brook"
 last_name = "Lopez"
 three_point_bonus = 0
 player_cost = 830
+shot_check = 14
 texture = ExtResource("3_jtrbi")
 first_name_size = 28
 last_name_size = 28

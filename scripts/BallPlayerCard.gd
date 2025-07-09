@@ -15,6 +15,7 @@ extends Control
 @onready var marker = $Panel/MarginContainer/VBoxContainer/HBoxContainer2/PlayerName/Marker as Marker
 @onready var texture_rect = $Panel/MarginContainer/TextureRect as TextureRect
 @onready var highlight = $Highlight as Panel
+@onready var player_cost := $Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer3/Panel/Cost as Label
 
 @export var roll_table_value_scene: PackedScene
 @export var ball_player_stats: BallPlayerStats
@@ -29,19 +30,17 @@ func _ready():
 	defense_value.text = str(ball_player_stats.defense)
 	player_position.text = convert_positions_to_string(ball_player_stats.positions)
 	texture_rect.texture = ball_player_stats.texture
-
 	if ball_player_stats.three_point_bonus > 0:
 		three_point_bonus.text = "3PT +" + str(ball_player_stats.three_point_bonus)
 	else:
 		three_point_bonus.hide()
-
 	first_name.text = ball_player_stats.first_name.to_upper()
 	last_name.text = ball_player_stats.last_name.to_upper()
-
 	if show_roll_table:
 		setup_roll_table()
 	else:
 		roll_table.hide()
+	player_cost.text = "Cost: " + str(ball_player_stats.player_cost)
 
 func setup_roll_table():
 	for row in ball_player_stats.roll_table:

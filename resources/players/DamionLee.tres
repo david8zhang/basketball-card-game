@@ -45,6 +45,7 @@ first_name = "Damion"
 last_name = "Lee"
 three_point_bonus = 3
 player_cost = 300
+shot_check = 15
 texture = ExtResource("3_xem27")
 first_name_size = 28
 last_name_size = 28

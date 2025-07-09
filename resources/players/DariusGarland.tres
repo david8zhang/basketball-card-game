@@ -53,6 +53,7 @@ first_name = "Darius"
 last_name = "Garland"
 three_point_bonus = 0
 player_cost = 1030
+shot_check = 10
 texture = ExtResource("3_x3u71")
 first_name_size = 28
 last_name_size = 28

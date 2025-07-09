@@ -45,6 +45,7 @@ first_name = "Bobby"
 last_name = "Portis"
 three_point_bonus = 1
 player_cost = 410
+shot_check = 14
 texture = ExtResource("3_ifmp4")
 first_name_size = 28
 last_name_size = 28

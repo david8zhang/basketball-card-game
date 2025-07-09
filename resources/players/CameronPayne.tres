@@ -45,6 +45,7 @@ first_name = "Cameron"
 last_name = "Payne"
 three_point_bonus = 2
 player_cost = 400
+shot_check = 15
 texture = ExtResource("3_npvdk")
 first_name_size = 28
 last_name_size = 28

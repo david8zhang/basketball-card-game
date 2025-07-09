@@ -45,6 +45,7 @@ first_name = "Andrew"
 last_name = "Wiggins"
 three_point_bonus = 4
 player_cost = 480
+shot_check = 18
 texture = ExtResource("3_3nq65")
 first_name_size = 28
 last_name_size = 28

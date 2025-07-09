@@ -1,0 +1,64 @@
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://cnsrdto3lyloi"]
+
+[ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_asyxp"]
+[ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_lameu"]
+
+[sub_resource type="Resource" id="Resource_asyxp"]
+script = ExtResource("1_asyxp")
+low = 1
+high = 6
+points = 3
+assists = 0
+rebounds = 0
+metadata/_custom_type_script = "uid://c3xho6niytkse"
+
+[sub_resource type="Resource" id="Resource_lameu"]
+script = ExtResource("1_asyxp")
+low = 7
+high = 11
+points = 5
+assists = 1
+rebounds = 1
+metadata/_custom_type_script = "uid://c3xho6niytkse"
+
+[sub_resource type="Resource" id="Resource_pw8hc"]
+script = ExtResource("1_asyxp")
+low = 12
+high = 18
+points = 7
+assists = 1
+rebounds = 2
+metadata/_custom_type_script = "uid://c3xho6niytkse"
+
+[sub_resource type="Resource" id="Resource_vixva"]
+script = ExtResource("1_asyxp")
+low = 19
+high = 22
+points = 9
+assists = 2
+rebounds = 3
+metadata/_custom_type_script = "uid://c3xho6niytkse"
+
+[sub_resource type="Resource" id="Resource_gcehk"]
+script = ExtResource("1_asyxp")
+low = 23
+high = 30
+points = 11
+assists = 3
+rebounds = 4
+metadata/_custom_type_script = "uid://c3xho6niytkse"
+
+[resource]
+script = ExtResource("2_lameu")
+offense = 15
+defense = 11
+positions = Array[int]([2, 3])
+first_name = "Kevin"
+last_name = "Durant"
+three_point_bonus = 0
+player_cost = 1090
+shot_check = 11
+first_name_size = 28
+last_name_size = 28
+roll_table = Array[ExtResource("1_asyxp")]([SubResource("Resource_asyxp"), SubResource("Resource_lameu"), SubResource("Resource_pw8hc"), SubResource("Resource_vixva"), SubResource("Resource_gcehk")])
+metadata/_custom_type_script = "uid://dmyxnrgdtpksv"

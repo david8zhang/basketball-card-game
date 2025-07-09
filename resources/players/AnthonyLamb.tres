@@ -45,6 +45,7 @@ first_name = "Anthony"
 last_name = "Lamb"
 three_point_bonus = 0
 player_cost = 320
+shot_check = 14
 texture = ExtResource("3_wcyts")
 first_name_size = 28
 last_name_size = 28

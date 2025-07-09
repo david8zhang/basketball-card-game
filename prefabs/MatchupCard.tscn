@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cwe2cjerdaiuv" path="res://scripts/MatchupPlayerCard.gd" id="1_b2tmg"]
 [ext_resource type="PackedScene" uid="uid://cgpent6asbq6b" path="res://prefabs/TableValue.tscn" id="2_ko473"]
-[ext_resource type="Resource" uid="uid://bp7wmkoxqyrw0" path="res://resources/players/ShaiGilgeousAlexander.tres" id="3_ci24t"]
+[ext_resource type="Resource" uid="uid://c0avd24oojs4w" path="res://resources/players/KentaviousCaldwellPope.tres" id="3_wi2sf"]
 [ext_resource type="Texture2D" uid="uid://ckq3e43adggw3" path="res://assets/players/aaron-gordon.jpg" id="4_1k4qq"]
 [ext_resource type="PackedScene" uid="uid://ciyhd5db3ubjt" path="res://prefabs/Marker.tscn" id="4_huvud"]
 [ext_resource type="Animation" uid="uid://v6bgww4fmfmj" path="res://animations/highlight_offense_stat.res" id="4_vlyfh"]
@@ -60,7 +60,7 @@ size_flags_horizontal = 6
 mouse_filter = 2
 script = ExtResource("1_b2tmg")
 roll_table_value_scene = ExtResource("2_ko473")
-ball_player_stats = ExtResource("3_ci24t")
+ball_player_stats = ExtResource("3_wi2sf")
 roll_table_font_override_size = 15
 
 [node name="Highlight" type="Panel" parent="."]
@@ -292,7 +292,21 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_0vq88")
 
-[node name="ShotLine" type="Label" parent="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer3/Panel"]
+[node name="Cost" type="Label" parent="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer3/Panel"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 12
+text = "Cost: 0"
+
+[node name="Panel2" type="PanelContainer" parent="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_0vq88")
+
+[node name="ShotLine" type="Label" parent="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer3/Panel2"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8

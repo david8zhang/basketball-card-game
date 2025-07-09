@@ -45,6 +45,7 @@ first_name = "Bones"
 last_name = "Hyland"
 three_point_bonus = 0
 player_cost = 330
+shot_check = 15
 texture = ExtResource("3_ruvwu")
 first_name_size = 28
 last_name_size = 28

@@ -11,6 +11,7 @@ enum PlayerPosition { PG, SG, SF, PF, C }
 @export var last_name := ""
 @export var three_point_bonus := 0
 @export var player_cost := 0
+@export var shot_check := 0
 @export var texture: Texture
 @export var first_name_size := 28
 @export var last_name_size := 28

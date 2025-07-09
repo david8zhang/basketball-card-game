@@ -45,6 +45,7 @@ first_name = "Chimezie"
 last_name = "Metu"
 three_point_bonus = 0
 player_cost = 90
+shot_check = 17
 texture = ExtResource("3_17teo")
 first_name_size = 28
 last_name_size = 28

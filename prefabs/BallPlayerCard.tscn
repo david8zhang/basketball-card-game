@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bmrdjwjeo7jiw" path="res://scripts/BallPlayerCard.gd" id="1_my46u"]
 [ext_resource type="PackedScene" uid="uid://cgpent6asbq6b" path="res://prefabs/TableValue.tscn" id="2_bfexb"]
-[ext_resource type="Resource" uid="uid://dghnk54btjod" path="res://resources/players/DeanWade.tres" id="3_ajuuy"]
+[ext_resource type="Resource" uid="uid://c0avd24oojs4w" path="res://resources/players/KentaviousCaldwellPope.tres" id="3_84awu"]
 [ext_resource type="PackedScene" uid="uid://ciyhd5db3ubjt" path="res://prefabs/Marker.tscn" id="4_wqmgd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dlbuw"]
@@ -48,7 +48,7 @@ size_flags_stretch_ratio = 0.75
 mouse_filter = 1
 script = ExtResource("1_my46u")
 roll_table_value_scene = ExtResource("2_bfexb")
-ball_player_stats = ExtResource("3_ajuuy")
+ball_player_stats = ExtResource("3_84awu")
 show_roll_table = false
 
 [node name="Highlight" type="Panel" parent="."]
@@ -272,7 +272,21 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_krclw")
 
-[node name="ShotLine" type="Label" parent="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer3/Panel"]
+[node name="Cost" type="Label" parent="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer3/Panel"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 8
+text = "Cost: 0"
+
+[node name="Panel2" type="PanelContainer" parent="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_krclw")
+
+[node name="ShotLine" type="Label" parent="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer3/Panel2"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
