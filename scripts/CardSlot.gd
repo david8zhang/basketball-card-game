@@ -5,7 +5,7 @@ extends Control
 @onready var button = $Button as Button
 @export var player_position := BallPlayerStats.PlayerPosition.PG
 
-var card_in_slot: BallPlayerCard
+var card_in_slot: BallPlayerCard = null
 
 signal on_select_card(card_slot)
 

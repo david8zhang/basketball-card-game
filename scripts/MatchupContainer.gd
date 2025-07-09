@@ -537,7 +537,6 @@ func tally_strat_bonus_rebounds():
     handle_rebound_tally_anim(strategy_rebound_bonuses)
 
 func handle_rebound_tally_anim(num_rebounds: int):
-  print(num_rebounds)
   var rebounds_value = matchup_score.rebounds_value
   var rebounds_bonus_label = Label.new()
   add_child(rebounds_bonus_label)
