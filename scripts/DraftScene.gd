@@ -121,13 +121,12 @@ func replace_drafted_bp_card(player_to_remove_name: String, player_to_replace: B
 	remove_drafted_bp_card(player_to_remove_name)
 
 func load_all_players():
-	for file_name in DirAccess.get_files_at("res://resources/players"):
-		if (file_name.get_extension() == "tres"):
-			var stat_config = load("res://resources/players/" + file_name) as BallPlayerStats
-			for p in stat_config.positions:
-				if p not in all_player_stats:
-					all_player_stats[p] = []
-				all_player_stats[p].append(stat_config)
+	for player_name in SceneVariables.all_player_names:
+		var stat_config = load("res://resources/players/" + player_name + ".tres") as BallPlayerStats
+		for p in stat_config.positions:
+			if p not in all_player_stats:
+				all_player_stats[p] = []
+			all_player_stats[p].append(stat_config)
 
 func init_random_players():
 	var keys = all_player_stats.keys()

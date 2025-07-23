@@ -23,6 +23,7 @@ SceneVariables="*res://scripts/SceneVariables.gd"
 
 window/size/viewport_width=1350
 window/size/viewport_height=900
+window/stretch/mode="viewport"
 window/dpi/allow_hidpi=false
 window/canvas_textures/default_texture_filter=0
 
