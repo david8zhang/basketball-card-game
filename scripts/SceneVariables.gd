@@ -12,6 +12,7 @@ var full_player_scorer_statlines = {}
 var player_score := 0
 var cpu_score := 0
 var player_team_bp_configs := {}
+var player_strategy_card_deck := []
 var budget_tier := BudgetTier.LOW
 
 var all_player_names = [

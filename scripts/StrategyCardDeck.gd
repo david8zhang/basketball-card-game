@@ -13,20 +13,12 @@ class StrategyCardConfigWrapper:
 		config = _config
 		config_id = _config_id
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	init_strategy_card_deck()
-
-func init_strategy_card_deck():
-	var all_strategy_card_configs = [] if override_configs.is_empty() else override_configs
-	if all_strategy_card_configs.is_empty():
-		for strategy_name in SceneVariables.all_strategy_card_names:
-			var strategy_card_config = load("res://resources/strategy/" + strategy_name + ".tres") as StrategyCardConfig
-			all_strategy_card_configs.append(strategy_card_config)
-	for i in range(0, num_strategy_cards):
-		var random_config = all_strategy_card_configs.pick_random()
-		var config_wrapper = StrategyCardConfigWrapper.new(random_config, i)
+func init_strategy_card_deck(strategy_card_configs: Array[StrategyCardConfig]):
+	var idx = 0
+	for config in strategy_card_configs:
+		var config_wrapper = StrategyCardConfigWrapper.new(config, idx)
 		cards.append(config_wrapper)
+		idx += 1
 
 func on_strategy_card_selected(selected_card_id: int):
 	cards = cards.filter(func (c): return c.config_id != selected_card_id)

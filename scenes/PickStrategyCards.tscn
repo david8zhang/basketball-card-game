@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=3 uid="uid://ycdkrntstf2n"]
+
+[ext_resource type="Script" uid="uid://drroqdgj8c1ms" path="res://scripts/PickStrategyCards.gd" id="1_s3bvw"]
+[ext_resource type="PackedScene" uid="uid://bi2ksw8anhd4v" path="res://prefabs/StrategyCard.tscn" id="2_h2b5r"]
+
+[node name="PickStrategyCards" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_s3bvw")
+strategy_card_scene = ExtResource("2_h2b5r")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 450)
+layout_mode = 2
+vertical_scroll_mode = 0
+
+[node name="SelectedCardsContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/ScrollContainer"]
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/MarginContainer2"]
+custom_minimum_size = Vector2(2.08165e-12, 450)
+layout_mode = 2
+vertical_scroll_mode = 0
+
+[node name="AvailableCardsContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer2/ScrollContainer"]
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 20
