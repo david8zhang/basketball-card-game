@@ -29,6 +29,7 @@ var full_cpu_scorer_statlines = {}
 @export var matchup_container_scene: PackedScene
 @export var quarter_end_modal_scene: PackedScene
 @export var rebound_tally_scene: PackedScene
+@export var MAX_QUARTERS := 4
 
 var matchup_container: MatchupContainer
 var quarter_end_modal: QuarterEnd
@@ -40,6 +41,7 @@ var quarter_scores = {
 var curr_player_quarter_score := 0
 var curr_cpu_quarter_score := 0
 var is_cpu_scoring := false
+var rebound_tally
 
 class BoxScoreStatLine:
 	var full_name: String
@@ -158,7 +160,7 @@ func on_matchup_complete(all_stats: Dictionary, side: Side, assists_used: int):
 	process_matchup_stats(all_stats, side, assists_used)
 	if is_quarter_completed():
 		is_cpu_scoring = false
-		var rebound_tally = rebound_tally_scene.instantiate() as ReboundTally
+		rebound_tally = rebound_tally_scene.instantiate() as ReboundTally
 		canvas_layer.add_child(rebound_tally)
 		rebound_tally.hide()
 		var on_rebound_tally_complete = func():
@@ -168,15 +170,14 @@ func on_matchup_complete(all_stats: Dictionary, side: Side, assists_used: int):
 			curr_cpu_quarter_score += cpu_reb
 			player_score_label.text = str(get_player_score() + player_reb)
 			cpu_score_label.text = str(get_cpu_score() + cpu_reb)
-			rebound_tally.queue_free()
 			show_quarter_end_info_modal()
-		handle_rebound_tally(rebound_tally, on_rebound_tally_complete)
+		handle_rebound_tally(on_rebound_tally_complete)
 	elif side == Side.PLAYER:
 		cpu_select_card_to_score_with()
 	else:
 		is_cpu_scoring = false
 
-func handle_rebound_tally(rebound_tally: ReboundTally, cb: Callable):
+func handle_rebound_tally(cb: Callable):
 	var player_score_data = {
 		"points": get_player_score(),
 		"assists": get_assists(player_assists_label),
@@ -196,13 +197,13 @@ func show_quarter_end_info_modal():
 	quarter_scores["cpu"].append(curr_cpu_quarter_score)
 	curr_player_quarter_score = 0
 	curr_cpu_quarter_score = 0
-	if quarter_number == 4:
+	if quarter_number == MAX_QUARTERS:
 		SceneVariables.quarter_scores = quarter_scores
 		SceneVariables.full_cpu_scorer_statlines = full_cpu_scorer_statlines
 		SceneVariables.full_player_scorer_statlines = full_player_scorer_statlines
 		SceneVariables.player_score = get_player_score()
 		SceneVariables.cpu_score = get_cpu_score()
-		get_tree().change_scene_to_file("res://scenes/GameOver.tscn")
+		get_tree().change_scene_to_file("res://scenes/FinalScore.tscn")
 	else:
 		quarter_end_modal = quarter_end_modal_scene.instantiate() as QuarterEnd
 		canvas_layer.add_child(quarter_end_modal)
@@ -296,6 +297,7 @@ func on_new_quarter_start():
 	player_completed_scorer_positions = []
 	cpu_completed_scorer_positions = []
 	quarter_end_modal.queue_free()
+	rebound_tally.queue_free()
 	for card in player_team.get_starting_cards():
 		card.button.flat = true
 	for card in cpu_team.get_starting_cards():

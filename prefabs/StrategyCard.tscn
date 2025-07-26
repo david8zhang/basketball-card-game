@@ -12,7 +12,7 @@ border_width_bottom = 2
 border_color = Color(0.65098, 0.65098, 0.65098, 1)
 
 [node name="StrategyCard" type="Control"]
-custom_minimum_size = Vector2(300, 420)
+custom_minimum_size = Vector2(250, 350)
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -21,21 +21,17 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 script = ExtResource("1_omdm6")
 strategy_card_config = ExtResource("2_3c6jq")
 
 [node name="Panel" type="Panel" parent="."]
-custom_minimum_size = Vector2(280, 420)
+custom_minimum_size = Vector2(250, 350)
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -150.0
-offset_top = -210.0
-offset_right = 150.0
-offset_bottom = 210.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_7wo1j")
@@ -56,7 +52,7 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(2.08165e-12, 200)
+custom_minimum_size = Vector2(0, 175)
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
@@ -80,12 +76,13 @@ text = "Offense"
 horizontal_alignment = 2
 
 [node name="Control" type="Control" parent="Panel/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(2.08165e-12, 15)
+custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="CardDescription" type="RichTextLabel" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/normal_font_size = 14
 text = "This player scores 2 points. Roll a D20. If it's a 20, give each player on your team a hot marker"
 fit_content = true
 

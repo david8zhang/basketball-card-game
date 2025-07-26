@@ -1,4 +1,4 @@
-class_name GameOver
+class_name FinalScore
 extends Node2D
 
 @onready var player_score: RichTextLabel = $CanvasLayer/Control/VBoxContainer/HBoxContainer/PlayerScore
@@ -48,3 +48,4 @@ func add_statline_row(statline: Game.BoxScoreStatLine, parent: GridContainer):
 	points_row.set_value(str(statline.points))
 	assists_row.set_value(str(statline.assists))
 	rebounds_row.set_value(str(statline.rebounds))
+
