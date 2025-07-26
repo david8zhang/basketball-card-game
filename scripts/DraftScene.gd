@@ -26,7 +26,7 @@ func _ready():
 	for node in child_nodes:
 		var card_slot = node as CardSlot
 		card_slot.on_select_card.connect(on_set_bp_card)
-	continue_button.pressed.connect(go_to_game_scene)
+	continue_button.pressed.connect(go_to_next_scene)
 
 func init_cost_limit():
 	match SceneVariables.budget_tier:
@@ -97,13 +97,13 @@ func check_can_continue():
 			return
 	continue_button.show()
 
-func go_to_game_scene():
+func go_to_next_scene():
 	var drafted_player_stats = {}
 	for node in card_slot_container.get_children():
 		var card_slot = node as CardSlot
 		drafted_player_stats[card_slot.player_position] = card_slot.card_in_slot.ball_player_stats
 	SceneVariables.player_team_bp_configs = drafted_player_stats
-	get_tree().change_scene_to_file("res://scenes/Main.tscn")
+	get_tree().change_scene_to_file("res://scenes/PickStrategyCards.tscn")
 
 func remove_drafted_bp_card(player_to_remove_name: String):
 	for card in players_to_pick_from_cards:
@@ -162,7 +162,6 @@ func on_click_card(bp_card: BallPlayerCard):
 	bp_card_preview.bp_stat_to_preview = bp_card.ball_player_stats
 	add_child(bp_card_preview)
 	bp_card_preview.on_close.connect(close_bp_card_preview)
-
 	var callable = Callable(self, "select_bp_card").bind(bp_card)
 	bp_card_preview.on_selected.connect(callable)
 

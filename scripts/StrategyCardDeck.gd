@@ -13,7 +13,7 @@ class StrategyCardConfigWrapper:
 		config = _config
 		config_id = _config_id
 
-func init_strategy_card_deck(strategy_card_configs: Array[StrategyCardConfig]):
+func init_strategy_card_deck(strategy_card_configs):
 	var idx = 0
 	for config in strategy_card_configs:
 		var config_wrapper = StrategyCardConfigWrapper.new(config, idx)
