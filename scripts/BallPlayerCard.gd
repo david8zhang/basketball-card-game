@@ -25,6 +25,8 @@ extends Control
 
 var roll_table_rows = []
 
+signal on_bp_card_clicked(bp_card)
+
 func _ready():
 	offense_value.text = str(ball_player_stats.offense)
 	defense_value.text = str(ball_player_stats.defense)
@@ -41,6 +43,7 @@ func _ready():
 	else:
 		roll_table.hide()
 	player_cost.text = "Cost: " + str(ball_player_stats.player_cost)
+	button.pressed.connect(_on_bp_card_clicked)
 
 func setup_roll_table():
 	for row in ball_player_stats.roll_table:
@@ -106,3 +109,6 @@ func enable_highlight():
 
 func disable_highlight():
 	highlight.hide()
+
+func _on_bp_card_clicked():
+	on_bp_card_clicked.emit(self)

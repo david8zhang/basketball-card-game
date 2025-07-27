@@ -29,11 +29,11 @@ func get_player_max_cost_for_salary_cap():
 	if salary_cap <= 1750:
 		return 400
 	elif salary_cap > 1750 and salary_cap <= 2250:
-		return 800
+		return 650
 	elif salary_cap > 2250 and salary_cap <= 2750:
-		return 1200
+		return 900
 	elif salary_cap > 3250 and salary_cap <= 3750:
-		return 1600
+		return 1200
 	else:
 		return 2000
 

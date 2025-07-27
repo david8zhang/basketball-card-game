@@ -1,4 +1,11 @@
-[gd_scene format=3 uid="uid://wahueay2vm7i"]
+[gd_scene load_steps=5 format=3 uid="uid://wahueay2vm7i"]
+
+[ext_resource type="Script" uid="uid://bydfybswp8yfa" path="res://scripts/AddNewPlayerModal.gd" id="1_aqind"]
+[ext_resource type="PackedScene" uid="uid://cgehw3go3iec0" path="res://prefabs/CardSlot.tscn" id="1_p2v0d"]
+[ext_resource type="PackedScene" uid="uid://canx4b4pr7n3c" path="res://prefabs/BallPlayerCard.tscn" id="2_7iky2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p2v0d"]
+bg_color = Color(0, 0, 0, 1)
 
 [node name="AddNewPlayerModal" type="Control"]
 layout_mode = 3
@@ -7,3 +14,118 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_aqind")
+bp_card_scene = ExtResource("2_7iky2")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_p2v0d")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -73.0
+offset_top = 10.0
+offset_right = 73.0
+offset_bottom = 33.0
+grow_horizontal = 2
+text = "Select your players"
+horizontal_alignment = 1
+
+[node name="CardCostTooHigh" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_top = 423.0
+offset_right = 1350.0
+offset_bottom = 446.0
+text = "Card cost too high!"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 2
+
+[node name="CardSlot" parent="VBoxContainer/HBoxContainer" instance=ExtResource("1_p2v0d")]
+layout_mode = 2
+
+[node name="CardSlot2" parent="VBoxContainer/HBoxContainer" instance=ExtResource("1_p2v0d")]
+layout_mode = 2
+player_position = 1
+
+[node name="CardSlot3" parent="VBoxContainer/HBoxContainer" instance=ExtResource("1_p2v0d")]
+layout_mode = 2
+player_position = 2
+
+[node name="CardSlot4" parent="VBoxContainer/HBoxContainer" instance=ExtResource("1_p2v0d")]
+layout_mode = 2
+player_position = 3
+
+[node name="CardSlot5" parent="VBoxContainer/HBoxContainer" instance=ExtResource("1_p2v0d")]
+layout_mode = 2
+player_position = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 450)
+layout_mode = 2
+vertical_scroll_mode = 0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/MarginContainer/ScrollContainer"]
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+
+[node name="PlayerCostTotal" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -110.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 33.0
+grow_horizontal = 0
+text = "Total: 0/3000"
+
+[node name="Close" type="Button" parent="."]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Close"
+
+[node name="Continue" type="Button" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -59.0
+offset_top = -43.0
+offset_right = 59.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 25
+text = "Continue"

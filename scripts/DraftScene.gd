@@ -118,12 +118,10 @@ func load_all_players():
 
 func init_random_players():
 	var keys = all_player_stats.keys()
-	print(keys)
 	var selected_player_names = []
 	for i in range(0, num_random_players):
 		var key_to_select = keys[i % keys.size()]
 		var players_at_position = all_player_stats[key_to_select].filter(func(s): return is_eligible_player(s, selected_player_names))
-		print("key: " + str(key_to_select) + ", " + str(players_at_position.size()))
 		var random_player_stat = players_at_position.pick_random() as BallPlayerStats
 		selected_player_names.append(random_player_stat.get_full_name())
 		var bp_card = bp_card_scene.instantiate() as BallPlayerCard
