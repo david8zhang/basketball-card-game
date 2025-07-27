@@ -10,7 +10,6 @@ extends Control
 @export var bp_card_scene: PackedScene
 @export var bp_card_preview_scene: PackedScene
 @export var num_random_players = 8
-@export var player_cost_limit = 0
 
 var all_player_stats = {}
 var selected_bp_card: BallPlayerCard
@@ -20,22 +19,12 @@ var players_to_pick_from_cards: Array[BallPlayerCard] = []
 func _ready():
 	load_all_players()
 	init_random_players()
-	init_cost_limit()
 	update_curr_player_cost_total()
 	var child_nodes = card_slot_container.get_children()
 	for node in child_nodes:
 		var card_slot = node as CardSlot
 		card_slot.on_select_card.connect(on_set_bp_card)
 	continue_button.pressed.connect(go_to_next_scene)
-
-func init_cost_limit():
-	match SceneVariables.budget_tier:
-		SceneVariables.BudgetTier.LOW:
-			player_cost_limit = 2000
-		SceneVariables.BudgetTier.MED:
-			player_cost_limit = 3500
-		SceneVariables.BudgetTier.HIGH:
-			player_cost_limit = 5000
 
 func on_set_bp_card(card_slot: CardSlot):
 	if selected_bp_card != null:
@@ -46,12 +35,12 @@ func on_set_bp_card(card_slot: CardSlot):
 		var curr_cost_total = get_curr_cost_total()
 		if card_slot.card_in_slot != null:
 			var curr_card_in_slot_cost = card_slot.card_in_slot.ball_player_stats.player_cost
-			if curr_cost_total - curr_card_in_slot_cost + selected_bp_card_cost <= player_cost_limit:
+			if curr_cost_total - curr_card_in_slot_cost + selected_bp_card_cost <= SceneVariables.salary_cap:
 				should_update_card = true
 				replace_drafted_bp_card(bp_card.full_name(), card_slot.card_in_slot)
 			else:
 				show_over_budget_alert()
-		elif curr_cost_total + selected_bp_card_cost > player_cost_limit:
+		elif curr_cost_total + selected_bp_card_cost > SceneVariables.salary_cap:
 			show_over_budget_alert()
 		else:
 			should_update_card = true
@@ -88,7 +77,7 @@ func get_curr_cost_total():
 
 func update_curr_player_cost_total():
 	var curr_cost = get_curr_cost_total()
-	player_cost_total.text = "Total: " + str(curr_cost) + "/" + str(player_cost_limit)
+	player_cost_total.text = "Total: " + str(curr_cost) + "/" + str(SceneVariables.salary_cap)
 
 func check_can_continue():
 	for node in card_slot_container.get_children():
@@ -121,19 +110,20 @@ func replace_drafted_bp_card(player_to_remove_name: String, player_to_replace: B
 	remove_drafted_bp_card(player_to_remove_name)
 
 func load_all_players():
-	for player_name in SceneVariables.all_player_names:
-		var stat_config = load("res://resources/players/" + player_name + ".tres") as BallPlayerStats
-		for p in stat_config.positions:
+	for config in SceneVariables.all_player_stat_configs:
+		for p in config.positions:
 			if p not in all_player_stats:
 				all_player_stats[p] = []
-			all_player_stats[p].append(stat_config)
+			all_player_stats[p].append(config)
 
 func init_random_players():
 	var keys = all_player_stats.keys()
+	print(keys)
 	var selected_player_names = []
 	for i in range(0, num_random_players):
 		var key_to_select = keys[i % keys.size()]
 		var players_at_position = all_player_stats[key_to_select].filter(func(s): return is_eligible_player(s, selected_player_names))
+		print("key: " + str(key_to_select) + ", " + str(players_at_position.size()))
 		var random_player_stat = players_at_position.pick_random() as BallPlayerStats
 		selected_player_names.append(random_player_stat.get_full_name())
 		var bp_card = bp_card_scene.instantiate() as BallPlayerCard
@@ -144,18 +134,10 @@ func init_random_players():
 		bp_card.button.pressed.connect(callable)
 
 func is_eligible_player(s: BallPlayerStats, selected_player_names):
-	return !selected_player_names.has(s.get_full_name()) and is_player_within_budget_tier(s)
+	return !selected_player_names.has(s.get_full_name()) and is_player_within_max_cost(s)
 
-func is_player_within_budget_tier(ball_player_stats: BallPlayerStats):
-	var cost_limit = 0
-	match SceneVariables.budget_tier:
-		SceneVariables.BudgetTier.LOW:
-			cost_limit = 400
-		SceneVariables.BudgetTier.MED:
-			cost_limit = 800
-		SceneVariables.BudgetTier.HIGH:
-			cost_limit = 1600
-	return ball_player_stats.player_cost <= cost_limit
+func is_player_within_max_cost(ball_player_stats: BallPlayerStats):
+	return ball_player_stats.player_cost <= SceneVariables.get_player_max_cost_for_salary_cap()
 
 func on_click_card(bp_card: BallPlayerCard):
 	bp_card_preview = bp_card_preview_scene.instantiate() as BPCardPreview

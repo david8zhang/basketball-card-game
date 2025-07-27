@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dnbce8jv4hm47"]
+[gd_scene load_steps=5 format=3 uid="uid://dnbce8jv4hm47"]
 
 [ext_resource type="Script" uid="uid://d2j77qjbufmw0" path="res://scripts/PostGameRewards.gd" id="1_cgxef"]
 [ext_resource type="PackedScene" uid="uid://bi2ksw8anhd4v" path="res://prefabs/StrategyCard.tscn" id="1_mnhli"]
+[ext_resource type="PackedScene" uid="uid://canx4b4pr7n3c" path="res://prefabs/BallPlayerCard.tscn" id="3_k4p0j"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mnhli"]
 bg_color = Color(0, 0, 0, 1)
@@ -14,6 +15,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_cgxef")
+strategy_card_scene = ExtResource("1_mnhli")
+bp_card_scene = ExtResource("3_k4p0j")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -84,15 +87,6 @@ layout_mode = 2
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 1
-
-[node name="StrategyCard" parent="VBoxContainer/HBoxContainer2" instance=ExtResource("1_mnhli")]
-layout_mode = 2
-
-[node name="StrategyCard2" parent="VBoxContainer/HBoxContainer2" instance=ExtResource("1_mnhli")]
-layout_mode = 2
-
-[node name="StrategyCard3" parent="VBoxContainer/HBoxContainer2" instance=ExtResource("1_mnhli")]
-layout_mode = 2
 
 [node name="Button" type="Button" parent="."]
 custom_minimum_size = Vector2(150, 0)

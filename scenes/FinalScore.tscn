@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dvid1m0m2lsrf"]
+[gd_scene load_steps=5 format=3 uid="uid://dvid1m0m2lsrf"]
 
 [ext_resource type="Script" uid="uid://crdwkxppbqkd2" path="res://scripts/FinalScore.gd" id="1_40ovk"]
+[ext_resource type="PackedScene" uid="uid://cmh2p7sqkladm" path="res://prefabs/BoxScoreRow.tscn" id="2_1jqo8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hsuhp"]
 bg_color = Color(0, 0, 0, 1)
@@ -15,6 +16,7 @@ border_width_bottom = 1
 
 [node name="FinalScore" type="Node2D"]
 script = ExtResource("1_40ovk")
+box_score_row = ExtResource("2_1jqo8")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -98,70 +100,70 @@ grow_horizontal = 2
 grow_vertical = 2
 columns = 6
 
-[node name="ColumnHeader6" type="PanelContainer" parent="CanvasLayer/Control/VBoxContainer/QuarterScores/GridContainer"]
+[node name="SideHeader" type="PanelContainer" parent="CanvasLayer/Control/VBoxContainer/QuarterScores/GridContainer"]
 custom_minimum_size = Vector2(150, 2.08165e-12)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_wn253")
 
-[node name="Team" type="Label" parent="CanvasLayer/Control/VBoxContainer/QuarterScores/GridContainer/ColumnHeader6"]
+[node name="Team" type="Label" parent="CanvasLayer/Control/VBoxContainer/QuarterScores/GridContainer/SideHeader"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "Side"
 
-[node name="ColumnHeader1" type="PanelContainer" parent="CanvasLayer/Control/VBoxContainer/QuarterScores/GridContainer"]
+[node name="Q1Header" type="PanelContainer" parent="CanvasLayer/Control/VBoxContainer/QuarterScores/GridContainer"]
 custom_minimum_size = Vector2(50, 2.08165e-12)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_wn253")
 
-[node name="Q1" type="Label" parent="CanvasLayer/Control/VBoxContainer/QuarterScores/GridContainer/ColumnHeader1"]
+[node name="Q1" type="Label" parent="CanvasLayer/Control/VBoxContainer/QuarterScores/GridContainer/Q1Header"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 16
 text = "Q1"
 horizontal_alignment = 1
 
-[node name="ColumnHeader2" type="PanelContainer" parent="CanvasLayer/Control/VBoxContainer/QuarterScores/GridContainer"]
+[node name="Q2Header" type="PanelContainer" parent="CanvasLayer/Control/VBoxContainer/QuarterScores/GridContainer"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_wn253")
 
-[node name="Q2" type="Label" parent="CanvasLayer/Control/VBoxContainer/QuarterScores/GridContainer/ColumnHeader2"]
+[node name="Q2" type="Label" parent="CanvasLayer/Control/VBoxContainer/QuarterScores/GridContainer/Q2Header"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 16
 text = "Q2"
 horizontal_alignment = 1
 
-[node name="ColumnHeader3" type="PanelContainer" parent="CanvasLayer/Control/VBoxContainer/QuarterScores/GridContainer"]
+[node name="Q3Header" type="PanelContainer" parent="CanvasLayer/Control/VBoxContainer/QuarterScores/GridContainer"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_wn253")
 
-[node name="Q3" type="Label" parent="CanvasLayer/Control/VBoxContainer/QuarterScores/GridContainer/ColumnHeader3"]
+[node name="Q3" type="Label" parent="CanvasLayer/Control/VBoxContainer/QuarterScores/GridContainer/Q3Header"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 16
 text = "Q3"
 horizontal_alignment = 1
 
-[node name="ColumnHeader4" type="PanelContainer" parent="CanvasLayer/Control/VBoxContainer/QuarterScores/GridContainer"]
+[node name="Q4Header" type="PanelContainer" parent="CanvasLayer/Control/VBoxContainer/QuarterScores/GridContainer"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_wn253")
 
-[node name="Q4" type="Label" parent="CanvasLayer/Control/VBoxContainer/QuarterScores/GridContainer/ColumnHeader4"]
+[node name="Q4" type="Label" parent="CanvasLayer/Control/VBoxContainer/QuarterScores/GridContainer/Q4Header"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 16
 text = "Q4"
 horizontal_alignment = 1
 
-[node name="ColumnHeader5" type="PanelContainer" parent="CanvasLayer/Control/VBoxContainer/QuarterScores/GridContainer"]
+[node name="TotalHeader" type="PanelContainer" parent="CanvasLayer/Control/VBoxContainer/QuarterScores/GridContainer"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_wn253")
 
-[node name="Total" type="Label" parent="CanvasLayer/Control/VBoxContainer/QuarterScores/GridContainer/ColumnHeader5"]
+[node name="Total" type="Label" parent="CanvasLayer/Control/VBoxContainer/QuarterScores/GridContainer/TotalHeader"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 16

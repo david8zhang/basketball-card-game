@@ -6,6 +6,14 @@ extends Node2D
 @onready var player_box_score: GridContainer = $CanvasLayer/Control/VBoxContainer/HBoxContainer2/PlayerBoxScore/GridContainer
 @onready var cpu_box_score: GridContainer = $CanvasLayer/Control/VBoxContainer/HBoxContainer2/CPUBoxScore/GridContainer
 @onready var quarter_scores: GridContainer = $CanvasLayer/Control/VBoxContainer/QuarterScores/GridContainer
+@onready var continue_button: Button = $CanvasLayer/Control/VBoxContainer/Button
+@onready var quarter_headers = [
+	$CanvasLayer/Control/VBoxContainer/QuarterScores/GridContainer/Q1Header,
+	$CanvasLayer/Control/VBoxContainer/QuarterScores/GridContainer/Q2Header,
+	$CanvasLayer/Control/VBoxContainer/QuarterScores/GridContainer/Q3Header,
+	$CanvasLayer/Control/VBoxContainer/QuarterScores/GridContainer/Q4Header,
+]
+
 @export var box_score_row: PackedScene
 
 func _ready():
@@ -17,8 +25,10 @@ func _ready():
 		add_statline_row(statline, cpu_box_score)
 	add_quarter_scores_row(SceneVariables.quarter_scores["player"], Game.Side.PLAYER, SceneVariables.player_score)
 	add_quarter_scores_row(SceneVariables.quarter_scores["cpu"], Game.Side.CPU, SceneVariables.cpu_score)
+	continue_button.pressed.connect(go_to_next_scene)
 
 func add_quarter_scores_row(scores, side: Game.Side, total_score):
+	init_box_score_column_headers(scores)
 	var side_label_row = box_score_row.instantiate() as BoxScoreRow
 	quarter_scores.add_child(side_label_row)
 	var team_side = "Player" if side == Game.Side.PLAYER else "CPU"
@@ -49,3 +59,13 @@ func add_statline_row(statline: Game.BoxScoreStatLine, parent: GridContainer):
 	assists_row.set_value(str(statline.assists))
 	rebounds_row.set_value(str(statline.rebounds))
 
+func init_box_score_column_headers(scores):
+	for header in quarter_headers:
+		header.hide()
+	for i in range(0, scores.size()):
+		quarter_headers[i].show()
+	quarter_scores.columns = scores.size() + 2
+
+func go_to_next_scene():
+	if SceneVariables.player_score > SceneVariables.cpu_score:
+		get_tree().change_scene_to_file("res://scenes/PostGameRewards.tscn")
