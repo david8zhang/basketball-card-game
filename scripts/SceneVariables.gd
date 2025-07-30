@@ -40,3 +40,14 @@ func get_player_max_cost_for_salary_cap():
 func get_players_for_salary_cap():
 	var max_cost = get_player_max_cost_for_salary_cap()
 	return all_player_stat_configs.filter(func (c): return c.player_cost <= max_cost)
+
+func reset_player_data():
+	quarter_scores = {}
+	full_cpu_scorer_statlines = {}
+	full_player_scorer_statlines = {}
+	player_score = 0
+	cpu_score = 0
+	player_team_bp_configs = {}
+	player_strategy_card_deck = []
+	salary_cap = 1750
+	num_games_won = 0
