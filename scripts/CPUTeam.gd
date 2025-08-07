@@ -16,7 +16,7 @@ func _ready():
   if starting_lineup_wrapper != null:
     starting_lineup = starting_lineup_scene.instantiate() as StartingLineup
     starting_lineup_wrapper.add_child(starting_lineup)
-    var random_lineup = game.assemble_random_lineup()
+    var random_lineup = SceneVariables.cpu_team_bp_configs
     starting_lineup.init_cards(random_lineup)
 
 func get_card_at_position(pos: BallPlayerStats.PlayerPosition):

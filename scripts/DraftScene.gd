@@ -135,7 +135,7 @@ func is_eligible_player(s: BallPlayerStats, selected_player_names):
 	return !selected_player_names.has(s.get_full_name()) and is_player_within_max_cost(s)
 
 func is_player_within_max_cost(ball_player_stats: BallPlayerStats):
-	return ball_player_stats.player_cost <= SceneVariables.get_player_max_cost_for_salary_cap()
+	return ball_player_stats.player_cost <= SceneVariables.get_player_max_cost_for_salary_cap(SceneVariables.salary_cap)
 
 func on_click_card(bp_card: BallPlayerCard):
 	bp_card_preview = bp_card_preview_scene.instantiate() as BPCardPreview

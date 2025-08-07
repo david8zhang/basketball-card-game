@@ -7,6 +7,7 @@ var player_score := 0
 var cpu_score := 0
 var player_team_bp_configs := {}
 var player_strategy_card_deck := []
+var cpu_team_bp_configs := {}
 var salary_cap := 1750
 var num_games_won := 0
 var all_player_names = [
@@ -25,20 +26,20 @@ func _ready() -> void:
 		var strategy_card_config = load("res://resources/strategy/" + strategy_name + ".tres") as StrategyCardConfig
 		all_strat_card_configs.append(strategy_card_config)
 
-func get_player_max_cost_for_salary_cap():
-	if salary_cap <= 1750:
+func get_player_max_cost_for_salary_cap(curr_salary_cap):
+	if curr_salary_cap <= 1750:
 		return 400
-	elif salary_cap > 1750 and salary_cap <= 2250:
+	elif curr_salary_cap > 1750 and curr_salary_cap <= 2250:
 		return 650
-	elif salary_cap > 2250 and salary_cap <= 2750:
+	elif curr_salary_cap > 2250 and curr_salary_cap <= 2750:
 		return 900
-	elif salary_cap > 3250 and salary_cap <= 3750:
+	elif curr_salary_cap > 3250 and curr_salary_cap <= 3750:
 		return 1200
 	else:
 		return 2000
 
 func get_players_for_salary_cap():
-	var max_cost = get_player_max_cost_for_salary_cap()
+	var max_cost = get_player_max_cost_for_salary_cap(salary_cap)
 	return all_player_stat_configs.filter(func (c): return c.player_cost <= max_cost)
 
 func reset_player_data():
@@ -51,3 +52,21 @@ func reset_player_data():
 	player_strategy_card_deck = []
 	salary_cap = 1750
 	num_games_won = 0
+
+func instantiate_cpu_team():
+	var position_to_players = {}
+	for c in all_player_stat_configs:
+		var stat_config = c as BallPlayerStats
+		for position in stat_config.positions:
+			if !position_to_players.has(position):
+				position_to_players[position] = []
+			position_to_players[position].append(stat_config)
+	var selected_player_names = []
+	for pos in position_to_players.keys():
+		var players_to_select = filter_valid_players(position_to_players[pos], selected_player_names)
+		var player_to_add = players_to_select.pick_random() as BallPlayerStats
+		selected_player_names.append(player_to_add.get_full_name())
+		cpu_team_bp_configs[pos] = player_to_add
+
+func filter_valid_players(players, selected_player_names):
+	return players.filter(func (p): return p.player_cost < get_player_max_cost_for_salary_cap(salary_cap + 100) and !selected_player_names.has(p.get_full_name()))
