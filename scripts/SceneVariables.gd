@@ -63,10 +63,44 @@ func instantiate_cpu_team():
 			position_to_players[position].append(stat_config)
 	var selected_player_names = []
 	for pos in position_to_players.keys():
-		var players_to_select = filter_valid_players(position_to_players[pos], selected_player_names)
+		var players_to_select = filter_valid_players(position_to_players[pos], selected_player_names, salary_cap + 100)
 		var player_to_add = players_to_select.pick_random() as BallPlayerStats
 		selected_player_names.append(player_to_add.get_full_name())
 		cpu_team_bp_configs[pos] = player_to_add
 
-func filter_valid_players(players, selected_player_names):
-	return players.filter(func (p): return p.player_cost < get_player_max_cost_for_salary_cap(salary_cap + 100) and !selected_player_names.has(p.get_full_name()))
+func filter_valid_players(players, selected_player_names, cap):
+	return players.filter(func (p): return p.player_cost < get_player_max_cost_for_salary_cap(cap) and !selected_player_names.has(p.get_full_name()))
+
+func get_players_for_position():
+	var pos_to_bp_stat_map = {}
+	for c in all_player_stat_configs:
+		var config = c as BallPlayerStats
+		for position in config.positions:
+			if !pos_to_bp_stat_map.has(position):
+				pos_to_bp_stat_map[position] = []
+			pos_to_bp_stat_map[position].append(config)
+	return pos_to_bp_stat_map
+
+func assemble_random_lineup() -> Dictionary:
+	var pos_to_player_map = {}
+	var all_player_stats = get_players_for_position()
+	var selected_players = []
+	var positions = all_player_stats.keys()
+	positions.sort()
+	for pos in positions:
+		var players_to_pick_from = filter_valid_players(all_player_stats[pos], selected_players, salary_cap)
+		var random_player_stat = players_to_pick_from.pick_random() as BallPlayerStats
+		pos_to_player_map[pos] = random_player_stat
+		selected_players.append(random_player_stat.get_full_name())
+	return pos_to_player_map
+
+func get_player_lineup_or_gen_random_lineup():
+	if player_team_bp_configs.is_empty():
+		player_team_bp_configs = assemble_random_lineup()
+	return player_team_bp_configs
+
+func get_player_strat_card_deck_or_gen_random_deck():
+	if player_strategy_card_deck.is_empty():
+		for i in range(1, 3):
+			player_strategy_card_deck.append(all_strat_card_configs.pick_random())
+	return player_strategy_card_deck

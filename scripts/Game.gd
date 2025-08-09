@@ -6,7 +6,6 @@ enum Side {
 	CPU
 }
 
-var all_player_stats = {}
 var selected_player_bp_card: BallPlayerCard
 var selected_cpu_bp_card: BallPlayerCard
 
@@ -25,6 +24,7 @@ var full_cpu_scorer_statlines = {}
 @onready var cpu_assists_label = $CanvasLayer/Scoreboard/CPUAssists as Label
 @onready var cpu_rebounds_label = $CanvasLayer/Scoreboard/CPURebounds as Label
 @onready var quarter_label = $CanvasLayer/QuarterLabel as Label
+@onready var auto_win_button = $CanvasLayer/AutoWinButton as Button
 
 @export var matchup_container_scene: PackedScene
 @export var quarter_end_modal_scene: PackedScene
@@ -55,18 +55,8 @@ class BoxScoreStatLine:
 		assists = _assists
 		rebounds = _rebounds
 
-# Called when the node enters the scene tree for the first time.
-func _init():
-	for player_name in SceneVariables.all_player_names:
-		var stat_config = load("res://resources/players/" + player_name + ".tres") as BallPlayerStats
-		for p in stat_config.positions:
-			if p not in all_player_stats:
-				all_player_stats[p] = []
-			all_player_stats[p].append(stat_config)
-
-
-# func _ready():
-# 	_tally_rebound_test()
+func _ready() -> void:
+	auto_win_button.pressed.connect(handle_auto_win)
 
 func _tally_rebound_test():
 	var player_score_data = {
@@ -87,23 +77,6 @@ func _tally_rebound_test():
 
 func on_tally_finished():
 	pass
-
-func assemble_random_lineup() -> Dictionary:
-	var pos_to_player_map = {}
-	var picked_players = []
-	var positions = all_player_stats.keys()
-	positions.sort()
-
-	var remove_invalid_players = func (p):
-		var player_name = p.first_name + " " + p.last_name
-		return !pos_to_player_map.values().has(p) and !picked_players.has(player_name)
-	
-	for pos in positions:
-		var players_to_pick_from = all_player_stats[pos].filter(remove_invalid_players)
-		var random_player_stat = players_to_pick_from.pick_random() as BallPlayerStats
-		pos_to_player_map[pos] = random_player_stat
-		picked_players.append(random_player_stat.first_name + " " + random_player_stat.last_name)
-	return pos_to_player_map
 
 func player_select_card_to_score_with(card: BallPlayerCard):
 	if !player_completed_scorer_positions.has(card.get_assigned_position()) and !is_cpu_scoring:
@@ -158,7 +131,7 @@ func cpu_select_card_to_score_with():
 
 func on_matchup_complete(all_stats: Dictionary, side: Side, assists_used: int):
 	process_matchup_stats(all_stats, side, assists_used)
-	if is_quarter_completed():
+	if get_is_quarter_completed():
 		is_cpu_scoring = false
 		rebound_tally = rebound_tally_scene.instantiate() as ReboundTally
 		canvas_layer.add_child(rebound_tally)
@@ -213,30 +186,6 @@ func show_quarter_end_info_modal():
 		quarter_end_modal.update_quarter_number(quarter_number)
 		var callable = Callable(self, "on_new_quarter_start")
 		quarter_end_modal.continue_button.pressed.connect(callable)
-
-func is_quarter_completed():
-	var player_lineup_cards = player_team.get_starting_cards()
-	var cpu_lineup_cards = cpu_team.get_starting_cards()
-	return player_lineup_cards.size() == player_completed_scorer_positions.size() and \
-		cpu_lineup_cards.size() == cpu_completed_scorer_positions.size()
-
-func get_player_score():
-	return int(player_score_label.text)
-
-func get_cpu_score():
-	return int(cpu_score_label.text)
-
-func get_rebounds(rebounds_label: Label) -> int:
-	var rebounds_value = rebounds_label.text.split(": ")
-	if rebounds_value.size() > 1:
-		return int(rebounds_value[1])
-	return 0
-
-func get_assists(assists_label: Label) -> int:
-	var assists_value = assists_label.text.split(": ")
-	if assists_value.size() > 1:
-		return int(assists_value[1])
-	return 0
 
 func process_matchup_stats(all_stats: Dictionary, side: Side, assists_used: int):
 	if side == Side.PLAYER:
@@ -311,3 +260,35 @@ func reset_rebounds():
 func reset_assists():
 	player_assists_label.text = "A: 0"
 	cpu_assists_label.text = "A: 0"
+
+func handle_auto_win():
+	SceneVariables.player_score = 10
+	SceneVariables.cpu_score = 0
+	get_tree().change_scene_to_file("res://scenes/FinalScore.tscn")
+
+
+# ==================================== GETTERS ====================================
+
+func get_is_quarter_completed():
+	var player_lineup_cards = player_team.get_starting_cards()
+	var cpu_lineup_cards = cpu_team.get_starting_cards()
+	return player_lineup_cards.size() == player_completed_scorer_positions.size() and \
+		cpu_lineup_cards.size() == cpu_completed_scorer_positions.size()
+
+func get_player_score():
+	return int(player_score_label.text)
+
+func get_cpu_score():
+	return int(cpu_score_label.text)
+
+func get_rebounds(rebounds_label: Label) -> int:
+	var rebounds_value = rebounds_label.text.split(": ")
+	if rebounds_value.size() > 1:
+		return int(rebounds_value[1])
+	return 0
+
+func get_assists(assists_label: Label) -> int:
+	var assists_value = assists_label.text.split(": ")
+	if assists_value.size() > 1:
+		return int(assists_value[1])
+	return 0

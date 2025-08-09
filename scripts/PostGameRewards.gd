@@ -17,14 +17,17 @@ func _ready() -> void:
 
 func init_rewards():
 	var players_to_pick_from = SceneVariables.get_players_for_salary_cap()
+	var players_to_exclude = SceneVariables.player_team_bp_configs.values().map(func (p): return p.get_full_name())
 	for i in range(0, 3):
 		var rand_num = randi_range(0, 1)
 		if rand_num == 0:
-			var rand_bp_config = players_to_pick_from.pick_random()
+			players_to_pick_from = players_to_pick_from.filter(func (p): return !players_to_exclude.has(p.get_full_name()))
+			var rand_bp_config = players_to_pick_from.pick_random() as BallPlayerStats
 			var rand_bp_card = bp_card_scene.instantiate() as BallPlayerCard
 			rand_bp_card.ball_player_stats = rand_bp_config
 			rand_bp_card.on_bp_card_clicked.connect(show_add_player_modal)
 			reward_container.add_child(rand_bp_card)
+			players_to_exclude.append(rand_bp_config.get_full_name())
 		else:
 			var rand_strat_card_config = SceneVariables.all_strat_card_configs.pick_random()
 			var strat_card = strategy_card_scene.instantiate() as StrategyCard
@@ -35,6 +38,7 @@ func init_rewards():
 func show_add_player_modal(bp_card: BallPlayerCard):
 	var add_new_player_modal = add_new_player_modal_scene.instantiate() as AddNewPlayerModal
 	add_child(add_new_player_modal)
+	add_new_player_modal.on_add_player.connect(on_add_player)
 	add_new_player_modal.set_bp_stat_to_add(bp_card.ball_player_stats)
 	add_new_player_modal.show()
 

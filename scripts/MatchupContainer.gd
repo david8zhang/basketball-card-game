@@ -1,6 +1,7 @@
 class_name MatchupContainer
 extends Panel
 
+@onready var game = get_node("/root/Main") as Game
 @onready var strategy_card_preview = $StratCardPreview
 @onready var hbox_container = $MarginContainer/VBoxContainer/HBoxContainer as HBoxContainer
 @onready var roll_button = $MarginContainer/VBoxContainer/VBoxContainer/RollButton as Button
@@ -9,7 +10,6 @@ extends Panel
 @onready var use_assists_checkbox = $MarginContainer/VBoxContainer/VBoxContainer/UseAssistsCheckbox as CheckBox
 @onready var use_strategy_card_button = $MarginContainer/VBoxContainer/VBoxContainer/StratButton as Button
 @onready var strat_roll_bonus_label = $MarginContainer/VBoxContainer/VBoxContainer/StratRollBonus as Label
-@onready var game = get_node("/root/Main") as Game
 
 # For animating bonuses from strategy cards
 @onready var stat_bonus_animator: StatBonusAnimator = $StatBonusAnimator
@@ -37,12 +37,9 @@ var curr_assists := 0
 # Strategy cards
 var strategy_card_selector: StrategyCardSelector
 var strategy_roll_bonuses := 0
-var strategy_off_bonuses := 0
-var strategy_def_bonuses := 0
 var strategy_point_bonuses := 0
 var strategy_rebound_bonuses := 0
 var strategy_assist_bonuses := 0
-var off_strategy_card_name := ""
 var did_use_strategy_card := false
 var is_cpu_using_strategy_card := false
 var did_opp_use_def_strategy_card := false
@@ -61,7 +58,6 @@ func _ready():
 	use_strategy_card_button.pressed.connect(show_strategy_card_selector)
 	strat_roll_bonus_label.hide()
 	box_score_bonus_animator.hide()
-	
 	# Hide use strategy card button if player has no strategy cards available
 	if offense_side == Game.Side.PLAYER:
 		var player_team = game.player_team
@@ -280,7 +276,6 @@ func add_strat_bonus_to_roll():
 		var operator = "+" if strategy_roll_bonuses > 0 else "-"
 		strat_roll_bonus_modifier_label.text = operator + str(abs(strategy_roll_bonuses))
 		add_child(strat_roll_bonus_modifier_label)
-
 		# Combine assists with roll value
 		var strat_roll_modifier_tween = create_tween()
 		strat_roll_modifier_tween.tween_property(strat_roll_bonus_modifier_label, "global_position:y", roll_value_label.global_position.y + 10, 0.25).set_delay(0.5)
@@ -304,7 +299,6 @@ func add_assists_to_roll():
 		assists_modifier_label.global_position = Vector2(0, roll_value_label.global_position.y + 100)
 		assists_modifier_label.text = "+" + str(curr_assists) + " assist" + ("s" if curr_assists > 1 else "")
 		add_child(assists_modifier_label)
-
 		# Combine assists with roll value
 		var assists_modifier_tween = create_tween()
 		assists_modifier_tween.tween_property(assists_modifier_label, "global_position:y", roll_value_label.global_position.y + 10, 0.25).set_delay(0.5)
@@ -312,7 +306,6 @@ func add_assists_to_roll():
 		assists_modifier_tween.finished.connect(cb)
 	else:
 		calc_complete.emit()
-
 
 func combine_hot_or_cold_bonus(bonus: int):
 	var new_roll_value = int(roll_value_label.text) + bonus
@@ -326,7 +319,6 @@ func add_hot_or_cold_modifiers():
 	if marker.curr_marker_count > 0:
 		var bonus_amt = 4 * marker.curr_marker_count
 		bonus_amt = -bonus_amt if marker.curr_marker_type == Marker.MarkerType.COLD else bonus_amt
-
 		var modifier_label_text = "(hot)" if marker.curr_marker_type == Marker.MarkerType.HOT else "(cold)"
 		hot_cold_modifier_label = Label.new()
 		hot_cold_modifier_label.add_theme_font_size_override("font_size", 30)
@@ -335,7 +327,6 @@ func add_hot_or_cold_modifiers():
 		hot_cold_modifier_label.global_position = Vector2(0, roll_value_label.global_position.y + 100)
 		hot_cold_modifier_label.text = ("+" if bonus_amt > 0 else "") + str(bonus_amt) + " " + modifier_label_text
 		add_child(hot_cold_modifier_label)
-
 		# Combine hot/cold bonus with roll value
 		var hot_cold_modifier_label_tween = create_tween()
 		hot_cold_modifier_label_tween.tween_property(hot_cold_modifier_label, "global_position:y", roll_value_label.global_position.y + 10, 0.25).set_delay(0.75)
@@ -362,7 +353,6 @@ func handle_off_modifier():
 		off_modifier_label.global_position = Vector2(0, roll_value_label.global_position.y + 100)
 		off_modifier_label.text = "+" + str(off_def_diff) if off_def_diff > 0 else str(off_def_diff)
 		add_child(off_modifier_label)
-
 		# Combine modifier value with roll value
 		var off_modifier_tween = create_tween()
 		off_modifier_tween.tween_property(off_modifier_label, "global_position:y", roll_value_label.global_position.y + 10, 0.25).set_delay(0.5)
@@ -430,13 +420,11 @@ func push_roll_value_up():
 	var tween = create_tween()
 	var start_y = roll_value_label.global_position.y
 	tween.tween_property(roll_value_label, "theme_override_font_sizes/font_size", 30, 0.25)
-
 	var shrink_fn = func shrink_roll_value():
 		var new_tween = create_tween()
 		var end_y = roll_value_label.global_position.y - 100
 		new_tween.tween_property(roll_value_label, "global_position:y", end_y, 0.25)
 		new_tween.finished.connect(go_to_next_step_generic)
-
 	tween.finished.connect(shrink_fn)
 	matchup_score = matchup_pts_assts_rebs_scene.instantiate()
 	add_child(matchup_score)
@@ -457,19 +445,16 @@ func handle_point_tally_anim(points_scored_value: int, bonus_modifier: String = 
 	points_bonus_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	var add_points_bonus_tween = create_tween()
 	add_points_bonus_tween.tween_property(points_bonus_label, "global_position:y", points_value.global_position.y, 0.25).set_delay(0.5)
-
 	var on_combine_finished = func on_combine_finished():
 		var tween = create_tween()
 		tween.tween_property(points_value, "theme_override_font_sizes/font_size", 50, 0.25)
 		calc_complete.emit()
-
 	var combine_fn = func combine_with_total_points():
 		var tween = create_tween()
 		points_bonus_label.queue_free()
 		points_value.text = str(int(points_value.text) + points_scored_value)
 		tween.tween_property(points_value, "theme_override_font_sizes/font_size", 60, 0.25)
 		tween.finished.connect(on_combine_finished)
-	
 	add_points_bonus_tween.finished.connect(combine_fn)
 	
 func tally_points():
@@ -495,19 +480,16 @@ func handle_assist_tally_anim(assist_value: int, bonus_modifier: String = ""):
 	assists_bonus_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	var add_assists_bonus_tween = create_tween()
 	add_assists_bonus_tween.tween_property(assists_bonus_label, "global_position:y", assists_value.global_position.y, 0.25).set_delay(0.5)
-
 	var on_combine_finished = func on_combine_finished():
 		var tween = create_tween()
 		tween.tween_property(assists_value, "theme_override_font_sizes/font_size", 50, 0.25)
 		calc_complete.emit()
-
 	var combine_fn = func combine_with_total_points():
 		var tween = create_tween()
 		assists_bonus_label.queue_free()
 		assists_value.text = str(int(assists_value.text) + assist_value)
 		tween.tween_property(assists_value, "theme_override_font_sizes/font_size", 60, 0.25)
 		tween.finished.connect(on_combine_finished)
-
 	add_assists_bonus_tween.finished.connect(combine_fn)
 
 func tally_assists():
@@ -547,12 +529,10 @@ func handle_rebound_tally_anim(num_rebounds: int):
 	rebounds_bonus_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	var add_rebounds_bonus_tween = create_tween()
 	add_rebounds_bonus_tween.tween_property(rebounds_bonus_label, "global_position:y", rebounds_value.global_position.y, 0.25).set_delay(0.5)
-
 	var on_combine_finished = func on_combine_finished():
 		var tween = create_tween()
 		tween.tween_property(rebounds_value, "theme_override_font_sizes/font_size", 50, 0.25)
 		calc_complete.emit()
-
 	var combine_fn = func combine_with_total_points():
 		var tween = create_tween()
 		rebounds_bonus_label.queue_free()
@@ -561,20 +541,17 @@ func handle_rebound_tally_anim(num_rebounds: int):
 		tween.finished.connect(on_combine_finished)
 	add_rebounds_bonus_tween.finished.connect(combine_fn)
 
-
 func reset_roll_table_rows():
 	var roll_table_row = get_table_row_for_roll_value()
 	var roll_range_label = roll_table_row["roll_range_label"] as TableValue
 	var rebounds_value_row = roll_table_row["rebounds_label"] as TableValue
 	var assists_value_row = roll_table_row["assists_label"] as TableValue
 	var points_value_row = roll_table_row["points_label"] as TableValue
-
 	var tween = create_tween()
 	tween.tween_property(roll_range_label.label, "theme_override_font_sizes/font_size", 15, 0.25)
 	tween.parallel().tween_property(rebounds_value_row.label, "theme_override_font_sizes/font_size", 15, 0.25)
 	tween.parallel().tween_property(assists_value_row.label, "theme_override_font_sizes/font_size", 15, 0.25)
 	tween.parallel().tween_property(points_value_row.label, "theme_override_font_sizes/font_size", 15, 0.25)
-
 	var on_continue_button = Button.new()
 	on_continue_button.text = "Continue"
 	add_child(on_continue_button)
@@ -631,9 +608,11 @@ func show_strategy_card_selector():
 		use_strategy_card_button.show()
 		if offense_side == Game.Side.PLAYER:
 			did_use_strategy_card = false
-			if curr_assists == 0:
+			if curr_assists > 0:
 				use_assists_checkbox.show()
 		else:
+			# If the Player is on defense and closes the strategy card selector without using a card, 
+			# set the flag to false (Not sure if we actually need this since we never set it to true?)
 			did_opp_use_def_strategy_card = false
 	strategy_card_selector = strategy_card_selector_scene.instantiate() as StrategyCardSelector
 	strategy_card_selector.off_player = get_off_player_card()
@@ -704,7 +683,6 @@ func apply_bonuses_if_applicable(bonuses, strategy_type: StrategyCardConfig.Stra
 							box_score_bonus_animator.hide()
 						box_score_bonus_animator.show()
 						box_score_bonus_animator.on_box_score_bonus_complete.connect(on_box_score_anim_finished)
-
 				StrategyCardBonusNode.BonusType.NOOP:
 					on_complete_callable.call()
 

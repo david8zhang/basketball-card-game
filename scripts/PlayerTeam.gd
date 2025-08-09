@@ -16,8 +16,8 @@ func _ready():
 	if starting_lineup_wrapper != null:
 		starting_lineup = starting_lineup_scene.instantiate() as StartingLineup
 		starting_lineup_wrapper.add_child(starting_lineup)
-		starting_lineup.init_cards(SceneVariables.player_team_bp_configs)
-	strategy_card_deck.init_strategy_card_deck(SceneVariables.player_strategy_card_deck)
+		starting_lineup.init_cards(SceneVariables.get_player_lineup_or_gen_random_lineup())
+	strategy_card_deck.init_strategy_card_deck(SceneVariables.get_player_strat_card_deck_or_gen_random_deck())
 
 func _process(_delta):
 	if !is_bp_card_callbacks_hooked:

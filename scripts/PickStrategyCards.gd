@@ -31,5 +31,4 @@ func add_strategy_card(selected_card: StrategyCard):
 
 func go_to_game_scene():
 	SceneVariables.player_strategy_card_deck = selected_cards_container.get_children().map(func (c): return c.strategy_card_config)
-	SceneVariables.instantiate_cpu_team()
 	get_tree().change_scene_to_file("res://scenes/Main.tscn")
