@@ -42,4 +42,7 @@ func get_starting_cards():
 	return starting_lineup.starting_lineup_cards
 
 func get_strategy_card_deck() -> Array:
-	return strategy_card_deck.cards
+	return strategy_card_deck.cards_in_play
+
+func reset_playable_strategy_cards():
+	strategy_card_deck.init_strategy_card_deck(SceneVariables.player_strategy_card_deck)

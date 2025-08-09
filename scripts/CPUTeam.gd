@@ -26,7 +26,7 @@ func get_starting_cards():
   return starting_lineup.starting_lineup_cards
 
 func get_strategy_card_deck() -> Array[StrategyCardConfig]:
-  return strategy_card_deck.cards
+  return strategy_card_deck.cards_in_play
 
 func use_strategy_card(matchup_container: MatchupContainer, rand_index: int, cards_to_pick_from):
   if strategy_card != null:

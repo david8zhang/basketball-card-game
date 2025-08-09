@@ -292,6 +292,7 @@ func update_statlines(full_name: String, stat_line: BoxScoreStatLine, scorer_sta
 func on_new_quarter_start():
 	reset_rebounds()
 	reset_assists()
+	player_team.reset_playable_strategy_cards()
 	quarter_number += 1
 	quarter_label.text = "Q" + str(quarter_number)
 	player_completed_scorer_positions = []
