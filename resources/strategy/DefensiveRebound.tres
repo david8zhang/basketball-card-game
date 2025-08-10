@@ -43,5 +43,5 @@ fail_child = SubResource("Resource_3xal7")
 script = ExtResource("1_34cuo")
 strategy_type = 1
 card_name = "Defensive Rebound"
-card_description = "If your player has more defense than tandhe opponent, -1 rebound from your opponent's scoring roll and +1 rebound to your team"
+card_description = "If your player has more defense than the opponent, -1 rebound from your opponent's scoring roll and +1 rebound to your team"
 root_node = SubResource("Resource_2ipnx")

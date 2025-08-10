@@ -1,0 +1,52 @@
+[gd_resource type="Resource" script_class="StrategyCardConfig" load_steps=13 format=3 uid="uid://g0ahcw60skoy"]
+
+[ext_resource type="Script" uid="uid://cdj30lies16yq" path="res://scripts/strategy/StrategyCardConfig.gd" id="1_nkugq"]
+[ext_resource type="Script" uid="uid://bq22hlebjq8xg" path="res://scripts/strategy/StrategyCardNode.gd" id="1_wy7ui"]
+[ext_resource type="Script" uid="uid://ckyo36itiyt30" path="res://scripts/strategy/action/RollDiceAction.gd" id="2_2wmik"]
+[ext_resource type="Script" uid="uid://dfdnia3mppqsu" path="res://scripts/strategy/StrategyCardSequenceNode.gd" id="3_8hwf6"]
+[ext_resource type="Script" uid="uid://dvl8hl7mfdxi2" path="res://scripts/strategy/bonus/BoxScoreBonus.gd" id="3_f8o8k"]
+[ext_resource type="Script" uid="uid://8h7wbli6l8ea" path="res://scripts/strategy/bonus/NoopBonus.gd" id="3_ilojb"]
+[ext_resource type="Script" uid="uid://d3q2e7wk15stm" path="res://scripts/strategy/condition/ShotCheckCondition.gd" id="4_ilojb"]
+
+[sub_resource type="Resource" id="Resource_f8o8k"]
+script = ExtResource("2_2wmik")
+dice_type = 20
+rigged_dice_value = -1
+static_bonus = 5
+add_three_point_bonus = true
+action_type = 2
+metadata/_custom_type_script = "uid://ckyo36itiyt30"
+
+[sub_resource type="Resource" id="Resource_iu84o"]
+script = ExtResource("3_ilojb")
+bonus_type = 7
+metadata/_custom_type_script = "uid://8h7wbli6l8ea"
+
+[sub_resource type="Resource" id="Resource_4d6bt"]
+script = ExtResource("3_f8o8k")
+bonus_amt = 2
+bonus_stat_type = 0
+target_side = 0
+bonus_type = 2
+metadata/_custom_type_script = "uid://dvl8hl7mfdxi2"
+
+[sub_resource type="Resource" id="Resource_abqn5"]
+script = ExtResource("4_ilojb")
+side_to_check = 0
+condition_type = 0
+pass_child = SubResource("Resource_4d6bt")
+fail_child = SubResource("Resource_iu84o")
+metadata/_custom_type_script = "uid://d3q2e7wk15stm"
+
+[sub_resource type="Resource" id="Resource_ilojb"]
+script = ExtResource("3_8hwf6")
+children = Array[ExtResource("1_wy7ui")]([SubResource("Resource_f8o8k"), SubResource("Resource_abqn5")])
+metadata/_custom_type_script = "uid://dfdnia3mppqsu"
+
+[resource]
+script = ExtResource("1_nkugq")
+strategy_type = 0
+card_name = "Jumper"
+card_description = "This player makes a shot check at +5. If he succeeds, he scores 2 points."
+root_node = SubResource("Resource_ilojb")
+metadata/_custom_type_script = "uid://cdj30lies16yq"
