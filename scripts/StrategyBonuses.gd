@@ -18,8 +18,8 @@ func add_bonus_line(attr_name: String, bonus_amt: int):
 	strategy_bonus_line.setup(attr_name, bonus_amt)
 
 func handle_close():
+	hide()
 	on_close.emit()
-	queue_free()
 
 func show_failure_message():
 	title_label.hide()

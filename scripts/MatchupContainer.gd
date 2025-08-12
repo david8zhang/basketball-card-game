@@ -637,54 +637,58 @@ func get_on_process_strategy_complete_callable(strategy_type: StrategyCardConfig
 		else:
 			return "on_process_cpu_off_strategy_complete"
 
-func apply_bonuses_if_applicable(bonuses, strategy_type: StrategyCardConfig.StrategyCardType):
+func apply_single_bonus(bonus, strategy_type, custom_cb):
+	print(bonus.bonus_type == StrategyCardBonusNode.BonusType.BOX_SCORE)
 	var off_player = get_off_player_card()
 	var def_player = get_def_player_card()
-	var on_complete_callable = Callable(self, get_on_process_strategy_complete_callable(strategy_type))
+	match (bonus.bonus_type):
+		StrategyCardBonusNode.BonusType.STAT:
+			var stat_bonus = bonus as StatBonus
+			var player_to_apply_bonus_to = def_player if strategy_type == StrategyCardConfig.StrategyCardType.DEFENSE else off_player
+			if !stat_bonus_animator.on_complete.has_connections():
+				stat_bonus_animator.on_complete.connect(custom_cb)
+			stat_bonus_animator.apply_bonus_to_player(stat_bonus.off_bonus_amount, stat_bonus.def_bonus_amount, player_to_apply_bonus_to)
+		StrategyCardBonusNode.BonusType.MARKER:
+			var marker_bonus = bonus as MarkerBonus
+			if !marker_bonus_animator.on_complete.has_connections():
+				marker_bonus_animator.on_complete.connect(custom_cb)
+			marker_bonus_animator.apply_bonus_to_player(off_player, def_player, marker_bonus)
+		StrategyCardBonusNode.BonusType.ROLL:
+			var roll_bonus = bonus as RollBonus
+			strategy_roll_bonuses = roll_bonus.roll_bonus_amount
+			custom_cb.call()
+		StrategyCardBonusNode.BonusType.BOX_SCORE:
+			var box_score_bonus = bonus as BoxScoreBonus
+			if box_score_bonus.target_side == BoxScoreBonus.TargetSide.OFFENSE:
+				if box_score_bonus.bonus_stat_type == BoxScoreBonus.StatType.POINTS:
+					strategy_point_bonuses += box_score_bonus.bonus_amt
+					print(strategy_point_bonuses)
+				elif box_score_bonus.bonus_stat_type == BoxScoreBonus.StatType.REBOUNDS:
+					strategy_rebound_bonuses += box_score_bonus.bonus_amt
+				elif box_score_bonus.bonus_stat_type == BoxScoreBonus.StatType.ASSISTS:
+					strategy_assist_bonuses += box_score_bonus.bonus_amt
+				custom_cb.call()
+			else:
+				# If the target of this bonus is the defender and the current offensive player card is the player, then it was
+				# the CPU that used the defensive strategy card resulting in this bonus
+				var is_cpu = offense_side == Game.Side.PLAYER
+				box_score_bonus_animator.animate_box_score_bonus(box_score_bonus, is_cpu)
+				var on_box_score_anim_finished = func _on_anim_finished():
+					var side_to_receive_bonus = Game.Side.CPU if is_cpu else Game.Side.PLAYER
+					game.add_box_score_bonuses(side_to_receive_bonus, box_score_bonus.bonus_stat_type, box_score_bonus.bonus_amt)
+					custom_cb.call()
+					box_score_bonus_animator.hide()
+				box_score_bonus_animator.show()
+				if !box_score_bonus_animator.on_box_score_bonus_complete.has_connections():
+					box_score_bonus_animator.on_box_score_bonus_complete.connect(on_box_score_anim_finished)
+		StrategyCardBonusNode.BonusType.NOOP:
+			custom_cb.call()
+
+func on_strategy_card_processing_complete(strategy_type: StrategyCardConfig.StrategyCardType):
 	if strategy_type == StrategyCardConfig.StrategyCardType.DEFENSE:
 		did_opp_use_def_strategy_card = true
-	if bonuses.is_empty():
-		on_complete_callable.call()
-	else:
-		for node in bonuses:
-			match (node.bonus_type):
-				StrategyCardBonusNode.BonusType.STAT:
-					var stat_bonus = node as StatBonus
-					var player_to_apply_bonus_to = def_player if strategy_type == StrategyCardConfig.StrategyCardType.DEFENSE else off_player
-					stat_bonus_animator.on_complete.connect(on_complete_callable)
-					stat_bonus_animator.apply_bonus_to_player(stat_bonus.off_bonus_amount, stat_bonus.def_bonus_amount, player_to_apply_bonus_to)
-				StrategyCardBonusNode.BonusType.MARKER:
-					var marker_bonus = node as MarkerBonus
-					marker_bonus_animator.on_complete.connect(on_complete_callable)
-					marker_bonus_animator.apply_bonus_to_player(off_player, def_player, marker_bonus)
-				StrategyCardBonusNode.BonusType.ROLL:
-					var roll_bonus = node as RollBonus
-					strategy_roll_bonuses = roll_bonus.roll_bonus_amount
-					on_complete_callable.call()
-				StrategyCardBonusNode.BonusType.BOX_SCORE:
-					var box_score_bonus = node as BoxScoreBonus
-					if box_score_bonus.target_side == BoxScoreBonus.TargetSide.OFFENSE:
-						if box_score_bonus.bonus_stat_type == BoxScoreBonus.StatType.POINTS:
-							strategy_point_bonuses = box_score_bonus.bonus_amt
-						elif box_score_bonus.bonus_stat_type == BoxScoreBonus.StatType.REBOUNDS:
-							strategy_rebound_bonuses = box_score_bonus.bonus_amt
-						elif box_score_bonus.bonus_stat_type == BoxScoreBonus.StatType.ASSISTS:
-							strategy_assist_bonuses = box_score_bonus.bonus_amt
-						on_complete_callable.call()
-					else:
-						# If the target of this bonus is the defender and the current offensive player card is the player, then it was
-						# the CPU that used the defensive strategy card resulting in this bonus
-						var is_cpu = offense_side == Game.Side.PLAYER
-						box_score_bonus_animator.animate_box_score_bonus(box_score_bonus, is_cpu)
-						var on_box_score_anim_finished = func _on_anim_finished():
-							var side_to_receive_bonus = Game.Side.CPU if is_cpu else Game.Side.PLAYER
-							game.add_box_score_bonuses(side_to_receive_bonus, box_score_bonus.bonus_stat_type, box_score_bonus.bonus_amt)
-							on_complete_callable.call()
-							box_score_bonus_animator.hide()
-						box_score_bonus_animator.show()
-						box_score_bonus_animator.on_box_score_bonus_complete.connect(on_box_score_anim_finished)
-				StrategyCardBonusNode.BonusType.NOOP:
-					on_complete_callable.call()
+	var on_complete_callable = Callable(self, get_on_process_strategy_complete_callable(strategy_type))
+	on_complete_callable.call()
 
 func init_cpu_roll():
 	roll_button.hide()

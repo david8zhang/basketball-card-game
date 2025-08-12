@@ -10,7 +10,7 @@ enum ComparatorType {
 @export var dice_roll_thres := 0
 @export var comparator_type := ComparatorType.GREATER
 
-var dice_roll_result := 0
+var final_roll_result := 0
 var dice_type := 0
 
 func _init():
@@ -20,21 +20,21 @@ func _init():
 func check_condition(blackboard: Blackboard):  
 	var roll_dice_action_result = get_roll_dice_action_result(blackboard) as RollDiceAction
 	assert(roll_dice_action_result != null, "Roll dice action must exist!")
-	dice_roll_result = roll_dice_action_result.dice_roll_result
+	final_roll_result = roll_dice_action_result.final_roll_result
 	dice_type = roll_dice_action_result.dice_type
 	var result_type
 	match (comparator_type):
 		ComparatorType.LESS:
 			result_type = StrategyCardNode.NodeResultType.SUCCESS if \
-			dice_roll_result < dice_roll_thres else \
+			final_roll_result < dice_roll_thres else \
 			StrategyCardNode.NodeResultType.FAILURE
 		ComparatorType.EQUAL:
 			result_type = StrategyCardNode.NodeResultType.SUCCESS if \
-			dice_roll_result == dice_roll_thres else \
+			final_roll_result == dice_roll_thres else \
 			StrategyCardNode.NodeResultType.FAILURE
 		ComparatorType.GREATER:
 			result_type = StrategyCardNode.NodeResultType.SUCCESS if \
-			dice_roll_result > dice_roll_thres else \
+			final_roll_result > dice_roll_thres else \
 			StrategyCardNode.NodeResultType.FAILURE
 	return result_type
 

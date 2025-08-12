@@ -11,6 +11,7 @@ extends StrategyCardActionNode
 @export var add_three_point_bonus := false
 
 var dice_roll_result := 0
+var final_roll_result := 0
 var three_point_bonus := 0
 
 func _init():
@@ -24,7 +25,7 @@ func process(blackboard: Blackboard):
 		dice_roll_result = randi_range(1, dice_type)
 	if add_three_point_bonus:
 		three_point_bonus = blackboard.off_player.ball_player_stats.three_point_bonus
-	dice_roll_result += static_bonus + three_point_bonus
+	final_roll_result = dice_roll_result + static_bonus + three_point_bonus
 	var node_result = StrategyCardNode.NodeResult.new(StrategyCardNode.NodeResultType.SUCCESS, self)
 	blackboard.node_results.append(node_result)
 	return StrategyCardNode.NodeResultType.SUCCESS

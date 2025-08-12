@@ -17,8 +17,8 @@ func check_condition(blackboard: Blackboard):
 	var bp_stats = player_to_check.ball_player_stats
 	var roll_dice_action_result = get_roll_dice_action_result(blackboard) as RollDiceAction
 	assert(roll_dice_action_result != null, "Roll dice action must exist!")
-	var dice_roll_result = roll_dice_action_result.dice_roll_result
-	return StrategyCardNode.NodeResultType.SUCCESS if dice_roll_result > bp_stats.shot_check else StrategyCardNode.NodeResultType.FAILURE
+	var final_roll_result = roll_dice_action_result.final_roll_result
+	return StrategyCardNode.NodeResultType.SUCCESS if final_roll_result > bp_stats.shot_check else StrategyCardNode.NodeResultType.FAILURE
 
 func get_roll_dice_action_result(blackboard: Blackboard):
 	for result in blackboard.node_results:

@@ -13,8 +13,7 @@ var num_games_won := 0
 var all_player_names = [
 "DerrickWhite", "CarisLevert", "DomantasSabonis", "DeAaronFox", "DeAnthonyMelton", "JamalMurray", "CameronPayne", "DeanWade", "KentaviousCaldwellPope", "DavionMitchell", "ShaiGilgeousAlexander", "ChrisPaul", "JalenMcDaniels", "AnthonyLamb", "JaeCrowder", "CediOsman", "JamesHarden", "IvicaZubac", "CamThomas", "JoshOkogie", "DariusGarland", "JohnKonchar", "AndrewWiggins", "KawhiLeonard", "MalcolmBrogdon", "JoeIngles", "MichaelPorterJr", "AlHorford", "KlayThompson", "BruceBrown", "GrantWilliams", "AaronGordon", "JoelEmbiid", "JalenBrunson", "JoeHarris", "JockLandale", "JaylenBrown", "JaMorant", "JordanPoole", "DevinBooker", "DraymondGreen", "ImmanuelQuickley", "JevonCarter", "KevonLooney", "BobbyPortis", "GiannisAntetokounmpo", "JeffGreen", "JarenJacksonJr", "BonesHyland", "LukeKennard", "JaysonTatum", "MarcusSmart", "DorianFinneySmith", "IsaacOkoro", "GeorgesNiang", "MalikMonk", "BrandonClarke", "JuliusRandle", "JrueHoliday", "CameronJohnson", "BrookLopez", "DamionLee", "HarrisonBarnes", "LamarStevens", "ChristianBraun", "DesmondBane", "KeeganMurray", "KevinHuerter", "DeAndreAyton", "BenSimmons", "DillonBrooks", "JonathanKuminga", "EvanMobley", "DonovanMitchell", "IsaiahHartenstein", "MasonPlumlee", "GraysonAllen", "MikalBridges", "ChimezieMetu", "JoshHart", "KevinDurant", "DonteDivincenzo", "JarettAllen"
 ]
-# var all_strategy_card_names = ["BlinkAndYoullMissHim", "HesHeatingUp", "Layup", "BoxingOut", "GoodPosition", "HalfCourtSet", "ChaseDownBlock", "AndOne", "DefensiveRebound", "KillerCrossover"]
-var all_strategy_card_names = ["Jumper"]
+var all_strategy_card_names = ["BlinkAndYoullMissHim", "HesHeatingUp", "Layup", "BoxingOut", "GoodPosition", "HalfCourtSet", "ChaseDownBlock", "AndOne", "DefensiveRebound", "KillerCrossover", "Jumper"]
 
 var all_player_stat_configs: Array[BallPlayerStats] = []
 var all_strat_card_configs: Array[StrategyCardConfig] = []
@@ -102,6 +101,6 @@ func get_player_lineup_or_gen_random_lineup():
 
 func get_player_strat_card_deck_or_gen_random_deck():
 	if player_strategy_card_deck.is_empty():
-		for i in range(1, 3):
+		for i in range(0, 3):
 			player_strategy_card_deck.append(all_strat_card_configs.pick_random())
 	return player_strategy_card_deck
