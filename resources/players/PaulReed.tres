@@ -1,0 +1,55 @@
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://cmnffqaaswyw1"]
+
+[ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_nv31l"]
+[ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_ji7hw"]
+
+[sub_resource type="Resource" id="Resource_a4usf"]
+script = ExtResource("1_nv31l")
+low = 1
+high = 7
+points = 0
+assists = 0
+rebounds = 0
+metadata/_custom_type_script = "uid://c3xho6niytkse"
+
+[sub_resource type="Resource" id="Resource_f0ppf"]
+script = ExtResource("1_nv31l")
+low = 8
+high = 13
+points = 1
+assists = 0
+rebounds = 1
+metadata/_custom_type_script = "uid://c3xho6niytkse"
+
+[sub_resource type="Resource" id="Resource_fksbu"]
+script = ExtResource("1_nv31l")
+low = 14
+high = 19
+points = 3
+assists = 1
+rebounds = 3
+metadata/_custom_type_script = "uid://c3xho6niytkse"
+
+[sub_resource type="Resource" id="Resource_h0vgp"]
+script = ExtResource("1_nv31l")
+low = 20
+high = 30
+points = 5
+assists = 1
+rebounds = 4
+metadata/_custom_type_script = "uid://c3xho6niytkse"
+
+[resource]
+script = ExtResource("2_ji7hw")
+offense = 9
+defense = 13
+positions = Array[int]([3])
+first_name = "Paul"
+last_name = "Reed"
+three_point_bonus = 0
+player_cost = 380
+shot_check = 13
+first_name_size = 28
+last_name_size = 28
+roll_table = Array[ExtResource("1_nv31l")]([SubResource("Resource_a4usf"), SubResource("Resource_f0ppf"), SubResource("Resource_fksbu"), SubResource("Resource_h0vgp")])
+metadata/_custom_type_script = "uid://dmyxnrgdtpksv"
