@@ -30,3 +30,7 @@ func get_offense_strategy_cards():
 func get_defense_strategy_cards():
 	var defense_cards = cards_in_play.filter(func(c): return c.config.strategy_type == StrategyCardConfig.StrategyCardType.DEFENSE)
 	return defense_cards
+
+func reset_strategy_card_deck(strategy_card_configs):
+	cards_in_play = []
+	init_strategy_card_deck(strategy_card_configs)

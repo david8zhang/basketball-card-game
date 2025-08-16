@@ -8,7 +8,7 @@ script = ExtResource("1_7fwok")
 low = 1
 high = 10
 points = 2
-assists = 0
+assists = 1
 rebounds = 1
 metadata/_custom_type_script = "uid://c3xho6niytkse"
 
@@ -17,7 +17,7 @@ script = ExtResource("1_7fwok")
 low = 11
 high = 14
 points = 4
-assists = 1
+assists = 3
 rebounds = 2
 metadata/_custom_type_script = "uid://c3xho6niytkse"
 
@@ -26,7 +26,7 @@ script = ExtResource("1_7fwok")
 low = 15
 high = 20
 points = 6
-assists = 2
+assists = 4
 rebounds = 3
 metadata/_custom_type_script = "uid://c3xho6niytkse"
 
@@ -35,7 +35,7 @@ script = ExtResource("1_7fwok")
 low = 21
 high = 25
 points = 9
-assists = 3
+assists = 5
 rebounds = 5
 metadata/_custom_type_script = "uid://c3xho6niytkse"
 
@@ -44,7 +44,7 @@ script = ExtResource("1_7fwok")
 low = 26
 high = 30
 points = 11
-assists = 4
+assists = 6
 rebounds = 7
 metadata/_custom_type_script = "uid://c3xho6niytkse"
 
