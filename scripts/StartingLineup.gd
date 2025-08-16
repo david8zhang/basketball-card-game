@@ -5,7 +5,9 @@ extends HBoxContainer
 var starting_lineup_cards = []
 
 func init_cards(pos_to_player_map: Dictionary):
-	for pos in pos_to_player_map:
+	var sorted_positions = pos_to_player_map.keys()
+	sorted_positions.sort()
+	for pos in sorted_positions:
 		var player_stat = pos_to_player_map[pos]
 		var card = card_scene.instantiate() as BallPlayerCard
 		card.ball_player_stats = player_stat

@@ -45,4 +45,4 @@ func get_strategy_card_deck() -> Array:
 	return strategy_card_deck.cards_in_play
 
 func reset_playable_strategy_cards():
-	strategy_card_deck.init_strategy_card_deck(SceneVariables.player_strategy_card_deck)
+	strategy_card_deck.reset_strategy_card_deck(SceneVariables.player_strategy_card_deck)
