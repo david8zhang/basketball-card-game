@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://wahueay2vm7i"]
+[gd_scene load_steps=6 format=3 uid="uid://wahueay2vm7i"]
 
 [ext_resource type="Script" uid="uid://bydfybswp8yfa" path="res://scripts/AddNewPlayerModal.gd" id="1_aqind"]
 [ext_resource type="PackedScene" uid="uid://cgehw3go3iec0" path="res://prefabs/CardSlot.tscn" id="1_p2v0d"]
 [ext_resource type="PackedScene" uid="uid://canx4b4pr7n3c" path="res://prefabs/BallPlayerCard.tscn" id="2_7iky2"]
+[ext_resource type="PackedScene" uid="uid://bm8fw1micckc0" path="res://prefabs/BPCardPreview.tscn" id="3_ssnxr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p2v0d"]
 bg_color = Color(0, 0, 0, 1)
@@ -16,6 +17,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_aqind")
 bp_card_scene = ExtResource("2_7iky2")
+bp_card_preview_scene = ExtResource("3_ssnxr")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
