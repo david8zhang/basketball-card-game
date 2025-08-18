@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://ntcw53wtfele"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://ntcw53wtfele"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_jhmcr"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_s857d"]
+[ext_resource type="Texture2D" uid="uid://c767nlpn7ynqk" path="res://assets/players/moses-moody.jpg" id="3_5svp3"]
 
 [sub_resource type="Resource" id="Resource_3enxf"]
 script = ExtResource("1_jhmcr")
@@ -49,6 +50,7 @@ last_name = "Moody"
 three_point_bonus = 3
 player_cost = 10
 shot_check = 17
+texture = ExtResource("3_5svp3")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_jhmcr")]([SubResource("Resource_3enxf"), SubResource("Resource_5svp3"), SubResource("Resource_peauf"), SubResource("Resource_lkn43")])

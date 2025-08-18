@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://cmnffqaaswyw1"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://cmnffqaaswyw1"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_nv31l"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_ji7hw"]
+[ext_resource type="Texture2D" uid="uid://dsm82wn01m0iy" path="res://assets/players/paul-reed.jpg" id="3_f0ppf"]
 
 [sub_resource type="Resource" id="Resource_a4usf"]
 script = ExtResource("1_nv31l")
@@ -49,6 +50,7 @@ last_name = "Reed"
 three_point_bonus = 0
 player_cost = 380
 shot_check = 13
+texture = ExtResource("3_f0ppf")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_nv31l")]([SubResource("Resource_a4usf"), SubResource("Resource_f0ppf"), SubResource("Resource_fksbu"), SubResource("Resource_h0vgp")])

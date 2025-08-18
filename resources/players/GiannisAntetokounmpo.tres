@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://cqyd04134g1f1"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=9 format=3 uid="uid://cqyd04134g1f1"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_ehqkg"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="1_uw4hw"]
+[ext_resource type="Texture2D" uid="uid://xikxlncepeve" path="res://assets/players/giannis-antetokounmpo.jpg" id="3_gtspp"]
 
 [sub_resource type="Resource" id="Resource_8us7g"]
 script = ExtResource("1_ehqkg")
@@ -53,6 +54,7 @@ last_name = "Antetokounmpo"
 three_point_bonus = 2
 player_cost = 1160
 shot_check = 17
+texture = ExtResource("3_gtspp")
 first_name_size = 28
 last_name_size = 22
 roll_table = Array[ExtResource("1_ehqkg")]([SubResource("Resource_8us7g"), SubResource("Resource_g06sp"), SubResource("Resource_7bvv6"), SubResource("Resource_gwvnw"), SubResource("Resource_efnsg")])

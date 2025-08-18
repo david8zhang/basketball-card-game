@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://c72y4kerj2jlb"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=9 format=3 uid="uid://c72y4kerj2jlb"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_aaywi"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_2ue77"]
+[ext_resource type="Texture2D" uid="uid://ca4hdioyd751b" path="res://assets/players/scottie-barnes.jpg" id="3_2ue77"]
 
 [sub_resource type="Resource" id="Resource_nv31l"]
 script = ExtResource("1_aaywi")
@@ -58,6 +59,7 @@ last_name = "Barnes"
 three_point_bonus = 0
 player_cost = 670
 shot_check = 14
+texture = ExtResource("3_2ue77")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_aaywi")]([SubResource("Resource_nv31l"), SubResource("Resource_ji7hw"), SubResource("Resource_081dk"), SubResource("Resource_7tle6"), SubResource("Resource_ga6jy")])

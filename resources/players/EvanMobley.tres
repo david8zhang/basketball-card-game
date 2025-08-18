@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://5v2km7143pih"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=9 format=3 uid="uid://5v2km7143pih"]
 
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="1_dc0da"]
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_n0ygd"]
+[ext_resource type="Texture2D" uid="uid://dxevqgiw0bsw6" path="res://assets/players/evan-mobley.jpg" id="3_vt7k5"]
 
 [sub_resource type="Resource" id="Resource_dnh1e"]
 script = ExtResource("1_n0ygd")
@@ -53,6 +54,7 @@ last_name = "Mobley"
 three_point_bonus = 0
 player_cost = 720
 shot_check = 18
+texture = ExtResource("3_vt7k5")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_n0ygd")]([SubResource("Resource_dnh1e"), SubResource("Resource_jyrhe"), SubResource("Resource_pj02i"), SubResource("Resource_rkhee"), SubResource("Resource_evs6p")])

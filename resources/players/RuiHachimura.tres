@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://dkmii72rgf5ss"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://dkmii72rgf5ss"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_xm7mx"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_c4hq8"]
+[ext_resource type="Texture2D" uid="uid://ddf88oixfwj52" path="res://assets/players/rui-hachimura.jpg" id="3_c4hq8"]
 
 [sub_resource type="Resource" id="Resource_nv31l"]
 script = ExtResource("1_xm7mx")
@@ -49,6 +50,7 @@ last_name = "Hachimura"
 three_point_bonus = 3
 player_cost = 220
 shot_check = 18
+texture = ExtResource("3_c4hq8")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_xm7mx")]([SubResource("Resource_nv31l"), SubResource("Resource_ji7hw"), SubResource("Resource_081dk"), SubResource("Resource_7tle6")])

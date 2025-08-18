@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://dqk50prkl1haf"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://dqk50prkl1haf"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_a3nmb"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_5kbfl"]
+[ext_resource type="Texture2D" uid="uid://da8jr0c7cgfst" path="res://assets/players/nickeil-alexander-walker.jpg" id="3_5kbfl"]
 
 [sub_resource type="Resource" id="Resource_nv31l"]
 script = ExtResource("1_a3nmb")
@@ -49,7 +50,8 @@ last_name = "Alexander-Walker"
 three_point_bonus = 3
 player_cost = 410
 shot_check = 19
+texture = ExtResource("3_5kbfl")
 first_name_size = 28
-last_name_size = 28
+last_name_size = 20
 roll_table = Array[ExtResource("1_a3nmb")]([SubResource("Resource_nv31l"), SubResource("Resource_ji7hw"), SubResource("Resource_081dk"), SubResource("Resource_7tle6")])
 metadata/_custom_type_script = "uid://dmyxnrgdtpksv"

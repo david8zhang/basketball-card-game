@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://b5r1vvd75s7lt"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://b5r1vvd75s7lt"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_15lil"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="1_64w73"]
+[ext_resource type="Texture2D" uid="uid://cmi7ms4objhmg" path="res://assets/players/ivica-zubac.jpg" id="3_o1isb"]
 
 [sub_resource type="Resource" id="Resource_bqkai"]
 script = ExtResource("1_15lil")
@@ -45,6 +46,7 @@ last_name = "Zubac"
 three_point_bonus = 0
 player_cost = 490
 shot_check = 17
+texture = ExtResource("3_o1isb")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_15lil")]([SubResource("Resource_bqkai"), SubResource("Resource_0huo0"), SubResource("Resource_vjbya"), SubResource("Resource_ythun")])

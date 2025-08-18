@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://dca0bripwhxft"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=9 format=3 uid="uid://dca0bripwhxft"]
 
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="1_6ckem"]
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_e7k6t"]
+[ext_resource type="Texture2D" uid="uid://blingwe1x8vo3" path="res://assets/players/julius-randle.jpg" id="3_3epkl"]
 
 [sub_resource type="Resource" id="Resource_c66vl"]
 script = ExtResource("1_e7k6t")
@@ -53,6 +54,7 @@ last_name = "Randle"
 three_point_bonus = 2
 player_cost = 940
 shot_check = 16
+texture = ExtResource("3_3epkl")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_e7k6t")]([SubResource("Resource_c66vl"), SubResource("Resource_ipues"), SubResource("Resource_mogep"), SubResource("Resource_sg247"), SubResource("Resource_f325g")])

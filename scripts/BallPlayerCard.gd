@@ -8,7 +8,7 @@ extends Control
 @onready var player_position := $Panel/MarginContainer/VBoxContainer/Position as Label
 @onready var three_point_bonus := $Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer3/ThreePointBonus as Label
 @onready var shot_line := $Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer3/Panel2/ShotLine as Label
-@onready var roll_table := $Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer as GridContainer
+@onready var roll_table := $Panel/MarginContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/GridContainer as GridContainer
 @onready var button := $Panel/Button as Button
 @onready var panel_container := $Panel as Panel
 @onready var animation_player := $AnimationPlayer as AnimationPlayer

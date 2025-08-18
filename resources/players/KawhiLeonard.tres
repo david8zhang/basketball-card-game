@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://26o0vl0f4jvs"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=9 format=3 uid="uid://26o0vl0f4jvs"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_trdd7"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_qux77"]
+[ext_resource type="Texture2D" uid="uid://cyej0g5k25cn0" path="res://assets/players/kawhi-leonard.jpg" id="3_qux77"]
 
 [sub_resource type="Resource" id="Resource_trdd7"]
 script = ExtResource("1_trdd7")
@@ -58,6 +59,7 @@ last_name = "Leonard"
 three_point_bonus = 2
 player_cost = 1070
 shot_check = 15
+texture = ExtResource("3_qux77")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_trdd7")]([SubResource("Resource_trdd7"), SubResource("Resource_qux77"), SubResource("Resource_c13or"), SubResource("Resource_bqio4"), SubResource("Resource_kx0l1")])

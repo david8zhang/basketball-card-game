@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://bgcap1pggydeh"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://bgcap1pggydeh"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_4wl12"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_nn6f7"]
+[ext_resource type="Texture2D" uid="uid://dm7htgivilefw" path="res://assets/players/malik-monk.jpg" id="3_nn6f7"]
 
 [sub_resource type="Resource" id="Resource_4wl12"]
 script = ExtResource("1_4wl12")
@@ -49,6 +50,7 @@ last_name = "Monk"
 three_point_bonus = 3
 player_cost = 400
 shot_check = 14
+texture = ExtResource("3_nn6f7")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_4wl12")]([SubResource("Resource_4wl12"), SubResource("Resource_nn6f7"), SubResource("Resource_ifxo7"), SubResource("Resource_txgm4")])

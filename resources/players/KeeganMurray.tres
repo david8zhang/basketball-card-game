@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://0qmqj13xduym"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://0qmqj13xduym"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_g1wky"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_ac8i1"]
+[ext_resource type="Texture2D" uid="uid://cev7n4jsxgl8o" path="res://assets/players/keegan-murray.jpg" id="3_ac8i1"]
 
 [sub_resource type="Resource" id="Resource_g1wky"]
 script = ExtResource("1_g1wky")
@@ -49,6 +50,7 @@ last_name = "Murray"
 three_point_bonus = 2
 player_cost = 340
 shot_check = 15
+texture = ExtResource("3_ac8i1")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_g1wky")]([SubResource("Resource_g1wky"), SubResource("Resource_ac8i1"), SubResource("Resource_n2ysk"), SubResource("Resource_th1u6")])

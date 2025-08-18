@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://k6d3x5cajmi3"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=9 format=3 uid="uid://k6d3x5cajmi3"]
 
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="1_r1rbg"]
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_tedt8"]
+[ext_resource type="Texture2D" uid="uid://b8hg8tdum4ccd" path="res://assets/players/derrick-white.jpg" id="3_uiua3"]
 
 [sub_resource type="Resource" id="Resource_qxxi5"]
 script = ExtResource("1_tedt8")
@@ -53,6 +54,7 @@ last_name = "White"
 three_point_bonus = 1
 player_cost = 830
 shot_check = 14
+texture = ExtResource("3_uiua3")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_tedt8")]([SubResource("Resource_qxxi5"), SubResource("Resource_21gs0"), SubResource("Resource_le2m5"), SubResource("Resource_0innp"), SubResource("Resource_dmii5")])

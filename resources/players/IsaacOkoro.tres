@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://dtw604rfcu722"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://dtw604rfcu722"]
 
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="1_5hvs6"]
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_oir7t"]
+[ext_resource type="Texture2D" uid="uid://734uddjvrhmr" path="res://assets/players/isaac-okoro.jpg" id="3_uap1p"]
 
 [sub_resource type="Resource" id="Resource_867pq"]
 script = ExtResource("1_oir7t")
@@ -45,6 +46,7 @@ last_name = "Okoro"
 three_point_bonus = 3
 player_cost = 200
 shot_check = 18
+texture = ExtResource("3_uap1p")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_oir7t")]([SubResource("Resource_867pq"), SubResource("Resource_sbmte"), SubResource("Resource_602ds"), SubResource("Resource_0o244")])

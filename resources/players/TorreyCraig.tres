@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://4k2sblgtucrx"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://4k2sblgtucrx"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_uiaxi"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_jo1wr"]
+[ext_resource type="Texture2D" uid="uid://bk50elhuk4qbx" path="res://assets/players/torrey-craig.jpg" id="3_jo1wr"]
 
 [sub_resource type="Resource" id="Resource_uiaxi"]
 script = ExtResource("1_uiaxi")
@@ -49,6 +50,7 @@ last_name = "Craig"
 three_point_bonus = 3
 player_cost = 200
 shot_check = 18
+texture = ExtResource("3_jo1wr")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_uiaxi")]([SubResource("Resource_uiaxi"), SubResource("Resource_jo1wr"), SubResource("Resource_x28yj"), SubResource("Resource_2kgab")])

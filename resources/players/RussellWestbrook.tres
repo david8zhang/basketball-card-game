@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://djli4r1oy7ew0"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://djli4r1oy7ew0"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_w0aye"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_reei8"]
+[ext_resource type="Texture2D" uid="uid://ic8ngx5mfdlc" path="res://assets/players/russell-westbrook.jpg" id="3_reei8"]
 
 [sub_resource type="Resource" id="Resource_nv31l"]
 script = ExtResource("1_w0aye")
@@ -49,6 +50,7 @@ last_name = "Westbrook"
 three_point_bonus = 0
 player_cost = 580
 shot_check = 14
+texture = ExtResource("3_reei8")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_w0aye")]([SubResource("Resource_nv31l"), SubResource("Resource_ji7hw"), SubResource("Resource_081dk"), SubResource("Resource_7tle6")])

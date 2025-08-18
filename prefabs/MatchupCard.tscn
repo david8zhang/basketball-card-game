@@ -1,8 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://nr3d4pggsa3m"]
+[gd_scene load_steps=14 format=3 uid="uid://nr3d4pggsa3m"]
 
 [ext_resource type="Script" uid="uid://cwe2cjerdaiuv" path="res://scripts/MatchupPlayerCard.gd" id="1_b2tmg"]
 [ext_resource type="PackedScene" uid="uid://cgpent6asbq6b" path="res://prefabs/TableValue.tscn" id="2_ko473"]
-[ext_resource type="Resource" uid="uid://c0avd24oojs4w" path="res://resources/players/KentaviousCaldwellPope.tres" id="3_wi2sf"]
+[ext_resource type="Resource" uid="uid://dqk50prkl1haf" path="res://resources/players/NickeilAlexanderWalker.tres" id="3_wi2sf"]
 [ext_resource type="Texture2D" uid="uid://ckq3e43adggw3" path="res://assets/players/aaron-gordon.jpg" id="4_1k4qq"]
 [ext_resource type="PackedScene" uid="uid://ciyhd5db3ubjt" path="res://prefabs/Marker.tscn" id="4_huvud"]
 [ext_resource type="Animation" uid="uid://v6bgww4fmfmj" path="res://animations/highlight_offense_stat.res" id="4_vlyfh"]
@@ -26,6 +26,9 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 corner_detail = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wi2sf"]
+bg_color = Color(0, 0, 0, 0.588235)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yk2tx"]
 content_margin_left = 2.0
@@ -217,20 +220,25 @@ text = "LASTNAME"
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="Panel" type="PanelContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_wi2sf")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/Panel"]
 layout_mode = 2
 
-[node name="GridContainer" type="GridContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer"]
+[node name="GridContainer" type="GridContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 columns = 4
 
-[node name="ColumnHeader1" type="PanelContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer"]
+[node name="ColumnHeader1" type="PanelContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/GridContainer"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_yk2tx")
 
-[node name="RollRange" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer/ColumnHeader1"]
+[node name="RollRange" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/GridContainer/ColumnHeader1"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -239,11 +247,11 @@ theme_override_font_sizes/font_size = 15
 text = "ROLL"
 horizontal_alignment = 1
 
-[node name="ColumnHeader2" type="PanelContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer"]
+[node name="ColumnHeader2" type="PanelContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/GridContainer"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_yk2tx")
 
-[node name="Points" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer/ColumnHeader2"]
+[node name="Points" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/GridContainer/ColumnHeader2"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -252,11 +260,11 @@ theme_override_font_sizes/font_size = 15
 text = "PTS"
 horizontal_alignment = 1
 
-[node name="ColumnHeader3" type="PanelContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer"]
+[node name="ColumnHeader3" type="PanelContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/GridContainer"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_yk2tx")
 
-[node name="Assists" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer/ColumnHeader3"]
+[node name="Assists" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/GridContainer/ColumnHeader3"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -265,11 +273,11 @@ theme_override_font_sizes/font_size = 15
 text = "AST"
 horizontal_alignment = 1
 
-[node name="ColumnHeader4" type="PanelContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer"]
+[node name="ColumnHeader4" type="PanelContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/GridContainer"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_yk2tx")
 
-[node name="Rebounds" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/GridContainer/ColumnHeader4"]
+[node name="Rebounds" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/GridContainer/ColumnHeader4"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)

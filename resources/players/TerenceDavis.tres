@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://c7geqwhogeapd"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://c7geqwhogeapd"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_kdn6e"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_e1orh"]
+[ext_resource type="Texture2D" uid="uid://c6kslvpbsxtx3" path="res://assets/players/terence-davis.jpg" id="3_e1orh"]
 
 [sub_resource type="Resource" id="Resource_nv31l"]
 script = ExtResource("1_kdn6e")
@@ -49,6 +50,7 @@ last_name = "Davis"
 three_point_bonus = 0
 player_cost = 200
 shot_check = 13
+texture = ExtResource("3_e1orh")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_kdn6e")]([SubResource("Resource_nv31l"), SubResource("Resource_ji7hw"), SubResource("Resource_081dk"), SubResource("Resource_7tle6")])

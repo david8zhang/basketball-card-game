@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://cl2spe58f4ylq"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://cl2spe58f4ylq"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_18g7m"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_5lced"]
+[ext_resource type="Texture2D" uid="uid://dgnnd02rwpijy" path="res://assets/players/mike-muscala.jpg" id="3_5lced"]
 
 [sub_resource type="Resource" id="Resource_18g7m"]
 script = ExtResource("1_18g7m")
@@ -49,6 +50,7 @@ last_name = "Muscala"
 three_point_bonus = 2
 player_cost = 240
 shot_check = 22
+texture = ExtResource("3_5lced")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_18g7m")]([SubResource("Resource_18g7m"), SubResource("Resource_5lced"), SubResource("Resource_kyld0"), SubResource("Resource_ac836")])

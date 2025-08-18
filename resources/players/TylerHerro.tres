@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://cqn8oddw18le1"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=9 format=3 uid="uid://cqn8oddw18le1"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_onrf8"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_wlubb"]
+[ext_resource type="Texture2D" uid="uid://wxxoqew72pxo" path="res://assets/players/tyler-herro.jpg" id="3_wlubb"]
 
 [sub_resource type="Resource" id="Resource_onrf8"]
 script = ExtResource("1_onrf8")
@@ -58,6 +59,7 @@ last_name = "Herro"
 three_point_bonus = 2
 player_cost = 660
 shot_check = 9
+texture = ExtResource("3_wlubb")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_onrf8")]([SubResource("Resource_onrf8"), SubResource("Resource_wlubb"), SubResource("Resource_g8v62"), SubResource("Resource_v716m"), SubResource("Resource_fjc7c")])

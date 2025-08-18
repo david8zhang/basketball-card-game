@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://b8pg8xdvxena4"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://b8pg8xdvxena4"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_5l7t1"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_emvva"]
+[ext_resource type="Texture2D" uid="uid://bjs5hjqbljwky" path="res://assets/players/patrick-williams.jpg" id="3_emvva"]
 
 [sub_resource type="Resource" id="Resource_nv31l"]
 script = ExtResource("1_5l7t1")
@@ -49,6 +50,7 @@ last_name = "Williams"
 three_point_bonus = 1
 player_cost = 160
 shot_check = 13
+texture = ExtResource("3_emvva")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_5l7t1")]([SubResource("Resource_nv31l"), SubResource("Resource_ji7hw"), SubResource("Resource_081dk"), SubResource("Resource_7tle6")])

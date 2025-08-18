@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://ckryvsg2r563p"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://ckryvsg2r563p"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_j5hh4"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_nsi33"]
+[ext_resource type="Texture2D" uid="uid://dwsxftg7uwcpv" path="res://assets/players/santi-aldama.jpg" id="3_nsi33"]
 
 [sub_resource type="Resource" id="Resource_nv31l"]
 script = ExtResource("1_j5hh4")
@@ -49,6 +50,7 @@ last_name = "Aldama"
 three_point_bonus = 0
 player_cost = 220
 shot_check = 13
+texture = ExtResource("3_nsi33")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_j5hh4")]([SubResource("Resource_nv31l"), SubResource("Resource_ji7hw"), SubResource("Resource_081dk"), SubResource("Resource_7tle6")])

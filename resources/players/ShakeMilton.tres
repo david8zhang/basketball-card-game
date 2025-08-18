@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://bln8ovfu1lhio"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://bln8ovfu1lhio"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_gy1bq"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_ijqkq"]
+[ext_resource type="Texture2D" uid="uid://dl6mns3x2vn5e" path="res://assets/players/shake-milton.jpg" id="3_ijqkq"]
 
 [sub_resource type="Resource" id="Resource_nv31l"]
 script = ExtResource("1_gy1bq")
@@ -49,6 +50,7 @@ last_name = "Milton"
 three_point_bonus = 1
 player_cost = 300
 shot_check = 14
+texture = ExtResource("3_ijqkq")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_gy1bq")]([SubResource("Resource_nv31l"), SubResource("Resource_ji7hw"), SubResource("Resource_081dk"), SubResource("Resource_7tle6")])

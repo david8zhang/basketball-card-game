@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://ynbs40f8j74y"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=9 format=3 uid="uid://ynbs40f8j74y"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_2uaa8"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_skbbq"]
+[ext_resource type="Texture2D" uid="uid://bcnkjgfksivv5" path="res://assets/players/stephen-curry.jpg" id="3_skbbq"]
 
 [sub_resource type="Resource" id="Resource_2uaa8"]
 script = ExtResource("1_2uaa8")
@@ -58,6 +59,7 @@ last_name = "Curry"
 three_point_bonus = 5
 player_cost = 1090
 shot_check = 13
+texture = ExtResource("3_skbbq")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_2uaa8")]([SubResource("Resource_2uaa8"), SubResource("Resource_skbbq"), SubResource("Resource_btnbw"), SubResource("Resource_d1e4h"), SubResource("Resource_3f2k2")])

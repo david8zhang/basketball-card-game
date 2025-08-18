@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://c8kwbl4j3e0jx"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://c8kwbl4j3e0jx"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_nv31l"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_ji7hw"]
+[ext_resource type="Texture2D" uid="uid://cg5nu62w0s2qf" path="res://assets/players/miles-mcbride.jpg" id="3_fv32n"]
 
 [sub_resource type="Resource" id="Resource_h8vkt"]
 script = ExtResource("1_nv31l")
@@ -49,6 +50,7 @@ last_name = "McBride"
 three_point_bonus = 2
 player_cost = 120
 shot_check = 17
+texture = ExtResource("3_fv32n")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_nv31l")]([SubResource("Resource_h8vkt"), SubResource("Resource_fv32n"), SubResource("Resource_pjsyw"), SubResource("Resource_w3fwo")])

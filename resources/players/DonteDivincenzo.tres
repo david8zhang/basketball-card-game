@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://0f6eyvk6fk52"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://0f6eyvk6fk52"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_8ac3h"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="1_qxssb"]
+[ext_resource type="Texture2D" uid="uid://nofihnmlp0bs" path="res://assets/players/donte-divincenzo.jpg" id="3_22qpg"]
 
 [sub_resource type="Resource" id="Resource_vyqjr"]
 script = ExtResource("1_8ac3h")
@@ -45,6 +46,7 @@ last_name = "Divincenzo"
 three_point_bonus = 0
 player_cost = 580
 shot_check = 13
+texture = ExtResource("3_22qpg")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_8ac3h")]([SubResource("Resource_vyqjr"), SubResource("Resource_d0w1i"), SubResource("Resource_wq3rm"), SubResource("Resource_hnsr7")])

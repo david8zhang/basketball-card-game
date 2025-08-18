@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://b3dnyrc1gmxgk"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://b3dnyrc1gmxgk"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_hfyvj"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="1_yhxjt"]
+[ext_resource type="Texture2D" uid="uid://csjdg43ng34px" path="res://assets/players/jae-crowder.jpg" id="3_4huyr"]
 
 [sub_resource type="Resource" id="Resource_f8kqx"]
 script = ExtResource("1_hfyvj")
@@ -45,6 +46,7 @@ last_name = "Crowder"
 three_point_bonus = 2
 player_cost = 450
 shot_check = 15
+texture = ExtResource("3_4huyr")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_hfyvj")]([SubResource("Resource_f8kqx"), SubResource("Resource_5qhop"), SubResource("Resource_54tdx"), SubResource("Resource_m14er")])

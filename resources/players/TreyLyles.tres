@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://bxvgdvr54xwvb"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://bxvgdvr54xwvb"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_x6tme"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_3ocku"]
+[ext_resource type="Texture2D" uid="uid://dov2f3apge40f" path="res://assets/players/trey-lyles.jpg" id="3_3ocku"]
 
 [sub_resource type="Resource" id="Resource_nv31l"]
 script = ExtResource("1_x6tme")
@@ -49,6 +50,7 @@ last_name = "Lyles"
 three_point_bonus = 0
 player_cost = 150
 shot_check = 12
+texture = ExtResource("3_3ocku")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_x6tme")]([SubResource("Resource_nv31l"), SubResource("Resource_ji7hw"), SubResource("Resource_081dk"), SubResource("Resource_7tle6")])

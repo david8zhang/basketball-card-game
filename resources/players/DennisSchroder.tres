@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://qghmpo2xixtl"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://qghmpo2xixtl"]
 
-[ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_nv31l"]
-[ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_ji7hw"]
+[ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_figvr"]
+[ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_5s3bf"]
+[ext_resource type="Texture2D" uid="uid://4r0dxd727udj" path="res://assets/players/dennis-schroeder.png" id="3_b6h5f"]
 
 [sub_resource type="Resource" id="Resource_nv31l"]
-script = ExtResource("1_nv31l")
+script = ExtResource("1_figvr")
 low = 1
 high = 6
 points = 1
@@ -13,7 +14,7 @@ rebounds = 0
 metadata/_custom_type_script = "uid://c3xho6niytkse"
 
 [sub_resource type="Resource" id="Resource_ji7hw"]
-script = ExtResource("1_nv31l")
+script = ExtResource("1_figvr")
 low = 7
 high = 13
 points = 3
@@ -22,7 +23,7 @@ rebounds = 1
 metadata/_custom_type_script = "uid://c3xho6niytkse"
 
 [sub_resource type="Resource" id="Resource_081dk"]
-script = ExtResource("1_nv31l")
+script = ExtResource("1_figvr")
 low = 14
 high = 19
 points = 6
@@ -31,7 +32,7 @@ rebounds = 2
 metadata/_custom_type_script = "uid://c3xho6niytkse"
 
 [sub_resource type="Resource" id="Resource_7tle6"]
-script = ExtResource("1_nv31l")
+script = ExtResource("1_figvr")
 low = 20
 high = 30
 points = 8
@@ -40,7 +41,7 @@ rebounds = 2
 metadata/_custom_type_script = "uid://c3xho6niytkse"
 
 [resource]
-script = ExtResource("2_ji7hw")
+script = ExtResource("2_5s3bf")
 offense = 10
 defense = 10
 positions = Array[int]([0, 1])
@@ -49,7 +50,8 @@ last_name = "Schroder"
 three_point_bonus = 0
 player_cost = 450
 shot_check = 13
+texture = ExtResource("3_b6h5f")
 first_name_size = 28
 last_name_size = 28
-roll_table = Array[ExtResource("1_nv31l")]([SubResource("Resource_nv31l"), SubResource("Resource_ji7hw"), SubResource("Resource_081dk"), SubResource("Resource_7tle6")])
+roll_table = Array[ExtResource("1_figvr")]([SubResource("Resource_nv31l"), SubResource("Resource_ji7hw"), SubResource("Resource_081dk"), SubResource("Resource_7tle6")])
 metadata/_custom_type_script = "uid://dmyxnrgdtpksv"

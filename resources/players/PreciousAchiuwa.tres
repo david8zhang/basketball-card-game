@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://dokddrlw00me1"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://dokddrlw00me1"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_xk7qc"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_sh67h"]
+[ext_resource type="Texture2D" uid="uid://dn2ltw7x16a3f" path="res://assets/players/precious-achiuwa.jpeg" id="3_sh67h"]
 
 [sub_resource type="Resource" id="Resource_3hdtw"]
 script = ExtResource("1_xk7qc")
@@ -49,6 +50,7 @@ last_name = "Achiuwa"
 three_point_bonus = 2
 player_cost = 270
 shot_check = 18
+texture = ExtResource("3_sh67h")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_xk7qc")]([SubResource("Resource_3hdtw"), SubResource("Resource_u8e7m"), SubResource("Resource_sq8lb"), SubResource("Resource_j7vic")])

@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://bdkq2x8pnrrve"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=9 format=3 uid="uid://bdkq2x8pnrrve"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_2cfnb"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="1_yfwub"]
+[ext_resource type="Texture2D" uid="uid://dmel4h0t3w6xh" path="res://assets/players/ja-morant.jpg" id="3_tpgm6"]
 
 [sub_resource type="Resource" id="Resource_37c0g"]
 script = ExtResource("1_2cfnb")
@@ -53,6 +54,7 @@ last_name = "Morant"
 three_point_bonus = 2
 player_cost = 1090
 shot_check = 17
+texture = ExtResource("3_tpgm6")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_2cfnb")]([SubResource("Resource_37c0g"), SubResource("Resource_7y8i5"), SubResource("Resource_mf8tt"), SubResource("Resource_q0pdd"), SubResource("Resource_3nwb3")])

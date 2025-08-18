@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://clgcd4bumcsid"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=9 format=3 uid="uid://clgcd4bumcsid"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_dpgyx"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="1_lpr22"]
+[ext_resource type="Texture2D" uid="uid://b6wksig2qk5nc" path="res://assets/players/jayson-tatum.jpg" id="3_6hymt"]
 
 [sub_resource type="Resource" id="Resource_w3gnc"]
 script = ExtResource("1_dpgyx")
@@ -53,6 +54,7 @@ last_name = "Tatum"
 three_point_bonus = 4
 player_cost = 1060
 shot_check = 17
+texture = ExtResource("3_6hymt")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_dpgyx")]([SubResource("Resource_w3gnc"), SubResource("Resource_syy6h"), SubResource("Resource_8t5oy"), SubResource("Resource_6juo1"), SubResource("Resource_wpqux")])

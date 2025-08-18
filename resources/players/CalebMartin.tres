@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://durpbu4abamj7"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://durpbu4abamj7"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_5de4t"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_nma7t"]
+[ext_resource type="Texture2D" uid="uid://duxxs2cronhb0" path="res://assets/players/caleb-martin.jpg" id="3_nma7t"]
 
 [sub_resource type="Resource" id="Resource_5de4t"]
 script = ExtResource("1_5de4t")
@@ -49,6 +50,7 @@ last_name = "Martin"
 three_point_bonus = 0
 player_cost = 180
 shot_check = 13
+texture = ExtResource("3_nma7t")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_5de4t")]([SubResource("Resource_5de4t"), SubResource("Resource_nma7t"), SubResource("Resource_scyak"), SubResource("Resource_mg4er")])

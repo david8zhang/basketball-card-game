@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://c2ytqyag1gxeg"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=9 format=3 uid="uid://c2ytqyag1gxeg"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_8um0r"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_qorso"]
+[ext_resource type="Texture2D" uid="uid://b4empfhevm0ld" path="res://assets/players/steven-adams.jpg" id="3_qorso"]
 
 [sub_resource type="Resource" id="Resource_8um0r"]
 script = ExtResource("1_8um0r")
@@ -58,6 +59,7 @@ last_name = "Adams"
 three_point_bonus = 0
 player_cost = 850
 shot_check = 19
+texture = ExtResource("3_qorso")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_8um0r")]([SubResource("Resource_8um0r"), SubResource("Resource_qorso"), SubResource("Resource_q3gbr"), SubResource("Resource_eugyq"), SubResource("Resource_7mvtu")])

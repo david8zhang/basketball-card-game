@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://b4uit7tlqp4m8"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=9 format=3 uid="uid://b4uit7tlqp4m8"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_0wtcc"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_naqnn"]
+[ext_resource type="Texture2D" uid="uid://cai46ria7cbti" path="res://assets/players/kevon-looney.jpg" id="3_naqnn"]
 
 [sub_resource type="Resource" id="Resource_0wtcc"]
 script = ExtResource("1_0wtcc")
@@ -58,6 +59,7 @@ last_name = "Looney"
 three_point_bonus = 0
 player_cost = 670
 shot_check = 20
+texture = ExtResource("3_naqnn")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_0wtcc")]([SubResource("Resource_0wtcc"), SubResource("Resource_naqnn"), SubResource("Resource_32io3"), SubResource("Resource_ohsp8"), SubResource("Resource_3r7ra")])

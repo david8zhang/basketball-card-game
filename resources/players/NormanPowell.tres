@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://yqpep5ntklso"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://yqpep5ntklso"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_i0d4n"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_b4m8b"]
+[ext_resource type="Texture2D" uid="uid://cdxxgo0inenrf" path="res://assets/players/norman-powell.jpg" id="3_b4m8b"]
 
 [sub_resource type="Resource" id="Resource_nv31l"]
 script = ExtResource("1_i0d4n")
@@ -49,6 +50,7 @@ last_name = "Powell"
 three_point_bonus = 0
 player_cost = 250
 shot_check = 13
+texture = ExtResource("3_b4m8b")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_i0d4n")]([SubResource("Resource_nv31l"), SubResource("Resource_ji7hw"), SubResource("Resource_081dk"), SubResource("Resource_7tle6")])

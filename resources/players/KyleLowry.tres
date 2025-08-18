@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://c2qu5xss70lc2"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=9 format=3 uid="uid://c2qu5xss70lc2"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_4ko80"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_dxv01"]
+[ext_resource type="Texture2D" uid="uid://beaxvkccijkuk" path="res://assets/players/kyle-lowry.jpg" id="3_dxv01"]
 
 [sub_resource type="Resource" id="Resource_4ko80"]
 script = ExtResource("1_4ko80")
@@ -58,6 +59,7 @@ last_name = "Lowry"
 three_point_bonus = 2
 player_cost = 660
 shot_check = 15
+texture = ExtResource("3_dxv01")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_4ko80")]([SubResource("Resource_4ko80"), SubResource("Resource_dxv01"), SubResource("Resource_jycbj"), SubResource("Resource_1m6c8"), SubResource("Resource_cwky6")])

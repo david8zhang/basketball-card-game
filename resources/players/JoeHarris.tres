@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://dbh7ddprni7j0"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://dbh7ddprni7j0"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_5q8km"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="1_aexog"]
+[ext_resource type="Texture2D" uid="uid://crrvedvscb177" path="res://assets/players/joe-harris.jpg" id="3_e1hoc"]
 
 [sub_resource type="Resource" id="Resource_smppa"]
 script = ExtResource("1_5q8km")
@@ -45,6 +46,7 @@ last_name = "Harris"
 three_point_bonus = 3
 player_cost = 10
 shot_check = 12
+texture = ExtResource("3_e1hoc")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_5q8km")]([SubResource("Resource_smppa"), SubResource("Resource_hd3ga"), SubResource("Resource_rkfiq"), SubResource("Resource_qv0h0")])

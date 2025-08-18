@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://ikd5ywhr7eie"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=9 format=3 uid="uid://ikd5ywhr7eie"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_wb6sk"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_hymgc"]
+[ext_resource type="Texture2D" uid="uid://dcffaa0ghgbrp" path="res://assets/players/jimmy-butler.jpg" id="3_hymgc"]
 
 [sub_resource type="Resource" id="Resource_wb6sk"]
 script = ExtResource("1_wb6sk")
@@ -58,6 +59,7 @@ last_name = "Butler"
 three_point_bonus = 2
 player_cost = 1040
 shot_check = 16
+texture = ExtResource("3_hymgc")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_wb6sk")]([SubResource("Resource_wb6sk"), SubResource("Resource_hymgc"), SubResource("Resource_qgurs"), SubResource("Resource_p5jub"), SubResource("Resource_w3xyj")])

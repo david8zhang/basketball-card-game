@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://bony30hh45ff2"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://bony30hh45ff2"]
 
-[ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_nv31l"]
-[ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_ji7hw"]
+[ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_6ci53"]
+[ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_5ubrg"]
+[ext_resource type="Texture2D" uid="uid://bb4picsiwvcc3" path="res://assets/players/jarred-vanderbilt.jpg" id="3_2j184"]
 
 [sub_resource type="Resource" id="Resource_nv31l"]
-script = ExtResource("1_nv31l")
+script = ExtResource("1_6ci53")
 low = 1
 high = 6
 points = 0
@@ -13,7 +14,7 @@ rebounds = 0
 metadata/_custom_type_script = "uid://c3xho6niytkse"
 
 [sub_resource type="Resource" id="Resource_ji7hw"]
-script = ExtResource("1_nv31l")
+script = ExtResource("1_6ci53")
 low = 7
 high = 13
 points = 2
@@ -22,7 +23,7 @@ rebounds = 2
 metadata/_custom_type_script = "uid://c3xho6niytkse"
 
 [sub_resource type="Resource" id="Resource_081dk"]
-script = ExtResource("1_nv31l")
+script = ExtResource("1_6ci53")
 low = 14
 high = 18
 points = 4
@@ -31,7 +32,7 @@ rebounds = 3
 metadata/_custom_type_script = "uid://c3xho6niytkse"
 
 [sub_resource type="Resource" id="Resource_7tle6"]
-script = ExtResource("1_nv31l")
+script = ExtResource("1_6ci53")
 low = 19
 high = 30
 points = 5
@@ -40,7 +41,7 @@ rebounds = 4
 metadata/_custom_type_script = "uid://c3xho6niytkse"
 
 [resource]
-script = ExtResource("2_ji7hw")
+script = ExtResource("2_5ubrg")
 offense = 9
 defense = 10
 positions = Array[int]([2, 3])
@@ -49,7 +50,8 @@ last_name = "Vanderbilt"
 three_point_bonus = 2
 player_cost = 340
 shot_check = 18
+texture = ExtResource("3_2j184")
 first_name_size = 28
 last_name_size = 28
-roll_table = Array[ExtResource("1_nv31l")]([SubResource("Resource_nv31l"), SubResource("Resource_ji7hw"), SubResource("Resource_081dk"), SubResource("Resource_7tle6")])
+roll_table = Array[ExtResource("1_6ci53")]([SubResource("Resource_nv31l"), SubResource("Resource_ji7hw"), SubResource("Resource_081dk"), SubResource("Resource_7tle6")])
 metadata/_custom_type_script = "uid://dmyxnrgdtpksv"

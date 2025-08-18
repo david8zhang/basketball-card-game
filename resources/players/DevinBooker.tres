@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://h4d0sf3ktk7q"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=9 format=3 uid="uid://h4d0sf3ktk7q"]
 
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="1_p7sle"]
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_x52sr"]
+[ext_resource type="Texture2D" uid="uid://ra1auwk32tda" path="res://assets/players/devin-booker.jpg" id="3_be4qw"]
 
 [sub_resource type="Resource" id="Resource_cuxud"]
 script = ExtResource("1_x52sr")
@@ -53,6 +54,7 @@ last_name = "Booker"
 three_point_bonus = 1
 player_cost = 980
 shot_check = 12
+texture = ExtResource("3_be4qw")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_x52sr")]([SubResource("Resource_cuxud"), SubResource("Resource_7idml"), SubResource("Resource_nl824"), SubResource("Resource_o4pwc"), SubResource("Resource_xwwsu")])

@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://wb3d52mwwang"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://wb3d52mwwang"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_6v68e"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_xhgtr"]
+[ext_resource type="Texture2D" uid="uid://ckyomox8gk1u2" path="res://assets/players/lamar-stevens.jpg" id="3_xhgtr"]
 
 [sub_resource type="Resource" id="Resource_6v68e"]
 script = ExtResource("1_6v68e")
@@ -49,6 +50,7 @@ last_name = "Stevens"
 three_point_bonus = 2
 player_cost = 70
 shot_check = 16
+texture = ExtResource("3_xhgtr")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_6v68e")]([SubResource("Resource_6v68e"), SubResource("Resource_xhgtr"), SubResource("Resource_041cy"), SubResource("Resource_k7fjc")])

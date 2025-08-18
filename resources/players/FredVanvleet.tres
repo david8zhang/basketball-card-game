@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://b4i4opjee1f21"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=9 format=3 uid="uid://b4i4opjee1f21"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_3cyl6"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_gdu6d"]
+[ext_resource type="Texture2D" uid="uid://cdp11r1ytqhmb" path="res://assets/players/fred-vanvleet.jpg" id="3_gdu6d"]
 
 [sub_resource type="Resource" id="Resource_nv31l"]
 script = ExtResource("1_3cyl6")
@@ -58,6 +59,7 @@ last_name = "Vanvleet"
 three_point_bonus = 0
 player_cost = 1030
 shot_check = 10
+texture = ExtResource("3_gdu6d")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_3cyl6")]([SubResource("Resource_nv31l"), SubResource("Resource_ji7hw"), SubResource("Resource_081dk"), SubResource("Resource_7tle6"), SubResource("Resource_ga6jy")])

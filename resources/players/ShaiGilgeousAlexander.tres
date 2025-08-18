@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://bp7wmkoxqyrw0"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=9 format=3 uid="uid://bp7wmkoxqyrw0"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_32xgl"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="1_kb37f"]
+[ext_resource type="Texture2D" uid="uid://csln8qel8jpwr" path="res://assets/players/shai-gilgeous-alexander.jpg" id="3_c1d13"]
 
 [sub_resource type="Resource" id="Resource_m3fki"]
 script = ExtResource("1_32xgl")
@@ -53,6 +54,7 @@ last_name = "Gilgeous-Alexander"
 three_point_bonus = 0
 player_cost = 1160
 shot_check = 13
+texture = ExtResource("3_c1d13")
 first_name_size = 28
 last_name_size = 20
 roll_table = Array[ExtResource("1_32xgl")]([SubResource("Resource_m3fki"), SubResource("Resource_f2rw2"), SubResource("Resource_4preg"), SubResource("Resource_sbks4"), SubResource("Resource_ef6wl")])

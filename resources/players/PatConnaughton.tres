@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://cp6vt1eq5mxar"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://cp6vt1eq5mxar"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_5gy3y"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_bnbby"]
+[ext_resource type="Texture2D" uid="uid://bu5smxtjm5201" path="res://assets/players/pat-connaughton.jpg" id="3_bnbby"]
 
 [sub_resource type="Resource" id="Resource_nv31l"]
 script = ExtResource("1_5gy3y")
@@ -49,6 +50,7 @@ last_name = "Connaughton"
 three_point_bonus = 3
 player_cost = 240
 shot_check = 18
+texture = ExtResource("3_bnbby")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_5gy3y")]([SubResource("Resource_nv31l"), SubResource("Resource_ji7hw"), SubResource("Resource_081dk"), SubResource("Resource_7tle6")])

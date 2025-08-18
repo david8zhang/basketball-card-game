@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://dl32gqapchaf8"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://dl32gqapchaf8"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_4afex"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_8hjij"]
+[ext_resource type="Texture2D" uid="uid://pvr1t10b24l7" path="res://assets/players/reggie-jackson.jpg" id="3_8hjij"]
 
 [sub_resource type="Resource" id="Resource_4afex"]
 script = ExtResource("1_4afex")
@@ -49,6 +50,7 @@ last_name = "Jackson"
 three_point_bonus = 0
 player_cost = 300
 shot_check = 13
+texture = ExtResource("3_8hjij")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_4afex")]([SubResource("Resource_4afex"), SubResource("Resource_8hjij"), SubResource("Resource_a0fac"), SubResource("Resource_7u8on")])

@@ -638,7 +638,6 @@ func get_on_process_strategy_complete_callable(strategy_type: StrategyCardConfig
 			return "on_process_cpu_off_strategy_complete"
 
 func apply_single_bonus(bonus, strategy_type, custom_cb):
-	print(bonus.bonus_type == StrategyCardBonusNode.BonusType.BOX_SCORE)
 	var off_player = get_off_player_card()
 	var def_player = get_def_player_card()
 	match (bonus.bonus_type):
@@ -662,7 +661,6 @@ func apply_single_bonus(bonus, strategy_type, custom_cb):
 			if box_score_bonus.target_side == BoxScoreBonus.TargetSide.OFFENSE:
 				if box_score_bonus.bonus_stat_type == BoxScoreBonus.StatType.POINTS:
 					strategy_point_bonuses += box_score_bonus.bonus_amt
-					print(strategy_point_bonuses)
 				elif box_score_bonus.bonus_stat_type == BoxScoreBonus.StatType.REBOUNDS:
 					strategy_rebound_bonuses += box_score_bonus.bonus_amt
 				elif box_score_bonus.bonus_stat_type == BoxScoreBonus.StatType.ASSISTS:

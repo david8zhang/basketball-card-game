@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://dx7nkbyjvrly2"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=9 format=3 uid="uid://dx7nkbyjvrly2"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_gkxmj"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="1_j1s2a"]
+[ext_resource type="Texture2D" uid="uid://de4pjdqdh7uy3" path="res://assets/players/donovan-mitchell.jpg" id="3_ka46l"]
 
 [sub_resource type="Resource" id="Resource_lpp0o"]
 script = ExtResource("1_gkxmj")
@@ -53,6 +54,7 @@ last_name = "Mitchell"
 three_point_bonus = 0
 player_cost = 1080
 shot_check = 13
+texture = ExtResource("3_ka46l")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_gkxmj")]([SubResource("Resource_lpp0o"), SubResource("Resource_hdee2"), SubResource("Resource_uagpo"), SubResource("Resource_seab5"), SubResource("Resource_xstho")])

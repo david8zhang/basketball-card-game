@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://cnsrdto3lyloi"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=9 format=3 uid="uid://cnsrdto3lyloi"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_asyxp"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_lameu"]
+[ext_resource type="Texture2D" uid="uid://queckmsvm57t" path="res://assets/players/kevin-durant.jpg" id="3_lameu"]
 
 [sub_resource type="Resource" id="Resource_asyxp"]
 script = ExtResource("1_asyxp")
@@ -58,6 +59,7 @@ last_name = "Durant"
 three_point_bonus = 0
 player_cost = 1090
 shot_check = 11
+texture = ExtResource("3_lameu")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_asyxp")]([SubResource("Resource_asyxp"), SubResource("Resource_lameu"), SubResource("Resource_pw8hc"), SubResource("Resource_vixva"), SubResource("Resource_gcehk")])

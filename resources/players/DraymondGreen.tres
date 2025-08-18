@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://dbipjlpbdrmmv"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=9 format=3 uid="uid://dbipjlpbdrmmv"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_n54g7"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="1_wn0wp"]
+[ext_resource type="Texture2D" uid="uid://yeuextaybirg" path="res://assets/players/draymond-green.jpg" id="3_ln2x5"]
 
 [sub_resource type="Resource" id="Resource_p1elo"]
 script = ExtResource("1_n54g7")
@@ -53,6 +54,7 @@ last_name = "Green"
 three_point_bonus = 0
 player_cost = 650
 shot_check = 18
+texture = ExtResource("3_ln2x5")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_n54g7")]([SubResource("Resource_p1elo"), SubResource("Resource_xlmo5"), SubResource("Resource_b1uyt"), SubResource("Resource_i0wi8"), SubResource("Resource_164ya")])

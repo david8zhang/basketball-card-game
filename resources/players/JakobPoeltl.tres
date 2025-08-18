@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://coj02i5ck7rc1"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=9 format=3 uid="uid://coj02i5ck7rc1"]
 
-[ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_nv31l"]
-[ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_ji7hw"]
+[ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_wvaap"]
+[ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_qfix2"]
+[ext_resource type="Texture2D" uid="uid://dmsb8k6ka0tg3" path="res://assets/players/jakob-poeltl.jpg" id="3_bp700"]
 
 [sub_resource type="Resource" id="Resource_nv31l"]
-script = ExtResource("1_nv31l")
+script = ExtResource("1_wvaap")
 low = 1
 high = 4
 points = 0
@@ -13,7 +14,7 @@ rebounds = 0
 metadata/_custom_type_script = "uid://c3xho6niytkse"
 
 [sub_resource type="Resource" id="Resource_ji7hw"]
-script = ExtResource("1_nv31l")
+script = ExtResource("1_wvaap")
 low = 5
 high = 8
 points = 2
@@ -22,7 +23,7 @@ rebounds = 1
 metadata/_custom_type_script = "uid://c3xho6niytkse"
 
 [sub_resource type="Resource" id="Resource_081dk"]
-script = ExtResource("1_nv31l")
+script = ExtResource("1_wvaap")
 low = 9
 high = 14
 points = 3
@@ -31,7 +32,7 @@ rebounds = 2
 metadata/_custom_type_script = "uid://c3xho6niytkse"
 
 [sub_resource type="Resource" id="Resource_7tle6"]
-script = ExtResource("1_nv31l")
+script = ExtResource("1_wvaap")
 low = 15
 high = 20
 points = 6
@@ -40,7 +41,7 @@ rebounds = 4
 metadata/_custom_type_script = "uid://c3xho6niytkse"
 
 [sub_resource type="Resource" id="Resource_ga6jy"]
-script = ExtResource("1_nv31l")
+script = ExtResource("1_wvaap")
 low = 21
 high = 30
 points = 8
@@ -49,7 +50,7 @@ rebounds = 5
 metadata/_custom_type_script = "uid://c3xho6niytkse"
 
 [resource]
-script = ExtResource("2_ji7hw")
+script = ExtResource("2_qfix2")
 offense = 11
 defense = 10
 positions = Array[int]([4])
@@ -58,7 +59,8 @@ last_name = "Poeltl"
 three_point_bonus = 0
 player_cost = 650
 shot_check = 20
+texture = ExtResource("3_bp700")
 first_name_size = 28
 last_name_size = 28
-roll_table = Array[ExtResource("1_nv31l")]([SubResource("Resource_nv31l"), SubResource("Resource_ji7hw"), SubResource("Resource_081dk"), SubResource("Resource_7tle6"), SubResource("Resource_ga6jy")])
+roll_table = Array[ExtResource("1_wvaap")]([SubResource("Resource_nv31l"), SubResource("Resource_ji7hw"), SubResource("Resource_081dk"), SubResource("Resource_7tle6"), SubResource("Resource_ga6jy")])
 metadata/_custom_type_script = "uid://dmyxnrgdtpksv"

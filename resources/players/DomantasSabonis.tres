@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://ctdiywyds2rc7"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=9 format=3 uid="uid://ctdiywyds2rc7"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_hlnu4"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="1_tgtfq"]
+[ext_resource type="Texture2D" uid="uid://5j1186ov13pn" path="res://assets/players/domantas-sabonis.jpg" id="3_qch02"]
 
 [sub_resource type="Resource" id="Resource_ee1f4"]
 script = ExtResource("1_hlnu4")
@@ -53,6 +54,7 @@ last_name = "Sabonis"
 three_point_bonus = 2
 player_cost = 1050
 shot_check = 16
+texture = ExtResource("3_qch02")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_hlnu4")]([SubResource("Resource_ee1f4"), SubResource("Resource_6gwk6"), SubResource("Resource_v18lf"), SubResource("Resource_or3wl"), SubResource("Resource_solcf")])

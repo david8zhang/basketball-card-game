@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://cll7mwapfqfor"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://cll7mwapfqfor"]
 
-[ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_nv31l"]
-[ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_ji7hw"]
+[ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_lybsi"]
+[ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_usl0t"]
+[ext_resource type="Texture2D" uid="uid://bkhrlnlshua7k" path="res://assets/players/pj-tucker.jpg" id="3_fkt16"]
 
 [sub_resource type="Resource" id="Resource_nv31l"]
-script = ExtResource("1_nv31l")
+script = ExtResource("1_lybsi")
 low = 1
 high = 6
 points = 0
@@ -13,7 +14,7 @@ rebounds = 0
 metadata/_custom_type_script = "uid://c3xho6niytkse"
 
 [sub_resource type="Resource" id="Resource_ji7hw"]
-script = ExtResource("1_nv31l")
+script = ExtResource("1_lybsi")
 low = 7
 high = 12
 points = 1
@@ -22,7 +23,7 @@ rebounds = 1
 metadata/_custom_type_script = "uid://c3xho6niytkse"
 
 [sub_resource type="Resource" id="Resource_081dk"]
-script = ExtResource("1_nv31l")
+script = ExtResource("1_lybsi")
 low = 13
 high = 17
 points = 2
@@ -31,7 +32,7 @@ rebounds = 3
 metadata/_custom_type_script = "uid://c3xho6niytkse"
 
 [sub_resource type="Resource" id="Resource_7tle6"]
-script = ExtResource("1_nv31l")
+script = ExtResource("1_lybsi")
 low = 18
 high = 30
 points = 3
@@ -40,7 +41,7 @@ rebounds = 4
 metadata/_custom_type_script = "uid://c3xho6niytkse"
 
 [resource]
-script = ExtResource("2_ji7hw")
+script = ExtResource("2_usl0t")
 offense = 7
 defense = 10
 positions = Array[int]([2, 3])
@@ -49,7 +50,8 @@ last_name = "Tucker"
 three_point_bonus = 2
 player_cost = 10
 shot_check = 12
+texture = ExtResource("3_fkt16")
 first_name_size = 28
 last_name_size = 28
-roll_table = Array[ExtResource("1_nv31l")]([SubResource("Resource_nv31l"), SubResource("Resource_ji7hw"), SubResource("Resource_081dk"), SubResource("Resource_7tle6")])
+roll_table = Array[ExtResource("1_lybsi")]([SubResource("Resource_nv31l"), SubResource("Resource_ji7hw"), SubResource("Resource_081dk"), SubResource("Resource_7tle6")])
 metadata/_custom_type_script = "uid://dmyxnrgdtpksv"

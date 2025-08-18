@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://iuuu8nakn4w"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://iuuu8nakn4w"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_jq4wc"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_b56iy"]
+[ext_resource type="Texture2D" uid="uid://dx2a2na6rgapg" path="res://assets/players/michael-porter-jr.jpg" id="3_b56iy"]
 
 [sub_resource type="Resource" id="Resource_jq4wc"]
 script = ExtResource("1_jq4wc")
@@ -49,6 +50,7 @@ last_name = "Porter Jr."
 three_point_bonus = 3
 player_cost = 410
 shot_check = 16
+texture = ExtResource("3_b56iy")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_jq4wc")]([SubResource("Resource_jq4wc"), SubResource("Resource_b56iy"), SubResource("Resource_sos42"), SubResource("Resource_6x4sw")])

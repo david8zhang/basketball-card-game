@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://dyn4tcbgvd7x0"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://dyn4tcbgvd7x0"]
 
-[ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_nv31l"]
-[ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_ji7hw"]
+[ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_x4h44"]
+[ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_gufxm"]
+[ext_resource type="Texture2D" uid="uid://dbrvu010d8pi1" path="res://assets/players/aaron-wiggins.jpg" id="3_ixlvw"]
 
 [sub_resource type="Resource" id="Resource_nv31l"]
-script = ExtResource("1_nv31l")
+script = ExtResource("1_x4h44")
 low = 1
 high = 7
 points = 0
@@ -13,7 +14,7 @@ rebounds = 0
 metadata/_custom_type_script = "uid://c3xho6niytkse"
 
 [sub_resource type="Resource" id="Resource_ji7hw"]
-script = ExtResource("1_nv31l")
+script = ExtResource("1_x4h44")
 low = 8
 high = 15
 points = 2
@@ -22,7 +23,7 @@ rebounds = 1
 metadata/_custom_type_script = "uid://c3xho6niytkse"
 
 [sub_resource type="Resource" id="Resource_081dk"]
-script = ExtResource("1_nv31l")
+script = ExtResource("1_x4h44")
 low = 16
 high = 19
 points = 5
@@ -31,7 +32,7 @@ rebounds = 2
 metadata/_custom_type_script = "uid://c3xho6niytkse"
 
 [sub_resource type="Resource" id="Resource_7tle6"]
-script = ExtResource("1_nv31l")
+script = ExtResource("1_x4h44")
 low = 20
 high = 30
 points = 7
@@ -40,7 +41,7 @@ rebounds = 3
 metadata/_custom_type_script = "uid://c3xho6niytkse"
 
 [resource]
-script = ExtResource("2_ji7hw")
+script = ExtResource("2_gufxm")
 offense = 9
 defense = 10
 positions = Array[int]([1, 2])
@@ -49,7 +50,8 @@ last_name = "Wiggins"
 three_point_bonus = 3
 player_cost = 230
 shot_check = 15
+texture = ExtResource("3_ixlvw")
 first_name_size = 28
 last_name_size = 28
-roll_table = Array[ExtResource("1_nv31l")]([SubResource("Resource_nv31l"), SubResource("Resource_ji7hw"), SubResource("Resource_081dk"), SubResource("Resource_7tle6")])
+roll_table = Array[ExtResource("1_x4h44")]([SubResource("Resource_nv31l"), SubResource("Resource_ji7hw"), SubResource("Resource_081dk"), SubResource("Resource_7tle6")])
 metadata/_custom_type_script = "uid://dmyxnrgdtpksv"

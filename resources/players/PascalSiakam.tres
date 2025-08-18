@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://drd5sg6fd3ydt"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=9 format=3 uid="uid://drd5sg6fd3ydt"]
 
-[ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_nv31l"]
-[ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_ji7hw"]
+[ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_mbubo"]
+[ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_v0cla"]
+[ext_resource type="Texture2D" uid="uid://k3fgyph7gs4" path="res://assets/players/pascal-siakam.jpg" id="3_22187"]
 
 [sub_resource type="Resource" id="Resource_nv31l"]
-script = ExtResource("1_nv31l")
+script = ExtResource("1_mbubo")
 low = 1
 high = 4
 points = 2
@@ -13,7 +14,7 @@ rebounds = 0
 metadata/_custom_type_script = "uid://c3xho6niytkse"
 
 [sub_resource type="Resource" id="Resource_ji7hw"]
-script = ExtResource("1_nv31l")
+script = ExtResource("1_mbubo")
 low = 5
 high = 9
 points = 4
@@ -22,7 +23,7 @@ rebounds = 1
 metadata/_custom_type_script = "uid://c3xho6niytkse"
 
 [sub_resource type="Resource" id="Resource_081dk"]
-script = ExtResource("1_nv31l")
+script = ExtResource("1_mbubo")
 low = 10
 high = 16
 points = 6
@@ -31,7 +32,7 @@ rebounds = 2
 metadata/_custom_type_script = "uid://c3xho6niytkse"
 
 [sub_resource type="Resource" id="Resource_7tle6"]
-script = ExtResource("1_nv31l")
+script = ExtResource("1_mbubo")
 low = 17
 high = 21
 points = 10
@@ -40,7 +41,7 @@ rebounds = 3
 metadata/_custom_type_script = "uid://c3xho6niytkse"
 
 [sub_resource type="Resource" id="Resource_ga6jy"]
-script = ExtResource("1_nv31l")
+script = ExtResource("1_mbubo")
 low = 22
 high = 30
 points = 13
@@ -49,7 +50,7 @@ rebounds = 4
 metadata/_custom_type_script = "uid://c3xho6niytkse"
 
 [resource]
-script = ExtResource("2_ji7hw")
+script = ExtResource("2_v0cla")
 offense = 12
 defense = 8
 positions = Array[int]([3, 4])
@@ -58,7 +59,8 @@ last_name = "Siakam"
 three_point_bonus = 1
 player_cost = 830
 shot_check = 16
+texture = ExtResource("3_22187")
 first_name_size = 28
 last_name_size = 28
-roll_table = Array[ExtResource("1_nv31l")]([SubResource("Resource_nv31l"), SubResource("Resource_ji7hw"), SubResource("Resource_081dk"), SubResource("Resource_7tle6"), SubResource("Resource_ga6jy")])
+roll_table = Array[ExtResource("1_mbubo")]([SubResource("Resource_nv31l"), SubResource("Resource_ji7hw"), SubResource("Resource_081dk"), SubResource("Resource_7tle6"), SubResource("Resource_ga6jy")])
 metadata/_custom_type_script = "uid://dmyxnrgdtpksv"

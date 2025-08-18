@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://bkijjjbqibcwq"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://bkijjjbqibcwq"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_4pdr5"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_f6mb0"]
+[ext_resource type="Texture2D" uid="uid://dvq7s8vpes26y" path="res://assets/players/bogdan-bogdanovic.jpg" id="3_f6mb0"]
 
 [sub_resource type="Resource" id="Resource_nv31l"]
 script = ExtResource("1_4pdr5")
@@ -49,6 +50,7 @@ last_name = "Bogdanovic"
 three_point_bonus = 3
 player_cost = 530
 shot_check = 16
+texture = ExtResource("3_f6mb0")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_4pdr5")]([SubResource("Resource_nv31l"), SubResource("Resource_ji7hw"), SubResource("Resource_081dk"), SubResource("Resource_7tle6")])

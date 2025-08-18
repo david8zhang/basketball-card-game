@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://dnxd66diwx3gt"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=9 format=3 uid="uid://dnxd66diwx3gt"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_7fwok"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_m4g16"]
+[ext_resource type="Texture2D" uid="uid://bbbnf0yfo5723" path="res://assets/players/nikola-jokic.jpg" id="3_m4g16"]
 
 [sub_resource type="Resource" id="Resource_nv31l"]
 script = ExtResource("1_7fwok")
@@ -58,6 +59,7 @@ last_name = "Jokic"
 three_point_bonus = 1
 player_cost = 1560
 shot_check = 14
+texture = ExtResource("3_m4g16")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_7fwok")]([SubResource("Resource_nv31l"), SubResource("Resource_ji7hw"), SubResource("Resource_081dk"), SubResource("Resource_7tle6"), SubResource("Resource_ga6jy")])

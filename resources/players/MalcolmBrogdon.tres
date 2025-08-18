@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://dtamk3ud15f5w"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://dtamk3ud15f5w"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_35g5q"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_pc10u"]
+[ext_resource type="Texture2D" uid="uid://cejlns8gsesk3" path="res://assets/players/malcolm-brogdon.jpg" id="3_pc10u"]
 
 [sub_resource type="Resource" id="Resource_35g5q"]
 script = ExtResource("1_35g5q")
@@ -49,6 +50,7 @@ last_name = "Brogdon"
 three_point_bonus = 2
 player_cost = 570
 shot_check = 14
+texture = ExtResource("3_pc10u")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_35g5q")]([SubResource("Resource_35g5q"), SubResource("Resource_pc10u"), SubResource("Resource_4u5n0"), SubResource("Resource_jcsyx")])

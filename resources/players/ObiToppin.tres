@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://boibkoem6m5hc"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://boibkoem6m5hc"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_nv31l"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_ji7hw"]
+[ext_resource type="Texture2D" uid="uid://70pe1lm8elx1" path="res://assets/players/obi-toppin.jpg" id="3_p2yk8"]
 
 [sub_resource type="Resource" id="Resource_jf2pq"]
 script = ExtResource("1_nv31l")
@@ -49,6 +50,7 @@ last_name = "Toppin"
 three_point_bonus = 3
 player_cost = 190
 shot_check = 18
+texture = ExtResource("3_p2yk8")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_nv31l")]([SubResource("Resource_jf2pq"), SubResource("Resource_p2yk8"), SubResource("Resource_bcsqe"), SubResource("Resource_nmhya")])

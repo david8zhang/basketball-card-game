@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://ct5hh7r8ksv5x"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://ct5hh7r8ksv5x"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_p15dy"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_5xdrr"]
+[ext_resource type="Texture2D" uid="uid://cxkeo3dfh2upw" path="res://assets/players/og-anunoby.jpg" id="3_5xdrr"]
 
 [sub_resource type="Resource" id="Resource_nv31l"]
 script = ExtResource("1_p15dy")
@@ -49,6 +50,7 @@ last_name = "Anunoby"
 three_point_bonus = 0
 player_cost = 430
 shot_check = 13
+texture = ExtResource("3_5xdrr")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_p15dy")]([SubResource("Resource_nv31l"), SubResource("Resource_ji7hw"), SubResource("Resource_081dk"), SubResource("Resource_7tle6")])

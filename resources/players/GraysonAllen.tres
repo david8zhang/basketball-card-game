@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://gquy3eth7lna"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://gquy3eth7lna"]
 
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="1_1rvni"]
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_3wq8u"]
+[ext_resource type="Texture2D" uid="uid://cx5n4ivt3i3f4" path="res://assets/players/grayson-allen.jpg" id="3_2o811"]
 
 [sub_resource type="Resource" id="Resource_1eck7"]
 script = ExtResource("1_3wq8u")
@@ -45,6 +46,7 @@ last_name = "Allen"
 three_point_bonus = 2
 player_cost = 360
 shot_check = 15
+texture = ExtResource("3_2o811")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_3wq8u")]([SubResource("Resource_1eck7"), SubResource("Resource_f1bix"), SubResource("Resource_lyul7"), SubResource("Resource_rn448")])

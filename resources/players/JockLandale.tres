@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://b8f6ks72p45io"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://b8f6ks72p45io"]
 
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="1_82jr0"]
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_nx2wi"]
+[ext_resource type="Texture2D" uid="uid://c64f7d4enjqk5" path="res://assets/players/jock-landale.jpg" id="3_8rqr2"]
 
 [sub_resource type="Resource" id="Resource_egxtm"]
 script = ExtResource("1_nx2wi")
@@ -45,6 +46,7 @@ last_name = "Landale"
 three_point_bonus = 0
 player_cost = 330
 shot_check = 18
+texture = ExtResource("3_8rqr2")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_nx2wi")]([SubResource("Resource_egxtm"), SubResource("Resource_qgbv6"), SubResource("Resource_0rhj0"), SubResource("Resource_jvbx5")])

@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://cojfrwv1gslnt"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=9 format=3 uid="uid://cojfrwv1gslnt"]
 
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="1_3jwp4"]
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_dttnd"]
+[ext_resource type="Texture2D" uid="uid://gkrmnsvs18ue" path="res://assets/players/james-harden.jpg" id="3_chy02"]
 
 [sub_resource type="Resource" id="Resource_8wmhr"]
 script = ExtResource("1_dttnd")
@@ -53,6 +54,7 @@ last_name = "Harden"
 three_point_bonus = 0
 player_cost = 1090
 shot_check = 11
+texture = ExtResource("3_chy02")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_dttnd")]([SubResource("Resource_8wmhr"), SubResource("Resource_8otg6"), SubResource("Resource_ysw01"), SubResource("Resource_xeclx"), SubResource("Resource_r3m42")])

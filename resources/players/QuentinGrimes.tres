@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://bg0lsekl0d3np"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://bg0lsekl0d3np"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_wjwei"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_gth25"]
+[ext_resource type="Texture2D" uid="uid://dcpvr1cjkvsgd" path="res://assets/players/quentin-grimes.jpg" id="3_gth25"]
 
 [sub_resource type="Resource" id="Resource_wjwei"]
 script = ExtResource("1_wjwei")
@@ -49,6 +50,7 @@ last_name = "Grimes"
 three_point_bonus = 2
 player_cost = 420
 shot_check = 15
+texture = ExtResource("3_gth25")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_wjwei")]([SubResource("Resource_wjwei"), SubResource("Resource_gth25"), SubResource("Resource_1cpls"), SubResource("Resource_1eq40")])

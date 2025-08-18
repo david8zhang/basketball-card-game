@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://cbw4fia6851f1"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://cbw4fia6851f1"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_vb1u5"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_lmtyf"]
+[ext_resource type="Texture2D" uid="uid://ubmtnu5anq5e" path="res://assets/players/kevin-huerter.jpg" id="3_lmtyf"]
 
 [sub_resource type="Resource" id="Resource_vb1u5"]
 script = ExtResource("1_vb1u5")
@@ -49,6 +50,7 @@ last_name = "Huerter"
 three_point_bonus = 4
 player_cost = 400
 shot_check = 16
+texture = ExtResource("3_lmtyf")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_vb1u5")]([SubResource("Resource_vb1u5"), SubResource("Resource_lmtyf"), SubResource("Resource_awibb"), SubResource("Resource_u4kml")])

@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://bk357fydcwr77"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://bk357fydcwr77"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_n14vl"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_805ro"]
+[ext_resource type="Texture2D" uid="uid://d8vsehhb3kh6" path="res://assets/players/nic-claxton.jpg" id="3_805ro"]
 
 [sub_resource type="Resource" id="Resource_nv31l"]
 script = ExtResource("1_n14vl")
@@ -49,6 +50,7 @@ last_name = "Claxton"
 three_point_bonus = 0
 player_cost = 610
 shot_check = 0
+texture = ExtResource("3_805ro")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_n14vl")]([SubResource("Resource_nv31l"), SubResource("Resource_ji7hw"), SubResource("Resource_081dk"), SubResource("Resource_7tle6")])

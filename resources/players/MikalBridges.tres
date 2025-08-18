@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://bno3ryvsrykxj"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=9 format=3 uid="uid://bno3ryvsrykxj"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_j8pbl"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_d084v"]
+[ext_resource type="Texture2D" uid="uid://cr5sqohf25pmb" path="res://assets/players/mikal-bridges.jpg" id="3_d084v"]
 
 [sub_resource type="Resource" id="Resource_j8pbl"]
 script = ExtResource("1_j8pbl")
@@ -58,6 +59,7 @@ last_name = "Bridges"
 three_point_bonus = 3
 player_cost = 690
 shot_check = 15
+texture = ExtResource("3_d084v")
 first_name_size = 28
 last_name_size = 28
 roll_table = Array[ExtResource("1_j8pbl")]([SubResource("Resource_j8pbl"), SubResource("Resource_d084v"), SubResource("Resource_w0pq7"), SubResource("Resource_hk77y"), SubResource("Resource_6b1ly")])

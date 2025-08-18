@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=7 format=3 uid="uid://c0avd24oojs4w"]
+[gd_resource type="Resource" script_class="BallPlayerStats" load_steps=8 format=3 uid="uid://c0avd24oojs4w"]
 
 [ext_resource type="Script" uid="uid://c3xho6niytkse" path="res://scripts/RollTableRow.gd" id="1_wpqw3"]
 [ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="2_u2fon"]
+[ext_resource type="Texture2D" uid="uid://kx5c0amgudnu" path="res://assets/players/kentavious-caldwell-pope.jpg" id="3_u2fon"]
 
 [sub_resource type="Resource" id="Resource_wpqw3"]
 script = ExtResource("1_wpqw3")
@@ -49,6 +50,7 @@ last_name = "Caldwell-Pope"
 three_point_bonus = 2
 player_cost = 460
 shot_check = 15
+texture = ExtResource("3_u2fon")
 first_name_size = 28
 last_name_size = 20
 roll_table = Array[ExtResource("1_wpqw3")]([SubResource("Resource_wpqw3"), SubResource("Resource_u2fon"), SubResource("Resource_q2gsb"), SubResource("Resource_m2gtb")])
