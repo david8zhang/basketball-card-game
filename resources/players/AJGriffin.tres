@@ -8,7 +8,7 @@
 script = ExtResource("1_ki76s")
 low = 1
 high = 7
-points = 8
+points = 0
 assists = 0
 rebounds = 0
 metadata/_custom_type_script = "uid://c3xho6niytkse"

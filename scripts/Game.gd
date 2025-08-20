@@ -129,6 +129,10 @@ func cpu_select_card_to_score_with():
 	zoom_in_card.tween_property(selected_cpu_bp_card, "scale", Vector2(1.05, 1.05), 0.25)
 	zoom_in_card.finished.connect(on_zoomed)
 
+static func get_points_from_rebounds(reb: int):
+	@warning_ignore("integer_division")
+	return reb / 2
+
 func on_matchup_complete(all_stats: Dictionary, side: Side, assists_used: int):
 	process_matchup_stats(all_stats, side, assists_used)
 	if get_is_quarter_completed():
@@ -139,10 +143,10 @@ func on_matchup_complete(all_stats: Dictionary, side: Side, assists_used: int):
 		var on_rebound_tally_complete = func():
 			var player_reb = get_rebounds(player_rebounds_label)
 			var cpu_reb = get_rebounds(cpu_rebounds_label)
-			curr_player_quarter_score += player_reb
-			curr_cpu_quarter_score += cpu_reb
-			player_score_label.text = str(get_player_score() + player_reb)
-			cpu_score_label.text = str(get_cpu_score() + cpu_reb)
+			curr_player_quarter_score += get_points_from_rebounds(player_reb)
+			curr_cpu_quarter_score += get_points_from_rebounds(cpu_reb)
+			player_score_label.text = str(get_player_score() + get_points_from_rebounds(player_reb))
+			cpu_score_label.text = str(get_cpu_score() + get_points_from_rebounds(cpu_reb))
 			show_quarter_end_info_modal()
 		handle_rebound_tally(on_rebound_tally_complete)
 	elif side == Side.PLAYER:
@@ -225,9 +229,9 @@ func add_box_score_bonuses(side: Side, stat_type: BoxScoreBonus.StatType, value:
 		BoxScoreBonus.StatType.POINTS:
 			score_label.text = str(max(0, int(player_score_label.text) + value))
 		BoxScoreBonus.StatType.REBOUNDS:
-			rebounds_label.text = "R:" + str(max(0, get_rebounds(rebounds_label) + value))
+			rebounds_label.text = "R: " + str(max(0, get_rebounds(rebounds_label) + value))
 		BoxScoreBonus.StatType.ASSISTS:
-			assists_label.text = "A:" + str(max(0, get_assists(assists_label)+ value))
+			assists_label.text = "A: " + str(max(0, get_assists(assists_label)+ value))
 
 func update_statlines(full_name: String, stat_line: BoxScoreStatLine, scorer_statline: Dictionary):
 	if scorer_statline.has(full_name):

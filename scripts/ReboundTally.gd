@@ -36,7 +36,9 @@ func tally_rebounds(on_tally_finished: Callable):
 func handle_rebound_tally_anims(rebounds_text: Label, score_text: Label, on_complete: Callable):
 	var reb_tween_finished = func():
 		var reb_bonus_label = Label.new()
-		reb_bonus_label.text = "+" + str(int(rebounds_text.text))
+		@warning_ignore("integer_division")
+		var num_points_to_add = Game.get_points_from_rebounds(int(rebounds_text.text))
+		reb_bonus_label.text = "+" + str(num_points_to_add)
 		add_child(reb_bonus_label)
 		reb_bonus_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		reb_bonus_label.add_theme_font_size_override("font_size", 30)
@@ -52,7 +54,9 @@ func handle_rebound_tally_anims(rebounds_text: Label, score_text: Label, on_comp
 func _on_bonus_added(rebounds_text: Label, score_text: Label, reb_bonus_label: Label, on_complete: Callable):
 	var num_reb_to_add = int(rebounds_text.text)
 	reb_bonus_label.queue_free()
-	score_text.text = str(int(score_text.text) + num_reb_to_add)
+	@warning_ignore("integer_division")
+	var num_points_to_add = Game.get_points_from_rebounds(num_reb_to_add)
+	score_text.text = str(int(score_text.text) + num_points_to_add)
 	var reb_reset_tween = create_tween()
 	reb_reset_tween.tween_property(rebounds_text, "scale", Vector2(1, 1), 0.25)
 	if on_complete != null:
