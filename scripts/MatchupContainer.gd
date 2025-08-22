@@ -439,7 +439,7 @@ func handle_point_tally_anim(points_scored_value: int, bonus_modifier: String = 
 	var points_value = matchup_score.points_value
 	var points_bonus_label = Label.new()
 	add_child(points_bonus_label)
-	points_bonus_label.text = bonus_modifier + "+" + str(points_scored_value)
+	points_bonus_label.text = bonus_modifier + ("+" if points_scored_value >= 0 else "") + str(points_scored_value)
 	points_bonus_label.global_position = Vector2(points_value.global_position.x, points_value.global_position.y + 75)
 	points_bonus_label.add_theme_font_size_override("font_size", 50)
 	points_bonus_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -452,7 +452,7 @@ func handle_point_tally_anim(points_scored_value: int, bonus_modifier: String = 
 	var combine_fn = func combine_with_total_points():
 		var tween = create_tween()
 		points_bonus_label.queue_free()
-		points_value.text = str(int(points_value.text) + points_scored_value)
+		points_value.text = str(max(0, int(points_value.text) + points_scored_value))
 		tween.tween_property(points_value, "theme_override_font_sizes/font_size", 60, 0.25)
 		tween.finished.connect(on_combine_finished)
 	add_points_bonus_tween.finished.connect(combine_fn)
@@ -460,9 +460,13 @@ func handle_point_tally_anim(points_scored_value: int, bonus_modifier: String = 
 func tally_points():
 	var roll_table_row = get_table_row_for_roll_value()
 	var points_scored = roll_table_row["points_label"] as TableValue
-	var hl_points_scored = create_tween()
-	hl_points_scored.tween_property(points_scored.label, "theme_override_font_sizes/font_size", 25, 0.25)
-	handle_point_tally_anim(0 if points_scored.label.text == "" else int(points_scored.label.text))
+	var points_value = 0 if points_scored.label.text == "" else int(points_scored.label.text)
+	if points_value == 0:
+		calc_complete.emit()
+	else:
+		var hl_points_scored = create_tween()
+		hl_points_scored.tween_property(points_scored.label, "theme_override_font_sizes/font_size", 25, 0.25)
+		handle_point_tally_anim(points_value)
 
 func tally_strat_bonus_points():
 	if strategy_point_bonuses == 0:
@@ -495,9 +499,13 @@ func handle_assist_tally_anim(assist_value: int, bonus_modifier: String = ""):
 func tally_assists():
 	var roll_table_row = get_table_row_for_roll_value()
 	var assists_made = roll_table_row["assists_label"] as TableValue
-	var hl_assists_scored = create_tween()
-	hl_assists_scored.tween_property(assists_made.label, "theme_override_font_sizes/font_size", 25, 0.25)
-	handle_assist_tally_anim(0 if assists_made.label.text == "" else int(assists_made.label.text))
+	var ast_value = 0 if assists_made.label.text == "" else int(assists_made.label.text)
+	if ast_value == 0:
+		calc_complete.emit()
+	else:
+		var hl_assists_scored = create_tween()
+		hl_assists_scored.tween_property(assists_made.label, "theme_override_font_sizes/font_size", 25, 0.25)
+		handle_assist_tally_anim(ast_value)
 
 func tally_strat_bonus_assists():
 	if strategy_assist_bonuses == 0:
@@ -508,9 +516,13 @@ func tally_strat_bonus_assists():
 func tally_rebounds():
 	var roll_table_row = get_table_row_for_roll_value()
 	var rebounds_grabbed = roll_table_row["rebounds_label"] as TableValue
-	var hl_rebounds_grabbed = create_tween()
-	hl_rebounds_grabbed.tween_property(rebounds_grabbed.label, "theme_override_font_sizes/font_size", 25, 0.25)
-	handle_rebound_tally_anim(0 if rebounds_grabbed.label.text == "" else int(rebounds_grabbed.label.text))
+	var reb_value = 0 if rebounds_grabbed.label.text == "" else int(rebounds_grabbed.label.text)
+	if reb_value == 0:
+		calc_complete.emit()
+	else:
+		var hl_rebounds_grabbed = create_tween()
+		hl_rebounds_grabbed.tween_property(rebounds_grabbed.label, "theme_override_font_sizes/font_size", 25, 0.25)
+		handle_rebound_tally_anim(reb_value)
 
 func tally_strat_bonus_rebounds():
 	if strategy_rebound_bonuses == 0:
@@ -654,7 +666,7 @@ func apply_single_bonus(bonus, strategy_type, custom_cb):
 			marker_bonus_animator.apply_bonus_to_player(off_player, def_player, marker_bonus)
 		StrategyCardBonusNode.BonusType.ROLL:
 			var roll_bonus = bonus as RollBonus
-			strategy_roll_bonuses = roll_bonus.roll_bonus_amount
+			strategy_roll_bonuses += roll_bonus.roll_bonus_amount
 			custom_cb.call()
 		StrategyCardBonusNode.BonusType.BOX_SCORE:
 			var box_score_bonus = bonus as BoxScoreBonus

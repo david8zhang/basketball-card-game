@@ -12,10 +12,10 @@ signal on_close
 func _ready():
 	continue_button.pressed.connect(handle_close)
 
-func add_bonus_line(attr_name: String, bonus_amt: int):
+func add_bonus_line(attr_name: String, bonus_amt: int, prefix: String = ""):
 	var strategy_bonus_line = strategy_bonus_line_scene.instantiate() as StrategyCardBonusLine
 	container.add_child(strategy_bonus_line)
-	strategy_bonus_line.setup(attr_name, bonus_amt)
+	strategy_bonus_line.setup(attr_name, bonus_amt, prefix)
 
 func handle_close():
 	hide()

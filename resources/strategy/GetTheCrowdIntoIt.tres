@@ -1,0 +1,83 @@
+[gd_resource type="Resource" script_class="StrategyCardConfig" load_steps=18 format=3 uid="uid://b7y0kvkatsnry"]
+
+[ext_resource type="Script" uid="uid://cdj30lies16yq" path="res://scripts/strategy/StrategyCardConfig.gd" id="1_g1b1m"]
+[ext_resource type="Script" uid="uid://bq22hlebjq8xg" path="res://scripts/strategy/StrategyCardNode.gd" id="1_x4cdp"]
+[ext_resource type="Script" uid="uid://ckyo36itiyt30" path="res://scripts/strategy/action/RollDiceAction.gd" id="2_ox48i"]
+[ext_resource type="Script" uid="uid://8h7wbli6l8ea" path="res://scripts/strategy/bonus/NoopBonus.gd" id="3_ogo3i"]
+[ext_resource type="Script" uid="uid://2s3vmqbdc7qr" path="res://scripts/strategy/condition/DiceRollCondition.gd" id="3_ox48i"]
+[ext_resource type="Script" uid="uid://dfdnia3mppqsu" path="res://scripts/strategy/StrategyCardSequenceNode.gd" id="3_tasfw"]
+[ext_resource type="Script" uid="uid://valpsh4ib3un" path="res://scripts/strategy/bonus/MarkerBonus.gd" id="4_ogo3i"]
+[ext_resource type="Script" uid="uid://vcwodimwrbri" path="res://scripts/strategy/bonus/StatBonus.gd" id="4_vtsuw"]
+
+[sub_resource type="Resource" id="Resource_ogo3i"]
+script = ExtResource("2_ox48i")
+dice_type = 20
+rigged_dice_value = -1
+static_bonus = 0
+add_three_point_bonus = false
+action_type = 2
+metadata/_custom_type_script = "uid://ckyo36itiyt30"
+
+[sub_resource type="Resource" id="Resource_1yduq"]
+script = ExtResource("3_ogo3i")
+show_failure = true
+bonus_type = 0
+metadata/_custom_type_script = "uid://8h7wbli6l8ea"
+
+[sub_resource type="Resource" id="Resource_lx2pm"]
+script = ExtResource("4_vtsuw")
+off_bonus_amount = 0
+def_bonus_amount = 4
+bonus_type = 0
+metadata/_custom_type_script = "uid://vcwodimwrbri"
+
+[sub_resource type="Resource" id="Resource_noo7c"]
+script = ExtResource("3_ogo3i")
+show_failure = false
+bonus_type = 0
+metadata/_custom_type_script = "uid://8h7wbli6l8ea"
+
+[sub_resource type="Resource" id="Resource_mhug5"]
+script = ExtResource("4_ogo3i")
+marker_type = 2
+num_markers = 1
+bonus_type = 3
+metadata/_custom_type_script = "uid://valpsh4ib3un"
+
+[sub_resource type="Resource" id="Resource_m0y1q"]
+script = ExtResource("3_ox48i")
+dice_roll_thres = 18
+comparator_type = 2
+check_initial_roll = true
+condition_type = 0
+pass_child = SubResource("Resource_mhug5")
+fail_child = SubResource("Resource_noo7c")
+metadata/_custom_type_script = "uid://2s3vmqbdc7qr"
+
+[sub_resource type="Resource" id="Resource_8bnte"]
+script = ExtResource("3_tasfw")
+children = Array[ExtResource("1_x4cdp")]([SubResource("Resource_lx2pm"), SubResource("Resource_m0y1q")])
+metadata/_custom_type_script = "uid://dfdnia3mppqsu"
+
+[sub_resource type="Resource" id="Resource_tasfw"]
+script = ExtResource("3_ox48i")
+dice_roll_thres = 6
+comparator_type = 2
+check_initial_roll = true
+condition_type = 0
+pass_child = SubResource("Resource_8bnte")
+fail_child = SubResource("Resource_1yduq")
+metadata/_custom_type_script = "uid://2s3vmqbdc7qr"
+
+[sub_resource type="Resource" id="Resource_vtsuw"]
+script = ExtResource("3_tasfw")
+children = Array[ExtResource("1_x4cdp")]([SubResource("Resource_ogo3i"), SubResource("Resource_tasfw")])
+metadata/_custom_type_script = "uid://dfdnia3mppqsu"
+
+[resource]
+script = ExtResource("1_g1b1m")
+strategy_type = 1
+card_name = "Get The Crowd Into It!"
+card_description = "Roll a die. 1-6: No Effect. 7-20: This player gets +4 defense. If the original roll was 19-20, this player gets a hot marker"
+root_node = SubResource("Resource_vtsuw")
+metadata/_custom_type_script = "uid://cdj30lies16yq"

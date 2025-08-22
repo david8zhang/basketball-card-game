@@ -4,10 +4,6 @@ extends StrategyCardNode
 @export var children: Array[StrategyCardNode]
 
 func process(blackboard):
-	var final_result_type = StrategyCardNode.NodeResultType.SUCCESS
 	for c in children:
 		c.process(blackboard)
-		# if result_type == StrategyCardNode.NodeResultType.FAILURE:
-		# 	final_result_type = StrategyCardNode.NodeResultType.FAILURE
-		# 	break
-	return final_result_type
+	return StrategyCardNode.NodeResultType.SUCCESS

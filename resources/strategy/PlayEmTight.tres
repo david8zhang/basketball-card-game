@@ -1,0 +1,78 @@
+[gd_resource type="Resource" script_class="StrategyCardConfig" load_steps=17 format=3 uid="uid://braoxa2n7ui4i"]
+
+[ext_resource type="Script" uid="uid://bq22hlebjq8xg" path="res://scripts/strategy/StrategyCardNode.gd" id="1_k3b8f"]
+[ext_resource type="Script" uid="uid://cdj30lies16yq" path="res://scripts/strategy/StrategyCardConfig.gd" id="1_ryemu"]
+[ext_resource type="Script" uid="uid://vcwodimwrbri" path="res://scripts/strategy/bonus/StatBonus.gd" id="2_fudor"]
+[ext_resource type="Script" uid="uid://ckyo36itiyt30" path="res://scripts/strategy/action/RollDiceAction.gd" id="3_nptdg"]
+[ext_resource type="Script" uid="uid://dfdnia3mppqsu" path="res://scripts/strategy/StrategyCardSequenceNode.gd" id="3_wucjh"]
+[ext_resource type="Script" uid="uid://8h7wbli6l8ea" path="res://scripts/strategy/bonus/NoopBonus.gd" id="4_p6mpv"]
+[ext_resource type="Script" uid="uid://dvl8hl7mfdxi2" path="res://scripts/strategy/bonus/BoxScoreBonus.gd" id="5_4h8f8"]
+[ext_resource type="Script" uid="uid://d3q2e7wk15stm" path="res://scripts/strategy/condition/ShotCheckCondition.gd" id="6_hfbfu"]
+
+[sub_resource type="Resource" id="Resource_s5hyj"]
+script = ExtResource("2_fudor")
+off_bonus_amount = 0
+def_bonus_amount = 6
+bonus_type = 0
+metadata/_custom_type_script = "uid://vcwodimwrbri"
+
+[sub_resource type="Resource" id="Resource_wucjh"]
+script = ExtResource("3_nptdg")
+dice_type = 20
+rigged_dice_value = -1
+static_bonus = 10
+add_three_point_bonus = false
+action_type = 2
+metadata/_custom_type_script = "uid://ckyo36itiyt30"
+
+[sub_resource type="Resource" id="Resource_hfbfu"]
+script = ExtResource("4_p6mpv")
+show_failure = true
+bonus_type = 7
+metadata/_custom_type_script = "uid://8h7wbli6l8ea"
+
+[sub_resource type="Resource" id="Resource_4h8f8"]
+script = ExtResource("5_4h8f8")
+bonus_amt = 1
+bonus_stat_type = 0
+target_side = 0
+bonus_type = 2
+metadata/_custom_type_script = "uid://dvl8hl7mfdxi2"
+
+[sub_resource type="Resource" id="Resource_p6mpv"]
+script = ExtResource("6_hfbfu")
+side_to_check = 0
+condition_type = 3
+pass_child = SubResource("Resource_4h8f8")
+fail_child = SubResource("Resource_hfbfu")
+metadata/_custom_type_script = "uid://d3q2e7wk15stm"
+
+[sub_resource type="Resource" id="Resource_su0ie"]
+script = ExtResource("3_nptdg")
+dice_type = 20
+rigged_dice_value = -1
+static_bonus = 10
+add_three_point_bonus = false
+action_type = 2
+metadata/_custom_type_script = "uid://ckyo36itiyt30"
+
+[sub_resource type="Resource" id="Resource_aghmu"]
+script = ExtResource("6_hfbfu")
+side_to_check = 0
+condition_type = 3
+pass_child = SubResource("Resource_4h8f8")
+fail_child = SubResource("Resource_hfbfu")
+metadata/_custom_type_script = "uid://d3q2e7wk15stm"
+
+[sub_resource type="Resource" id="Resource_nptdg"]
+script = ExtResource("3_wucjh")
+children = Array[ExtResource("1_k3b8f")]([SubResource("Resource_s5hyj"), SubResource("Resource_wucjh"), SubResource("Resource_p6mpv"), SubResource("Resource_su0ie"), SubResource("Resource_aghmu")])
+metadata/_custom_type_script = "uid://dfdnia3mppqsu"
+
+[resource]
+script = ExtResource("1_ryemu")
+strategy_type = 1
+card_name = "Play Em Tight"
+card_description = "This player gets +6 Defense. The opposing player takes 2 foul shots"
+root_node = SubResource("Resource_nptdg")
+metadata/_custom_type_script = "uid://cdj30lies16yq"

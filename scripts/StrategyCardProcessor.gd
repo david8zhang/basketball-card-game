@@ -40,14 +40,18 @@ func process_curr_node_result():
 		return
 	var curr_node_result = node_results[curr_node_result_to_process_idx] as StrategyCardNode.NodeResult
 	if curr_node_result.node_ref.node_type == StrategyCardNode.NodeType.BONUS:
-		process_bonus_node_result(curr_node_result)
+		if curr_node_result.result_type == StrategyCardNode.NodeResultType.FAILURE:
+			curr_node_result_to_process_idx += 1
+			process_curr_node_result()
+		else:
+			process_bonus_node_result(curr_node_result)
 	elif curr_node_result.node_ref.node_type == StrategyCardNode.NodeType.ACTION:
 		process_action_node_result(curr_node_result)
 	else:
 		curr_node_result_to_process_idx += 1
 		process_curr_node_result()
 
-func process_bonus_node_result(curr_node_result):
+func process_bonus_node_result(curr_node_result: StrategyCardNode.NodeResult):
 	var node = curr_node_result.node_ref as StrategyCardBonusNode
 	if strategy_bonuses == null or !is_instance_valid(strategy_bonuses):
 		strategy_bonuses = strategy_bonuses_scene.instantiate() as StrategyBonuses
@@ -84,11 +88,17 @@ func process_bonus_node_result(curr_node_result):
 					strategy_bonuses.add_bonus_line("Rebounds " + suffix, box_score_bonus.bonus_amt)
 		StrategyCardBonusNode.BonusType.ROLL:
 			var roll_bonus = node as RollBonus
-			strategy_bonuses.add_bonus_line("Roll", roll_bonus.roll_bonus_amount)
+			var prefix = ""
+			match (roll_bonus.roll_bonus_type):
+				RollBonus.RollBonusType.OFF_DIFF:
+					prefix = "(Off. Bonus)"
+				RollBonus.RollBonusType.DEF_DIFF:
+					prefix = "(Def. Bonus)"
+				RollBonus.RollBonusType.THREE_PT_BONUS:
+					prefix = "(3-Pt. Bonus)"
+			strategy_bonuses.add_bonus_line("Roll", roll_bonus.roll_bonus_amount, prefix)
 		StrategyCardBonusNode.BonusType.NOOP:
 			strategy_bonuses.show_failure_message()
-	# curr_node_result_to_process_idx += 1
-	# process_curr_node_result()
 
 func process_action_node_result(curr_node_result: StrategyCardNode.NodeResult):
 	var node = curr_node_result.node_ref as StrategyCardActionNode

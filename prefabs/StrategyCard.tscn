@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bi2ksw8anhd4v"]
 
 [ext_resource type="Script" uid="uid://bcswrisqpoxkx" path="res://scripts/StrategyCard.gd" id="1_omdm6"]
-[ext_resource type="Resource" uid="uid://gt5jmt5mx1fd" path="res://resources/strategy/DefensiveRebound.tres" id="2_3c6jq"]
+[ext_resource type="Resource" uid="uid://kqmav8deh0j8" path="res://resources/strategy/FromWayDowntown.tres" id="2_c54fk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7wo1j"]
 bg_color = Color(0, 0, 0, 1)
@@ -24,7 +24,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_omdm6")
-strategy_card_config = ExtResource("2_3c6jq")
+strategy_card_config = ExtResource("2_c54fk")
 
 [node name="Panel" type="Panel" parent="."]
 custom_minimum_size = Vector2(250, 350)
@@ -82,7 +82,7 @@ size_flags_horizontal = 3
 
 [node name="CardDescription" type="RichTextLabel" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 14
+theme_override_font_sizes/normal_font_size = 12
 text = "This player scores 2 points. Roll a D20. If it's a 20, give each player on your team a hot marker"
 fit_content = true
 

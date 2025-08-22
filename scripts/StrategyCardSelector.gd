@@ -28,39 +28,39 @@ signal on_finished
 signal on_strategy_card_selected(selected_card_id)
 
 func _ready():
-  var strat_deck = game.player_team.strategy_card_deck
-  var cards_in_deck = []
-  if matchup_container.offense_side == Game.Side.PLAYER:
-    cards_in_deck = strat_deck.get_offense_strategy_cards()
-  else:
-    cards_in_deck = strat_deck.get_defense_strategy_cards()
-  close_button.pressed.connect(on_close_selector)
-  for config_wrapper in cards_in_deck:
-    var strategy_card = strategy_card_scene.instantiate() as StrategyCard
-    strategy_card.strategy_card_config = config_wrapper.config
-    strategy_card.config_id = config_wrapper.config_id
-    var on_select_callable = Callable(self, "select_strategy_card").bind(strategy_card)
-    card_container.add_child(strategy_card)
-    strategy_card.button.pressed.connect(on_select_callable)
-  strategy_card_processor = strategy_card_processor_scene.instantiate() as StrategyCardProcessor
-  strategy_card_processor.on_strategy_card_selected.connect(strat_deck.on_strategy_card_selected)
-  matchup_container.add_child(strategy_card_processor)
-  strategy_card_processor.off_player = off_player
-  strategy_card_processor.def_player = def_player
-  strategy_card_processor.matchup_container = matchup_container
-  strategy_card_processor.before_apply_bonus.connect(on_finished_processing_strat)
+	var strat_deck = game.player_team.strategy_card_deck
+	var cards_in_deck = []
+	if matchup_container.offense_side == Game.Side.PLAYER:
+		cards_in_deck = strat_deck.get_offense_strategy_cards()
+	else:
+		cards_in_deck = strat_deck.get_defense_strategy_cards()
+		close_button.pressed.connect(on_close_selector)
+	for config_wrapper in cards_in_deck:
+		var strategy_card = strategy_card_scene.instantiate() as StrategyCard
+		strategy_card.strategy_card_config = config_wrapper.config
+		strategy_card.config_id = config_wrapper.config_id
+		var on_select_callable = Callable(self, "select_strategy_card").bind(strategy_card)
+		card_container.add_child(strategy_card)
+		strategy_card.button.pressed.connect(on_select_callable)
+	strategy_card_processor = strategy_card_processor_scene.instantiate() as StrategyCardProcessor
+	strategy_card_processor.on_strategy_card_selected.connect(strat_deck.on_strategy_card_selected)
+	matchup_container.add_child(strategy_card_processor)
+	strategy_card_processor.off_player = off_player
+	strategy_card_processor.def_player = def_player
+	strategy_card_processor.matchup_container = matchup_container
+	strategy_card_processor.before_apply_bonus.connect(on_finished_processing_strat)
 
 func select_strategy_card(sc: StrategyCard):
-  strategy_card_processor.select_strategy_card(sc)
-  var callable = Callable(self, "process_strategy_card")
-  strategy_card_processor.display_complete.connect(callable)
-  hide()
+	strategy_card_processor.select_strategy_card(sc)
+	var callable = Callable(self, "process_strategy_card")
+	strategy_card_processor.display_complete.connect(callable)
+	hide()
 
 func process_strategy_card():
-  strategy_card_processor.process_selected_card()
+	strategy_card_processor.process_selected_card()
 
 func on_close_selector():
-  on_close.emit()
+	on_close.emit()
 
 func on_finished_processing_strat():
-  on_finished.emit()
+	on_finished.emit()

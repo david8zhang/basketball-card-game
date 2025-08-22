@@ -9,6 +9,7 @@ enum ComparatorType {
 
 @export var dice_roll_thres := 0
 @export var comparator_type := ComparatorType.GREATER
+@export var check_initial_roll := false
 
 var final_roll_result := 0
 var dice_type := 0
@@ -20,7 +21,7 @@ func _init():
 func check_condition(blackboard: Blackboard):  
 	var roll_dice_action_result = get_roll_dice_action_result(blackboard) as RollDiceAction
 	assert(roll_dice_action_result != null, "Roll dice action must exist!")
-	final_roll_result = roll_dice_action_result.final_roll_result
+	final_roll_result = roll_dice_action_result.final_roll_result if !check_initial_roll else roll_dice_action_result.dice_roll_result
 	dice_type = roll_dice_action_result.dice_type
 	var result_type
 	match (comparator_type):

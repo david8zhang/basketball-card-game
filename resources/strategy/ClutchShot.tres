@@ -1,0 +1,95 @@
+[gd_resource type="Resource" script_class="StrategyCardConfig" load_steps=20 format=3 uid="uid://bacrh00otsgv3"]
+
+[ext_resource type="Script" uid="uid://cdj30lies16yq" path="res://scripts/strategy/StrategyCardConfig.gd" id="1_bu44b"]
+[ext_resource type="Script" uid="uid://bq22hlebjq8xg" path="res://scripts/strategy/StrategyCardNode.gd" id="1_pfv1l"]
+[ext_resource type="Script" uid="uid://ckyo36itiyt30" path="res://scripts/strategy/action/RollDiceAction.gd" id="2_gfeuk"]
+[ext_resource type="Script" uid="uid://dfdnia3mppqsu" path="res://scripts/strategy/StrategyCardSequenceNode.gd" id="3_1otqa"]
+[ext_resource type="Script" uid="uid://8h7wbli6l8ea" path="res://scripts/strategy/bonus/NoopBonus.gd" id="3_7ga23"]
+[ext_resource type="Script" uid="uid://dvl8hl7mfdxi2" path="res://scripts/strategy/bonus/BoxScoreBonus.gd" id="3_u0u7r"]
+[ext_resource type="Script" uid="uid://d3q2e7wk15stm" path="res://scripts/strategy/condition/ShotCheckCondition.gd" id="4_7ga23"]
+[ext_resource type="Script" uid="uid://2s3vmqbdc7qr" path="res://scripts/strategy/condition/DiceRollCondition.gd" id="6_7ga23"]
+[ext_resource type="Script" uid="uid://valpsh4ib3un" path="res://scripts/strategy/bonus/MarkerBonus.gd" id="6_xadfg"]
+
+[sub_resource type="Resource" id="Resource_u0u7r"]
+script = ExtResource("2_gfeuk")
+dice_type = 20
+rigged_dice_value = -1
+static_bonus = 4
+add_three_point_bonus = true
+action_type = 2
+metadata/_custom_type_script = "uid://ckyo36itiyt30"
+
+[sub_resource type="Resource" id="Resource_ckf72"]
+script = ExtResource("3_7ga23")
+show_failure = false
+bonus_type = 7
+metadata/_custom_type_script = "uid://8h7wbli6l8ea"
+
+[sub_resource type="Resource" id="Resource_xadfg"]
+script = ExtResource("3_u0u7r")
+bonus_amt = 2
+bonus_stat_type = 0
+target_side = 0
+bonus_type = 2
+metadata/_custom_type_script = "uid://dvl8hl7mfdxi2"
+
+[sub_resource type="Resource" id="Resource_ygmcc"]
+script = ExtResource("4_7ga23")
+side_to_check = 0
+condition_type = 3
+pass_child = SubResource("Resource_xadfg")
+fail_child = SubResource("Resource_ckf72")
+metadata/_custom_type_script = "uid://d3q2e7wk15stm"
+
+[sub_resource type="Resource" id="Resource_jq7h8"]
+script = ExtResource("3_7ga23")
+show_failure = true
+bonus_type = 7
+metadata/_custom_type_script = "uid://8h7wbli6l8ea"
+
+[sub_resource type="Resource" id="Resource_ks7fm"]
+script = ExtResource("6_xadfg")
+marker_type = 1
+num_markers = 1
+bonus_type = 3
+metadata/_custom_type_script = "uid://valpsh4ib3un"
+
+[sub_resource type="Resource" id="Resource_tkwsl"]
+script = ExtResource("6_7ga23")
+dice_roll_thres = 3
+comparator_type = 0
+check_initial_roll = true
+condition_type = 0
+pass_child = SubResource("Resource_ks7fm")
+fail_child = SubResource("Resource_jq7h8")
+metadata/_custom_type_script = "uid://2s3vmqbdc7qr"
+
+[sub_resource type="Resource" id="Resource_v51cg"]
+script = ExtResource("6_xadfg")
+marker_type = 0
+num_markers = 1
+bonus_type = 3
+metadata/_custom_type_script = "uid://valpsh4ib3un"
+
+[sub_resource type="Resource" id="Resource_7or68"]
+script = ExtResource("6_7ga23")
+dice_roll_thres = 18
+comparator_type = 2
+check_initial_roll = true
+condition_type = 0
+pass_child = SubResource("Resource_v51cg")
+fail_child = SubResource("Resource_tkwsl")
+metadata/_custom_type_script = "uid://2s3vmqbdc7qr"
+
+[sub_resource type="Resource" id="Resource_7ga23"]
+script = ExtResource("3_1otqa")
+children = Array[ExtResource("1_pfv1l")]([SubResource("Resource_u0u7r"), SubResource("Resource_ygmcc"), SubResource("Resource_7or68")])
+metadata/_custom_type_script = "uid://dfdnia3mppqsu"
+
+[resource]
+script = ExtResource("1_bu44b")
+strategy_type = 0
+card_name = "Clutch Shot"
+card_description = "This player makes a shot check at +4. If he succeeds, he scores 2 points. If the roll was 1-2, he gets a cold marker. If it was 19-20, he gets a hot marker."
+root_node = SubResource("Resource_7ga23")
+metadata/_custom_type_script = "uid://cdj30lies16yq"

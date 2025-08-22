@@ -2,8 +2,8 @@ class_name StrategyCardConfig
 extends Resource
 
 enum StrategyCardType {
-  OFFENSE,
-  DEFENSE
+	OFFENSE,
+	DEFENSE
 }
 
 @export var strategy_type: StrategyCardType
@@ -15,7 +15,8 @@ var blackboard: Blackboard
 var id = ""
 
 func process(off_player: BallPlayerCard, def_player: BallPlayerCard):
-  blackboard = Blackboard.new()
-  blackboard.off_player = off_player
-  blackboard.def_player = def_player
-  root_node.process(blackboard)
+	blackboard = Blackboard.new()
+	blackboard.off_player = off_player
+	blackboard.def_player = def_player
+	blackboard.card_config = self
+	root_node.process(blackboard)
