@@ -6,7 +6,9 @@ enum ConditionType {
 	STAT_CHECK,
 	STAT_COMP,
 	SHOT_CHECK,
-	QUARTER_CHECK
+	QUARTER_CHECK,
+	MARKER_CHECK,
+	THREE_POINT_BONUS_CHECK
 }
 
 @export var condition_type: ConditionType

@@ -10,6 +10,7 @@ extends Panel
 @onready var use_assists_checkbox = $MarginContainer/VBoxContainer/VBoxContainer/UseAssistsCheckbox as CheckBox
 @onready var use_strategy_card_button = $MarginContainer/VBoxContainer/VBoxContainer/StratButton as Button
 @onready var strat_roll_bonus_label = $MarginContainer/VBoxContainer/VBoxContainer/StratRollBonus as Label
+@onready var continue_button = $ContinueButton
 
 # For animating bonuses from strategy cards
 @onready var stat_bonus_animator: StatBonusAnimator = $StatBonusAnimator
@@ -19,6 +20,23 @@ extends Panel
 @export var card_scene: PackedScene
 @export var matchup_pts_assts_rebs_scene: PackedScene
 @export var strategy_card_selector_scene: PackedScene
+
+# Configurable tween timing variables
+@export var calc_step_delay: float = 0.1
+@export var stat_highlight_duration: float = 0.15
+@export var roll_value_grow_duration: float = 0.15
+@export var roll_value_shrink_duration: float = 0.15
+@export var roll_value_slide_duration: float = 0.75
+@export var modifier_label_slide_duration: float = 0.25
+@export var modifier_label_delay: float = 0.25
+@export var hot_cold_modifier_delay: float = 0.15
+@export var off_modifier_delay: float = 0.15
+@export var bonus_label_slide_duration: float = 0.2
+@export var bonus_label_delay: float = 0.3
+@export var stat_value_grow_duration: float = 0.15
+@export var stat_value_shrink_duration: float = 0.15
+@export var roll_table_highlight_duration: float = 0.15
+@export var roll_table_dehighlight_duration: float = 0.15
 
 var player_card: BallPlayerCard
 var cpu_card: BallPlayerCard
@@ -56,8 +74,10 @@ func _ready():
 	close_button.pressed.connect(on_close_matchup_window)
 	calc_complete.connect(process_calc_delay)
 	use_strategy_card_button.pressed.connect(show_strategy_card_selector)
+	continue_button.pressed.connect(on_matchup_completed)
 	strat_roll_bonus_label.hide()
 	box_score_bonus_animator.hide()
+	continue_button.hide()
 	# Hide use strategy card button if player has no strategy cards available
 	if offense_side == Game.Side.PLAYER:
 		var player_team = game.player_team
@@ -148,71 +168,71 @@ func process_scoring_roll():
 	calc_steps = [
 		{
 			"fname": "generate_roll_value",
-			"on_comp_delay_s": 0.1
+			"on_comp_delay_s": calc_step_delay
 		},
 		{
 			"fname": "add_strat_bonus_to_roll",
-			"on_comp_delay_s": 0.1
+			"on_comp_delay_s": calc_step_delay
 		},
 		{
 			"fname": "add_assists_to_roll",
-			"on_comp_delay_s": 0.1
+			"on_comp_delay_s": calc_step_delay
 		},
 		{
 			"fname": "add_hot_or_cold_modifiers",
-			"on_comp_delay_s": 0.1
+			"on_comp_delay_s": calc_step_delay
 		},
 		{
 			"fname": "highlight_off_stat",
-			"on_comp_delay_s": 0.1
+			"on_comp_delay_s": calc_step_delay
 		},
 		{
 			"fname": "highlight_def_stat",
-			"on_comp_delay_s": 0.1
+			"on_comp_delay_s": calc_step_delay
 		},
 		{
 			"fname": "handle_off_modifier",
-			"on_comp_delay_s": 0.1
+			"on_comp_delay_s": calc_step_delay
 		},
 		{
 			"fname": "reset_stat_highlight",
-			"on_comp_delay_s": 0.1
+			"on_comp_delay_s": calc_step_delay
 		},
 		{
 			"fname": "push_roll_value_up",
-			"on_comp_delay_s": 0.1
+			"on_comp_delay_s": calc_step_delay
 		},
 		{
 			"fname": "highlight_roll_table_row",
-			"on_comp_delay_s": 0.1
+			"on_comp_delay_s": calc_step_delay
 		},
 		{
 			"fname": "tally_points",
-			"on_comp_delay_s": 0.1
+			"on_comp_delay_s": calc_step_delay
 		},
 		{
 			"fname": "tally_strat_bonus_points",
-			"on_comp_delay_s": 0.1
+			"on_comp_delay_s": calc_step_delay
 		},
 		{
 			"fname": "tally_assists",
-			"on_comp_delay_s": 0.1
+			"on_comp_delay_s": calc_step_delay
 		},
 		{
 			"fname": "tally_strat_bonus_assists",
-			"on_comp_delay_s": 0.1
+			"on_comp_delay_s": calc_step_delay
 		},
 		{
 			"fname": "tally_rebounds",
-			"on_comp_delay_s": 0.1
+			"on_comp_delay_s": calc_step_delay
 		},
 		{
 			"fname": "tally_strat_bonus_rebounds",
-			"on_comp_delay_s": 0.1
+			"on_comp_delay_s": calc_step_delay
 		},
 		{
 			"fname": "reset_roll_table_rows",
-			"on_comp_delay_s": 0.1
+			"on_comp_delay_s": calc_step_delay
 		}
 	]
 	execute_calc_wflow()
@@ -278,7 +298,9 @@ func add_strat_bonus_to_roll():
 		add_child(strat_roll_bonus_modifier_label)
 		# Combine assists with roll value
 		var strat_roll_modifier_tween = create_tween()
-		strat_roll_modifier_tween.tween_property(strat_roll_bonus_modifier_label, "global_position:y", roll_value_label.global_position.y + 10, 0.25).set_delay(0.5)
+		strat_roll_modifier_tween.set_trans(Tween.TRANS_SINE)
+		strat_roll_modifier_tween.set_ease(Tween.EASE_IN_OUT)
+		strat_roll_modifier_tween.tween_property(strat_roll_bonus_modifier_label, "global_position:y", roll_value_label.global_position.y + 10, modifier_label_slide_duration).set_delay(modifier_label_delay)
 		var cb = Callable(self, "combine_strat_bonus_modifier")
 		strat_roll_modifier_tween.finished.connect(cb)
 	else:
@@ -301,7 +323,9 @@ func add_assists_to_roll():
 		add_child(assists_modifier_label)
 		# Combine assists with roll value
 		var assists_modifier_tween = create_tween()
-		assists_modifier_tween.tween_property(assists_modifier_label, "global_position:y", roll_value_label.global_position.y + 10, 0.25).set_delay(0.5)
+		assists_modifier_tween.set_trans(Tween.TRANS_SINE)
+		assists_modifier_tween.set_ease(Tween.EASE_IN_OUT)
+		assists_modifier_tween.tween_property(assists_modifier_label, "global_position:y", roll_value_label.global_position.y + 10, modifier_label_slide_duration).set_delay(modifier_label_delay)
 		var cb = Callable(self, "combine_assists_modifier").bind(curr_assists)
 		assists_modifier_tween.finished.connect(cb)
 	else:
@@ -329,7 +353,9 @@ func add_hot_or_cold_modifiers():
 		add_child(hot_cold_modifier_label)
 		# Combine hot/cold bonus with roll value
 		var hot_cold_modifier_label_tween = create_tween()
-		hot_cold_modifier_label_tween.tween_property(hot_cold_modifier_label, "global_position:y", roll_value_label.global_position.y + 10, 0.25).set_delay(0.75)
+		hot_cold_modifier_label_tween.set_trans(Tween.TRANS_SINE)
+		hot_cold_modifier_label_tween.set_ease(Tween.EASE_IN_OUT)
+		hot_cold_modifier_label_tween.tween_property(hot_cold_modifier_label, "global_position:y", roll_value_label.global_position.y + 10, modifier_label_slide_duration).set_delay(hot_cold_modifier_delay)
 		var cb = Callable(self, "combine_hot_or_cold_bonus").bind(bonus_amt)
 		hot_cold_modifier_label_tween.finished.connect(cb)
 	else:
@@ -355,7 +381,9 @@ func handle_off_modifier():
 		add_child(off_modifier_label)
 		# Combine modifier value with roll value
 		var off_modifier_tween = create_tween()
-		off_modifier_tween.tween_property(off_modifier_label, "global_position:y", roll_value_label.global_position.y + 10, 0.25).set_delay(0.5)
+		off_modifier_tween.set_trans(Tween.TRANS_SINE)
+		off_modifier_tween.set_ease(Tween.EASE_IN_OUT)
+		off_modifier_tween.tween_property(off_modifier_label, "global_position:y", roll_value_label.global_position.y + 10, modifier_label_slide_duration).set_delay(off_modifier_delay)
 		var cb = Callable(self, "combine_off_modifier").bind(off_def_diff)
 		off_modifier_tween.finished.connect(cb)
 	else:
@@ -406,31 +434,41 @@ func highlight_roll_table_row():
 	var roll_table_row = get_table_row_for_roll_value()
 	var roll_range_label = roll_table_row["roll_range_label"] as TableValue
 	var hl_row_range = create_tween()
-	hl_row_range.tween_property(roll_range_label.label, "theme_override_font_sizes/font_size", 25, 0.4)
+	hl_row_range.set_trans(Tween.TRANS_SINE)
+	hl_row_range.set_ease(Tween.EASE_IN_OUT)
+	hl_row_range.tween_property(roll_range_label.label, "theme_override_font_sizes/font_size", 25, roll_table_highlight_duration)
 	hl_row_range.finished.connect(go_to_next_step_generic)
 
 func dehighlight_roll_table_row():
 	var roll_table_row = get_table_row_for_roll_value()
 	var roll_range_label = roll_table_row["roll_range_label"] as TableValue
 	var hl_row_range = create_tween()
-	hl_row_range.tween_property(roll_range_label.label, "theme_override_font_sizes/font_size", 15, 0.4)
+	hl_row_range.set_trans(Tween.TRANS_SINE)
+	hl_row_range.set_ease(Tween.EASE_IN_OUT)
+	hl_row_range.tween_property(roll_range_label.label, "theme_override_font_sizes/font_size", 15, roll_table_dehighlight_duration)
 	hl_row_range.finished.connect(go_to_next_step_generic)
 
 func push_roll_value_up():
-	var tween = create_tween()
+	var grow_tween = create_tween()
+	grow_tween.set_trans(Tween.TRANS_SINE)
+	grow_tween.set_ease(Tween.EASE_IN_OUT)
 	var start_y = roll_value_label.global_position.y
-	tween.tween_property(roll_value_label, "theme_override_font_sizes/font_size", 30, 0.25)
+	grow_tween.tween_property(roll_value_label, "theme_override_font_sizes/font_size", 30, roll_value_grow_duration)
 	var shrink_fn = func shrink_roll_value():
 		var new_tween = create_tween()
+		new_tween.set_trans(Tween.TRANS_SINE)
+		new_tween.set_ease(Tween.EASE_IN_OUT)
 		var end_y = roll_value_label.global_position.y - 100
-		new_tween.tween_property(roll_value_label, "global_position:y", end_y, 0.25)
-		new_tween.finished.connect(go_to_next_step_generic)
-	tween.finished.connect(shrink_fn)
+		new_tween.tween_property(roll_value_label, "global_position:y", end_y, roll_value_shrink_duration)
+	grow_tween.finished.connect(shrink_fn)
 	matchup_score = matchup_pts_assts_rebs_scene.instantiate()
 	add_child(matchup_score)
-	matchup_score.global_position = Vector2(508, get_viewport_rect().size.y + 200)
+	matchup_score.global_position = Vector2(0, get_viewport_rect().size.y + 200)
 	var tween_slide = create_tween()
-	tween_slide.tween_property(matchup_score, "global_position:y", start_y, 1.0)
+	tween_slide.set_trans(Tween.TRANS_SINE)
+	tween_slide.set_ease(Tween.EASE_IN_OUT)
+	tween_slide.tween_property(matchup_score, "global_position:y", start_y, roll_value_slide_duration)
+	tween_slide.finished.connect(go_to_next_step_generic)
 
 func go_to_next_step_generic():
 	calc_complete.emit()
@@ -442,18 +480,25 @@ func handle_point_tally_anim(points_scored_value: int, bonus_modifier: String = 
 	points_bonus_label.text = bonus_modifier + ("+" if points_scored_value >= 0 else "") + str(points_scored_value)
 	points_bonus_label.global_position = Vector2(points_value.global_position.x, points_value.global_position.y + 75)
 	points_bonus_label.add_theme_font_size_override("font_size", 50)
+	points_bonus_label.custom_minimum_size = Vector2(100, 0)
 	points_bonus_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	var add_points_bonus_tween = create_tween()
-	add_points_bonus_tween.tween_property(points_bonus_label, "global_position:y", points_value.global_position.y, 0.25).set_delay(0.5)
+	add_points_bonus_tween.set_trans(Tween.TRANS_SINE)
+	add_points_bonus_tween.set_ease(Tween.EASE_IN_OUT)
+	add_points_bonus_tween.tween_property(points_bonus_label, "global_position:y", points_value.global_position.y, bonus_label_slide_duration).set_delay(bonus_label_delay)
 	var on_combine_finished = func on_combine_finished():
 		var tween = create_tween()
-		tween.tween_property(points_value, "theme_override_font_sizes/font_size", 50, 0.25)
+		tween.set_trans(Tween.TRANS_SINE)
+		tween.set_ease(Tween.EASE_IN_OUT)
+		tween.tween_property(points_value, "theme_override_font_sizes/font_size", 50, stat_value_grow_duration)
 		calc_complete.emit()
 	var combine_fn = func combine_with_total_points():
 		var tween = create_tween()
+		tween.set_trans(Tween.TRANS_SINE)
+		tween.set_ease(Tween.EASE_IN_OUT)
 		points_bonus_label.queue_free()
 		points_value.text = str(max(0, int(points_value.text) + points_scored_value))
-		tween.tween_property(points_value, "theme_override_font_sizes/font_size", 60, 0.25)
+		tween.tween_property(points_value, "theme_override_font_sizes/font_size", 60, stat_value_grow_duration)
 		tween.finished.connect(on_combine_finished)
 	add_points_bonus_tween.finished.connect(combine_fn)
 	
@@ -465,7 +510,9 @@ func tally_points():
 		calc_complete.emit()
 	else:
 		var hl_points_scored = create_tween()
-		hl_points_scored.tween_property(points_scored.label, "theme_override_font_sizes/font_size", 25, 0.25)
+		hl_points_scored.set_trans(Tween.TRANS_SINE)
+		hl_points_scored.set_ease(Tween.EASE_IN_OUT)
+		hl_points_scored.tween_property(points_scored.label, "theme_override_font_sizes/font_size", 25, stat_highlight_duration)
 		handle_point_tally_anim(points_value)
 
 func tally_strat_bonus_points():
@@ -481,18 +528,25 @@ func handle_assist_tally_anim(assist_value: int, bonus_modifier: String = ""):
 	assists_bonus_label.text = bonus_modifier + ("+" if assist_value >= 0 else "") + str(assist_value)
 	assists_bonus_label.global_position = Vector2(assists_value.global_position.x, assists_value.global_position.y + 75)
 	assists_bonus_label.add_theme_font_size_override("font_size", 50)
+	assists_bonus_label.custom_minimum_size = Vector2(100, 0)
 	assists_bonus_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	var add_assists_bonus_tween = create_tween()
-	add_assists_bonus_tween.tween_property(assists_bonus_label, "global_position:y", assists_value.global_position.y, 0.25).set_delay(0.5)
+	add_assists_bonus_tween.set_trans(Tween.TRANS_SINE)
+	add_assists_bonus_tween.set_ease(Tween.EASE_IN_OUT)
+	add_assists_bonus_tween.tween_property(assists_bonus_label, "global_position:y", assists_value.global_position.y, bonus_label_slide_duration).set_delay(bonus_label_delay)
 	var on_combine_finished = func on_combine_finished():
 		var tween = create_tween()
-		tween.tween_property(assists_value, "theme_override_font_sizes/font_size", 50, 0.25)
+		tween.set_trans(Tween.TRANS_SINE)
+		tween.set_ease(Tween.EASE_IN_OUT)
+		tween.tween_property(assists_value, "theme_override_font_sizes/font_size", 50, stat_value_grow_duration)
 		calc_complete.emit()
 	var combine_fn = func combine_with_total_points():
 		var tween = create_tween()
+		tween.set_trans(Tween.TRANS_SINE)
+		tween.set_ease(Tween.EASE_IN_OUT)
 		assists_bonus_label.queue_free()
 		assists_value.text = str(max(0, int(assists_value.text) + assist_value))
-		tween.tween_property(assists_value, "theme_override_font_sizes/font_size", 60, 0.25)
+		tween.tween_property(assists_value, "theme_override_font_sizes/font_size", 60, stat_value_grow_duration)
 		tween.finished.connect(on_combine_finished)
 	add_assists_bonus_tween.finished.connect(combine_fn)
 
@@ -504,7 +558,9 @@ func tally_assists():
 		calc_complete.emit()
 	else:
 		var hl_assists_scored = create_tween()
-		hl_assists_scored.tween_property(assists_made.label, "theme_override_font_sizes/font_size", 25, 0.25)
+		hl_assists_scored.set_trans(Tween.TRANS_SINE)
+		hl_assists_scored.set_ease(Tween.EASE_IN_OUT)
+		hl_assists_scored.tween_property(assists_made.label, "theme_override_font_sizes/font_size", 25, stat_highlight_duration)
 		handle_assist_tally_anim(ast_value)
 
 func tally_strat_bonus_assists():
@@ -521,7 +577,9 @@ func tally_rebounds():
 		calc_complete.emit()
 	else:
 		var hl_rebounds_grabbed = create_tween()
-		hl_rebounds_grabbed.tween_property(rebounds_grabbed.label, "theme_override_font_sizes/font_size", 25, 0.25)
+		hl_rebounds_grabbed.set_trans(Tween.TRANS_SINE)
+		hl_rebounds_grabbed.set_ease(Tween.EASE_IN_OUT)
+		hl_rebounds_grabbed.tween_property(rebounds_grabbed.label, "theme_override_font_sizes/font_size", 25, stat_highlight_duration)
 		handle_rebound_tally_anim(reb_value)
 
 func tally_strat_bonus_rebounds():
@@ -538,18 +596,25 @@ func handle_rebound_tally_anim(num_rebounds: int):
 	rebounds_bonus_label.text = prefix + str(num_rebounds)
 	rebounds_bonus_label.global_position = Vector2(rebounds_value.global_position.x, rebounds_value.global_position.y + 75)
 	rebounds_bonus_label.add_theme_font_size_override("font_size", 50)
+	rebounds_bonus_label.custom_minimum_size = Vector2(100, 0)
 	rebounds_bonus_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	var add_rebounds_bonus_tween = create_tween()
-	add_rebounds_bonus_tween.tween_property(rebounds_bonus_label, "global_position:y", rebounds_value.global_position.y, 0.25).set_delay(0.5)
+	add_rebounds_bonus_tween.set_trans(Tween.TRANS_SINE)
+	add_rebounds_bonus_tween.set_ease(Tween.EASE_IN_OUT)
+	add_rebounds_bonus_tween.tween_property(rebounds_bonus_label, "global_position:y", rebounds_value.global_position.y, bonus_label_slide_duration).set_delay(bonus_label_delay)
 	var on_combine_finished = func on_combine_finished():
 		var tween = create_tween()
-		tween.tween_property(rebounds_value, "theme_override_font_sizes/font_size", 50, 0.25)
+		tween.set_trans(Tween.TRANS_SINE)
+		tween.set_ease(Tween.EASE_IN_OUT)
+		tween.tween_property(rebounds_value, "theme_override_font_sizes/font_size", 50, stat_value_grow_duration)
 		calc_complete.emit()
 	var combine_fn = func combine_with_total_points():
 		var tween = create_tween()
+		tween.set_trans(Tween.TRANS_SINE)
+		tween.set_ease(Tween.EASE_IN_OUT)
 		rebounds_bonus_label.queue_free()
 		rebounds_value.text = str(max(0, int(rebounds_value.text) + num_rebounds))
-		tween.tween_property(rebounds_value, "theme_override_font_sizes/font_size", 60, 0.25)
+		tween.tween_property(rebounds_value, "theme_override_font_sizes/font_size", 60, stat_value_grow_duration)
 		tween.finished.connect(on_combine_finished)
 	add_rebounds_bonus_tween.finished.connect(combine_fn)
 
@@ -560,17 +625,14 @@ func reset_roll_table_rows():
 	var assists_value_row = roll_table_row["assists_label"] as TableValue
 	var points_value_row = roll_table_row["points_label"] as TableValue
 	var tween = create_tween()
-	tween.tween_property(roll_range_label.label, "theme_override_font_sizes/font_size", 15, 0.25)
-	tween.parallel().tween_property(rebounds_value_row.label, "theme_override_font_sizes/font_size", 15, 0.25)
-	tween.parallel().tween_property(assists_value_row.label, "theme_override_font_sizes/font_size", 15, 0.25)
-	tween.parallel().tween_property(points_value_row.label, "theme_override_font_sizes/font_size", 15, 0.25)
-	var on_continue_button = Button.new()
-	on_continue_button.text = "Continue"
-	add_child(on_continue_button)
-	on_continue_button.add_theme_font_size_override("font_size", 20)
-	on_continue_button.global_position.y = matchup_score.points_value.global_position.y + 90
-	on_continue_button.global_position.x = matchup_score.assists_value.global_position.x
-	on_continue_button.pressed.connect(on_matchup_completed)
+	tween.set_trans(Tween.TRANS_SINE)
+	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(roll_range_label.label, "theme_override_font_sizes/font_size", 15, stat_value_shrink_duration)
+	tween.parallel().tween_property(rebounds_value_row.label, "theme_override_font_sizes/font_size", 15, stat_value_shrink_duration)
+	tween.parallel().tween_property(assists_value_row.label, "theme_override_font_sizes/font_size", 15, stat_value_shrink_duration)
+	tween.parallel().tween_property(points_value_row.label, "theme_override_font_sizes/font_size", 15, stat_value_shrink_duration)
+	continue_button.global_position.y = matchup_score.points_value.global_position.y + 90
+	continue_button.show()
 
 func on_matchup_completed():
 	var all_stats = matchup_score.get_all_stats()

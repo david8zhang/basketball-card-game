@@ -114,19 +114,19 @@ func cpu_select_card_to_score_with():
 
 	var on_hold_finished = func():
 		var zoom_out_card = create_tween()
-		zoom_out_card.tween_property(selected_cpu_bp_card, "scale", Vector2(1, 1), 0.25)
+		zoom_out_card.tween_property(selected_cpu_bp_card, "scale", Vector2(1, 1), 0.15)
 		zoom_out_card.finished.connect(on_zoom_out_finished)
 
 	var on_zoomed = func():
 		var zoom_hold_timer = Timer.new()
-		zoom_hold_timer.wait_time = 1.0
+		zoom_hold_timer.wait_time = 0.4
 		zoom_hold_timer.autostart = true
 		zoom_hold_timer.one_shot = true
 		zoom_hold_timer.timeout.connect(on_hold_finished)
 		add_child(zoom_hold_timer)
 
 	var zoom_in_card = create_tween()
-	zoom_in_card.tween_property(selected_cpu_bp_card, "scale", Vector2(1.05, 1.05), 0.25)
+	zoom_in_card.tween_property(selected_cpu_bp_card, "scale", Vector2(1.05, 1.05), 0.15)
 	zoom_in_card.finished.connect(on_zoomed)
 
 static func get_points_from_rebounds(reb: int):

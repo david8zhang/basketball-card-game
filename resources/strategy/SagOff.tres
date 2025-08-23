@@ -1,0 +1,69 @@
+[gd_resource type="Resource" script_class="StrategyCardConfig" load_steps=16 format=3 uid="uid://bv4oqgc0a74uu"]
+
+[ext_resource type="Script" uid="uid://cdj30lies16yq" path="res://scripts/strategy/StrategyCardConfig.gd" id="1_00j3s"]
+[ext_resource type="Script" uid="uid://8h7wbli6l8ea" path="res://scripts/strategy/bonus/NoopBonus.gd" id="1_j3owe"]
+[ext_resource type="Script" uid="uid://bq22hlebjq8xg" path="res://scripts/strategy/StrategyCardNode.gd" id="2_xro0s"]
+[ext_resource type="Script" uid="uid://ckyo36itiyt30" path="res://scripts/strategy/action/RollDiceAction.gd" id="3_s5wa1"]
+[ext_resource type="Script" uid="uid://dvl8hl7mfdxi2" path="res://scripts/strategy/bonus/BoxScoreBonus.gd" id="4_h1fwx"]
+[ext_resource type="Script" uid="uid://d3q2e7wk15stm" path="res://scripts/strategy/condition/ShotCheckCondition.gd" id="5_xvvl1"]
+[ext_resource type="Script" uid="uid://dfdnia3mppqsu" path="res://scripts/strategy/StrategyCardSequenceNode.gd" id="6_a12fq"]
+[ext_resource type="Script" path="res://scripts/strategy/condition/ThreePointBonusCondition.gd" id="7_si3xw"]
+
+[sub_resource type="Resource" id="Resource_3ui8x"]
+script = ExtResource("1_j3owe")
+show_failure = true
+bonus_type = 7
+metadata/_custom_type_script = "uid://8h7wbli6l8ea"
+
+[sub_resource type="Resource" id="Resource_0j5g0"]
+script = ExtResource("3_s5wa1")
+dice_type = 20
+rigged_dice_value = -1
+static_bonus = 0
+add_three_point_bonus = false
+action_type = 2
+metadata/_custom_type_script = "uid://ckyo36itiyt30"
+
+[sub_resource type="Resource" id="Resource_21lth"]
+script = ExtResource("4_h1fwx")
+bonus_amt = -2
+bonus_stat_type = 0
+target_side = 0
+bonus_type = 2
+metadata/_custom_type_script = "uid://dvl8hl7mfdxi2"
+
+[sub_resource type="Resource" id="Resource_qwdl5"]
+script = ExtResource("1_j3owe")
+show_failure = true
+bonus_type = 7
+metadata/_custom_type_script = "uid://8h7wbli6l8ea"
+
+[sub_resource type="Resource" id="Resource_k5v0f"]
+script = ExtResource("5_xvvl1")
+side_to_check = 0
+condition_type = 3
+pass_child = SubResource("Resource_qwdl5")
+fail_child = SubResource("Resource_21lth")
+metadata/_custom_type_script = "uid://d3q2e7wk15stm"
+
+[sub_resource type="Resource" id="Resource_p78jp"]
+script = ExtResource("6_a12fq")
+children = Array[ExtResource("2_xro0s")]([SubResource("Resource_0j5g0"), SubResource("Resource_k5v0f")])
+metadata/_custom_type_script = "uid://dfdnia3mppqsu"
+
+[sub_resource type="Resource" id="Resource_nbn8n"]
+script = ExtResource("7_si3xw")
+player_to_check = 0
+has_bonus = false
+condition_type = 6
+pass_child = SubResource("Resource_p78jp")
+fail_child = SubResource("Resource_3ui8x")
+metadata/_custom_type_script = "uid://bq22hlebjq8xg"
+
+[resource]
+script = ExtResource("1_00j3s")
+strategy_type = 1
+card_name = "Sag Off"
+card_description = "If the player on offense has no 3 point bonus, they make a shot check. If it fails, they lose 2 points from their scoring roll"
+root_node = SubResource("Resource_nbn8n")
+metadata/_custom_type_script = "uid://cdj30lies16yq"

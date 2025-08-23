@@ -1,0 +1,102 @@
+[gd_resource type="Resource" script_class="StrategyCardConfig" load_steps=20 format=3 uid="uid://mpacfqyuq5m3"]
+
+[ext_resource type="Script" uid="uid://cdj30lies16yq" path="res://scripts/strategy/StrategyCardConfig.gd" id="1_f034d"]
+[ext_resource type="Script" uid="uid://bq22hlebjq8xg" path="res://scripts/strategy/StrategyCardNode.gd" id="1_kssto"]
+[ext_resource type="Script" uid="uid://ckyo36itiyt30" path="res://scripts/strategy/action/RollDiceAction.gd" id="2_ulunr"]
+[ext_resource type="Script" uid="uid://dfdnia3mppqsu" path="res://scripts/strategy/StrategyCardSequenceNode.gd" id="3_sagfr"]
+[ext_resource type="Script" uid="uid://8h7wbli6l8ea" path="res://scripts/strategy/bonus/NoopBonus.gd" id="3_ulunr"]
+[ext_resource type="Script" uid="uid://dvl8hl7mfdxi2" path="res://scripts/strategy/bonus/BoxScoreBonus.gd" id="4_mrgps"]
+[ext_resource type="Script" uid="uid://d3q2e7wk15stm" path="res://scripts/strategy/condition/ShotCheckCondition.gd" id="5_hpv1p"]
+
+[sub_resource type="Resource" id="Resource_6dy1a"]
+script = ExtResource("2_ulunr")
+dice_type = 20
+rigged_dice_value = -1
+static_bonus = 0
+add_three_point_bonus = false
+action_type = 2
+metadata/_custom_type_script = "uid://ckyo36itiyt30"
+
+[sub_resource type="Resource" id="Resource_ulunr"]
+script = ExtResource("3_ulunr")
+show_failure = true
+bonus_type = 7
+metadata/_custom_type_script = "uid://8h7wbli6l8ea"
+
+[sub_resource type="Resource" id="Resource_vkemg"]
+script = ExtResource("2_ulunr")
+dice_type = 20
+rigged_dice_value = -1
+static_bonus = 5
+add_three_point_bonus = true
+action_type = 2
+metadata/_custom_type_script = "uid://ckyo36itiyt30"
+
+[sub_resource type="Resource" id="Resource_sagfr"]
+script = ExtResource("3_ulunr")
+show_failure = false
+bonus_type = 7
+metadata/_custom_type_script = "uid://8h7wbli6l8ea"
+
+[sub_resource type="Resource" id="Resource_mrgps"]
+script = ExtResource("4_mrgps")
+bonus_amt = 2
+bonus_stat_type = 0
+target_side = 1
+bonus_type = 2
+metadata/_custom_type_script = "uid://dvl8hl7mfdxi2"
+
+[sub_resource type="Resource" id="Resource_iry4n"]
+script = ExtResource("4_mrgps")
+bonus_amt = 1
+bonus_stat_type = 1
+target_side = 1
+bonus_type = 2
+metadata/_custom_type_script = "uid://dvl8hl7mfdxi2"
+
+[sub_resource type="Resource" id="Resource_82xug"]
+script = ExtResource("3_sagfr")
+children = Array[ExtResource("1_kssto")]([SubResource("Resource_mrgps"), SubResource("Resource_iry4n")])
+metadata/_custom_type_script = "uid://dfdnia3mppqsu"
+
+[sub_resource type="Resource" id="Resource_hpv1p"]
+script = ExtResource("5_hpv1p")
+side_to_check = 1
+condition_type = 3
+pass_child = SubResource("Resource_82xug")
+fail_child = SubResource("Resource_sagfr")
+metadata/_custom_type_script = "uid://d3q2e7wk15stm"
+
+[sub_resource type="Resource" id="Resource_x4ekj"]
+script = ExtResource("3_sagfr")
+children = Array[ExtResource("1_kssto")]([SubResource("Resource_ulunr"), SubResource("Resource_vkemg"), SubResource("Resource_hpv1p")])
+metadata/_custom_type_script = "uid://dfdnia3mppqsu"
+
+[sub_resource type="Resource" id="Resource_y6qqh"]
+script = ExtResource("4_mrgps")
+bonus_amt = 2
+bonus_stat_type = 0
+target_side = 0
+bonus_type = 2
+metadata/_custom_type_script = "uid://dvl8hl7mfdxi2"
+
+[sub_resource type="Resource" id="Resource_ttx8t"]
+script = ExtResource("5_hpv1p")
+side_to_check = 0
+condition_type = 3
+pass_child = SubResource("Resource_y6qqh")
+fail_child = SubResource("Resource_x4ekj")
+metadata/_custom_type_script = "uid://d3q2e7wk15stm"
+
+[sub_resource type="Resource" id="Resource_kgvpt"]
+script = ExtResource("3_sagfr")
+children = Array[ExtResource("1_kssto")]([SubResource("Resource_6dy1a"), SubResource("Resource_ttx8t")])
+metadata/_custom_type_script = "uid://dfdnia3mppqsu"
+
+[resource]
+script = ExtResource("1_f034d")
+strategy_type = 1
+card_name = "Raising The Bar"
+card_description = "The opposing player makes a shot check at +0. If he succeeds, he scores 2 points. If he misses, this player makes a shot check at +5. If he succeeds, he scores 2 points and gets 1 rebound."
+root_node = SubResource("Resource_kgvpt")
+metadata/_custom_type_script = "uid://cdj30lies16yq"

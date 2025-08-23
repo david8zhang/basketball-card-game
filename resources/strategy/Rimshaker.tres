@@ -1,0 +1,71 @@
+[gd_resource type="Resource" script_class="StrategyCardConfig" load_steps=16 format=3 uid="uid://bnff2i1ow7s1e"]
+
+[ext_resource type="Script" uid="uid://cdj30lies16yq" path="res://scripts/strategy/StrategyCardConfig.gd" id="1_n4ans"]
+[ext_resource type="Script" uid="uid://8h7wbli6l8ea" path="res://scripts/strategy/bonus/NoopBonus.gd" id="1_v4voe"]
+[ext_resource type="Script" uid="uid://bq22hlebjq8xg" path="res://scripts/strategy/StrategyCardNode.gd" id="2_6r1n7"]
+[ext_resource type="Script" uid="uid://dvl8hl7mfdxi2" path="res://scripts/strategy/bonus/BoxScoreBonus.gd" id="3_wrhq7"]
+[ext_resource type="Script" uid="uid://valpsh4ib3un" path="res://scripts/strategy/bonus/MarkerBonus.gd" id="4_naufw"]
+[ext_resource type="Script" uid="uid://dfdnia3mppqsu" path="res://scripts/strategy/StrategyCardSequenceNode.gd" id="5_uty0g"]
+[ext_resource type="Script" path="res://scripts/strategy/condition/MarkerCheckCondition.gd" id="6_cble6"]
+[ext_resource type="Script" uid="uid://dovpx0ehhvsr1" path="res://scripts/strategy/condition/StatCheckCondition.gd" id="7_x5bkl"]
+
+[sub_resource type="Resource" id="Resource_675yn"]
+script = ExtResource("1_v4voe")
+show_failure = true
+bonus_type = 7
+metadata/_custom_type_script = "uid://8h7wbli6l8ea"
+
+[sub_resource type="Resource" id="Resource_pwbrx"]
+script = ExtResource("1_v4voe")
+show_failure = true
+bonus_type = 7
+metadata/_custom_type_script = "uid://8h7wbli6l8ea"
+
+[sub_resource type="Resource" id="Resource_gp78p"]
+script = ExtResource("3_wrhq7")
+bonus_amt = 2
+bonus_stat_type = 0
+target_side = 0
+bonus_type = 2
+metadata/_custom_type_script = "uid://dvl8hl7mfdxi2"
+
+[sub_resource type="Resource" id="Resource_4iesx"]
+script = ExtResource("4_naufw")
+marker_type = 0
+num_markers = 1
+bonus_type = 3
+metadata/_custom_type_script = "uid://valpsh4ib3un"
+
+[sub_resource type="Resource" id="Resource_xnfbi"]
+script = ExtResource("5_uty0g")
+children = Array[ExtResource("2_6r1n7")]([SubResource("Resource_gp78p"), SubResource("Resource_4iesx")])
+metadata/_custom_type_script = "uid://dfdnia3mppqsu"
+
+[sub_resource type="Resource" id="Resource_tdrll"]
+script = ExtResource("6_cble6")
+marker_type = 1
+player_to_check = 0
+min_marker_count = 1
+condition_type = 5
+pass_child = SubResource("Resource_xnfbi")
+fail_child = SubResource("Resource_pwbrx")
+metadata/_custom_type_script = "uid://cmsnd2laww2jd"
+
+[sub_resource type="Resource" id="Resource_xmfl1"]
+script = ExtResource("7_x5bkl")
+stat_to_check = 0
+comparator_type = 4
+threshold = 14
+player_to_check = 0
+condition_type = 1
+pass_child = SubResource("Resource_tdrll")
+fail_child = SubResource("Resource_675yn")
+metadata/_custom_type_script = "uid://dovpx0ehhvsr1"
+
+[resource]
+script = ExtResource("1_n4ans")
+strategy_type = 0
+card_name = "Rimshaker"
+card_description = "If this player has 14 or more offense and has any hot markers, he scores two points and gets another hot marker."
+root_node = SubResource("Resource_xmfl1")
+metadata/_custom_type_script = "uid://cdj30lies16yq"

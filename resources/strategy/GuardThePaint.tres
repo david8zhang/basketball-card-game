@@ -1,0 +1,112 @@
+[gd_resource type="Resource" script_class="StrategyCardConfig" load_steps=21 format=3 uid="uid://bwj7jrvs14b1d"]
+
+[ext_resource type="Script" uid="uid://bq22hlebjq8xg" path="res://scripts/strategy/StrategyCardNode.gd" id="1_6v1hv"]
+[ext_resource type="Script" uid="uid://cdj30lies16yq" path="res://scripts/strategy/StrategyCardConfig.gd" id="1_i3l2l"]
+[ext_resource type="Script" uid="uid://vcwodimwrbri" path="res://scripts/strategy/bonus/StatBonus.gd" id="2_vo76p"]
+[ext_resource type="Script" uid="uid://dfdnia3mppqsu" path="res://scripts/strategy/StrategyCardSequenceNode.gd" id="3_lo2yu"]
+[ext_resource type="Script" uid="uid://ckyo36itiyt30" path="res://scripts/strategy/action/RollDiceAction.gd" id="3_vo76p"]
+[ext_resource type="Script" uid="uid://8h7wbli6l8ea" path="res://scripts/strategy/bonus/NoopBonus.gd" id="4_mdnaa"]
+[ext_resource type="Script" uid="uid://dvl8hl7mfdxi2" path="res://scripts/strategy/bonus/BoxScoreBonus.gd" id="5_t3mnc"]
+[ext_resource type="Script" uid="uid://d3q2e7wk15stm" path="res://scripts/strategy/condition/ShotCheckCondition.gd" id="6_1nopp"]
+
+[sub_resource type="Resource" id="Resource_xr4th"]
+script = ExtResource("2_vo76p")
+off_bonus_amount = 0
+def_bonus_amount = 8
+bonus_type = 0
+metadata/_custom_type_script = "uid://vcwodimwrbri"
+
+[sub_resource type="Resource" id="Resource_vo76p"]
+script = ExtResource("3_vo76p")
+dice_type = 20
+rigged_dice_value = -1
+static_bonus = 10
+add_three_point_bonus = false
+action_type = 2
+metadata/_custom_type_script = "uid://ckyo36itiyt30"
+
+[sub_resource type="Resource" id="Resource_gsbkw"]
+script = ExtResource("4_mdnaa")
+show_failure = true
+bonus_type = 7
+metadata/_custom_type_script = "uid://8h7wbli6l8ea"
+
+[sub_resource type="Resource" id="Resource_t3mnc"]
+script = ExtResource("5_t3mnc")
+bonus_amt = 1
+bonus_stat_type = 0
+target_side = 0
+bonus_type = 2
+metadata/_custom_type_script = "uid://dvl8hl7mfdxi2"
+
+[sub_resource type="Resource" id="Resource_1nopp"]
+script = ExtResource("6_1nopp")
+side_to_check = 0
+condition_type = 3
+pass_child = SubResource("Resource_t3mnc")
+fail_child = SubResource("Resource_gsbkw")
+metadata/_custom_type_script = "uid://d3q2e7wk15stm"
+
+[sub_resource type="Resource" id="Resource_n1xst"]
+script = ExtResource("3_vo76p")
+dice_type = 20
+rigged_dice_value = -1
+static_bonus = 10
+add_three_point_bonus = false
+action_type = 2
+metadata/_custom_type_script = "uid://ckyo36itiyt30"
+
+[sub_resource type="Resource" id="Resource_r0o5l"]
+script = ExtResource("6_1nopp")
+side_to_check = 0
+condition_type = 3
+pass_child = SubResource("Resource_t3mnc")
+fail_child = SubResource("Resource_gsbkw")
+metadata/_custom_type_script = "uid://d3q2e7wk15stm"
+
+[sub_resource type="Resource" id="Resource_60gok"]
+script = ExtResource("3_vo76p")
+dice_type = 20
+rigged_dice_value = -1
+static_bonus = 10
+add_three_point_bonus = false
+action_type = 2
+metadata/_custom_type_script = "uid://ckyo36itiyt30"
+
+[sub_resource type="Resource" id="Resource_66323"]
+script = ExtResource("6_1nopp")
+side_to_check = 0
+condition_type = 3
+pass_child = SubResource("Resource_t3mnc")
+fail_child = SubResource("Resource_gsbkw")
+metadata/_custom_type_script = "uid://d3q2e7wk15stm"
+
+[sub_resource type="Resource" id="Resource_hcptv"]
+script = ExtResource("3_vo76p")
+dice_type = 20
+rigged_dice_value = -1
+static_bonus = 10
+add_three_point_bonus = false
+action_type = 2
+metadata/_custom_type_script = "uid://ckyo36itiyt30"
+
+[sub_resource type="Resource" id="Resource_4ab5u"]
+script = ExtResource("6_1nopp")
+side_to_check = 0
+condition_type = 3
+pass_child = SubResource("Resource_t3mnc")
+fail_child = SubResource("Resource_gsbkw")
+metadata/_custom_type_script = "uid://d3q2e7wk15stm"
+
+[sub_resource type="Resource" id="Resource_mdnaa"]
+script = ExtResource("3_lo2yu")
+children = Array[ExtResource("1_6v1hv")]([SubResource("Resource_xr4th"), SubResource("Resource_vo76p"), SubResource("Resource_1nopp"), SubResource("Resource_n1xst"), SubResource("Resource_r0o5l"), SubResource("Resource_60gok"), SubResource("Resource_66323"), SubResource("Resource_hcptv"), SubResource("Resource_4ab5u")])
+metadata/_custom_type_script = "uid://dfdnia3mppqsu"
+
+[resource]
+script = ExtResource("1_i3l2l")
+strategy_type = 1
+card_name = "Guard the Paint"
+card_description = "This player gets +8 defense. The opposing player takes 4 foul shots."
+root_node = SubResource("Resource_mdnaa")
+metadata/_custom_type_script = "uid://cdj30lies16yq"

@@ -51,7 +51,7 @@ metadata/_custom_type_script = "uid://c3xho6niytkse"
 
 [resource]
 script = ExtResource("2_skbbq")
-offense = 18
+offense = 17
 defense = 9
 positions = Array[int]([0])
 first_name = "Stephen"

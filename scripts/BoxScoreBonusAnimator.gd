@@ -26,7 +26,7 @@ func animate_box_score_bonus(box_score_bonus: BoxScoreBonus, is_cpu: bool):
   var zoom_tween = create_tween()
   zoom_tween.set_trans(Tween.TRANS_SINE)
   zoom_tween.set_ease(Tween.EASE_IN_OUT)
-  zoom_tween.tween_property(label, "theme_override_font_sizes/font_size", 35, 0.5)
+  zoom_tween.tween_property(label, "theme_override_font_sizes/font_size", 35, 0.25)
 
   var screen_size = get_viewport_rect().size
   var bottom_right = Vector2(screen_size.x + 50, screen_size.y + 50)
@@ -48,7 +48,7 @@ func animate_box_score_bonus(box_score_bonus: BoxScoreBonus, is_cpu: bool):
     var tween = create_tween()
     tween.set_trans(Tween.TRANS_SINE)
     tween.set_ease(Tween.EASE_IN_OUT)		
-    tween.tween_property(label, "theme_override_font_sizes/font_size", 20, 0.5).set_delay(0.5)
+    tween.tween_property(label, "theme_override_font_sizes/font_size", 20, 0.25).set_delay(0.25)
     tween.finished.connect(pan_to_corner)
 
   zoom_tween.finished.connect(zoom_complete)
