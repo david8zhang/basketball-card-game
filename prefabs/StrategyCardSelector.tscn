@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ujdwrbx0pr12"]
+[gd_scene load_steps=8 format=3 uid="uid://ujdwrbx0pr12"]
 
 [ext_resource type="PackedScene" uid="uid://bi2ksw8anhd4v" path="res://prefabs/StrategyCard.tscn" id="1_03tvw"]
 [ext_resource type="Script" uid="uid://c0310shfanmh7" path="res://scripts/StrategyCardSelector.gd" id="1_xpjc8"]
@@ -6,8 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://dwpw7m7anqr3m" path="res://prefabs/DiceRoll.tscn" id="3_lx3xh"]
 [ext_resource type="PackedScene" uid="uid://bd3rgepkydr13" path="res://prefabs/StrategyBonuses.tscn" id="4_eeguo"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lwqyn"]
+bg_color = Color(0, 0, 0, 0.470588)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8slut"]
-bg_color = Color(0.552941, 0.552941, 0.552941, 1)
+bg_color = Color(0, 0, 0, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -17,79 +20,68 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tiik3"]
-bg_color = Color(0, 0, 0, 0.862745)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wc44o"]
-bg_color = Color(0, 0, 0, 0.862745)
-
 [node name="StrategyCardSelector" type="Panel"]
 custom_minimum_size = Vector2(900, 550)
-anchors_preset = -1
-anchor_left = 0.167
-anchor_top = 0.194
-anchor_right = 0.833
-anchor_bottom = 0.806
-offset_left = -0.450012
-offset_top = 0.399994
-offset_right = 0.449951
-offset_bottom = -0.400024
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_8slut")
+theme_override_styles/panel = SubResource("StyleBoxFlat_lwqyn")
 script = ExtResource("1_xpjc8")
 strategy_card_scene = ExtResource("1_03tvw")
 strategy_card_processor_scene = ExtResource("3_kixw2")
 dice_roll_scene = ExtResource("3_lx3xh")
 strategy_bonuses_scene = ExtResource("4_eeguo")
 
-[node name="CloseButton" type="Button" parent="."]
-custom_minimum_size = Vector2(1350, 900)
+[node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -450.0
+offset_top = -275.0
+offset_right = 450.0
+offset_bottom = 275.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/hover = SubResource("StyleBoxFlat_tiik3")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_tiik3")
-theme_override_styles/normal = SubResource("StyleBoxFlat_wc44o")
+theme_override_styles/panel = SubResource("StyleBoxFlat_8slut")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 37.0
-offset_bottom = 13.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="CloseButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Close"
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 30
 text = "Strategy Cards"
 horizontal_alignment = 1
 
-[node name="Control" type="Control" parent="MarginContainer/VBoxContainer"]
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 350)
 layout_mode = 2
 vertical_scroll_mode = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer"]
 custom_minimum_size = Vector2(2.08165e-12, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 4

@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="StrategyCardConfig" load_steps=8 format=3 uid="uid://cqhhvy3a6mjv8"]
+
+[ext_resource type="Script" uid="uid://8h7wbli6l8ea" path="res://scripts/strategy/bonus/NoopBonus.gd" id="1_8smnq"]
+[ext_resource type="Script" uid="uid://cdj30lies16yq" path="res://scripts/strategy/StrategyCardConfig.gd" id="1_jy1gk"]
+[ext_resource type="Script" uid="uid://ddnjcjhym57bv" path="res://scripts/strategy/condition/StatCompCondition.gd" id="1_npbm6"]
+[ext_resource type="Script" uid="uid://dvl8hl7mfdxi2" path="res://scripts/strategy/bonus/BoxScoreBonus.gd" id="2_hdir3"]
+
+[sub_resource type="Resource" id="Resource_kdtf0"]
+script = ExtResource("1_8smnq")
+show_failure = true
+bonus_type = 7
+metadata/_custom_type_script = "uid://8h7wbli6l8ea"
+
+[sub_resource type="Resource" id="Resource_mxxsn"]
+script = ExtResource("2_hdir3")
+bonus_amt = 2
+bonus_stat_type = 0
+target_side = 0
+bonus_type = 2
+metadata/_custom_type_script = "uid://dvl8hl7mfdxi2"
+
+[sub_resource type="Resource" id="Resource_rls53"]
+script = ExtResource("1_npbm6")
+off_stat_to_comp = 0
+def_stat_to_comp = 1
+comp_type = 0
+threshold = 4
+condition_type = 2
+pass_child = SubResource("Resource_mxxsn")
+fail_child = SubResource("Resource_kdtf0")
+metadata/_custom_type_script = "uid://ddnjcjhym57bv"
+
+[resource]
+script = ExtResource("1_jy1gk")
+strategy_type = 0
+card_name = "Slam Dunk"
+card_description = "If this player has at least 4 more offense than the opposing player has defense, score 2 points"
+root_node = SubResource("Resource_rls53")
+metadata/_custom_type_script = "uid://cdj30lies16yq"

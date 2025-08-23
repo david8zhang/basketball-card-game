@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="StrategyCardConfig" load_steps=8 format=3 uid="uid://c521ma03qhrm0"]
+
+[ext_resource type="Script" uid="uid://dvl8hl7mfdxi2" path="res://scripts/strategy/bonus/BoxScoreBonus.gd" id="1_jkiwb"]
+[ext_resource type="Script" uid="uid://dovpx0ehhvsr1" path="res://scripts/strategy/condition/StatCheckCondition.gd" id="1_kb34k"]
+[ext_resource type="Script" uid="uid://cdj30lies16yq" path="res://scripts/strategy/StrategyCardConfig.gd" id="1_t4ky3"]
+[ext_resource type="Script" uid="uid://8h7wbli6l8ea" path="res://scripts/strategy/bonus/NoopBonus.gd" id="1_vbuq1"]
+
+[sub_resource type="Resource" id="Resource_45dtp"]
+script = ExtResource("1_vbuq1")
+show_failure = true
+bonus_type = 7
+metadata/_custom_type_script = "uid://8h7wbli6l8ea"
+
+[sub_resource type="Resource" id="Resource_vbuq1"]
+script = ExtResource("1_jkiwb")
+bonus_amt = -2
+bonus_stat_type = 0
+target_side = 0
+bonus_type = 2
+metadata/_custom_type_script = "uid://dvl8hl7mfdxi2"
+
+[sub_resource type="Resource" id="Resource_jkiwb"]
+script = ExtResource("1_kb34k")
+stat_to_check = 0
+comparator_type = 4
+threshold = 14
+player_to_check = 0
+condition_type = 0
+pass_child = SubResource("Resource_vbuq1")
+fail_child = SubResource("Resource_45dtp")
+metadata/_custom_type_script = "uid://dovpx0ehhvsr1"
+
+[resource]
+script = ExtResource("1_t4ky3")
+strategy_type = 1
+card_name = "Rejected!"
+card_description = "If this player has 14 or more defense, his opponent loses 2 points on his scoring roll"
+root_node = SubResource("Resource_jkiwb")
+metadata/_custom_type_script = "uid://cdj30lies16yq"

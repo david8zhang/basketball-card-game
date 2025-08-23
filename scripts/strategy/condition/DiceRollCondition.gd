@@ -40,7 +40,8 @@ func check_condition(blackboard: Blackboard):
 	return result_type
 
 func get_roll_dice_action_result(blackboard: Blackboard):
+	var latest_dice_roll_result
 	for result in blackboard.node_results:
 		if result.node_ref.node_type == StrategyCardNode.NodeType.ACTION and result.node_ref.action_type == StrategyCardActionNode.ActionType.ROLL_DICE:
-			return result.node_ref
-		return null
+			latest_dice_roll_result = result.node_ref
+	return latest_dice_roll_result

@@ -6,9 +6,9 @@ extends Control
 @export var dice_roll_scene: PackedScene
 @export var strategy_bonuses_scene: PackedScene
 
-@onready var card_container: HBoxContainer = $MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer
-@onready var margin_container: MarginContainer = $MarginContainer
-@onready var close_button: Button = $CloseButton
+@onready var card_container: HBoxContainer = $PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer
+@onready var margin_container: MarginContainer = $PanelContainer/MarginContainer
+@onready var close_button: Button = $PanelContainer/MarginContainer/VBoxContainer/CloseButton
 @onready var game = get_node("/root/Main") as Game
 
 var strategy_bonuses: StrategyBonuses
@@ -34,7 +34,6 @@ func _ready():
 		cards_in_deck = strat_deck.get_offense_strategy_cards()
 	else:
 		cards_in_deck = strat_deck.get_defense_strategy_cards()
-		close_button.pressed.connect(on_close_selector)
 	for config_wrapper in cards_in_deck:
 		var strategy_card = strategy_card_scene.instantiate() as StrategyCard
 		strategy_card.strategy_card_config = config_wrapper.config
@@ -49,6 +48,7 @@ func _ready():
 	strategy_card_processor.def_player = def_player
 	strategy_card_processor.matchup_container = matchup_container
 	strategy_card_processor.before_apply_bonus.connect(on_finished_processing_strat)
+	close_button.pressed.connect(on_close_selector)
 
 func select_strategy_card(sc: StrategyCard):
 	strategy_card_processor.select_strategy_card(sc)

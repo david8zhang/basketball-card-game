@@ -478,7 +478,7 @@ func handle_assist_tally_anim(assist_value: int, bonus_modifier: String = ""):
 	var assists_value = matchup_score.assists_value
 	var assists_bonus_label = Label.new()
 	add_child(assists_bonus_label)
-	assists_bonus_label.text = bonus_modifier + "+" + str(assist_value)
+	assists_bonus_label.text = bonus_modifier + ("+" if assist_value >= 0 else "") + str(assist_value)
 	assists_bonus_label.global_position = Vector2(assists_value.global_position.x, assists_value.global_position.y + 75)
 	assists_bonus_label.add_theme_font_size_override("font_size", 50)
 	assists_bonus_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -491,7 +491,7 @@ func handle_assist_tally_anim(assist_value: int, bonus_modifier: String = ""):
 	var combine_fn = func combine_with_total_points():
 		var tween = create_tween()
 		assists_bonus_label.queue_free()
-		assists_value.text = str(int(assists_value.text) + assist_value)
+		assists_value.text = str(max(0, int(assists_value.text) + assist_value))
 		tween.tween_property(assists_value, "theme_override_font_sizes/font_size", 60, 0.25)
 		tween.finished.connect(on_combine_finished)
 	add_assists_bonus_tween.finished.connect(combine_fn)
