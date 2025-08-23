@@ -1,0 +1,54 @@
+[gd_resource type="Resource" script_class="StrategyCardConfig" load_steps=11 format=3 uid="uid://di7bw0xc7ywvd"]
+
+[ext_resource type="Script" uid="uid://cdj30lies16yq" path="res://scripts/strategy/StrategyCardConfig.gd" id="1_qxce3"]
+[ext_resource type="Script" uid="uid://54ugok0fgnk3" path="res://scripts/strategy/condition/QuarterCheckCondition.gd" id="2_gwrmt"]
+[ext_resource type="Script" uid="uid://8h7wbli6l8ea" path="res://scripts/strategy/bonus/NoopBonus.gd" id="2_x884g"]
+[ext_resource type="Script" uid="uid://co8frnjq86y02" path="res://scripts/strategy/bonus/RollBonus.gd" id="3_6cop3"]
+[ext_resource type="Script" uid="uid://ddnjcjhym57bv" path="res://scripts/strategy/condition/StatCompCondition.gd" id="3_x884g"]
+
+[sub_resource type="Resource" id="Resource_8c7n5"]
+script = ExtResource("2_x884g")
+show_failure = true
+bonus_type = 7
+metadata/_custom_type_script = "uid://8h7wbli6l8ea"
+
+[sub_resource type="Resource" id="Resource_yrkd7"]
+script = ExtResource("2_x884g")
+show_failure = true
+bonus_type = 7
+metadata/_custom_type_script = "uid://8h7wbli6l8ea"
+
+[sub_resource type="Resource" id="Resource_6hitt"]
+script = ExtResource("3_6cop3")
+roll_bonus_amount = 2
+roll_bonus_type = 0
+bonus_type = 1
+metadata/_custom_type_script = "uid://co8frnjq86y02"
+
+[sub_resource type="Resource" id="Resource_ge7wr"]
+script = ExtResource("2_gwrmt")
+quarter_threshold = 3
+comparator_type = 0
+condition_type = 4
+pass_child = SubResource("Resource_6hitt")
+fail_child = SubResource("Resource_yrkd7")
+metadata/_custom_type_script = "uid://54ugok0fgnk3"
+
+[sub_resource type="Resource" id="Resource_go6yv"]
+script = ExtResource("3_x884g")
+off_stat_to_comp = 0
+def_stat_to_comp = 1
+comp_type = 0
+threshold = 2
+condition_type = 2
+pass_child = SubResource("Resource_ge7wr")
+fail_child = SubResource("Resource_8c7n5")
+metadata/_custom_type_script = "uid://ddnjcjhym57bv"
+
+[resource]
+script = ExtResource("1_qxce3")
+strategy_type = 0
+card_name = "Hot Start"
+card_description = "If this player has more offense than his opponent has defense and it's still the first half, add 2 to his scoring roll"
+root_node = SubResource("Resource_go6yv")
+metadata/_custom_type_script = "uid://cdj30lies16yq"

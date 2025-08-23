@@ -29,7 +29,13 @@ func on_display_complete():
 
 func process_selected_card():
 	var config = selected_strategy_card.strategy_card_config
-	config.process(off_player, def_player)
+	
+	# Get current game state including quarter
+	var game_state = {}
+	if matchup_container != null and matchup_container.game != null:
+		game_state["current_quarter"] = matchup_container.game.quarter_number
+	
+	config.process(off_player, def_player, game_state)
 	node_results = config.blackboard.node_results as Array[StrategyCardNode.NodeResult]
 	process_curr_node_result()
 

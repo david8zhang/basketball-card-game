@@ -5,7 +5,8 @@ enum ConditionType {
 	DICE_ROLL_CHECK,
 	STAT_CHECK,
 	STAT_COMP,
-	SHOT_CHECK
+	SHOT_CHECK,
+	QUARTER_CHECK
 }
 
 @export var condition_type: ConditionType
