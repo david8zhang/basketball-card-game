@@ -6,8 +6,8 @@ extends Control
 @onready var continue_button = $Continue as Button
 @export var strategy_card_scene: PackedScene
 var selected_strategy_card
-var num_cards_to_choose_from := 5
-const MAX_CARDS_TO_PICK := 3
+var num_cards_to_choose_from := 10
+const MAX_CARDS_TO_PICK := 5
 
 func _ready() -> void:
 	for i in range(0, num_cards_to_choose_from):
