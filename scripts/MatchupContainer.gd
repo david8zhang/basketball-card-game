@@ -751,8 +751,10 @@ func apply_single_bonus(bonus, strategy_type, custom_cb):
 					custom_cb.call()
 					box_score_bonus_animator.hide()
 				box_score_bonus_animator.show()
-				if !box_score_bonus_animator.on_box_score_bonus_complete.has_connections():
-					box_score_bonus_animator.on_box_score_bonus_complete.connect(on_box_score_anim_finished)
+				if box_score_bonus_animator.on_box_score_bonus_complete.has_connections():
+					for conn in box_score_bonus_animator.get_signal_connection_list("on_box_score_bonus_complete"):
+						box_score_bonus_animator.disconnect("on_box_score_bonus_complete", conn.callable)
+				box_score_bonus_animator.on_box_score_bonus_complete.connect(on_box_score_anim_finished)
 		StrategyCardBonusNode.BonusType.NOOP:
 			custom_cb.call()
 

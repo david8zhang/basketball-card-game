@@ -19,8 +19,8 @@ func animate_box_score_bonus(box_score_bonus: BoxScoreBonus, is_cpu: bool):
       stat_name = "assist"
     BoxScoreBonus.StatType.REBOUNDS:
       stat_name = "rebound"
-  stat_name = stat_name + "s" if box_score_bonus.bonus_amt > 0 else ""
-  label.text = "+" + str(box_score_bonus.bonus_amt) + " " + stat_name
+  stat_name = stat_name + "s" if abs(box_score_bonus.bonus_amt) > 0 else stat_name
+  label.text = ("+" if box_score_bonus.bonus_amt > 0 else "") + str(box_score_bonus.bonus_amt) + " " + stat_name
   add_child(label)
 
   var zoom_tween = create_tween()

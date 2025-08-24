@@ -220,18 +220,25 @@ func process_matchup_stats(all_stats: Dictionary, side: Side, assists_used: int)
 		curr_cpu_quarter_score += all_stats["points"]
 	matchup_container.queue_free()
 
-# If defensive player uses a card that increases stats
+# If defensive player uses a card that increases or decreases stats
 func add_box_score_bonuses(side: Side, stat_type: BoxScoreBonus.StatType, value: int):
 	var score_label = player_score_label if side == Side.PLAYER else cpu_score_label
 	var assists_label = player_assists_label if side == Side.PLAYER else cpu_assists_label
 	var rebounds_label = player_rebounds_label if side == Side.PLAYER else cpu_rebounds_label
+	var defensive_player = selected_player_bp_card if side == Side.PLAYER else selected_cpu_bp_card
+	var new_statline = BoxScoreStatLine.new(defensive_player.full_name(), 0, 0, 0)
 	match stat_type:
 		BoxScoreBonus.StatType.POINTS:
+			new_statline.points = max(0, value)
 			score_label.text = str(max(0, int(player_score_label.text) + value))
 		BoxScoreBonus.StatType.REBOUNDS:
+			new_statline.rebounds = max(0, value)
 			rebounds_label.text = "R: " + str(max(0, get_rebounds(rebounds_label) + value))
 		BoxScoreBonus.StatType.ASSISTS:
+			new_statline.assists = max(0, value)
 			assists_label.text = "A: " + str(max(0, get_assists(assists_label)+ value))
+	var scorer_statline = full_player_scorer_statlines if side == Side.PLAYER else full_cpu_scorer_statlines
+	update_statlines(defensive_player.full_name(), new_statline, scorer_statline)
 
 func update_statlines(full_name: String, stat_line: BoxScoreStatLine, scorer_statline: Dictionary):
 	if scorer_statline.has(full_name):

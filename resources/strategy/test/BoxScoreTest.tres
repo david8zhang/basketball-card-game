@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="StrategyCardConfig" load_steps=9 format=3 uid="uid://dlwbmyfgx7dsv"]
+
+[ext_resource type="Script" uid="uid://bq22hlebjq8xg" path="res://scripts/strategy/StrategyCardNode.gd" id="1_2qsyy"]
+[ext_resource type="Script" uid="uid://cdj30lies16yq" path="res://scripts/strategy/StrategyCardConfig.gd" id="1_mwein"]
+[ext_resource type="Script" uid="uid://dvl8hl7mfdxi2" path="res://scripts/strategy/bonus/BoxScoreBonus.gd" id="2_px37v"]
+[ext_resource type="Script" uid="uid://dfdnia3mppqsu" path="res://scripts/strategy/StrategyCardSequenceNode.gd" id="3_2nm3t"]
+
+[sub_resource type="Resource" id="Resource_bj74w"]
+script = ExtResource("2_px37v")
+bonus_amt = 100
+bonus_stat_type = 0
+target_side = 1
+bonus_type = 2
+metadata/_custom_type_script = "uid://dvl8hl7mfdxi2"
+
+[sub_resource type="Resource" id="Resource_2qsyy"]
+script = ExtResource("2_px37v")
+bonus_amt = 100
+bonus_stat_type = 1
+target_side = 1
+bonus_type = 2
+metadata/_custom_type_script = "uid://dvl8hl7mfdxi2"
+
+[sub_resource type="Resource" id="Resource_px37v"]
+script = ExtResource("2_px37v")
+bonus_amt = -100
+bonus_stat_type = 2
+target_side = 1
+bonus_type = 2
+metadata/_custom_type_script = "uid://dvl8hl7mfdxi2"
+
+[sub_resource type="Resource" id="Resource_a3kbl"]
+script = ExtResource("3_2nm3t")
+children = Array[ExtResource("1_2qsyy")]([SubResource("Resource_bj74w"), SubResource("Resource_2qsyy"), SubResource("Resource_px37v")])
+metadata/_custom_type_script = "uid://dfdnia3mppqsu"
+
+[resource]
+script = ExtResource("1_mwein")
+strategy_type = 1
+card_name = "Box Score test"
+card_description = "Test adding box score stats as defensive player"
+root_node = SubResource("Resource_a3kbl")
+metadata/_custom_type_script = "uid://cdj30lies16yq"
