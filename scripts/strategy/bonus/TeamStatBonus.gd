@@ -1,9 +1,22 @@
 class_name TeamStatBonus
 extends StrategyCardBonusNode
 
-@export var off_bonus_amount := 0
-@export var def_bonus_amount := 0
+enum StatType {
+	OFFENSE,
+	DEFENSE,
+	SHOT_CHECK,
+	THREE_PT_BONUS
+}
+
+enum SideToReceive {
+	OFFENSE,
+	DEFENSE
+}
+
+@export var bonus_amt: int = 0
+@export var stat_type: StatType
+@export var side_to_receive: SideToReceive
 
 func _init():
 	super._init()
-	bonus_type = StrategyCardBonusNode.BonusType.TEAM_STAT_BONUS
+	bonus_type = StrategyCardBonusNode.BonusType.TEAM_STAT

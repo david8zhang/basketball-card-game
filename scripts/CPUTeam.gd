@@ -11,6 +11,7 @@ extends Node
 var strategy_card: StrategyCard
 var starting_lineup: StartingLineup
 var strategy_card_processor: StrategyCardProcessor
+var cards_in_play = []
 
 func _ready():
 	if starting_lineup_wrapper != null:
@@ -18,12 +19,16 @@ func _ready():
 		starting_lineup_wrapper.add_child(starting_lineup)
 		SceneVariables.instantiate_cpu_team()
 		starting_lineup.init_cards(SceneVariables.cpu_team_bp_configs)
+	cards_in_play = starting_lineup.starting_lineup_cards	
 
 func get_card_at_position(pos: BallPlayerStats.PlayerPosition):
 	return starting_lineup.get_card_at_position(pos)
 
 func get_starting_cards():
 	return starting_lineup.starting_lineup_cards
+
+func get_cards_in_play():
+	return cards_in_play
 
 func get_strategy_card_deck() -> Array[StrategyCardConfig]:
 	return strategy_card_deck.cards_in_play

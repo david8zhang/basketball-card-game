@@ -103,6 +103,13 @@ func process_bonus_node_result(curr_node_result: StrategyCardNode.NodeResult):
 				RollBonus.RollBonusType.THREE_PT_BONUS:
 					prefix = "(3-Pt. Bonus)"
 			strategy_bonuses.add_bonus_line("Roll", roll_bonus.roll_bonus_amount, prefix)
+		StrategyCardBonusNode.BonusType.TEAM_STAT:
+			var team_stat_bonus = node as TeamStatBonus
+			match (team_stat_bonus.stat_type):
+				TeamStatBonus.StatType.OFFENSE:
+					strategy_bonuses.add_bonus_line("Team Offense", team_stat_bonus.bonus_amt)
+				TeamStatBonus.StatType.DEFENSE:
+					strategy_bonuses.add_bonus_line("Team Defense", team_stat_bonus.bonus_amt)
 		StrategyCardBonusNode.BonusType.NOOP:
 			strategy_bonuses.show_failure_message()
 

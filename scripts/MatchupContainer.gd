@@ -15,7 +15,7 @@ extends Panel
 # For animating bonuses from strategy cards
 @onready var stat_bonus_animator: StatBonusAnimator = $StatBonusAnimator
 @onready var marker_bonus_animator: MarkerBonusAnimator = $MarkerBonusAnimator
-@onready var box_score_bonus_animator: BoxScoreBonusAnimator = $BoxScoreBonusAnimator
+@onready var generic_bonus_animator: GenericBonusAnimator = $GenericBonusAnimator
 
 @export var card_scene: PackedScene
 @export var matchup_pts_assts_rebs_scene: PackedScene
@@ -76,7 +76,7 @@ func _ready():
 	use_strategy_card_button.pressed.connect(show_strategy_card_selector)
 	continue_button.pressed.connect(on_matchup_completed)
 	strat_roll_bonus_label.hide()
-	box_score_bonus_animator.hide()
+	generic_bonus_animator.hide()
 	continue_button.hide()
 	# Hide use strategy card button if player has no strategy cards available
 	if offense_side == Game.Side.PLAYER:
@@ -92,12 +92,14 @@ func set_player_card(card: BallPlayerCard):
 	player_card.ball_player_stats = card.ball_player_stats.duplicate()
 	hbox_container.add_child(player_card)
 	player_card.marker.copy_from_marker(card.marker)
+	player_card.copy_stat_bonuses(card)
 
 func set_cpu_card(card: BallPlayerCard):
 	cpu_card = card_scene.instantiate() as BallPlayerCard
 	cpu_card.ball_player_stats = card.ball_player_stats.duplicate()
 	hbox_container.add_child(cpu_card)
 	cpu_card.marker.copy_from_marker(card.marker)
+	cpu_card.copy_stat_bonuses(card)
 
 func set_curr_assists(assists: int):
 	curr_assists = assists
@@ -744,17 +746,54 @@ func apply_single_bonus(bonus, strategy_type, custom_cb):
 				# If the target of this bonus is the defender and the current offensive player card is the player, then it was
 				# the CPU that used the defensive strategy card resulting in this bonus
 				var is_cpu = offense_side == Game.Side.PLAYER
-				box_score_bonus_animator.animate_box_score_bonus(box_score_bonus, is_cpu)
+				var direction = GenericBonusAnimator.BonusAnimDirection.BOTTOM_RIGHT if is_cpu else GenericBonusAnimator.BonusAnimDirection.BOTTOM_LEFT
+				var prefix = "+" if box_score_bonus.bonus_amt >= 0 else ""
+				var suffix = ""
+				match box_score_bonus.bonus_stat_type:
+					BoxScoreBonus.StatType.POINTS:
+						suffix = " point"
+					BoxScoreBonus.StatType.ASSISTS:
+						suffix = " assist"
+					BoxScoreBonus.StatType.REBOUNDS:
+						suffix = " rebound"
+				suffix += "s" if box_score_bonus.bonus_amt > 0 else ""
+				generic_bonus_animator.animate_generic_bonus(box_score_bonus.bonus_amt, direction, prefix, suffix)
 				var on_box_score_anim_finished = func _on_anim_finished():
 					var side_to_receive_bonus = Game.Side.CPU if is_cpu else Game.Side.PLAYER
 					game.add_box_score_bonuses(side_to_receive_bonus, box_score_bonus.bonus_stat_type, box_score_bonus.bonus_amt)
 					custom_cb.call()
-					box_score_bonus_animator.hide()
-				box_score_bonus_animator.show()
-				if box_score_bonus_animator.on_box_score_bonus_complete.has_connections():
-					for conn in box_score_bonus_animator.get_signal_connection_list("on_box_score_bonus_complete"):
-						box_score_bonus_animator.disconnect("on_box_score_bonus_complete", conn.callable)
-				box_score_bonus_animator.on_box_score_bonus_complete.connect(on_box_score_anim_finished)
+					generic_bonus_animator.hide()
+				generic_bonus_animator.show()
+				if generic_bonus_animator.on_anim_complete.has_connections():
+					for conn in generic_bonus_animator.get_signal_connection_list("on_anim_complete"):
+						generic_bonus_animator.disconnect("on_anim_complete", conn.callable)
+				generic_bonus_animator.on_anim_complete.connect(on_box_score_anim_finished)
+		StrategyCardBonusNode.BonusType.TEAM_STAT:
+			var team_stat_bonus = bonus as TeamStatBonus
+			var is_cpu = false
+			if team_stat_bonus.side_to_receive == TeamStatBonus.SideToReceive.OFFENSE:
+				is_cpu = offense_side == Game.Side.CPU
+			else:
+				is_cpu = offense_side == Game.Side.PLAYER
+			var direction = GenericBonusAnimator.BonusAnimDirection.BOTTOM_RIGHT if is_cpu else GenericBonusAnimator.BonusAnimDirection.BOTTOM_LEFT
+			var prefix = "+" if team_stat_bonus.bonus_amt >= 0 else ""
+			var suffix = ""
+			match team_stat_bonus.stat_type:
+				TeamStatBonus.StatType.OFFENSE:
+					suffix = " Offense"
+				TeamStatBonus.StatType.DEFENSE:
+					suffix = " Defense"
+			generic_bonus_animator.animate_generic_bonus(team_stat_bonus.bonus_amt, direction, prefix, suffix)
+			var on_team_stat_bonus_anim_finished = func _on_anim_finished():
+				var side_to_receive_bonus = Game.Side.CPU if is_cpu else Game.Side.PLAYER
+				game.add_team_stat_bonuses(side_to_receive_bonus, team_stat_bonus.stat_type, team_stat_bonus.bonus_amt)
+				custom_cb.call()
+				generic_bonus_animator.hide()
+			generic_bonus_animator.show()
+			if generic_bonus_animator.on_anim_complete.has_connections():
+				for conn in generic_bonus_animator.get_signal_connection_list("on_anim_complete"):
+					generic_bonus_animator.disconnect("on_anim_complete", conn.callable)
+			generic_bonus_animator.on_anim_complete.connect(on_team_stat_bonus_anim_finished)
 		StrategyCardBonusNode.BonusType.NOOP:
 			custom_cb.call()
 

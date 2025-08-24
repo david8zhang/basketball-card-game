@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="StrategyCardConfig" load_steps=4 format=3 uid="uid://ba0hv3x8tbbm0"]
+
+[ext_resource type="Script" uid="uid://cdj30lies16yq" path="res://scripts/strategy/StrategyCardConfig.gd" id="1_8n0d3"]
+[ext_resource type="Script" uid="uid://cllvlpi68twx8" path="res://scripts/strategy/bonus/TeamStatBonus.gd" id="1_vrn6t"]
+
+[sub_resource type="Resource" id="Resource_vp3rp"]
+script = ExtResource("1_vrn6t")
+bonus_amt = 2
+stat_type = 0
+bonus_type = 4
+metadata/_custom_type_script = "uid://cllvlpi68twx8"
+
+[resource]
+script = ExtResource("1_8n0d3")
+strategy_type = 0
+card_name = "TeamStatTest"
+card_description = "Team stat test"
+root_node = SubResource("Resource_vp3rp")
+metadata/_custom_type_script = "uid://cdj30lies16yq"

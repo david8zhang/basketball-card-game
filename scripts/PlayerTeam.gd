@@ -10,6 +10,7 @@ extends Node
 var starting_lineup: StartingLineup
 var lineup_selector: LineupSelector
 var is_bp_card_callbacks_hooked := false
+var cards_in_play = []
 const NUM_STRATEGY_CARDS = 3
 
 func _ready():
@@ -18,6 +19,7 @@ func _ready():
 		starting_lineup_wrapper.add_child(starting_lineup)
 		starting_lineup.init_cards(SceneVariables.get_player_lineup_or_gen_random_lineup())
 	strategy_card_deck.init_strategy_card_deck(SceneVariables.get_player_strat_card_deck_or_gen_random_deck())
+	cards_in_play = starting_lineup.starting_lineup_cards
 
 func _process(_delta):
 	if !is_bp_card_callbacks_hooked:
@@ -40,6 +42,9 @@ func get_card_at_position(pos: BallPlayerStats.PlayerPosition):
 
 func get_starting_cards():
 	return starting_lineup.starting_lineup_cards
+
+func get_cards_in_play():
+	return cards_in_play
 
 func get_strategy_card_deck() -> Array:
 	return strategy_card_deck.cards_in_play

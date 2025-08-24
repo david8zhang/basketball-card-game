@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://q8du0pabkwos" path="res://prefabs/MarkerBonusAnimator.tscn" id="5_bsl14"]
 [ext_resource type="PackedScene" uid="uid://bocyd5espcfft" path="res://prefabs/StatBonusAnimator.tscn" id="5_iqwyu"]
 [ext_resource type="PackedScene" uid="uid://lkpp0562vspw" path="res://prefabs/StratCardPreview.tscn" id="5_khnnx"]
-[ext_resource type="PackedScene" uid="uid://dqr18xaoirdkp" path="res://prefabs/BoxScoreBonusAnimator.tscn" id="8_y58ie"]
+[ext_resource type="PackedScene" uid="uid://bbqsasbxnp6w8" path="res://prefabs/GenericBonusAnimator.tscn" id="9_fly8q"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_20t5l"]
 bg_color = Color(0, 0, 0, 0.745098)
@@ -137,7 +137,7 @@ text = "+2"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BoxScoreBonusAnimator" parent="." instance=ExtResource("8_y58ie")]
+[node name="GenericBonusAnimator" parent="." instance=ExtResource("9_fly8q")]
 layout_mode = 1
 
 [node name="ContinueButton" type="Button" parent="."]

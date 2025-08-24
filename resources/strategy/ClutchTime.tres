@@ -1,0 +1,84 @@
+[gd_resource type="Resource" script_class="StrategyCardConfig" load_steps=18 format=3 uid="uid://btace81xbwuhm"]
+
+[ext_resource type="Script" uid="uid://bq22hlebjq8xg" path="res://scripts/strategy/StrategyCardNode.gd" id="1_3nf0g"]
+[ext_resource type="Script" uid="uid://54ugok0fgnk3" path="res://scripts/strategy/condition/QuarterCheckCondition.gd" id="1_myxyt"]
+[ext_resource type="Script" uid="uid://cdj30lies16yq" path="res://scripts/strategy/StrategyCardConfig.gd" id="1_uy2ri"]
+[ext_resource type="Script" uid="uid://ckyo36itiyt30" path="res://scripts/strategy/action/RollDiceAction.gd" id="2_g5i2m"]
+[ext_resource type="Script" uid="uid://8h7wbli6l8ea" path="res://scripts/strategy/bonus/NoopBonus.gd" id="3_g5i2m"]
+[ext_resource type="Script" uid="uid://cllvlpi68twx8" path="res://scripts/strategy/bonus/TeamStatBonus.gd" id="3_i8w0d"]
+[ext_resource type="Script" uid="uid://2s3vmqbdc7qr" path="res://scripts/strategy/condition/DiceRollCondition.gd" id="4_bvilx"]
+[ext_resource type="Script" uid="uid://dfdnia3mppqsu" path="res://scripts/strategy/StrategyCardSequenceNode.gd" id="5_tv83p"]
+
+[sub_resource type="Resource" id="Resource_g5i2m"]
+script = ExtResource("3_g5i2m")
+show_failure = true
+bonus_type = 7
+metadata/_custom_type_script = "uid://8h7wbli6l8ea"
+
+[sub_resource type="Resource" id="Resource_cdwhp"]
+script = ExtResource("2_g5i2m")
+dice_type = 20
+rigged_dice_value = -1
+static_bonus = 0
+add_three_point_bonus = false
+action_type = 2
+metadata/_custom_type_script = "uid://ckyo36itiyt30"
+
+[sub_resource type="Resource" id="Resource_i8w0d"]
+script = ExtResource("3_g5i2m")
+show_failure = true
+bonus_type = 7
+metadata/_custom_type_script = "uid://8h7wbli6l8ea"
+
+[sub_resource type="Resource" id="Resource_bvilx"]
+script = ExtResource("3_i8w0d")
+bonus_amt = 2
+stat_type = 0
+side_to_receive = 0
+bonus_type = 4
+metadata/_custom_type_script = "uid://cllvlpi68twx8"
+
+[sub_resource type="Resource" id="Resource_tv83p"]
+script = ExtResource("3_i8w0d")
+bonus_amt = 2
+stat_type = 1
+side_to_receive = 0
+bonus_type = 4
+metadata/_custom_type_script = "uid://cllvlpi68twx8"
+
+[sub_resource type="Resource" id="Resource_p1ti7"]
+script = ExtResource("5_tv83p")
+children = Array[ExtResource("1_3nf0g")]([SubResource("Resource_bvilx"), SubResource("Resource_tv83p")])
+metadata/_custom_type_script = "uid://dfdnia3mppqsu"
+
+[sub_resource type="Resource" id="Resource_g4e7w"]
+script = ExtResource("4_bvilx")
+dice_roll_thres = 14
+comparator_type = 2
+check_initial_roll = false
+condition_type = 0
+pass_child = SubResource("Resource_p1ti7")
+fail_child = SubResource("Resource_i8w0d")
+metadata/_custom_type_script = "uid://2s3vmqbdc7qr"
+
+[sub_resource type="Resource" id="Resource_w4efs"]
+script = ExtResource("5_tv83p")
+children = Array[ExtResource("1_3nf0g")]([SubResource("Resource_cdwhp"), SubResource("Resource_g4e7w")])
+metadata/_custom_type_script = "uid://dfdnia3mppqsu"
+
+[sub_resource type="Resource" id="Resource_uot1c"]
+script = ExtResource("1_myxyt")
+quarter_threshold = 4
+comparator_type = 1
+condition_type = 0
+pass_child = SubResource("Resource_w4efs")
+fail_child = SubResource("Resource_g5i2m")
+metadata/_custom_type_script = "uid://54ugok0fgnk3"
+
+[resource]
+script = ExtResource("1_uy2ri")
+strategy_type = 0
+card_name = "Clutch Time"
+card_description = "If it's the 4th quarter, roll a dice. 1-14: No effect. 15-20: Every player gets +2 Offense and +2 Defense for the rest of the quarter."
+root_node = SubResource("Resource_uot1c")
+metadata/_custom_type_script = "uid://cdj30lies16yq"

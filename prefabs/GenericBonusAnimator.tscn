@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbqsasbxnp6w8"]
+
+[ext_resource type="Script" uid="uid://bc2ywt22t5huk" path="res://scripts/GenericBonusAnimator.gd" id="1_rba3l"]
+[ext_resource type="PackedScene" uid="uid://djke13p50wvid" path="res://prefabs/GenericBonusLabel.tscn" id="2_ruwak"]
+
+[node name="GenericBonusAnimator" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rba3l")
+generic_bonus_label_scene = ExtResource("2_ruwak")

@@ -24,8 +24,19 @@ extends Control
 @export var show_roll_table = true
 
 var roll_table_rows = []
+var stat_bonuses = {
+	StatType.OFFENSE: 0,
+	StatType.DEFENSE: 0
+}
 
 signal on_bp_card_clicked(bp_card)
+
+enum StatType {
+	OFFENSE,
+	DEFENSE,
+	SHOT_CHECK,
+	THREE_PT_BONUS
+}
 
 func _ready():
 	offense_value.text = str(ball_player_stats.offense)
@@ -113,3 +124,38 @@ func disable_highlight():
 
 func _on_bp_card_clicked():
 	on_bp_card_clicked.emit(self)
+
+func update_stat(stat_type: StatType, amount: int):
+	stat_bonuses[stat_type] += amount
+	render_stat_bonuses()
+
+func copy_stat_bonuses(bp_card: BallPlayerCard):
+	for key in bp_card.stat_bonuses:
+		stat_bonuses[key] = bp_card.stat_bonuses[key]
+	render_stat_bonuses()
+
+func render_stat_bonuses():
+	for key in stat_bonuses:
+		var stat_bonus_amt = stat_bonuses[key]
+		match key:
+			StatType.OFFENSE:
+				offense_value.text = str(ball_player_stats.offense + stat_bonus_amt)
+				if stat_bonus_amt > 0:
+					offense_value.add_theme_color_override("font_color", Color(0, 1, 0))
+				elif stat_bonus_amt < 0:
+					offense_value.add_theme_color_override("font_color", Color(1, 0, 0))
+				else:
+					offense_value.add_theme_color_override("font_color", Color(1, 1, 1))
+			StatType.DEFENSE:
+				defense_value.text = str(ball_player_stats.defense + stat_bonus_amt)
+				if stat_bonus_amt > 0:
+					defense_value.add_theme_color_override("font_color", Color(0, 1, 0))
+				elif stat_bonus_amt < 0:
+					defense_value.add_theme_color_override("font_color", Color(1, 0, 0))
+				else:
+					defense_value.add_theme_color_override("font_color", Color(1, 1, 1))
+
+func reset_stat_bonuses():
+	for key in stat_bonuses:
+		stat_bonuses[key] = 0
+	render_stat_bonuses()

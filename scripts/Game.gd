@@ -33,7 +33,7 @@ var full_cpu_scorer_statlines = {}
 
 var matchup_container: MatchupContainer
 var quarter_end_modal: QuarterEnd
-var quarter_number: int = 1
+var quarter_number: int = 4
 var quarter_scores = {
 	"player": [],
 	"cpu": []
@@ -57,6 +57,7 @@ class BoxScoreStatLine:
 
 func _ready() -> void:
 	auto_win_button.pressed.connect(handle_auto_win)
+	quarter_label.text = "Q" + str(quarter_number)
 
 func _tally_rebound_test():
 	var player_score_data = {
@@ -240,6 +241,15 @@ func add_box_score_bonuses(side: Side, stat_type: BoxScoreBonus.StatType, value:
 	var scorer_statline = full_player_scorer_statlines if side == Side.PLAYER else full_cpu_scorer_statlines
 	update_statlines(defensive_player.full_name(), new_statline, scorer_statline)
 
+func add_team_stat_bonuses(side: Side, stat_type: TeamStatBonus.StatType, value: int):
+	var bp_cards = player_team.get_cards_in_play() if side == Side.PLAYER else cpu_team.get_cards_in_play()
+	var stat_to_update = BallPlayerCard.StatType.OFFENSE if stat_type == TeamStatBonus.StatType.OFFENSE else BallPlayerCard.StatType.DEFENSE
+	for bpc in bp_cards:
+		var card = bpc as BallPlayerCard
+		card.update_stat(stat_to_update, value)
+	var curr_matchup_card = matchup_container.cpu_card if side == Side.CPU else matchup_container.player_card
+	curr_matchup_card.update_stat(stat_to_update, value)
+
 func update_statlines(full_name: String, stat_line: BoxScoreStatLine, scorer_statline: Dictionary):
 	if scorer_statline.has(full_name):
 		var stat_line_to_update = scorer_statline[full_name] as BoxScoreStatLine
@@ -259,9 +269,10 @@ func on_new_quarter_start():
 	cpu_completed_scorer_positions = []
 	quarter_end_modal.queue_free()
 	rebound_tally.queue_free()
-	for card in player_team.get_starting_cards():
-		card.button.flat = true
-	for card in cpu_team.get_starting_cards():
+	var all_cards = player_team.get_cards_in_play() + cpu_team.get_cards_in_play()
+	for c in all_cards:
+		var card = c as BallPlayerCard
+		card.reset_stat_bonuses()
 		card.button.flat = true
 
 func reset_rebounds():
@@ -281,8 +292,8 @@ func handle_auto_win():
 # ==================================== GETTERS ====================================
 
 func get_is_quarter_completed():
-	var player_lineup_cards = player_team.get_starting_cards()
-	var cpu_lineup_cards = cpu_team.get_starting_cards()
+	var player_lineup_cards = player_team.get_cards_in_play()
+	var cpu_lineup_cards = cpu_team.get_cards_in_play()
 	return player_lineup_cards.size() == player_completed_scorer_positions.size() and \
 		cpu_lineup_cards.size() == cpu_completed_scorer_positions.size()
 
