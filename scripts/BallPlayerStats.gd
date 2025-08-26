@@ -1,7 +1,7 @@
 class_name BallPlayerStats
 extends Resource
 
-enum PlayerPosition { PG, SG, SF, PF, C }
+enum PlayerPosition { PG, SG, SF, PF, C, NONE }
 
 @export_group("Attributes")
 @export var offense := 0

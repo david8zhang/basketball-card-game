@@ -33,7 +33,7 @@ var full_cpu_scorer_statlines = {}
 
 var matchup_container: MatchupContainer
 var quarter_end_modal: QuarterEnd
-var quarter_number: int = 4
+var quarter_number: int = 1
 var quarter_scores = {
 	"player": [],
 	"cpu": []

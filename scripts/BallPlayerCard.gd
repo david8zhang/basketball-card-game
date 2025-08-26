@@ -20,7 +20,7 @@ extends Control
 @export var roll_table_value_scene: PackedScene
 @export var ball_player_stats: BallPlayerStats
 @export var roll_table_font_override_size := 8
-@export var assigned_position: BallPlayerStats.PlayerPosition
+@export var assigned_position: BallPlayerStats.PlayerPosition = BallPlayerStats.PlayerPosition.NONE
 @export var show_roll_table = true
 
 var roll_table_rows = []
@@ -28,6 +28,7 @@ var stat_bonuses = {
 	StatType.OFFENSE: 0,
 	StatType.DEFENSE: 0
 }
+var is_out_of_position := false
 
 signal on_bp_card_clicked(bp_card)
 
@@ -56,6 +57,14 @@ func _ready():
 		roll_table.hide()
 	player_cost.text = "Cost: " + str(ball_player_stats.player_cost)
 	button.pressed.connect(_on_bp_card_clicked)
+
+	# Apply stat penalty if the player is playing out of position
+	if assigned_position != BallPlayerStats.PlayerPosition.NONE and !ball_player_stats.positions.has(assigned_position):
+		is_out_of_position = true
+		stat_bonuses[StatType.OFFENSE] = -2
+		stat_bonuses[StatType.DEFENSE] = -2
+		render_stat_bonuses()
+
 
 func setup_roll_table():
 	for row in ball_player_stats.roll_table:
@@ -140,7 +149,7 @@ func render_stat_bonuses():
 		match key:
 			StatType.OFFENSE:
 				offense_value.text = str(ball_player_stats.offense + stat_bonus_amt)
-				if stat_bonus_amt > 0:
+				if stat_bonus_amt > 0 and !is_out_of_position: # If the player is out of position, always show their off/def as red
 					offense_value.add_theme_color_override("font_color", Color(0, 1, 0))
 				elif stat_bonus_amt < 0:
 					offense_value.add_theme_color_override("font_color", Color(1, 0, 0))
@@ -148,7 +157,7 @@ func render_stat_bonuses():
 					offense_value.add_theme_color_override("font_color", Color(1, 1, 1))
 			StatType.DEFENSE:
 				defense_value.text = str(ball_player_stats.defense + stat_bonus_amt)
-				if stat_bonus_amt > 0:
+				if stat_bonus_amt > 0 and !is_out_of_position:
 					defense_value.add_theme_color_override("font_color", Color(0, 1, 0))
 				elif stat_bonus_amt < 0:
 					defense_value.add_theme_color_override("font_color", Color(1, 0, 0))
