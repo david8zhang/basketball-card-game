@@ -63,14 +63,29 @@ func instantiate_cpu_team():
 				position_to_players[position] = []
 			position_to_players[position].append(stat_config)
 	var selected_player_names = []
+	var cpu_salary_cap = salary_cap + 100
 	for pos in position_to_players.keys():
-		var players_to_select = filter_valid_players(position_to_players[pos], selected_player_names, salary_cap + 100)
-		var player_to_add = players_to_select.pick_random() as BallPlayerStats
+		var players_to_select = filter_valid_players(position_to_players[pos], selected_player_names, cpu_salary_cap)
+		# Pick only the best players in available set of players
+		players_to_select = get_best_players(players_to_select, get_player_max_cost_for_salary_cap(cpu_salary_cap), [])
+		var player_to_add = players_to_select.pick_random()
 		selected_player_names.append(player_to_add.get_full_name())
 		cpu_team_bp_configs[pos] = player_to_add
 
 func filter_valid_players(players, selected_player_names, cap):
 	return players.filter(func (p): return p.player_cost < get_player_max_cost_for_salary_cap(cap) and !selected_player_names.has(p.get_full_name()))
+
+func get_best_players(players_to_select, max_player_cost, players_to_exclude):
+	var min_cost_threshold = 300
+	for i in range(0, 20):
+		# Keep widening min player cost criteria until we get some players
+		var min_cost = min_cost_threshold + i * 100
+		var best_players = players_to_select.filter(func (p): return (p.player_cost >= max_player_cost - min_cost) and \
+		!players_to_exclude.has(p.get_full_name())) 
+		print(best_players.size())
+		if best_players.size() > 5:
+			return best_players
+	return players_to_select
 
 func get_players_for_position():
 	var pos_to_bp_stat_map = {}

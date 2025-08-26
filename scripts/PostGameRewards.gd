@@ -10,14 +10,16 @@ extends Control
 @export var add_new_player_modal_scene: PackedScene
 
 func _ready() -> void:
-	SceneVariables.salary_cap += 100
-	salary_cap_incr_amt.text = "+100 " + "(" + str(SceneVariables.salary_cap) + ")"
+	SceneVariables.salary_cap += 150
+	salary_cap_incr_amt.text = "+150 " + "(" + str(SceneVariables.salary_cap) + ")"
 	init_rewards()
 	skip_button.pressed.connect(on_skip_reward)
 
 func init_rewards():
-	var players_to_pick_from = SceneVariables.get_players_for_salary_cap()
+	var players_for_salary_cap = SceneVariables.get_players_for_salary_cap()
+	var max_cost = SceneVariables.get_player_max_cost_for_salary_cap(SceneVariables.salary_cap)
 	var players_to_exclude = SceneVariables.player_team_bp_configs.values().map(func (p): return p.get_full_name())
+	var players_to_pick_from = SceneVariables.get_best_players(players_for_salary_cap, max_cost, players_to_exclude)
 	for i in range(0, 3):
 		var rand_num = randi_range(0, 1)
 		if rand_num == 0:

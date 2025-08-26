@@ -51,8 +51,8 @@ metadata/_custom_type_script = "uid://c3xho6niytkse"
 
 [resource]
 script = ExtResource("2_m4g16")
-offense = 20
-defense = 14
+offense = 16
+defense = 13
 positions = Array[int]([4])
 first_name = "Nikola"
 last_name = "Jokic"
