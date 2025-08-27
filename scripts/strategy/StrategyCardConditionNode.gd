@@ -8,7 +8,8 @@ enum ConditionType {
 	SHOT_CHECK,
 	QUARTER_CHECK,
 	MARKER_CHECK,
-	THREE_POINT_BONUS_CHECK
+	THREE_POINT_BONUS_CHECK,
+	POINT_DIFF_CHECK
 }
 
 @export var condition_type: ConditionType

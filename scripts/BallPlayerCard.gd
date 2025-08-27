@@ -16,6 +16,7 @@ extends Control
 @onready var texture_rect = $Panel/MarginContainer/TextureRect as TextureRect
 @onready var highlight = $Highlight as Panel
 @onready var player_cost := $Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer3/Panel/Cost as Label
+@onready var side := Game.Side
 
 @export var roll_table_value_scene: PackedScene
 @export var ball_player_stats: BallPlayerStats

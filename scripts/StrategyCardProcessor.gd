@@ -34,6 +34,9 @@ func process_selected_card():
 	var game_state = {}
 	if matchup_container != null and matchup_container.game != null:
 		game_state["current_quarter"] = matchup_container.game.quarter_number
+		game_state["player_score"] = matchup_container.game.get_player_score()
+		game_state["cpu_score"] = matchup_container.game.get_cpu_score()
+		game_state["offense_side"] = matchup_container.offense_side
 	
 	config.process(off_player, def_player, game_state)
 	node_results = config.blackboard.node_results as Array[StrategyCardNode.NodeResult]
