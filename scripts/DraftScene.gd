@@ -1,7 +1,7 @@
 class_name DraftScene
 extends Control
 
-@onready var bp_card_container = $VBoxContainer/MarginContainer/ScrollContainer/HBoxContainer2 as HBoxContainer
+@onready var cards_to_select_from_container = $VBoxContainer/MarginContainer/ScrollContainer/HBoxContainer2 as HBoxContainer
 @onready var card_slot_container = $VBoxContainer/HBoxContainer as HBoxContainer
 @onready var continue_button = $Continue as Button
 @onready var player_cost_total = $PlayerCostTotal as Label
@@ -29,13 +29,14 @@ func _ready():
 func on_set_bp_card(card_slot: CardSlot):
 	if selected_bp_card != null:
 		var should_update_card = false
-		var bp_card = bp_card_scene.instantiate() as BallPlayerCard
-		bp_card.ball_player_stats = selected_bp_card.ball_player_stats
 		var selected_bp_card_cost = selected_bp_card.ball_player_stats.player_cost		
 		var curr_cost_total = get_curr_cost_total()
+		# TODO: This code is bad lol fix this later
 		if card_slot.card_in_slot != null:
 			var curr_card_in_slot_cost = card_slot.card_in_slot.ball_player_stats.player_cost
 			if curr_cost_total - curr_card_in_slot_cost + selected_bp_card_cost <= SceneVariables.salary_cap:
+				var bp_card = bp_card_scene.instantiate() as BallPlayerCard
+				bp_card.ball_player_stats = selected_bp_card.ball_player_stats
 				should_update_card = true
 				replace_drafted_bp_card(bp_card.full_name(), card_slot.card_in_slot)
 			else:
@@ -43,9 +44,13 @@ func on_set_bp_card(card_slot: CardSlot):
 		elif curr_cost_total + selected_bp_card_cost > SceneVariables.salary_cap:
 			show_over_budget_alert()
 		else:
+			var bp_card = bp_card_scene.instantiate() as BallPlayerCard
+			bp_card.ball_player_stats = selected_bp_card.ball_player_stats			
 			should_update_card = true
 			remove_drafted_bp_card(bp_card.full_name())
 		if should_update_card:
+			var bp_card = bp_card_scene.instantiate() as BallPlayerCard
+			bp_card.ball_player_stats = selected_bp_card.ball_player_stats			
 			card_slot.set_bp_card_in_slot(bp_card)
 			selected_bp_card.disable_highlight()
 			selected_bp_card = null
@@ -92,7 +97,7 @@ func go_to_next_scene():
 		var card_slot = node as CardSlot
 		drafted_player_stats[card_slot.player_position] = card_slot.card_in_slot.ball_player_stats
 	SceneVariables.player_team_bp_configs = drafted_player_stats
-	get_tree().change_scene_to_file("res://scenes/PickStrategyCards.tscn")
+	get_tree().change_scene_to_file("res://scenes/DraftBenchScene.tscn")
 
 func remove_drafted_bp_card(player_to_remove_name: String):
 	for card in players_to_pick_from_cards:
@@ -102,8 +107,8 @@ func remove_drafted_bp_card(player_to_remove_name: String):
 func replace_drafted_bp_card(player_to_remove_name: String, player_to_replace: BallPlayerCard):
 	var bp_card = bp_card_scene.instantiate() as BallPlayerCard
 	bp_card.ball_player_stats = player_to_replace.ball_player_stats
-	bp_card_container.add_child(bp_card)
-	bp_card_container.move_child(bp_card, 0)
+	cards_to_select_from_container.add_child(bp_card)
+	cards_to_select_from_container.move_child(bp_card, 0)
 	players_to_pick_from_cards.push_front(bp_card)
 	var callable = Callable(self, "on_click_card").bind(bp_card)
 	bp_card.button.pressed.connect(callable)
@@ -126,7 +131,7 @@ func init_random_players():
 		selected_player_names.append(random_player_stat.get_full_name())
 		var bp_card = bp_card_scene.instantiate() as BallPlayerCard
 		bp_card.ball_player_stats = random_player_stat
-		bp_card_container.add_child(bp_card)
+		cards_to_select_from_container.add_child(bp_card)
 		players_to_pick_from_cards.append(bp_card)
 		var callable = Callable(self, "on_click_card").bind(bp_card)
 		bp_card.button.pressed.connect(callable)

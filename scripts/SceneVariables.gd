@@ -6,9 +6,10 @@ var full_player_scorer_statlines = {}
 var player_score := 0
 var cpu_score := 0
 var player_team_bp_configs := {}
+var player_team_bench := []
 var player_strategy_card_deck := []
 var cpu_team_bp_configs := {}
-var salary_cap := 1750
+var salary_cap := 2000
 var num_games_won := 0
 var all_player_names = [
 "CalebMartin", "DerrickWhite", "CarisLevert", "DomantasSabonis", "CJMcCollum", "NormanPowell", "DeAaronFox", "JadenMcDaniels", "HaywoodHighsmith", "DeAnthonyMelton", "OnyekaOkongwu", "RoyceONeal", "ObiToppin", "TreMann", "TerenceDavis", "ScottieBarnes", "JamalMurray", "SethCurry", "CameronPayne", "DemarDeRozan", "DeanWade", "KentaviousCaldwellPope", "DavionMitchell", "TerrenceRoss", "TeranceMann", "ShaiGilgeousAlexander", "ChrisPaul", "AndreDrummond", "JalenJohnson", "PatrickWilliams", "NicolasBatum", "JalenMcDaniels", "AnthonyLamb", "JaeCrowder", "CediOsman", "RussellWestbrook", "RudyGobert", "KyleLowry", "JamesHarden", "IvicaZubac", "CamThomas", "FredVanvleet", "JoshOkogie", "RobertCovington", "ThaddeusYoung", "RJBarrett", "DariusGarland", "MilesMcBride", "JohnKonchar", "AnthonyEdwards", "AyoDosunmu", "GabeVincent", "PreciousAchiuwa", "DejounteMurray", "JoshRichardson", "SamHauser", "CobyWhite", "AndrewWiggins", "KawhiLeonard", "PatrickBeverley", "KenrichWilliams", "PaulReed", "MalcolmBrogdon", "SantiAldama", "JoeIngles", "GaryTrent", "MichaelPorterJr", "MikeMuscala", "ZachLavine", "AustinReaves", "ThomasBryant", "AlHorford", "KlayThompson", "BruceBrown", "GrantWilliams", "TobiasHarris", "RickyRubio", "AaronGordon", "JoelEmbiid", "SaddiqBey", "DeandreHunter", "IsaiahJoe", "JalenBrunson", "MalikBeasley", "RobertWilliams", "JonasValanciunas", "KyleAnderson", "JoeHarris", "JohnCollins", "ReggieJackson", "JimmyButler", "JockLandale", "PJTucker", "TreyLyles", "PatConnaughton", "JaylenBrown", "BrandonIngram", "OGAnunoby", "JaMorant", "NazReid", "JordanPoole", "DevinBooker", "DraymondGreen", "ImmanuelQuickley", "JevonCarter", "JalenWilliams", "TaureanPrince", "LebronJames", "KevonLooney", "BobbyPortis", "GiannisAntetokounmpo", "WillBarton", "QuentinGrimes", "JeffGreen", "JarenJacksonJr", "BonesHyland", "ClintCapela", "KarlAnthonyTowns", "MitchellRobinson", "TyreseMaxey", "LukeKennard", "JaysonTatum", "MarcusSmart", "PaulGeorge", "NicClaxton", "ZionWilliamson", "BamAdebayo", "DorianFinneySmith", "LuguentzDort", "AlexCaruso", "IsaacOkoro", "GeorgesNiang", "MalikMonk", "AaronWiggins", "DAngeloRussell", "BrandonClarke", "JaylinWilliams", "DennisSchroder", "JaylenNowell", "JuliusRandle", "JarredVanderbilt", "JrueHoliday", "MosesMoody", "CameronJohnson", "BrookLopez", "LarryNance", "StephenCurry", "DamionLee", "HarrisonBarnes", "LamarStevens", "ChristianBraun", "HerbertJones", "DesmondBane", "KeeganMurray", "BogdanBogdanovic", "AJGriffin", "KevinHuerter", "NickeilAlexanderWalker", "DeAndreAyton", "BenSimmons", "TyusJones", "DillonBrooks", "TylerHerro", "NikolaJokic", "JonathanKuminga", "EvanMobley", "TreyMurphy", "DonovanMitchell", "TroyBrown", "AnthonyDavis", "IsaiahHartenstein", "KevinLove", "JakobPoeltl", "MasonPlumlee", "PascalSiakam", "StevenAdams", "WenyenGabriel", "GraysonAllen", "JoseAlvarado", "MikalBridges", "NikolaVucevic", "NajiMarshall", "RuiHachimura", "JoshGiddey", "ChimezieMetu", "JoshHart", "MaxStrus", "TorreyCraig", "ChrisBoucher", "KevinDurant", "SpencerDinwiddie", "ShakeMilton", "DerrickJones", "VictorOladipo", "MikeConley", "DonteDivincenzo", "DarioSaric", "TraeYoung", "JarettAllen"
@@ -28,9 +29,9 @@ func _ready() -> void:
 		all_strat_card_configs.append(strategy_card_config)
 
 func get_player_max_cost_for_salary_cap(curr_salary_cap):
-	if curr_salary_cap <= 1750:
+	if curr_salary_cap <= 2000:
 		return 400
-	elif curr_salary_cap > 1750 and curr_salary_cap <= 2250:
+	elif curr_salary_cap > 2000 and curr_salary_cap <= 2250:
 		return 650
 	elif curr_salary_cap > 2250 and curr_salary_cap <= 2750:
 		return 900
