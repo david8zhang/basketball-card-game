@@ -4,7 +4,11 @@ extends Control
 @onready var selected_cards_container = $VBoxContainer/MarginContainer/ScrollContainer/SelectedCardsContainer
 @onready var available_cards_container = $VBoxContainer/MarginContainer2/ScrollContainer/AvailableCardsContainer
 @onready var continue_button = $Continue as Button
+@onready var lineup_preview = $LineupPreview as LineupPreview
+@onready var view_lineup_button = $ViewLineup as Button
+
 @export var strategy_card_scene: PackedScene
+
 var selected_strategy_card
 var num_cards_to_choose_from := 10
 const MAX_CARDS_TO_PICK := 5
@@ -18,6 +22,15 @@ func _ready() -> void:
 		available_cards_container.add_child(strategy_card)
 		strategy_card.button.pressed.connect(on_select_callable)
 	continue_button.pressed.connect(go_to_game_scene)
+	view_lineup_button.pressed.connect(show_lineup_preview)
+	lineup_preview.on_exit_pressed.connect(hide_lineup_preview)
+
+func hide_lineup_preview():
+	lineup_preview.hide()
+
+func show_lineup_preview():
+	lineup_preview.show()
+	lineup_preview.display_lineups()
 
 func add_strategy_card(selected_card: StrategyCard):
 	if selected_cards_container.get_children().has(selected_card):

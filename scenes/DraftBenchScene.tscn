@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://leqipm8owfgk"]
+[gd_scene load_steps=5 format=3 uid="uid://leqipm8owfgk"]
 
 [ext_resource type="Script" uid="uid://dyggvqb56jmqh" path="res://scripts/DraftBenchScene.gd" id="1_m0f0g"]
 [ext_resource type="PackedScene" uid="uid://canx4b4pr7n3c" path="res://prefabs/BallPlayerCard.tscn" id="2_xv45b"]
 [ext_resource type="PackedScene" uid="uid://bm8fw1micckc0" path="res://prefabs/BPCardPreview.tscn" id="3_ifwci"]
+[ext_resource type="PackedScene" uid="uid://bqsbslbokh8g4" path="res://prefabs/LineupPreview.tscn" id="4_m5ybp"]
 
 [node name="DraftBenchScene" type="Control"]
 layout_mode = 3
@@ -70,6 +71,7 @@ theme_override_constants/separation = 20
 
 [node name="CardCostTooHigh" type="Label" parent="."]
 visible = false
+layout_mode = 0
 offset_top = 423.0
 offset_right = 1350.0
 offset_bottom = 446.0
@@ -91,6 +93,15 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 25
 text = "Continue"
 
+[node name="ViewLineup" type="Button" parent="."]
+layout_mode = 1
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 130.0
+offset_bottom = 41.0
+theme_override_font_sizes/font_size = 20
+text = "View Lineup"
+
 [node name="PlayerCostTotal" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 1
@@ -102,3 +113,7 @@ offset_right = -10.0
 offset_bottom = 33.0
 grow_horizontal = 0
 text = "Total: 0/3000"
+
+[node name="LineupPreview" parent="." instance=ExtResource("4_m5ybp")]
+visible = false
+layout_mode = 1

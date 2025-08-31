@@ -4,8 +4,10 @@ extends Control
 @onready var bench_cards = $VBoxContainer/MarginContainer/ScrollContainer/HBoxContainer as HBoxContainer
 @onready var cards_to_select_from_container = $VBoxContainer/MarginContainer2/ScrollContainer/HBoxContainer2 as HBoxContainer
 @onready var continue_button = $Continue as Button
+@onready var view_lineup_button = $ViewLineup as Button
 @onready var player_cost_total = $PlayerCostTotal as Label
 @onready var card_cost_too_high = $CardCostTooHigh as Label
+@onready var lineup_preview = $LineupPreview
 
 @export var bp_card_scene: PackedScene
 @export var bp_card_preview_scene: PackedScene
@@ -21,6 +23,16 @@ func _ready():
 	init_random_players()
 	update_curr_player_cost_total()
 	continue_button.pressed.connect(go_to_next_scene)
+	view_lineup_button.pressed.connect(show_lineup_preview)
+	lineup_preview.show_bench = false
+	lineup_preview.on_exit_pressed.connect(hide_lineup_preview)
+
+func hide_lineup_preview():
+	lineup_preview.hide()
+
+func show_lineup_preview():
+	lineup_preview.show()
+	lineup_preview.display_lineups()
 
 func update_curr_player_cost_total():
 	var curr_cost = get_curr_cost_total()
@@ -55,6 +67,8 @@ func is_player_within_max_cost(ball_player_stats: BallPlayerStats):
 	return ball_player_stats.player_cost <= SceneVariables.get_player_max_cost_for_salary_cap(SceneVariables.salary_cap)
 
 func go_to_next_scene():
+	var bench_players = bench_cards.get_children().map(func (c): return c.ball_player_stats)
+	SceneVariables.player_team_bench = bench_players
 	get_tree().change_scene_to_file("res://scenes/PickStrategyCards.tscn")
 
 func get_curr_cost_total():

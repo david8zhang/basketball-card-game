@@ -45,9 +45,11 @@ text = "Select"
 
 [node name="CloseButton" type="Button" parent="."]
 layout_mode = 1
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 104.0
-offset_bottom = 60.0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -94.0
+offset_bottom = 50.0
+grow_horizontal = 0
 theme_override_font_sizes/font_size = 25
 text = "Close"
