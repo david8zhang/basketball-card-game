@@ -38,7 +38,7 @@ func on_set_bp_card(card_slot: CardSlot):
 				var bp_card = bp_card_scene.instantiate() as BallPlayerCard
 				bp_card.ball_player_stats = selected_bp_card.ball_player_stats
 				should_update_card = true
-				replace_drafted_bp_card(bp_card.full_name(), card_slot.card_in_slot)
+				replace_drafted_bp_card(bp_card.get_full_name(), card_slot.card_in_slot)
 			else:
 				show_over_budget_alert()
 		elif curr_cost_total + selected_bp_card_cost > SceneVariables.salary_cap:
@@ -47,7 +47,7 @@ func on_set_bp_card(card_slot: CardSlot):
 			var bp_card = bp_card_scene.instantiate() as BallPlayerCard
 			bp_card.ball_player_stats = selected_bp_card.ball_player_stats			
 			should_update_card = true
-			remove_drafted_bp_card(bp_card.full_name())
+			remove_drafted_bp_card(bp_card.get_full_name())
 		if should_update_card:
 			var bp_card = bp_card_scene.instantiate() as BallPlayerCard
 			bp_card.ball_player_stats = selected_bp_card.ball_player_stats			
@@ -101,7 +101,7 @@ func go_to_next_scene():
 
 func remove_drafted_bp_card(player_to_remove_name: String):
 	for card in players_to_pick_from_cards:
-		if is_instance_valid(card) and card.full_name() == player_to_remove_name:
+		if is_instance_valid(card) and card.get_full_name() == player_to_remove_name:
 			card.queue_free()
 
 func replace_drafted_bp_card(player_to_remove_name: String, player_to_replace: BallPlayerCard):

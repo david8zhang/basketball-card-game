@@ -58,7 +58,7 @@ func can_continue():
 	for child in player_lineup_slots.get_children():
 		var slot = child as CardSlot
 		var card_in_slot = slot.card_in_slot as BallPlayerCard
-		if card_in_slot.full_name() == orig_reward_bp_stat.get_full_name():
+		if card_in_slot.get_full_name() == orig_reward_bp_stat.get_full_name():
 			return true
 	return false
 

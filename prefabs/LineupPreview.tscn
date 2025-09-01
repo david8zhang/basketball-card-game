@@ -17,6 +17,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_1u7tg")
 script = ExtResource("1_jhfet")
 bp_card_scene = ExtResource("2_4d3db")
 bp_card_preview_scene = ExtResource("3_cr1k1")
+allow_replacement = true
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -63,3 +64,10 @@ size_flags_horizontal = 8
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 20
 text = "Exit"
+
+[node name="Button2" type="Button" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 20
+text = "Reset Lineups"

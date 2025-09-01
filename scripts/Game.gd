@@ -194,7 +194,7 @@ func show_quarter_end_info_modal():
 
 func process_matchup_stats(all_stats: Dictionary, side: Side, assists_used: int):
 	if side == Side.PLAYER:
-		var full_name = selected_player_bp_card.full_name()
+		var full_name = selected_player_bp_card.get_full_name()
 		var stat_line = BoxScoreStatLine.new(full_name, all_stats["points"], all_stats["assists"], all_stats["rebounds"])
 		var opp_matchup_bp_card = cpu_team.get_card_at_position(selected_player_bp_card.get_assigned_position())
 		update_statlines(full_name, stat_line, full_player_scorer_statlines)
@@ -207,7 +207,7 @@ func process_matchup_stats(all_stats: Dictionary, side: Side, assists_used: int)
 		player_rebounds_label.text = "R: " + str(get_rebounds(player_rebounds_label) + all_stats["rebounds"])
 		curr_player_quarter_score += all_stats["points"]
 	elif side == Side.CPU:
-		var full_name = selected_cpu_bp_card.full_name()
+		var full_name = selected_cpu_bp_card.get_full_name()
 		var stat_line = BoxScoreStatLine.new(full_name, all_stats["points"], all_stats["assists"], all_stats["rebounds"])
 		var opp_matchup_bp_card = player_team.get_card_at_position(selected_cpu_bp_card.get_assigned_position())
 		update_statlines(full_name, stat_line, full_cpu_scorer_statlines)
@@ -227,7 +227,7 @@ func add_box_score_bonuses(side: Side, stat_type: BoxScoreBonus.StatType, value:
 	var assists_label = player_assists_label if side == Side.PLAYER else cpu_assists_label
 	var rebounds_label = player_rebounds_label if side == Side.PLAYER else cpu_rebounds_label
 	var defensive_player = selected_player_bp_card if side == Side.PLAYER else selected_cpu_bp_card
-	var new_statline = BoxScoreStatLine.new(defensive_player.full_name(), 0, 0, 0)
+	var new_statline = BoxScoreStatLine.new(defensive_player.get_full_name(), 0, 0, 0)
 	match stat_type:
 		BoxScoreBonus.StatType.POINTS:
 			new_statline.points = max(0, value)
@@ -239,7 +239,7 @@ func add_box_score_bonuses(side: Side, stat_type: BoxScoreBonus.StatType, value:
 			new_statline.assists = max(0, value)
 			assists_label.text = "A: " + str(max(0, get_assists(assists_label)+ value))
 	var scorer_statline = full_player_scorer_statlines if side == Side.PLAYER else full_cpu_scorer_statlines
-	update_statlines(defensive_player.full_name(), new_statline, scorer_statline)
+	update_statlines(defensive_player.get_full_name(), new_statline, scorer_statline)
 
 func add_team_stat_bonuses(side: Side, stat_type: TeamStatBonus.StatType, value: int):
 	var bp_cards = player_team.get_cards_in_play() if side == Side.PLAYER else cpu_team.get_cards_in_play()

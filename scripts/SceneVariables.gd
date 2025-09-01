@@ -111,6 +111,19 @@ func assemble_random_lineup() -> Dictionary:
 		selected_players.append(random_player_stat.get_full_name())
 	return pos_to_player_map
 
+func assemble_random_bench() -> Array:
+	var starting_lineup_names = player_team_bp_configs.values().map(func (p): return p.get_full_name())
+	var players_to_pick_from = all_player_stat_configs.filter(func (p): return !starting_lineup_names.has(p.get_full_name()))
+	var bench = []
+	var bench_names = []
+	for i in range(0, 5):
+		players_to_pick_from = filter_valid_players(players_to_pick_from, bench_names, salary_cap)
+		var random_player = players_to_pick_from.pick_random() as BallPlayerStats
+		bench.append(random_player)
+		bench_names.append(random_player.get_full_name())
+	return bench
+
+
 func get_player_lineup_or_gen_random_lineup():
 	if player_team_bp_configs.is_empty():
 		player_team_bp_configs = assemble_random_lineup()

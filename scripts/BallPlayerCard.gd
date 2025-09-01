@@ -117,7 +117,7 @@ func convert_positions_to_string(positions: Array[BallPlayerStats.PlayerPosition
 func get_assigned_position():
 	return assigned_position
 
-func full_name():
+func get_full_name():
 	return ball_player_stats.first_name + " " + ball_player_stats.last_name
 
 func add_hot_marker():
