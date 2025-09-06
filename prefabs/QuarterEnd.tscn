@@ -73,7 +73,7 @@ fit_content = true
 scroll_active = false
 
 [node name="Spacer2" type="Control" parent="VBoxContainer"]
-custom_minimum_size = Vector2(2.08165e-12, 50)
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]

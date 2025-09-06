@@ -25,6 +25,7 @@ var full_cpu_scorer_statlines = {}
 @onready var cpu_rebounds_label = $CanvasLayer/Scoreboard/CPURebounds as Label
 @onready var quarter_label = $CanvasLayer/QuarterLabel as Label
 @onready var auto_win_button = $CanvasLayer/AutoWinButton as Button
+@onready var subs_modal = $CanvasLayer/LineupPreview as LineupPreview
 
 @export var matchup_container_scene: PackedScene
 @export var quarter_end_modal_scene: PackedScene
@@ -58,6 +59,7 @@ class BoxScoreStatLine:
 func _ready() -> void:
 	auto_win_button.pressed.connect(handle_auto_win)
 	quarter_label.text = "Q" + str(quarter_number)
+	subs_modal.hide()
 
 func _tally_rebound_test():
 	var player_score_data = {
@@ -189,7 +191,7 @@ func show_quarter_end_info_modal():
 		quarter_end_modal.update_player_box_score(full_player_scorer_statlines)
 		quarter_end_modal.update_cpu_box_score(full_cpu_scorer_statlines)
 		quarter_end_modal.update_quarter_number(quarter_number)
-		var callable = Callable(self, "on_new_quarter_start")
+		var callable = Callable(self, "on_quarter_end_complete")
 		quarter_end_modal.continue_button.pressed.connect(callable)
 
 func process_matchup_stats(all_stats: Dictionary, side: Side, assists_used: int):
@@ -267,13 +269,26 @@ func on_new_quarter_start():
 	quarter_label.text = "Q" + str(quarter_number)
 	player_completed_scorer_positions = []
 	cpu_completed_scorer_positions = []
-	quarter_end_modal.queue_free()
-	rebound_tally.queue_free()
 	var all_cards = player_team.get_cards_in_play() + cpu_team.get_cards_in_play()
 	for c in all_cards:
 		var card = c as BallPlayerCard
 		card.reset_stat_bonuses()
 		card.button.flat = true
+
+func on_quarter_end_complete():
+	quarter_end_modal.queue_free()
+	rebound_tally.queue_free()
+	show_subs_modal()
+
+func show_subs_modal():
+	subs_modal.allow_replacement = true
+	if subs_modal.on_exit_pressed.get_connections().is_empty():
+		var on_exit = func _on_exit():
+			player_team.update_lineup()
+			subs_modal.hide()
+			on_new_quarter_start()
+		subs_modal.on_exit_pressed.connect(on_exit)
+	subs_modal.show()
 
 func reset_rebounds():
 	player_rebounds_label.text = "R: 0"

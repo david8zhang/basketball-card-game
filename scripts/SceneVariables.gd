@@ -1,16 +1,24 @@
 extends Node
 
+# Box score stats
 var quarter_scores = {}
 var full_cpu_scorer_statlines = {}
 var full_player_scorer_statlines = {}
 var player_score := 0
 var cpu_score := 0
+
+# Player team configurations
 var player_team_bp_configs := {}
 var player_team_bench := []
 var player_strategy_card_deck := []
+
+# CPU Team configurations
 var cpu_team_bp_configs := {}
+var cpu_team_bench := []
 var salary_cap := 2000
 var num_games_won := 0
+
+# All resource names
 var all_player_names = [
 "CalebMartin", "DerrickWhite", "CarisLevert", "DomantasSabonis", "CJMcCollum", "NormanPowell", "DeAaronFox", "JadenMcDaniels", "HaywoodHighsmith", "DeAnthonyMelton", "OnyekaOkongwu", "RoyceONeal", "ObiToppin", "TreMann", "TerenceDavis", "ScottieBarnes", "JamalMurray", "SethCurry", "CameronPayne", "DemarDeRozan", "DeanWade", "KentaviousCaldwellPope", "DavionMitchell", "TerrenceRoss", "TeranceMann", "ShaiGilgeousAlexander", "ChrisPaul", "AndreDrummond", "JalenJohnson", "PatrickWilliams", "NicolasBatum", "JalenMcDaniels", "AnthonyLamb", "JaeCrowder", "CediOsman", "RussellWestbrook", "RudyGobert", "KyleLowry", "JamesHarden", "IvicaZubac", "CamThomas", "FredVanvleet", "JoshOkogie", "RobertCovington", "ThaddeusYoung", "RJBarrett", "DariusGarland", "MilesMcBride", "JohnKonchar", "AnthonyEdwards", "AyoDosunmu", "GabeVincent", "PreciousAchiuwa", "DejounteMurray", "JoshRichardson", "SamHauser", "CobyWhite", "AndrewWiggins", "KawhiLeonard", "PatrickBeverley", "KenrichWilliams", "PaulReed", "MalcolmBrogdon", "SantiAldama", "JoeIngles", "GaryTrent", "MichaelPorterJr", "MikeMuscala", "ZachLavine", "AustinReaves", "ThomasBryant", "AlHorford", "KlayThompson", "BruceBrown", "GrantWilliams", "TobiasHarris", "RickyRubio", "AaronGordon", "JoelEmbiid", "SaddiqBey", "DeandreHunter", "IsaiahJoe", "JalenBrunson", "MalikBeasley", "RobertWilliams", "JonasValanciunas", "KyleAnderson", "JoeHarris", "JohnCollins", "ReggieJackson", "JimmyButler", "JockLandale", "PJTucker", "TreyLyles", "PatConnaughton", "JaylenBrown", "BrandonIngram", "OGAnunoby", "JaMorant", "NazReid", "JordanPoole", "DevinBooker", "DraymondGreen", "ImmanuelQuickley", "JevonCarter", "JalenWilliams", "TaureanPrince", "LebronJames", "KevonLooney", "BobbyPortis", "GiannisAntetokounmpo", "WillBarton", "QuentinGrimes", "JeffGreen", "JarenJacksonJr", "BonesHyland", "ClintCapela", "KarlAnthonyTowns", "MitchellRobinson", "TyreseMaxey", "LukeKennard", "JaysonTatum", "MarcusSmart", "PaulGeorge", "NicClaxton", "ZionWilliamson", "BamAdebayo", "DorianFinneySmith", "LuguentzDort", "AlexCaruso", "IsaacOkoro", "GeorgesNiang", "MalikMonk", "AaronWiggins", "DAngeloRussell", "BrandonClarke", "JaylinWilliams", "DennisSchroder", "JaylenNowell", "JuliusRandle", "JarredVanderbilt", "JrueHoliday", "MosesMoody", "CameronJohnson", "BrookLopez", "LarryNance", "StephenCurry", "DamionLee", "HarrisonBarnes", "LamarStevens", "ChristianBraun", "HerbertJones", "DesmondBane", "KeeganMurray", "BogdanBogdanovic", "AJGriffin", "KevinHuerter", "NickeilAlexanderWalker", "DeAndreAyton", "BenSimmons", "TyusJones", "DillonBrooks", "TylerHerro", "NikolaJokic", "JonathanKuminga", "EvanMobley", "TreyMurphy", "DonovanMitchell", "TroyBrown", "AnthonyDavis", "IsaiahHartenstein", "KevinLove", "JakobPoeltl", "MasonPlumlee", "PascalSiakam", "StevenAdams", "WenyenGabriel", "GraysonAllen", "JoseAlvarado", "MikalBridges", "NikolaVucevic", "NajiMarshall", "RuiHachimura", "JoshGiddey", "ChimezieMetu", "JoshHart", "MaxStrus", "TorreyCraig", "ChrisBoucher", "KevinDurant", "SpencerDinwiddie", "ShakeMilton", "DerrickJones", "VictorOladipo", "MikeConley", "DonteDivincenzo", "DarioSaric", "TraeYoung", "JarettAllen"
 ]
@@ -56,22 +64,17 @@ func reset_player_data():
 	num_games_won = 0
 
 func instantiate_cpu_team():
-	var position_to_players = {}
-	for c in all_player_stat_configs:
-		var stat_config = c as BallPlayerStats
-		for position in stat_config.positions:
-			if !position_to_players.has(position):
-				position_to_players[position] = []
-			position_to_players[position].append(stat_config)
+	var position_to_players = get_players_for_position()
 	var selected_player_names = []
 	var cpu_salary_cap = salary_cap + 100
 	for pos in position_to_players.keys():
 		var players_to_select = filter_valid_players(position_to_players[pos], selected_player_names, cpu_salary_cap)
-		# Pick only the best players in available set of players
+		# Pick only the best players in available set of players for randomly instantiated CPU team
 		players_to_select = get_best_players(players_to_select, get_player_max_cost_for_salary_cap(cpu_salary_cap), [])
 		var player_to_add = players_to_select.pick_random()
 		selected_player_names.append(player_to_add.get_full_name())
 		cpu_team_bp_configs[pos] = player_to_add
+	cpu_team_bench = assemble_random_bench(cpu_team_bp_configs, cpu_salary_cap)
 
 func filter_valid_players(players, selected_player_names, cap):
 	return players.filter(func (p): return p.player_cost < get_player_max_cost_for_salary_cap(cap) and !selected_player_names.has(p.get_full_name()))
@@ -83,7 +86,6 @@ func get_best_players(players_to_select, max_player_cost, players_to_exclude):
 		var min_cost = min_cost_threshold + i * 100
 		var best_players = players_to_select.filter(func (p): return (p.player_cost >= max_player_cost - min_cost) and \
 		!players_to_exclude.has(p.get_full_name())) 
-		print(best_players.size())
 		if best_players.size() > 5:
 			return best_players
 	return players_to_select
@@ -98,7 +100,7 @@ func get_players_for_position():
 			pos_to_bp_stat_map[position].append(config)
 	return pos_to_bp_stat_map
 
-func assemble_random_lineup() -> Dictionary:
+func assemble_random_starting_lineup() -> Dictionary:
 	var pos_to_player_map = {}
 	var all_player_stats = get_players_for_position()
 	var selected_players = []
@@ -111,22 +113,26 @@ func assemble_random_lineup() -> Dictionary:
 		selected_players.append(random_player_stat.get_full_name())
 	return pos_to_player_map
 
-func assemble_random_bench() -> Array:
-	var starting_lineup_names = player_team_bp_configs.values().map(func (p): return p.get_full_name())
+func assemble_random_bench(team_bp_configs, custom_salary_cap) -> Array:
+	var starting_lineup_names = team_bp_configs.values().map(func (p): return p.get_full_name())
 	var players_to_pick_from = all_player_stat_configs.filter(func (p): return !starting_lineup_names.has(p.get_full_name()))
 	var bench = []
 	var bench_names = []
 	for i in range(0, 5):
-		players_to_pick_from = filter_valid_players(players_to_pick_from, bench_names, salary_cap)
+		players_to_pick_from = filter_valid_players(players_to_pick_from, bench_names, custom_salary_cap)
 		var random_player = players_to_pick_from.pick_random() as BallPlayerStats
 		bench.append(random_player)
 		bench_names.append(random_player.get_full_name())
 	return bench
 
+func assemble_random_player_bench() -> Array:
+	return assemble_random_bench(player_team_bp_configs, salary_cap)
 
-func get_player_lineup_or_gen_random_lineup():
+func get_player_team_or_gen_random_team():
 	if player_team_bp_configs.is_empty():
-		player_team_bp_configs = assemble_random_lineup()
+		player_team_bp_configs = assemble_random_starting_lineup()
+	if player_team_bench.is_empty():
+		player_team_bench = assemble_random_player_bench()
 	return player_team_bp_configs
 
 func get_player_strat_card_deck_or_gen_random_deck():

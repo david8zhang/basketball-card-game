@@ -33,9 +33,9 @@ func _ready() -> void:
 
 func generate_team_and_bench_if_empty():
 	if SceneVariables.player_team_bp_configs.is_empty():
-		SceneVariables.player_team_bp_configs = SceneVariables.assemble_random_lineup()
+		SceneVariables.player_team_bp_configs = SceneVariables.assemble_random_starting_lineup()
 	if SceneVariables.player_team_bench.is_empty():
-		SceneVariables.player_team_bench = SceneVariables.assemble_random_bench()
+		SceneVariables.player_team_bench = SceneVariables.assemble_random_player_bench()
 	updated_player_team_bp_configs = SceneVariables.player_team_bp_configs.duplicate(true)
 	updated_player_team_bench = SceneVariables.player_team_bench.duplicate(true)
 	display_default_lineups()

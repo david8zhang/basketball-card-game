@@ -25,6 +25,7 @@ func _ready():
 	continue_button.pressed.connect(go_to_next_scene)
 	view_lineup_button.pressed.connect(show_lineup_preview)
 	lineup_preview.show_bench = false
+	lineup_preview.allow_replacement = false
 	lineup_preview.on_exit_pressed.connect(hide_lineup_preview)
 
 func hide_lineup_preview():
@@ -32,7 +33,7 @@ func hide_lineup_preview():
 
 func show_lineup_preview():
 	lineup_preview.show()
-	lineup_preview.display_lineups()
+	lineup_preview.display_default_lineups()
 
 func update_curr_player_cost_total():
 	var curr_cost = get_curr_cost_total()
@@ -57,8 +58,8 @@ func init_random_players():
 		bp_card.ball_player_stats = random_player_stat
 		cards_to_select_from_container.add_child(bp_card)
 		players_to_pick_from_cards.append(bp_card)
-		var callable = Callable(self, "on_click_card").bind(bp_card)
-		bp_card.button.pressed.connect(callable)
+		var callable = Callable(self, "on_click_card")
+		bp_card.on_bp_card_clicked.connect(callable)
 
 func is_eligible_player(s: BallPlayerStats, selected_player_names):
 	return !selected_player_names.has(s.get_full_name()) and is_player_within_max_cost(s)
@@ -103,9 +104,9 @@ func add_card_to_bench_if_possible(bp_card_to_add: BallPlayerCard):
 	if selected_bp_card_cost + total_cost > SceneVariables.salary_cap:
 		show_over_budget_alert()
 	else:
-		var callable = Callable(self, "remove_bp_from_bench").bind(bp_card_to_add)
 		cards_to_select_from_container.remove_child(bp_card_to_add)
 		disconnect_bp_card_click_connections(bp_card_to_add)
+		var callable = Callable(self, "remove_bp_from_bench")
 		bp_card_to_add.on_bp_card_clicked.connect(callable)
 		bench_cards.add_child(bp_card_to_add)
 		update_curr_player_cost_total()
@@ -118,9 +119,10 @@ func disconnect_bp_card_click_connections(bp_card: BallPlayerCard):
 func remove_bp_from_bench(bp_card_to_remove: BallPlayerCard):
 	bench_cards.remove_child(bp_card_to_remove)
 	disconnect_bp_card_click_connections(bp_card_to_remove)
-	var callable = Callable(self, "on_click_card").bind(bp_card_to_remove)
+	var callable = Callable(self, "on_click_card")
 	bp_card_to_remove.on_bp_card_clicked.connect(callable)
 	cards_to_select_from_container.add_child(bp_card_to_remove)
+	cards_to_select_from_container.move_child(bp_card_to_remove, 0)
 	update_curr_player_cost_total()
 
 func show_over_budget_alert():

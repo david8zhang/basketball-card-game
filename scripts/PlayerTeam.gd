@@ -9,7 +9,6 @@ extends Node
 
 var starting_lineup: StartingLineup
 var lineup_selector: LineupSelector
-var is_bp_card_callbacks_hooked := false
 var cards_in_play = []
 const NUM_STRATEGY_CARDS = 3
 
@@ -17,22 +16,20 @@ func _ready():
 	if starting_lineup_wrapper != null:
 		starting_lineup = starting_lineup_scene.instantiate() as StartingLineup
 		starting_lineup_wrapper.add_child(starting_lineup)
-		starting_lineup.init_cards(SceneVariables.get_player_lineup_or_gen_random_lineup())
+		starting_lineup.init_cards(SceneVariables.get_player_team_or_gen_random_team())
 	strategy_card_deck.init_strategy_card_deck(SceneVariables.get_player_strat_card_deck_or_gen_random_deck())
 	cards_in_play = starting_lineup.starting_lineup_cards
+	hookup_bp_card_callbacks()
 
-func _process(_delta):
-	if !is_bp_card_callbacks_hooked:
-		hookup_bp_card_callbacks()
+func update_lineup():
+	starting_lineup.re_init_cards(SceneVariables.player_team_bp_configs)
+	cards_in_play = starting_lineup.starting_lineup_cards
+	hookup_bp_card_callbacks()
 
 func hookup_bp_card_callbacks():
 	for bp_card in starting_lineup.starting_lineup_cards:
-		if bp_card.button != null:
-			var callable = Callable(self, "on_bp_card_pressed").bind(bp_card)
-			bp_card.button.pressed.connect(callable)
-		else:
-			return
-	is_bp_card_callbacks_hooked = true
+		var callable = Callable(self, "on_bp_card_pressed")
+		bp_card.on_bp_card_clicked.connect(callable)
 
 func on_bp_card_pressed(card: BallPlayerCard):
 	game.player_select_card_to_score_with(card)
