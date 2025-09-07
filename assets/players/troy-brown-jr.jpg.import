@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cu6chtvscy422"
-path="res://.godot/imported/troy-brown.jpg-4b9eb2101ff25f756822cabfde9a01bf.ctex"
+uid="uid://cgt8ngosh1iwg"
+path="res://.godot/imported/troy-brown-jr.jpg-9be3410bee1f099965a0dca0fc81abc8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/players/troy-brown.jpg"
-dest_files=["res://.godot/imported/troy-brown.jpg-4b9eb2101ff25f756822cabfde9a01bf.ctex"]
+source_file="res://assets/players/troy-brown-jr.jpg"
+dest_files=["res://.godot/imported/troy-brown-jr.jpg-9be3410bee1f099965a0dca0fc81abc8.ctex"]
 
 [params]
 

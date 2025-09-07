@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="TeamConfig" load_steps=13 format=3 uid="uid://dossupbo3663v"]
+
+[ext_resource type="Script" uid="uid://dlki35uke8yv0" path="res://scripts/TeamConfig.gd" id="1_7fdo4"]
+[ext_resource type="Script" uid="uid://dmyxnrgdtpksv" path="res://scripts/BallPlayerStats.gd" id="1_wj1lj"]
+[ext_resource type="Resource" uid="uid://b3dnyrc1gmxgk" path="res://resources/players/JaeCrowder.tres" id="2_3khjj"]
+[ext_resource type="Resource" uid="uid://y322303bkojr" path="res://resources/players/BrookLopez.tres" id="2_5p2ah"]
+[ext_resource type="Resource" uid="uid://b7fcpvtjm7fd5" path="res://resources/players/JrueHoliday.tres" id="2_k30si"]
+[ext_resource type="Resource" uid="uid://b32djfed1tdxg" path="res://resources/players/KhrisMiddleton.tres" id="3_mecm0"]
+[ext_resource type="Resource" uid="uid://b7xr17eaosteu" path="res://resources/players/BobbyPortis.tres" id="3_undxx"]
+[ext_resource type="Resource" uid="uid://cqyd04134g1f1" path="res://resources/players/GiannisAntetokounmpo.tres" id="3_xx8q3"]
+[ext_resource type="Resource" uid="uid://ditcym11iypuo" path="res://resources/players/JevonCarter.tres" id="4_3y2um"]
+[ext_resource type="Resource" uid="uid://gquy3eth7lna" path="res://resources/players/GraysonAllen.tres" id="4_5p2ah"]
+[ext_resource type="Resource" uid="uid://1r06ulludq7t" path="res://resources/players/JoeIngles.tres" id="5_np31w"]
+[ext_resource type="Resource" uid="uid://cp6vt1eq5mxar" path="res://resources/players/PatConnaughton.tres" id="6_cm05c"]
+
+[resource]
+script = ExtResource("1_7fdo4")
+team_name = "Milwaukee Bucks"
+starting_pg = ExtResource("2_k30si")
+starting_sg = ExtResource("4_5p2ah")
+starting_sf = ExtResource("3_mecm0")
+starting_pf = ExtResource("3_xx8q3")
+starting_c = ExtResource("2_5p2ah")
+bench_players = Array[ExtResource("1_wj1lj")]([ExtResource("2_3khjj"), ExtResource("3_undxx"), ExtResource("4_3y2um"), ExtResource("5_np31w"), ExtResource("6_cm05c")])
+metadata/_custom_type_script = "uid://dlki35uke8yv0"

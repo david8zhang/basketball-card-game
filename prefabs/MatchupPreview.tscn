@@ -1,23 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://bqsbslbokh8g4"]
+[gd_scene load_steps=3 format=3 uid="uid://yr4hqg7jpf1n"]
 
-[ext_resource type="Script" uid="uid://bht273c5ft8n" path="res://scripts/LineupPreview.gd" id="1_jhfet"]
-[ext_resource type="PackedScene" uid="uid://canx4b4pr7n3c" path="res://prefabs/BallPlayerCard.tscn" id="2_4d3db"]
-[ext_resource type="PackedScene" uid="uid://bm8fw1micckc0" path="res://prefabs/BPCardPreview.tscn" id="3_cr1k1"]
+[ext_resource type="Script" uid="uid://ccftd1dw03mkd" path="res://scripts/MatchupPreview.gd" id="1_vop4m"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1u7tg"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y36mo"]
 bg_color = Color(0, 0, 0, 1)
 
-[node name="LineupPreview" type="PanelContainer"]
+[node name="MatchupPreview" type="PanelContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_1u7tg")
-script = ExtResource("1_jhfet")
-bp_card_scene = ExtResource("2_4d3db")
-bp_card_preview_scene = ExtResource("3_cr1k1")
-allow_replacement = true
+theme_override_styles/panel = SubResource("StyleBoxFlat_y36mo")
+script = ExtResource("1_vop4m")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -30,30 +25,30 @@ theme_override_constants/margin_bottom = 15
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="StarterLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="PlayerLineupLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
-text = "Starting Lineup"
+text = "Your Starting Lineup"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="StarterContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="PlayerLineupContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 15
 
-[node name="BenchLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="CPULineupLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
-text = "Bench"
+text = "CPU Starting Lineup"
 
 [node name="ScrollContainer2" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="BenchContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer2"]
+[node name="CPULineupContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer2"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 15
@@ -63,11 +58,11 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 20
-text = "Exit"
+text = "Continue"
 
 [node name="Button2" type="Button" parent="MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 theme_override_font_sizes/font_size = 20
-text = "Reset Lineups"
+text = "Edit Lineups"
