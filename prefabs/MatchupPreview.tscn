@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://yr4hqg7jpf1n"]
+[gd_scene load_steps=5 format=3 uid="uid://yr4hqg7jpf1n"]
 
 [ext_resource type="Script" uid="uid://ccftd1dw03mkd" path="res://scripts/MatchupPreview.gd" id="1_vop4m"]
+[ext_resource type="PackedScene" uid="uid://canx4b4pr7n3c" path="res://prefabs/BallPlayerCard.tscn" id="2_ke6pc"]
+[ext_resource type="PackedScene" uid="uid://bm8fw1micckc0" path="res://prefabs/BPCardPreview.tscn" id="3_yox75"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y36mo"]
 bg_color = Color(0, 0, 0, 1)
@@ -13,6 +15,8 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_y36mo")
 script = ExtResource("1_vop4m")
+bp_card_scene = ExtResource("2_ke6pc")
+bp_card_preview_scene = ExtResource("3_yox75")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2

@@ -305,7 +305,7 @@ text = "REB"
 horizontal_alignment = 1
 
 [node name="Spacer" type="Control" parent="CanvasLayer/Control/VBoxContainer"]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 125)
 layout_mode = 2
 
 [node name="Button" type="Button" parent="CanvasLayer/Control/VBoxContainer"]

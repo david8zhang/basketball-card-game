@@ -69,6 +69,8 @@ func is_player_within_max_cost(ball_player_stats: BallPlayerStats):
 
 func go_to_next_scene():
 	var bench_players = bench_cards.get_children().map(func (c): return c.ball_player_stats)
+	for b in bench_players:
+		print(b.get_full_name())
 	SceneVariables.player_team_bench = bench_players
 	get_tree().change_scene_to_file("res://scenes/PickStrategyCards.tscn")
 

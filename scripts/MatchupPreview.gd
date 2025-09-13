@@ -12,6 +12,28 @@ extends PanelContainer
 var selected_bp_card
 var bp_card_preview
 
+signal on_edit_lineups_clicked
+signal on_continue_clicked
+
+func _ready() -> void:
+	if SceneVariables.player_team_bp_configs.is_empty():
+		SceneVariables.player_team_bp_configs = SceneVariables.get_player_team_or_gen_random_team()
+	if SceneVariables.cpu_team_bp_configs.is_empty():
+		SceneVariables.instantiate_cpu_team()
+	update_lineups()
+
+	var on_edit_lineup = func _on_edit_lineup():
+		on_edit_lineups_clicked.emit()
+	edit_lineups_button.pressed.connect(on_edit_lineup)
+
+	var on_continue = func _on_continue():
+		on_continue_clicked.emit()
+	continue_button.pressed.connect(on_continue)
+
+func update_lineups():
+	display_specific_lineups(SceneVariables.player_team_bp_configs, player_lineup_container)
+	display_specific_lineups(SceneVariables.cpu_team_bp_configs, cpu_lineup_container)
+
 func display_specific_lineups(team_bp_configs, container):
 	var positions = team_bp_configs.keys()
 	positions.sort()

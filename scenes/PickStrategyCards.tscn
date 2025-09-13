@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://drroqdgj8c1ms" path="res://scripts/PickStrategyCards.gd" id="1_s3bvw"]
 [ext_resource type="PackedScene" uid="uid://bi2ksw8anhd4v" path="res://prefabs/StrategyCard.tscn" id="2_h2b5r"]
-[ext_resource type="PackedScene" uid="uid://bqsbslbokh8g4" path="res://prefabs/LineupPreview.tscn" id="3_wa7pe"]
+[ext_resource type="PackedScene" uid="uid://bqsbslbokh8g4" path="res://scripts/LineupPreview.tscn" id="3_wa7pe"]
 
 [node name="PickStrategyCards" type="Control"]
 layout_mode = 3

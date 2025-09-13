@@ -26,6 +26,7 @@ var full_cpu_scorer_statlines = {}
 @onready var quarter_label = $CanvasLayer/QuarterLabel as Label
 @onready var auto_win_button = $CanvasLayer/AutoWinButton as Button
 @onready var subs_modal = $CanvasLayer/LineupPreview as LineupPreview
+@onready var matchup_modal = $CanvasLayer/MatchupPreview as MatchupPreview
 
 @export var matchup_container_scene: PackedScene
 @export var quarter_end_modal_scene: PackedScene
@@ -60,6 +61,7 @@ func _ready() -> void:
 	auto_win_button.pressed.connect(handle_auto_win)
 	quarter_label.text = "Q" + str(quarter_number)
 	subs_modal.hide()
+	matchup_modal.hide()
 
 func _tally_rebound_test():
 	var player_score_data = {
@@ -278,7 +280,22 @@ func on_new_quarter_start():
 func on_quarter_end_complete():
 	quarter_end_modal.queue_free()
 	rebound_tally.queue_free()
-	show_subs_modal()
+	show_matchup_preview()
+
+# Show preview of player lineup vs. cpu lineup
+func show_matchup_preview():
+	if matchup_modal.on_continue_clicked.get_connections().is_empty():
+		var on_continue = func _on_continue():
+			matchup_modal.hide()
+			on_new_quarter_start()
+		matchup_modal.on_continue_clicked.connect(on_continue)
+	if matchup_modal.on_edit_lineups_clicked.get_connections().is_empty():
+		var on_edit_lineups = func _on_edit_lineups():
+			matchup_modal.hide()
+			show_subs_modal()
+		matchup_modal.on_edit_lineups_clicked.connect(on_edit_lineups)
+	matchup_modal.update_lineups()
+	matchup_modal.show()
 
 func show_subs_modal():
 	subs_modal.allow_replacement = true
@@ -286,7 +303,7 @@ func show_subs_modal():
 		var on_exit = func _on_exit():
 			player_team.update_lineup()
 			subs_modal.hide()
-			on_new_quarter_start()
+			show_matchup_preview()
 		subs_modal.on_exit_pressed.connect(on_exit)
 	subs_modal.show()
 
