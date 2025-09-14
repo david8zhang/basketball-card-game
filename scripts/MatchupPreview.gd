@@ -53,6 +53,7 @@ func init_card(container: HBoxContainer, bp_stat: BallPlayerStats):
 
 func on_click_card(bp_card: BallPlayerCard):
 	bp_card_preview = bp_card_preview_scene.instantiate() as BPCardPreview
+	bp_card_preview.show_select_button = false
 	bp_card_preview.bp_stat_to_preview = bp_card.ball_player_stats
 	bp_card_preview.on_close.connect(close_bp_card_preview)
 	var callable = Callable(self, "select_bp_card").bind(bp_card)

@@ -21,7 +21,7 @@ metadata/_custom_type_script = "uid://ckyo36itiyt30"
 [sub_resource type="Resource" id="Resource_1yduq"]
 script = ExtResource("3_ogo3i")
 show_failure = true
-bonus_type = 0
+bonus_type = 7
 metadata/_custom_type_script = "uid://8h7wbli6l8ea"
 
 [sub_resource type="Resource" id="Resource_lx2pm"]
@@ -34,7 +34,7 @@ metadata/_custom_type_script = "uid://vcwodimwrbri"
 [sub_resource type="Resource" id="Resource_noo7c"]
 script = ExtResource("3_ogo3i")
 show_failure = false
-bonus_type = 0
+bonus_type = 7
 metadata/_custom_type_script = "uid://8h7wbli6l8ea"
 
 [sub_resource type="Resource" id="Resource_mhug5"]

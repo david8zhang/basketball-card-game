@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://ycdkrntstf2n"]
+[gd_scene load_steps=5 format=3 uid="uid://ycdkrntstf2n"]
 
 [ext_resource type="Script" uid="uid://drroqdgj8c1ms" path="res://scripts/PickStrategyCards.gd" id="1_s3bvw"]
 [ext_resource type="PackedScene" uid="uid://bi2ksw8anhd4v" path="res://prefabs/StrategyCard.tscn" id="2_h2b5r"]
-[ext_resource type="PackedScene" uid="uid://bqsbslbokh8g4" path="res://scripts/LineupPreview.tscn" id="3_wa7pe"]
+[ext_resource type="PackedScene" uid="uid://bqsbslbokh8g4" path="res://prefabs/LineupPreview.tscn" id="3_wa7pe"]
+[ext_resource type="PackedScene" uid="uid://yr4hqg7jpf1n" path="res://prefabs/MatchupPreview.tscn" id="4_6rdre"]
 
 [node name="PickStrategyCards" type="Control"]
 layout_mode = 3
@@ -98,5 +99,9 @@ theme_override_font_sizes/font_size = 20
 text = "View Lineup"
 
 [node name="LineupPreview" parent="." instance=ExtResource("3_wa7pe")]
+visible = false
+layout_mode = 1
+
+[node name="MatchupPreview" parent="." instance=ExtResource("4_6rdre")]
 visible = false
 layout_mode = 1

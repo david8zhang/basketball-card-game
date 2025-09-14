@@ -17,7 +17,8 @@ func _ready():
 	if starting_lineup_wrapper != null:
 		starting_lineup = starting_lineup_scene.instantiate() as StartingLineup
 		starting_lineup_wrapper.add_child(starting_lineup)
-		SceneVariables.instantiate_cpu_team()
+		if SceneVariables.cpu_team_bp_configs.is_empty():
+			SceneVariables.instantiate_cpu_team()
 		starting_lineup.init_cards(SceneVariables.cpu_team_bp_configs)
 	cards_in_play = starting_lineup.starting_lineup_cards	
 

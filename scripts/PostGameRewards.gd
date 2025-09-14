@@ -4,16 +4,23 @@ extends Control
 @onready var salary_cap_incr_amt = $VBoxContainer/HBoxContainer/SalaryCapIncrAmt
 @onready var reward_container = $VBoxContainer/HBoxContainer2
 @onready var skip_button = $Button as Button
+@onready var lineup_preview = $LineupPreview as LineupPreview
+@onready var matchup_preview = $MatchupPreview as MatchupPreview
 
 @export var strategy_card_scene: PackedScene
 @export var bp_card_scene: PackedScene
 @export var add_new_player_modal_scene: PackedScene
+
+var has_generated_new_cpu_lineup := false
 
 func _ready() -> void:
 	SceneVariables.salary_cap += 150
 	salary_cap_incr_amt.text = "+150 " + "(" + str(SceneVariables.salary_cap) + ")"
 	init_rewards()
 	skip_button.pressed.connect(on_skip_reward)
+	lineup_preview.hide()
+	matchup_preview.hide()
+
 
 func init_rewards():
 	var players_for_salary_cap = SceneVariables.get_players_for_salary_cap()
@@ -46,11 +53,41 @@ func show_add_player_modal(bp_card: BallPlayerCard):
 
 func on_add_player(new_lineup):
 	SceneVariables.player_team_bp_configs = new_lineup
-	get_tree().change_scene_to_file("res://scenes/Main.tscn")
+	show_matchup_preview()
 
 func on_add_strat_card(strat_card: StrategyCard):
 	SceneVariables.player_strategy_card_deck.append(strat_card.strategy_card_config)
-	get_tree().change_scene_to_file("res://scenes/Main.tscn")
+	show_matchup_preview()
 
 func on_skip_reward():
+	show_matchup_preview()
+
+func go_to_next_scene():
 	get_tree().change_scene_to_file("res://scenes/Main.tscn")
+
+# Show preview of player lineup vs. cpu lineup
+func show_matchup_preview():
+	if !has_generated_new_cpu_lineup:
+		SceneVariables.instantiate_cpu_team()	
+		has_generated_new_cpu_lineup = true
+	if matchup_preview.on_continue_clicked.get_connections().is_empty():
+		var on_continue = func _on_continue():
+			matchup_preview.hide()
+			get_tree().change_scene_to_file("res://scenes/Main.tscn")
+		matchup_preview.on_continue_clicked.connect(on_continue)
+	if matchup_preview.on_edit_lineups_clicked.get_connections().is_empty():
+		var on_edit_lineups = func _on_edit_lineups():
+			matchup_preview.hide()
+			show_subs_modal()
+		matchup_preview.on_edit_lineups_clicked.connect(on_edit_lineups)
+	matchup_preview.update_lineups()
+	matchup_preview.show()
+
+func show_subs_modal():
+	lineup_preview.allow_replacement = true
+	if lineup_preview.on_exit_pressed.get_connections().is_empty():
+		var on_exit = func _on_exit():
+			lineup_preview.hide()
+			show_matchup_preview()
+		lineup_preview.on_exit_pressed.connect(on_exit)
+	lineup_preview.show()

@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://shsmwna0cia5" path="res://prefabs/QuarterEnd.tscn" id="3_g1bwu"]
 [ext_resource type="PackedScene" uid="uid://c5jusiagrv0vw" path="res://prefabs/MatchupContainer.tscn" id="4_vns61"]
 [ext_resource type="PackedScene" uid="uid://b5k1x8ihmtb33" path="res://prefabs/ReboundTally.tscn" id="6_rvxux"]
-[ext_resource type="PackedScene" uid="uid://bqsbslbokh8g4" path="res://scripts/LineupPreview.tscn" id="7_nxtc6"]
+[ext_resource type="PackedScene" uid="uid://bqsbslbokh8g4" path="res://prefabs/LineupPreview.tscn" id="7_nxtc6"]
 [ext_resource type="PackedScene" uid="uid://yr4hqg7jpf1n" path="res://prefabs/MatchupPreview.tscn" id="8_jlsqs"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_pvlkv"]

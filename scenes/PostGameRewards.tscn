@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dnbce8jv4hm47"]
+[gd_scene load_steps=8 format=3 uid="uid://dnbce8jv4hm47"]
 
 [ext_resource type="Script" uid="uid://d2j77qjbufmw0" path="res://scripts/PostGameRewards.gd" id="1_cgxef"]
 [ext_resource type="PackedScene" uid="uid://bi2ksw8anhd4v" path="res://prefabs/StrategyCard.tscn" id="1_mnhli"]
 [ext_resource type="PackedScene" uid="uid://canx4b4pr7n3c" path="res://prefabs/BallPlayerCard.tscn" id="3_k4p0j"]
 [ext_resource type="PackedScene" uid="uid://wahueay2vm7i" path="res://prefabs/AddNewPlayerModal.tscn" id="4_1oxo7"]
+[ext_resource type="PackedScene" uid="uid://bqsbslbokh8g4" path="res://prefabs/LineupPreview.tscn" id="5_r7i5o"]
+[ext_resource type="PackedScene" uid="uid://yr4hqg7jpf1n" path="res://prefabs/MatchupPreview.tscn" id="6_ymsd8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mnhli"]
 bg_color = Color(0, 0, 0, 1)
@@ -107,5 +109,13 @@ grow_vertical = 0
 text = "Skip"
 
 [node name="AddNewPlayerModal" parent="." instance=ExtResource("4_1oxo7")]
+visible = false
+layout_mode = 1
+
+[node name="LineupPreview" parent="." instance=ExtResource("5_r7i5o")]
+visible = false
+layout_mode = 1
+
+[node name="MatchupPreview" parent="." instance=ExtResource("6_ymsd8")]
 visible = false
 layout_mode = 1

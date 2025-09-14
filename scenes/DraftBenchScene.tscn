@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dyggvqb56jmqh" path="res://scripts/DraftBenchScene.gd" id="1_m0f0g"]
 [ext_resource type="PackedScene" uid="uid://canx4b4pr7n3c" path="res://prefabs/BallPlayerCard.tscn" id="2_xv45b"]
 [ext_resource type="PackedScene" uid="uid://bm8fw1micckc0" path="res://prefabs/BPCardPreview.tscn" id="3_ifwci"]
-[ext_resource type="PackedScene" uid="uid://bqsbslbokh8g4" path="res://scripts/LineupPreview.tscn" id="4_m5ybp"]
+[ext_resource type="PackedScene" uid="uid://bqsbslbokh8g4" path="res://prefabs/LineupPreview.tscn" id="4_m5ybp"]
 
 [node name="DraftBenchScene" type="Control"]
 layout_mode = 3
