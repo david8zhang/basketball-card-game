@@ -93,6 +93,7 @@ func set_player_card(card: BallPlayerCard):
 	hbox_container.add_child(player_card)
 	player_card.marker.copy_from_marker(card.marker)
 	player_card.copy_stat_bonuses(card)
+	player_card.set_curr_stamina(card.get_curr_stamina())
 
 func set_cpu_card(card: BallPlayerCard):
 	cpu_card = card_scene.instantiate() as BallPlayerCard
@@ -100,6 +101,7 @@ func set_cpu_card(card: BallPlayerCard):
 	hbox_container.add_child(cpu_card)
 	cpu_card.marker.copy_from_marker(card.marker)
 	cpu_card.copy_stat_bonuses(card)
+	cpu_card.set_curr_stamina(card.get_curr_stamina())
 
 func set_curr_assists(assists: int):
 	curr_assists = assists

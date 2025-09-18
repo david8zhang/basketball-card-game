@@ -15,6 +15,7 @@ enum PlayerPosition { PG, SG, SF, PF, C, NONE }
 @export var texture: Texture
 @export var first_name_size := 28
 @export var last_name_size := 28
+@export var max_stamina := 2
 
 @export_group("RollTable")
 @export var roll_table: Array[RollTableRow] = []

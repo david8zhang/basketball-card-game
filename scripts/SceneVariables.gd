@@ -11,10 +11,12 @@ var cpu_score := 0
 var player_team_bp_configs := {}
 var player_team_bench := []
 var player_strategy_card_deck := []
+var player_team_bp_data_cache = {}
 
 # CPU Team configurations
 var cpu_team_bp_configs := {}
 var cpu_team_bench := []
+var cpu_team_bp_data_cache := {}
 var salary_cap := 2000
 var num_games_won := 0
 

@@ -16,6 +16,7 @@ extends Control
 @onready var texture_rect = $Panel/MarginContainer/TextureRect as TextureRect
 @onready var highlight = $Highlight as Panel
 @onready var player_cost := $Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer3/Panel/Cost as Label
+@onready var stamina_label := $Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer3/Panel3/Stamina as Label
 @onready var side := Game.Side
 
 @export var roll_table_value_scene: PackedScene
@@ -30,6 +31,7 @@ var stat_bonuses = {
 	StatType.DEFENSE: 0
 }
 var is_out_of_position := false
+var curr_stamina := 0
 
 signal on_bp_card_clicked(bp_card)
 
@@ -65,6 +67,8 @@ func _ready():
 		stat_bonuses[StatType.OFFENSE] = -2
 		stat_bonuses[StatType.DEFENSE] = -2
 		render_stat_bonuses()
+
+	set_curr_stamina(ball_player_stats.max_stamina)
 
 
 func setup_roll_table():
@@ -119,6 +123,13 @@ func get_assigned_position():
 
 func get_full_name():
 	return ball_player_stats.first_name + " " + ball_player_stats.last_name
+
+func set_curr_stamina(stamina):
+	curr_stamina = stamina
+	stamina_label.text = "Stamina: " + str(stamina) + "/" + str(ball_player_stats.max_stamina)
+
+func get_curr_stamina():
+	return curr_stamina
 
 func add_hot_marker():
 	marker.add_hot_marker()

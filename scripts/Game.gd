@@ -62,6 +62,7 @@ func _ready() -> void:
 	quarter_label.text = "Q" + str(quarter_number)
 	subs_modal.hide()
 	matchup_modal.hide()
+	init_bp_data_cache()
 
 func _tally_rebound_test():
 	var player_score_data = {
@@ -276,10 +277,12 @@ func on_new_quarter_start():
 		var card = c as BallPlayerCard
 		card.reset_stat_bonuses()
 		card.button.flat = true
+	load_bp_data_cache()
 
 func on_quarter_end_complete():
 	quarter_end_modal.queue_free()
 	rebound_tally.queue_free()
+	set_bp_data_cache()
 	show_matchup_preview()
 
 # Show preview of player lineup vs. cpu lineup
@@ -320,6 +323,56 @@ func handle_auto_win():
 	SceneVariables.cpu_score = 0
 	get_tree().change_scene_to_file("res://scenes/FinalScore.tscn")
 
+func init_bp_data_cache():
+	init_bp_data_cache_for_team(SceneVariables.player_team_bp_configs.values(), SceneVariables.player_team_bp_data_cache)
+	init_bp_data_cache_for_team(SceneVariables.player_team_bench, SceneVariables.player_team_bp_data_cache)
+	init_bp_data_cache_for_team(SceneVariables.cpu_team_bp_configs.values(), SceneVariables.cpu_team_bp_data_cache)
+	init_bp_data_cache_for_team(SceneVariables.cpu_team_bench, SceneVariables.cpu_team_bp_data_cache)
+
+func init_bp_data_cache_for_team(team_stats, bp_data_cache):
+	for s in team_stats:
+		var stats = s as BallPlayerStats
+		bp_data_cache[stats.get_full_name()] = {
+			"stamina": stats.max_stamina,
+			"hot_markers": 0,
+			"cold_markers": 0
+		}
+
+func set_bp_data_cache():
+	set_bp_data_cache_for_team(player_team.get_cards_in_play(), SceneVariables.player_team_bp_data_cache)
+	set_bp_data_cache_for_team(cpu_team.get_cards_in_play(), SceneVariables.cpu_team_bp_data_cache)
+
+func set_bp_data_cache_for_team(team_cards, bp_data_cache):
+	for c in team_cards:
+		var card = c as BallPlayerCard
+		var cache_data = bp_data_cache[card.get_full_name()]
+		cache_data["stamina"] = max(0, cache_data["stamina"] - 1)
+		if card.marker.curr_marker_count > 0:
+			if card.marker.curr_marker_type == Marker.MarkerType.HOT:
+				cache_data["hot_markers"] = card.marker.curr_marker_count
+				cache_data["cold_markers"] = 0
+			else:
+				cache_data["cold_markers"] = card.marker.curr_marker_count
+				cache_data["hot_markers"] = 0
+		else:
+			cache_data["hot_markers"] = 0
+			cache_data["cold_markers"] = 0
+
+func load_bp_data_cache():
+	load_bp_data_cache_for_team(player_team.get_cards_in_play(), SceneVariables.player_team_bp_data_cache)
+	load_bp_data_cache_for_team(cpu_team.get_cards_in_play(), SceneVariables.cpu_team_bp_data_cache)
+
+func load_bp_data_cache_for_team(team_cards, bp_data_cache):
+	for c in team_cards:
+		var card = c as BallPlayerCard
+		var cache_data = bp_data_cache[card.get_full_name()]
+		c.set_curr_stamina(cache_data["stamina"])
+		if cache_data["hot_markers"] > 0:
+			c.marker.update_marker_with_type(cache_data["hot_markers"], Marker.MarkerType.HOT)
+		elif cache_data["cold_markers"] > 0:
+			c.marker.update_marker_with_type(cache_data["cold_markers"], Marker.MarkerType.COLD)
+		else:
+			c.marker.update_marker_with_type(0, Marker.MarkerType.HOT)
 
 # ==================================== GETTERS ====================================
 

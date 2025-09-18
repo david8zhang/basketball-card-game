@@ -323,6 +323,20 @@ theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 12
 text = "Shot: 1"
 
+[node name="Panel3" type="PanelContainer" parent="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_0vq88")
+
+[node name="Stamina" type="Label" parent="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer3/Panel3"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 12
+text = "Stamina: 3/3"
+
 [node name="ThreePointBonus" type="Label" parent="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 8
