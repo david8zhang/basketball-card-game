@@ -74,7 +74,7 @@ func init_card(container: HBoxContainer, bp_stat: BallPlayerStats):
 	container.add_child(bp_card)
 
 func on_click_card(bp_card: BallPlayerCard):
-	if selected_bp_card != null:
+	if selected_bp_card != null and !bench_container.get_children().has(bp_card):
 		exit_button.text = "Save & Exit"
 		var assigned_position = get_assigned_position(bp_card, updated_player_team_bp_configs)
 		updated_player_team_bp_configs[assigned_position] = selected_bp_card.ball_player_stats

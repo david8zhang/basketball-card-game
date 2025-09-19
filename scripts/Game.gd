@@ -370,11 +370,11 @@ static func load_bp_data_cache_for_team(team_cards, bp_data_cache):
 			var cache_data = bp_data_cache[card.get_full_name()]
 			c.set_curr_stamina(cache_data["stamina"])
 			if cache_data["hot_markers"] > 0:
-				c.marker.update_marker_with_type(cache_data["hot_markers"], Marker.MarkerType.HOT)
+				c.marker.set_marker_type_and_count(cache_data["hot_markers"], Marker.MarkerType.HOT)
 			elif cache_data["cold_markers"] > 0:
-				c.marker.update_marker_with_type(cache_data["cold_markers"], Marker.MarkerType.COLD)
+				c.marker.set_marker_type_and_count(cache_data["cold_markers"], Marker.MarkerType.COLD)
 			else:
-				c.marker.update_marker_with_type(0, Marker.MarkerType.HOT)
+				c.marker.set_marker_type_and_count(0, Marker.MarkerType.NONE)
 
 # ==================================== GETTERS ====================================
 

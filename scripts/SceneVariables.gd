@@ -76,7 +76,7 @@ func instantiate_cpu_team():
 		var player_to_add = players_to_select.pick_random()
 		selected_player_names.append(player_to_add.get_full_name())
 		cpu_team_bp_configs[pos] = player_to_add
-	cpu_team_bench = assemble_random_bench(cpu_team_bp_configs, cpu_salary_cap)
+	cpu_team_bench = assemble_random_bench(cpu_team_bp_configs, cpu_salary_cap - 150)
 
 func filter_valid_players(players, selected_player_names, cap):
 	return players.filter(func (p): return p.player_cost < get_player_max_cost_for_salary_cap(cap) and !selected_player_names.has(p.get_full_name()))
@@ -128,7 +128,7 @@ func assemble_random_bench(team_bp_configs, custom_salary_cap) -> Array:
 	return bench
 
 func assemble_random_player_bench() -> Array:
-	return assemble_random_bench(player_team_bp_configs, salary_cap)
+	return assemble_random_bench(player_team_bp_configs, salary_cap - 150)
 
 func get_player_team_or_gen_random_team():
 	if player_team_bp_configs.is_empty():
