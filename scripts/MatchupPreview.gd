@@ -31,15 +31,17 @@ func _ready() -> void:
 	continue_button.pressed.connect(on_continue)
 
 func update_lineups():
-	display_specific_lineups(SceneVariables.player_team_bp_configs, player_lineup_container)
-	display_specific_lineups(SceneVariables.cpu_team_bp_configs, cpu_lineup_container)
+	display_specific_lineups(SceneVariables.player_team_bp_configs, player_lineup_container, Game.Side.PLAYER)
+	display_specific_lineups(SceneVariables.cpu_team_bp_configs, cpu_lineup_container, Game.Side.CPU)
 
-func display_specific_lineups(team_bp_configs, container):
+func display_specific_lineups(team_bp_configs, container, side: Game.Side):
 	var positions = team_bp_configs.keys()
 	positions.sort()
 	clear_prev_children(container)
 	for p in positions:
 		init_card(container, team_bp_configs[p])
+	var bp_data_cache = SceneVariables.player_team_bp_data_cache if side == Game.Side.PLAYER else SceneVariables.cpu_team_bp_data_cache
+	Game.load_bp_data_cache_for_team(container.get_children(), bp_data_cache)
 
 func clear_prev_children(container: HBoxContainer):
 	for c in container.get_children():

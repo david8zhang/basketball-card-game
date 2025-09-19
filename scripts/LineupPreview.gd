@@ -38,17 +38,17 @@ func generate_team_and_bench_if_empty():
 		SceneVariables.player_team_bench = SceneVariables.assemble_random_player_bench()
 	updated_player_team_bp_configs = SceneVariables.player_team_bp_configs.duplicate(true)
 	updated_player_team_bench = SceneVariables.player_team_bench.duplicate(true)
-	display_default_lineups()
+	update_lineups()
 
 func reset_lineups():
 	updated_player_team_bp_configs = SceneVariables.player_team_bp_configs.duplicate(true)
 	updated_player_team_bench = SceneVariables.player_team_bench.duplicate(true)
-	display_default_lineups()
+	update_lineups()
 
-func display_default_lineups():
-	display_specific_lineups(SceneVariables.player_team_bp_configs, SceneVariables.player_team_bench)
+func update_lineups():
+	update_specific_lineups(SceneVariables.player_team_bp_configs, SceneVariables.player_team_bench)
 
-func display_specific_lineups(player_team_bp_configs, player_team_bench):
+func update_specific_lineups(player_team_bp_configs, player_team_bench):
 	var positions = player_team_bp_configs.keys()
 	positions.sort()
 	clear_prev_children()
@@ -58,6 +58,8 @@ func display_specific_lineups(player_team_bp_configs, player_team_bench):
 		for bp_stat in player_team_bench:
 			init_card(bench_container, bp_stat)
 	bench_label.visible = show_bench
+	Game.load_bp_data_cache_for_team(starter_container.get_children(), SceneVariables.player_team_bp_data_cache)
+	Game.load_bp_data_cache_for_team(bench_container.get_children(), SceneVariables.player_team_bp_data_cache)
 
 func clear_prev_children():
 	for c in starter_container.get_children():
@@ -80,7 +82,7 @@ func on_click_card(bp_card: BallPlayerCard):
 		updated_player_team_bench.append(bp_card.ball_player_stats)
 		selected_bp_card.disable_highlight()
 		selected_bp_card = null
-		display_specific_lineups(updated_player_team_bp_configs, updated_player_team_bench)
+		update_specific_lineups(updated_player_team_bp_configs, updated_player_team_bench)
 	else:
 		bp_card_preview = bp_card_preview_scene.instantiate() as BPCardPreview
 		bp_card_preview.bp_stat_to_preview = bp_card.ball_player_stats

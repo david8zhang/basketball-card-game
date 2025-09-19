@@ -308,6 +308,7 @@ func show_subs_modal():
 			subs_modal.hide()
 			show_matchup_preview()
 		subs_modal.on_exit_pressed.connect(on_exit)
+	subs_modal.update_lineups()
 	subs_modal.show()
 
 func reset_rebounds():
@@ -324,12 +325,12 @@ func handle_auto_win():
 	get_tree().change_scene_to_file("res://scenes/FinalScore.tscn")
 
 func init_bp_data_cache():
-	init_bp_data_cache_for_team(SceneVariables.player_team_bp_configs.values(), SceneVariables.player_team_bp_data_cache)
-	init_bp_data_cache_for_team(SceneVariables.player_team_bench, SceneVariables.player_team_bp_data_cache)
-	init_bp_data_cache_for_team(SceneVariables.cpu_team_bp_configs.values(), SceneVariables.cpu_team_bp_data_cache)
-	init_bp_data_cache_for_team(SceneVariables.cpu_team_bench, SceneVariables.cpu_team_bp_data_cache)
+	Game.init_bp_data_cache_for_team(SceneVariables.player_team_bp_configs.values(), SceneVariables.player_team_bp_data_cache)
+	Game.init_bp_data_cache_for_team(SceneVariables.player_team_bench, SceneVariables.player_team_bp_data_cache)
+	Game.init_bp_data_cache_for_team(SceneVariables.cpu_team_bp_configs.values(), SceneVariables.cpu_team_bp_data_cache)
+	Game.init_bp_data_cache_for_team(SceneVariables.cpu_team_bench, SceneVariables.cpu_team_bp_data_cache)
 
-func init_bp_data_cache_for_team(team_stats, bp_data_cache):
+static func init_bp_data_cache_for_team(team_stats, bp_data_cache):
 	for s in team_stats:
 		var stats = s as BallPlayerStats
 		bp_data_cache[stats.get_full_name()] = {
@@ -339,10 +340,10 @@ func init_bp_data_cache_for_team(team_stats, bp_data_cache):
 		}
 
 func set_bp_data_cache():
-	set_bp_data_cache_for_team(player_team.get_cards_in_play(), SceneVariables.player_team_bp_data_cache)
-	set_bp_data_cache_for_team(cpu_team.get_cards_in_play(), SceneVariables.cpu_team_bp_data_cache)
+	Game.set_bp_data_cache_for_team(player_team.get_cards_in_play(), SceneVariables.player_team_bp_data_cache)
+	Game.set_bp_data_cache_for_team(cpu_team.get_cards_in_play(), SceneVariables.cpu_team_bp_data_cache)
 
-func set_bp_data_cache_for_team(team_cards, bp_data_cache):
+static func set_bp_data_cache_for_team(team_cards, bp_data_cache):
 	for c in team_cards:
 		var card = c as BallPlayerCard
 		var cache_data = bp_data_cache[card.get_full_name()]
@@ -359,20 +360,21 @@ func set_bp_data_cache_for_team(team_cards, bp_data_cache):
 			cache_data["cold_markers"] = 0
 
 func load_bp_data_cache():
-	load_bp_data_cache_for_team(player_team.get_cards_in_play(), SceneVariables.player_team_bp_data_cache)
-	load_bp_data_cache_for_team(cpu_team.get_cards_in_play(), SceneVariables.cpu_team_bp_data_cache)
+	Game.load_bp_data_cache_for_team(player_team.get_cards_in_play(), SceneVariables.player_team_bp_data_cache)
+	Game.load_bp_data_cache_for_team(cpu_team.get_cards_in_play(), SceneVariables.cpu_team_bp_data_cache)
 
-func load_bp_data_cache_for_team(team_cards, bp_data_cache):
+static func load_bp_data_cache_for_team(team_cards, bp_data_cache):
 	for c in team_cards:
 		var card = c as BallPlayerCard
-		var cache_data = bp_data_cache[card.get_full_name()]
-		c.set_curr_stamina(cache_data["stamina"])
-		if cache_data["hot_markers"] > 0:
-			c.marker.update_marker_with_type(cache_data["hot_markers"], Marker.MarkerType.HOT)
-		elif cache_data["cold_markers"] > 0:
-			c.marker.update_marker_with_type(cache_data["cold_markers"], Marker.MarkerType.COLD)
-		else:
-			c.marker.update_marker_with_type(0, Marker.MarkerType.HOT)
+		if bp_data_cache.has(card.get_full_name()):
+			var cache_data = bp_data_cache[card.get_full_name()]
+			c.set_curr_stamina(cache_data["stamina"])
+			if cache_data["hot_markers"] > 0:
+				c.marker.update_marker_with_type(cache_data["hot_markers"], Marker.MarkerType.HOT)
+			elif cache_data["cold_markers"] > 0:
+				c.marker.update_marker_with_type(cache_data["cold_markers"], Marker.MarkerType.COLD)
+			else:
+				c.marker.update_marker_with_type(0, Marker.MarkerType.HOT)
 
 # ==================================== GETTERS ====================================
 

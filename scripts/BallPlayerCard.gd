@@ -127,6 +127,10 @@ func get_full_name():
 func set_curr_stamina(stamina):
 	curr_stamina = stamina
 	stamina_label.text = "Stamina: " + str(stamina) + "/" + str(ball_player_stats.max_stamina)
+	if curr_stamina == 0:
+		stat_bonuses[StatType.OFFENSE] = -4
+		stat_bonuses[StatType.DEFENSE] = -4
+		render_stat_bonuses()
 
 func get_curr_stamina():
 	return curr_stamina

@@ -31,7 +31,7 @@ func hide_lineup_preview():
 
 func show_lineup_preview():
 	lineup_preview.show()
-	lineup_preview.display_default_lineups()
+	lineup_preview.update_lineups()
 
 func add_strategy_card(selected_card: StrategyCard):
 	if selected_cards_container.get_children().has(selected_card):
