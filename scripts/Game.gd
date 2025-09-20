@@ -32,6 +32,7 @@ var full_cpu_scorer_statlines = {}
 @export var quarter_end_modal_scene: PackedScene
 @export var rebound_tally_scene: PackedScene
 @export var MAX_QUARTERS := 4
+@export var skip_scoring := false
 
 var matchup_container: MatchupContainer
 var quarter_end_modal: QuarterEnd
@@ -186,6 +187,7 @@ func show_quarter_end_info_modal():
 		SceneVariables.full_player_scorer_statlines = full_player_scorer_statlines
 		SceneVariables.player_score = get_player_score()
 		SceneVariables.cpu_score = get_cpu_score()
+		init_bp_data_cache()
 		get_tree().change_scene_to_file("res://scenes/FinalScore.tscn")
 	else:
 		quarter_end_modal = quarter_end_modal_scene.instantiate() as QuarterEnd
@@ -283,6 +285,7 @@ func on_quarter_end_complete():
 	quarter_end_modal.queue_free()
 	rebound_tally.queue_free()
 	set_bp_data_cache()
+	cpu_team.handle_substitutions()
 	show_matchup_preview()
 
 # Show preview of player lineup vs. cpu lineup
@@ -320,6 +323,7 @@ func reset_assists():
 	cpu_assists_label.text = "A: 0"
 
 func handle_auto_win():
+	init_bp_data_cache()
 	SceneVariables.player_score = 10
 	SceneVariables.cpu_score = 0
 	get_tree().change_scene_to_file("res://scenes/FinalScore.tscn")
@@ -330,6 +334,14 @@ func init_bp_data_cache():
 	Game.init_bp_data_cache_for_team(SceneVariables.cpu_team_bp_configs.values(), SceneVariables.cpu_team_bp_data_cache)
 	Game.init_bp_data_cache_for_team(SceneVariables.cpu_team_bench, SceneVariables.cpu_team_bp_data_cache)
 
+func set_bp_data_cache():
+	Game.set_bp_data_cache_for_team(player_team.get_cards_in_play(), SceneVariables.player_team_bp_data_cache)
+	Game.set_bp_data_cache_for_team(cpu_team.get_cards_in_play(), SceneVariables.cpu_team_bp_data_cache)
+
+func load_bp_data_cache():
+	Game.load_bp_data_cache_for_team(player_team.get_cards_in_play(), SceneVariables.player_team_bp_data_cache)
+	Game.load_bp_data_cache_for_team(cpu_team.get_cards_in_play(), SceneVariables.cpu_team_bp_data_cache)
+
 static func init_bp_data_cache_for_team(team_stats, bp_data_cache):
 	for s in team_stats:
 		var stats = s as BallPlayerStats
@@ -338,10 +350,6 @@ static func init_bp_data_cache_for_team(team_stats, bp_data_cache):
 			"hot_markers": 0,
 			"cold_markers": 0
 		}
-
-func set_bp_data_cache():
-	Game.set_bp_data_cache_for_team(player_team.get_cards_in_play(), SceneVariables.player_team_bp_data_cache)
-	Game.set_bp_data_cache_for_team(cpu_team.get_cards_in_play(), SceneVariables.cpu_team_bp_data_cache)
 
 static func set_bp_data_cache_for_team(team_cards, bp_data_cache):
 	for c in team_cards:
@@ -359,10 +367,6 @@ static func set_bp_data_cache_for_team(team_cards, bp_data_cache):
 			cache_data["hot_markers"] = 0
 			cache_data["cold_markers"] = 0
 
-func load_bp_data_cache():
-	Game.load_bp_data_cache_for_team(player_team.get_cards_in_play(), SceneVariables.player_team_bp_data_cache)
-	Game.load_bp_data_cache_for_team(cpu_team.get_cards_in_play(), SceneVariables.cpu_team_bp_data_cache)
-
 static func load_bp_data_cache_for_team(team_cards, bp_data_cache):
 	for c in team_cards:
 		var card = c as BallPlayerCard
@@ -379,6 +383,9 @@ static func load_bp_data_cache_for_team(team_cards, bp_data_cache):
 # ==================================== GETTERS ====================================
 
 func get_is_quarter_completed():
+	# If we want to skip having to score all cards (for testing quarter end logic)
+	if skip_scoring:
+		return player_completed_scorer_positions.size() == 1
 	var player_lineup_cards = player_team.get_cards_in_play()
 	var cpu_lineup_cards = cpu_team.get_cards_in_play()
 	return player_lineup_cards.size() == player_completed_scorer_positions.size() and \
@@ -401,3 +408,15 @@ func get_assists(assists_label: Label) -> int:
 	if assists_value.size() > 1:
 		return int(assists_value[1])
 	return 0
+
+static func get_bps_by_name(player_name: String, players_to_check: Array):
+	for p in players_to_check:
+		if p.get_full_name() == player_name:
+			return p
+	return null
+
+static func get_pos_for_bps(player_name: String, pos_to_player_map: Dictionary):
+	for k in pos_to_player_map:
+		if pos_to_player_map[k].get_full_name() == player_name:
+			return k
+	return null

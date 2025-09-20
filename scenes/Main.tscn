@@ -19,6 +19,7 @@ script = ExtResource("1_sqmis")
 matchup_container_scene = ExtResource("4_vns61")
 quarter_end_modal_scene = ExtResource("3_g1bwu")
 rebound_tally_scene = ExtResource("6_rvxux")
+skip_scoring = true
 
 [node name="CPUTeam" parent="." node_paths=PackedStringArray("starting_lineup_wrapper") instance=ExtResource("2_me2iv")]
 starting_lineup_wrapper = NodePath("../CanvasLayer/MarginContainer/VBoxContainer")
