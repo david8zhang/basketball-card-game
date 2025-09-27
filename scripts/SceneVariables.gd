@@ -142,3 +142,13 @@ func get_player_strat_card_deck_or_gen_random_deck():
 		for i in range(0, 3):
 			player_strategy_card_deck.append(all_strat_card_configs.pick_random())
 	return player_strategy_card_deck
+
+func get_curr_total_player_cost():
+	var cost = 0
+	for p in player_team_bp_configs.values():
+		var bps = p as BallPlayerStats
+		cost += bps.player_cost
+	for p in player_team_bench:
+		var bps = p as BallPlayerStats
+		cost += bps.player_cost
+	return cost

@@ -21,7 +21,6 @@ func _ready() -> void:
 	lineup_preview.hide()
 	matchup_preview.hide()
 
-
 func init_rewards():
 	var players_for_salary_cap = SceneVariables.get_players_for_salary_cap()
 	var max_cost = SceneVariables.get_player_max_cost_for_salary_cap(SceneVariables.salary_cap)
@@ -51,8 +50,7 @@ func show_add_player_modal(bp_card: BallPlayerCard):
 	add_new_player_modal.set_bp_stat_to_add(bp_card.ball_player_stats)
 	add_new_player_modal.show()
 
-func on_add_player(new_lineup):
-	SceneVariables.player_team_bp_configs = new_lineup
+func on_add_player():
 	show_matchup_preview()
 
 func on_add_strat_card(strat_card: StrategyCard):
