@@ -13,7 +13,7 @@ extends Control
 @onready var close_button = $Close as Button
 @onready var switch_lineup_button = $SwitchLineup as Button
 @onready var add_button = $AddButton as Button
-
+@export var generate_test_data := false
 
 var selected_bp_card: BallPlayerCard
 var orig_reward_bp_stat: BallPlayerStats
@@ -23,7 +23,8 @@ var is_showing_bench := false
 signal on_add_player(new_lineup)
 
 func _ready() -> void:
-	init_test_data_if_needed()
+	if generate_test_data:
+		init_test_data()
 	continue_button.hide()
 	continue_button.pressed.connect(on_continue)
 	close_button.pressed.connect(on_close)
@@ -40,7 +41,7 @@ func _ready() -> void:
 		card_slot.on_select_card.connect(on_set_bp_card)
 	update_curr_player_cost_total()
 
-func init_test_data_if_needed():
+func init_test_data():
 	if SceneVariables.player_team_bp_configs.is_empty():
 		SceneVariables.player_team_bp_configs = SceneVariables.assemble_random_starting_lineup()
 	if SceneVariables.player_team_bench.is_empty():

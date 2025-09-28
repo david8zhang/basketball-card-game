@@ -71,6 +71,7 @@ func init_box_score_column_headers(scores):
 
 func go_to_next_scene():
 	if SceneVariables.player_score > SceneVariables.cpu_score:
+		SceneVariables.num_games_won += 1
 		get_tree().change_scene_to_file("res://scenes/PostGameRewards.tscn")
 	else:
 		get_tree().change_scene_to_file("res://scenes/GameOver.tscn")
