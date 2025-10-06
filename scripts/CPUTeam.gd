@@ -83,13 +83,22 @@ func handle_substitutions():
 	print(subs_mapping)
 	
 	# Make the actual substitution
+	var new_starter_configs = {}
+	var new_bench = SceneVariables.cpu_team_bench
+
+	# copy over old configs
+	for key in SceneVariables.cpu_team_bp_configs.keys():
+		new_starter_configs[key] = SceneVariables.cpu_team_bp_configs[key]
+
 	for k in subs_mapping.keys():
 		var bp_stat_to_sub_out = Game.get_bps_by_name(k, all_bp_stats)
 		var bp_stat_to_sub_in = Game.get_bps_by_name(subs_mapping[k], all_bp_stats)
 		var pos = Game.get_pos_for_bps(k, SceneVariables.cpu_team_bp_configs)
-		SceneVariables.cpu_team_bp_configs[pos] = bp_stat_to_sub_in
-		SceneVariables.cpu_team_bench = SceneVariables.cpu_team_bench.filter(func (bps: BallPlayerStats): return bps.get_full_name() == subs_mapping[k])
-		SceneVariables.cpu_team_bench.append(bp_stat_to_sub_out)
+		new_starter_configs[pos] = bp_stat_to_sub_in
+		new_bench = new_bench.filter(func (bps: BallPlayerStats): return bps.get_full_name() != bp_stat_to_sub_in.get_full_name())
+		new_bench.append(bp_stat_to_sub_out)
+	SceneVariables.cpu_team_bp_configs = new_starter_configs
+	SceneVariables.cpu_team_bench = new_bench
 	starting_lineup.re_init_cards(SceneVariables.cpu_team_bp_configs)
 	cards_in_play = starting_lineup.starting_lineup_cards
 
