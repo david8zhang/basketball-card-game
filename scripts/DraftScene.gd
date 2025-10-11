@@ -4,6 +4,7 @@ extends Control
 @onready var cards_to_select_from_container = $VBoxContainer/MarginContainer/ScrollContainer/HBoxContainer2 as HBoxContainer
 @onready var card_slot_container = $VBoxContainer/HBoxContainer as HBoxContainer
 @onready var continue_button = $Continue as Button
+@onready var clear_button = $Clear as Button
 @onready var player_cost_total = $PlayerCostTotal as Label
 @onready var card_cost_too_high = $CardCostTooHigh as Label
 
@@ -25,6 +26,7 @@ func _ready():
 		var card_slot = node as CardSlot
 		card_slot.on_select_card.connect(on_set_bp_card)
 	continue_button.pressed.connect(go_to_next_scene)
+	clear_button.pressed.connect(clear_selections)
 
 func on_set_bp_card(card_slot: CardSlot):
 	if selected_bp_card != null:
@@ -124,11 +126,18 @@ func load_all_players():
 func init_random_players():
 	var keys = all_player_stats.keys()
 	var selected_player_names = []
+	var player_stats_to_init = []
 	for i in range(0, num_random_players):
 		var key_to_select = keys[i % keys.size()]
 		var players_at_position = all_player_stats[key_to_select].filter(func(s): return is_eligible_player(s, selected_player_names))
 		var random_player_stat = players_at_position.pick_random() as BallPlayerStats
 		selected_player_names.append(random_player_stat.get_full_name())
+		player_stats_to_init.append(random_player_stat)
+	init_cards_from_stat_list(player_stats_to_init)
+
+func init_cards_from_stat_list(stat_list):
+	stat_list.sort_custom(func (a: BallPlayerStats, b: BallPlayerStats): return a.positions[0] < b.positions[0])
+	for random_player_stat in stat_list:
 		var bp_card = bp_card_scene.instantiate() as BallPlayerCard
 		bp_card.ball_player_stats = random_player_stat
 		cards_to_select_from_container.add_child(bp_card)
@@ -159,3 +168,19 @@ func select_bp_card(bp_card: BallPlayerCard):
 	selected_bp_card = bp_card
 	selected_bp_card.enable_highlight()
 	close_bp_card_preview()
+
+func clear_selections():
+	for cs in card_slot_container.get_children():
+		var card_slot = cs as CardSlot
+		var card_in_slot = card_slot.card_in_slot as BallPlayerCard
+		card_slot.remove_child(card_in_slot)
+		card_slot.card_in_slot = null
+		cards_to_select_from_container.add_child(card_in_slot)
+	var bp_stats =[]
+	for c in cards_to_select_from_container.get_children():
+		var card = c as BallPlayerCard
+		cards_to_select_from_container.remove_child(card)
+		bp_stats.append(card.ball_player_stats)
+	cards_to_select_from_container.get_children().clear()
+	init_cards_from_stat_list(bp_stats)
+	

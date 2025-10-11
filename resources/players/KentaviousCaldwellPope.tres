@@ -53,5 +53,6 @@ shot_check = 15
 texture = ExtResource("3_u2fon")
 first_name_size = 28
 last_name_size = 20
+max_stamina = 2
 roll_table = Array[ExtResource("1_wpqw3")]([SubResource("Resource_wpqw3"), SubResource("Resource_u2fon"), SubResource("Resource_q2gsb"), SubResource("Resource_m2gtb")])
 metadata/_custom_type_script = "uid://dmyxnrgdtpksv"
